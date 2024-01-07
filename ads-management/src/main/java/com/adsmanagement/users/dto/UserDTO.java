@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @Getter
 public class UserDTO {
-    private Integer id;
+    private Short id;
 
     private String name;
 

@@ -2,6 +2,7 @@ package com.adsmanagement.districts;
 
 import com.adsmanagement.cities.City;
 import com.adsmanagement.wards.Ward;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,17 +16,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "districts")
+@Table(name = "district")
 public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "district")
+    @JsonIgnore
     private List<Ward> wards;
 
     @ManyToOne

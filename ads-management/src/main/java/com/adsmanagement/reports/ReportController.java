@@ -35,12 +35,12 @@ public class ReportController {
 
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<ReportDto>>> list(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer cityId,
-            @RequestParam(required = false) List<Integer> wardIds,
-            @RequestParam(required = false) List<Integer> districtIds,
-            @RequestParam(required = false) List<Integer> surfaceIds,
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short cityId,
+            @RequestParam(required = false) List<Short> wardIds,
+            @RequestParam(required = false) List<Short> districtIds,
+            @RequestParam(required = false) List<Short> surfaceIds,
             @RequestParam(required = false) ReportState state
             )   {
         var data = this.reportService.findAll(page,size,cityId,wardIds,districtIds,surfaceIds,state);

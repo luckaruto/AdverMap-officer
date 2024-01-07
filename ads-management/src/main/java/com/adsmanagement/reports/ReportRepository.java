@@ -11,21 +11,21 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 
-public interface ReportRepository extends JpaRepository<Report, Integer>, CrudRepository<Report, Integer> {
+public interface ReportRepository extends JpaRepository<Report, Short>, CrudRepository<Report, Short> {
 
     Page<Report> findAll(Pageable pageable);
 
     Page<Report> findAllByState(Pageable pageable, ReportState state);
 
-    Page<Report> findAllByWardIdIn(Pageable pageable, List<Integer> wardIds);
+    Page<Report> findAllByWardIdIn(Pageable pageable, List<Short> wardIds);
 
-    Page<Report> findAllByWardIdInAndState(Pageable pageable, List<Integer> wardIds, ReportState state);
+    Page<Report> findAllByWardIdInAndState(Pageable pageable, List<Short> wardIds, ReportState state);
 
-    Page<Report> findAllBySurfaceIdIn(Pageable pageable, List<Integer> surfaceIds);
+    Page<Report> findAllBySurfaceIdIn(Pageable pageable, List<Short> surfaceIds);
 
-    Page<Report> findAllBySurfaceIdInAndState(Pageable pageable, List<Integer> surfaceIds, ReportState state);
+    Page<Report> findAllBySurfaceIdInAndState(Pageable pageable, List<Short> surfaceIds, ReportState state);
 
-    Page<Report> findAllByWardIdInAndSurfaceIdIn(Pageable pageable, List<Integer> wardIds, List<Integer> surfaceIds);
-    Page<Report> findAllByWardIdInAndSurfaceIdInAndState(Pageable pageable, List<Integer> wardIds, List<Integer> surfaceIds, ReportState state);
+    Page<Report> findAllByWardIdInAndSurfaceIdIn(Pageable pageable, List<Short> wardIds, List<Short> surfaceIds);
+    Page<Report> findAllByWardIdInAndSurfaceIdInAndState(Pageable pageable, List<Short> wardIds, List<Short> surfaceIds, ReportState state);
 
 }

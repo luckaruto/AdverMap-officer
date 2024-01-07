@@ -36,7 +36,7 @@ public class SpaceService {
         this.spaceRequestRepository = spaceRequestRepository;
     }
 
-    public Page<Space> findAll(Integer page, Integer size, Integer cityId, List<Integer> wardIds, List<Integer> districtIds) {
+    public Page<Space> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {
@@ -86,7 +86,7 @@ public class SpaceService {
 
     }
 
-    public Page<SpaceRequest> findAllRequest(Integer page, Integer size, Integer cityId, List<Integer> wardIds, List<Integer> districtIds) {
+    public Page<SpaceRequest> findAllRequest(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {

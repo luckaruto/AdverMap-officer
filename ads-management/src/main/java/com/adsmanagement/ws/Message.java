@@ -1,4 +1,4 @@
-package com.adsmanagement.common;
+package com.adsmanagement.ws;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Pagination {
-    private Short size;
-    private Short page;
-    private Short totalPage;
-
+public class Message {
+    private MessageType type;
 }

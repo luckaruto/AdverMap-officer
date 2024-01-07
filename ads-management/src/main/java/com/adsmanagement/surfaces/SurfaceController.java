@@ -33,12 +33,12 @@ public class SurfaceController {
 
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<SurfaceDto>>> list(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer cityId,
-            @RequestParam(required = false) List<Integer> wardIds,
-            @RequestParam(required = false) List<Integer> districtIds,
-            @RequestParam(required = false) List<Integer> spaceIds
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short cityId,
+            @RequestParam(required = false) List<Short> wardIds,
+            @RequestParam(required = false) List<Short> districtIds,
+            @RequestParam(required = false) List<Short> spaceIds
 
             )   {
         var data = this.surfaceService.findAll(page,size,cityId,wardIds, districtIds,spaceIds);
@@ -64,7 +64,7 @@ public class SurfaceController {
 
     @PostMapping(path = "/{id}/request")
     public ResponseEntity<Response<SurfaceRequestDto>> createRequest(
-            @PathVariable("id") int surfaceId,
+            @PathVariable("id") Short surfaceId,
             @RequestBody CreateSurfaceRequestDto createSurfaceRequestDto,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
@@ -79,12 +79,12 @@ public class SurfaceController {
 
     @GetMapping(path = "/request")
     public ResponseEntity<Response<Page<SurfaceRequestDto>>> listRequest(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer cityId,
-            @RequestParam(required = false) List<Integer> wardIds,
-            @RequestParam(required = false) List<Integer> districtIds,
-            @RequestParam(required = false) List<Integer> surfaceIds,
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short cityId,
+            @RequestParam(required = false) List<Short> wardIds,
+            @RequestParam(required = false) List<Short> districtIds,
+            @RequestParam(required = false) List<Short> surfaceIds,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
         var user = userDetails.getUser();

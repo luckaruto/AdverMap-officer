@@ -17,26 +17,28 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "spaces")
+@Table(name = "space")
 public class Space {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "long")
+    @Column(name = "longitude")
     private Float longitude;
 
-    @Column(name = "lat")
-    private Float lat;
+    @Column(name = "latitude")
+    private Float latitude;
 
     @Column(name = "type", columnDefinition = "varchar(20)")
+    @Enumerated(EnumType.STRING)
     private SpaceType type;
 
     @Column(name = "format", columnDefinition = "varchar(20)")
+    @Enumerated(EnumType.STRING)
     private SpaceFormat format;
 
     private String imgUrl;
@@ -54,7 +56,7 @@ public class Space {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public Space(Integer spaceId) {
+    public Space(Short spaceId) {
         this.id = spaceId;
     }
 
@@ -70,6 +72,6 @@ public class Space {
             wardDto = ward.toDto();
         }
 
-        return new SpaceDto(id,address,longitude,lat,type,format,imgUrls,isPlanned,wardDto);
+        return new SpaceDto(id,address,longitude,latitude,type,format,imgUrls,isPlanned,wardDto);
     }
 }

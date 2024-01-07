@@ -10,12 +10,12 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "wards")
+@Table(name = "ward")
 public class Ward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "name")
     private String name;
@@ -24,7 +24,7 @@ public class Ward {
     @JoinColumn(name="district_id")
     private District district;
 
-   public Ward(Integer id){
+   public Ward(Short id){
        this.id = id;
    }
 

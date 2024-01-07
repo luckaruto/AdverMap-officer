@@ -8,10 +8,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface SpaceRepository extends JpaRepository<Space, Integer>, CrudRepository<Space, Integer> {
-    Page<Space> findAllByWardIdIn(List<Integer> wardIds, Pageable pageable);
-    List<Space> findAllByWardIdIn(List<Integer> wardIds);
+public interface SpaceRepository extends JpaRepository<Space, Short>, CrudRepository<Space, Short> {
+    Page<Space> findAllByWardIdIn(List<Short> wardIds, Pageable pageable);
+    List<Space> findAllByWardIdIn(List<Short> wardIds);
 
-    List<Space> findAllByWardIdInAndIdIn(List<Integer> wardIds, List<Integer> ids);
+    List<Space> findAllByWardIdInAndIdIn(List<Short> wardIds, List<Short> ids);
 
 }

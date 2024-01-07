@@ -14,6 +14,18 @@ create table users (
 
 
 insert into users(email,phone,role,name,password) values('viet@gmail.com','0797790110','user','viet nguyen','');
+insert into cities(name) values('Ho Chi Minh City');
+insert into cities(name) values('Ha Noi City');
+insert into districts (name,city_id) values('district 1', 1);
+insert into districts (name,city_id) values('district 2', 1);
+insert into wards (name,district_id) values('Ben Nghe', 1);
+insert into wards (name,district_id) values('Tan Thanh', 1);
+insert into wards (name,district_id) values('My Dinh', 2);
+insert into wards (name,district_id) values('An Phu', 2);
+insert into spaces(address,longitude,latitude,type,format,img_url,is_planned,ward_id) values('123 Pasteur',123, 12,'private house','politic','',true,1);
+insert into spaces(address,longitude,latitude,type,format,img_url,is_planned,ward_id) values('125 Pasteur',123, 12.12,'private house','politic','',true,1);
+insert into surfaces (format,width,height,img_url,content,space_id) values('politic',150,250,'advertisment for testing','',1);
+insert into surfaces (format,width,height,img_url,content,space_id) values('politic',250,250,'advertisment for testing 2','',1);
 
 create table cities (
                         id serial primary key,
@@ -22,8 +34,7 @@ create table cities (
                         updated_at timestamptz default CURRENT_TIMESTAMP
 );
 
-insert into cities(name) values('Ho Chi Minh City');
-insert into cities(name) values('Ha Noi City');
+
 
 
 
@@ -38,8 +49,7 @@ create table districts (
                                    REFERENCES cities(id)
 );
 
-insert into districts (name,city_id) values('district 1', 1);
-insert into districts (name,city_id) values('district 2', 1);
+
 
 
 create table wards (
@@ -53,16 +63,13 @@ create table wards (
                                REFERENCES districts(id)
 );
 
-insert into wards (name,district_id) values('Ben Nghe', 1);
-insert into wards (name,district_id) values('Tan Thanh', 1);
-insert into wards (name,district_id) values('My Dinh', 2);
-insert into wards (name,district_id) values('An Phu', 2);
+
 
 create table spaces (
                         id serial primary key,
                         address varchar(255),
-                        long float,
-                        lat float,
+                        longitude float,
+                        latitude float,
                         type varchar(255),
                         format varchar(255),
                         img_url varchar(255),
@@ -76,8 +83,6 @@ create table spaces (
 );
 
 
-insert into spaces(address,long,lat,type,format,img_url,is_planned,ward_id) values('123 Pasteur',123, 12,'private house','politic','',true,1);
-insert into spaces(address,long,lat,type,format,img_url,is_planned,ward_id) values('125 Pasteur',123, 12.12,'private house','politic','',true,1);
 
 
 create table surfaces (
@@ -95,8 +100,7 @@ create table surfaces (
                                   REFERENCES spaces(id)
 );
 
-insert into surfaces (format,width,height,img_url,content,space_id) values('politic',150,250,'advertisment for testing','',1);
-insert into surfaces (format,width,height,img_url,content,space_id) values('politic',250,250,'advertisment for testing 2','',1);
+
 
 
 create table reports (
@@ -105,8 +109,8 @@ create table reports (
                          address varchar(255),
                          user_ip varchar(255),
                          ward_id int,
-                         long float,
-                         lat float,
+                         longitude float,
+                         latitude float,
                          report_date timestamptz,
                          content text,
                          email varchar(255),
@@ -159,8 +163,8 @@ create table space_requests (
                                 address varchar(255),
                                 report_date timestamptz,
                                 user_id int,
-                                lat float,
-                                long float,
+                                latitude float,
+                                longitude float,
                                 space_id int,
                                 ward_id int,
                                 content text,

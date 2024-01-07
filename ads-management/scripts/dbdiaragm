@@ -53,8 +53,8 @@ TableGroup location {
  table spaces {
                         id serial [primary key]
                         address varchar(255)
-                        long float
-                        lat float
+                        longitude float
+                        latitude float
                         type varchar(255)
                         format varchar(255)
                         img_url varchar(255)
@@ -85,8 +85,8 @@ Ref: spaces.ward_id > wards.id // many-to-one
                          surface_id int
                          address varchar(255)
                          ward_id int
-                         long float
-                         lat float
+                         longitude float
+                         latitude float
                          report_date timestamptz
                          content text
                          email varchar(255)
@@ -125,8 +125,8 @@ Ref: surface_requests.approved_id > users.id // many-to-one
                                 id serial [primary key]
                                 report_date timestamptz
                                 user_id int
-                                lat float
-                                long float
+                                latitude float
+                                longitude float
                                 space_id int
                                 ward_id int
                                 content text

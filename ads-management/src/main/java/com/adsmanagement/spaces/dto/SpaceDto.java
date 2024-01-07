@@ -16,10 +16,10 @@ import java.util.List;
 @Setter
 @Getter
 public class SpaceDto {
-    private Integer id;
+    private Short id;
     private String address;
     private Float longitude;
-    private Float lat;
+    private Float latitude;
     private SpaceType type;
     private SpaceFormat format;
     private List<String> imgUrl;

@@ -2,25 +2,27 @@ package com.adsmanagement.cities;
 
 
 import com.adsmanagement.districts.District;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "cities")
+@Table(name = "city")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     private List<District> districts;
 
-    public City(Integer id, String name) {
+    public City(Short id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -29,11 +31,11 @@ public class City {
 
     }
 
-    public Integer getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

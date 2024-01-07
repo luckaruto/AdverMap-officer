@@ -47,7 +47,7 @@ public class SurfaceService {
         this.surfaceRequestRepository = surfaceRequestRepository;
     }
 
-    public Page<Surface> findAll(Integer page, Integer size, Integer cityId, List<Integer> wardIds, List<Integer> districtIds, List<Integer> spaceIds) {
+    public Page<Surface> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds, List<Short> spaceIds) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {
@@ -79,7 +79,7 @@ public class SurfaceService {
         }
 
 
-        List<Integer> spaceIdArr = new ArrayList<>();
+        List<Short> spaceIdArr = new ArrayList<>();
         if (wardIds != null && !wardIds.isEmpty()) {
             List<Space> spaces = null;
             if (spaceIds != null && spaceIds.size() > 0) {
@@ -118,7 +118,7 @@ public class SurfaceService {
         return this.surfaceRequestRepository.save(createSurfaceRequestDto.toSurfaceRequest());
     }
 
-    public Page<SurfaceRequest> findAllRequest(Integer page, Integer size,Integer cityId,List<Integer> districtIds,List<Integer> wardIds,List<Integer> surfaceIds) {
+    public Page<SurfaceRequest> findAllRequest(Short page, Short size,Short cityId,List<Short> districtIds,List<Short> wardIds,List<Short> surfaceIds) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {

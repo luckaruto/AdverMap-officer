@@ -17,15 +17,15 @@ import java.util.List;
 public class CreateSpaceDto {
     private String address;
     private Float longitude;
-    private Float lat;
+    private Float latitude;
     private SpaceType type;
     private SpaceFormat format;
     private List<String> imgUrl;
     private boolean isPlanned;
-    private Integer wardId;
+    private Short wardId;
 
     public Space ToSpace(){
         String imgUrls = String.join(", ", imgUrl);
-        return new Space(0,address,longitude,lat,type,format,imgUrls,isPlanned,new Ward(wardId),null,null);
+        return new Space((short) (short) 0,address,longitude,latitude,type,format,imgUrls,isPlanned,new Ward(wardId),null,null);
     }
 }

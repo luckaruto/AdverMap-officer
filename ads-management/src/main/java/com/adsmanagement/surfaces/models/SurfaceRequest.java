@@ -18,12 +18,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "surface_requests")
+@Table(name = "surface_request")
 public class SurfaceRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "report_date")
     private Date reportDate;
@@ -34,6 +34,7 @@ public class SurfaceRequest {
 
     @ManyToOne
     @JoinColumn(name="surface_id")
+    @Enumerated(EnumType.STRING)
     private Surface surface;
 
     @ManyToOne

@@ -3,6 +3,7 @@ package com.adsmanagement.surfaces.dto;
 import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.surfaces.models.SurfaceFormat;
 import lombok.*;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -10,11 +11,11 @@ import lombok.*;
 @Getter
 @Setter
 public class SurfaceDto {
-    private Integer id;
+    private Short id;
     private SurfaceFormat format;
-    private Integer width;
-    private Integer height;
-    private String imgUrl;
+    private Short width;
+    private Short height;
+    private List<String> imgUrl;
     private String content;
     private SpaceDto space;
 }

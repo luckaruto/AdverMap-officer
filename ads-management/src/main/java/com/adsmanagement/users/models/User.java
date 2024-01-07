@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "name")
     private String name;
@@ -42,7 +42,7 @@ public class User {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public User(Integer id){
+    public User(Short id){
         this.id = id;
     }
     public UserDTO toDTO() {

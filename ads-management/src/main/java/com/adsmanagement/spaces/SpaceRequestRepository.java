@@ -8,8 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface SpaceRequestRepository extends JpaRepository<SpaceRequest, Integer>, CrudRepository<SpaceRequest, Integer> {
+public interface SpaceRequestRepository extends JpaRepository<SpaceRequest, Short>, CrudRepository<SpaceRequest, Short> {
 
-    Page<SpaceRequest> findAllByWardIdIn(List<Integer> wardIds, Pageable pageable);
+    Page<SpaceRequest> findAllByWardIdIn(List<Short> wardIds, Pageable pageable);
 
 }

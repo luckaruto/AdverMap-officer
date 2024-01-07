@@ -22,9 +22,9 @@ public class WardController {
 
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<Ward>>> list(
-            @RequestParam(defaultValue = "0") Integer page ,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer districtId
+            @RequestParam(defaultValue = "0") Short page ,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short districtId
     ) {
         var data = this.wardService.findAllByDistrictId(districtId,page,size);
         var res = new Response<>("",data);

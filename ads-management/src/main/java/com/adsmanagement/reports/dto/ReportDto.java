@@ -6,6 +6,7 @@ import com.adsmanagement.users.dto.UserDTO;
 import com.adsmanagement.wards.WardDTO;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -13,14 +14,13 @@ import java.util.Date;
 @Getter
 @Setter
 public class ReportDto {
-    private Integer id;
+    private Short id;
     private SurfaceDto surface;
     private String address;
-    private String userIp;
     private WardDTO ward;
     private Float longitude;
-    private Float lat;
-    private Date reportDate;
+    private Float latitude;
+    private LocalDate reportDate;
     private String content;
     private String email;
     private String phone;
@@ -28,4 +28,7 @@ public class ReportDto {
     private String imgUrl;
     private UserDTO approvedBy;
     private String response;
+    private String userAddress;
+    private String name;
+
 }

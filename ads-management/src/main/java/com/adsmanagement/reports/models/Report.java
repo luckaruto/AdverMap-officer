@@ -9,7 +9,9 @@ import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,12 +20,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "reports")
+@Table(name = "report")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @ManyToOne
     @JoinColumn(name="surface_id")
@@ -32,21 +34,19 @@ public class Report {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "user_ip")
-    private String userIp;
-
     @ManyToOne
     @JoinColumn(name="ward_id")
     private Ward ward;
 
-    @Column(name = "long")
+    @Column(name = "longitude")
     private Float longitude;
 
-    @Column(name = "lat")
-    private Float lat;
+    @Column(name = "latitude")
+    private Float latitude;
 
-    @Column(name = "report_date")
-    private Date reportDate;
+    @Column
+    @CreationTimestamp
+    private LocalDate reportDate;
 
     @Column(name = "content")
     private String content;
@@ -58,6 +58,7 @@ public class Report {
     private String phone;
 
     @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private ReportState state;
 
     @Column(name = "img_url")
@@ -77,6 +78,12 @@ public class Report {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column
+    private String userAddress;
+
+    @Column
+    private String name;
+
     public ReportDto toDto(){
         SurfaceDto surfaceDto = null;
         if (surface != null){
@@ -93,6 +100,6 @@ public class Report {
             approvedByDto = approvedBy.toDTO();
         }
 
-        return new ReportDto(id,surfaceDto,address,userIp,wardDto,longitude,lat,reportDate,content,email,phone,state,imgUrl,approvedByDto,response);
+        return new ReportDto(id,surfaceDto,address,wardDto,longitude,latitude,reportDate,content,email,phone,state,imgUrl,approvedByDto,response, userAddress, name);
     }
 }

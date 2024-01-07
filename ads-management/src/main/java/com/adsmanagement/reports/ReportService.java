@@ -45,7 +45,7 @@ public class ReportService {
         this.reportRepository = reportRepository;
     }
 
-    public Page<Report> findAll(Integer page, Integer size, Integer cityId, List<Integer> wardIds, List<Integer> districtIds, List<Integer> surfaceIds, ReportState reportState) {
+    public Page<Report> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds, List<Short> surfaceIds, ReportState reportState) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {

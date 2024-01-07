@@ -72,7 +72,7 @@ const SignIn = ( ) => {
 
         } catch (error) {
             if (error instanceof AxiosError) {
-                if (error.response.data.message) {
+                if (error?.response?.data?.message) {
                     setMessage("Error: " + error.response.data.message)
                 } else {
                     setMessage(error.code as string)

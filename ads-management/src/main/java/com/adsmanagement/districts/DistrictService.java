@@ -18,7 +18,7 @@ public class DistrictService {
         this.districtRepository = districtRepository;
     }
 
-    public Page<District> findAll(Integer page, Integer size, Integer cityId) {
+    public Page<District> findAll(Short page, Short size, Short cityId) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         if (cityId == null) {
             return this.districtRepository.findAll(pageable);

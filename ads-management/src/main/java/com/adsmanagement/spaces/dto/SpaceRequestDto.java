@@ -15,12 +15,12 @@ import java.util.Date;
 @Getter
 @Setter
 public class SpaceRequestDto {
-    private Integer id;
+    private Short id;
     private String address;
     private Date reportDate;
     private UserDTO user;
     private Float longitude;
-    private Float lat;
+    private Float latitude;
     private SpaceDto space;
     private WardDTO ward;
     private String content;

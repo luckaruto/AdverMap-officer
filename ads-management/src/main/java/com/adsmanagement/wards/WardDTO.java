@@ -11,11 +11,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WardDTO {
-    private Integer id;
+    private Short id;
     private String name;
     private DistrictDTO district;
 
-    WardDTO(Integer id, String name){
+    WardDTO(Short id, String name){
         this.id = id;
         this.name = name;
     }

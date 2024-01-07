@@ -16,7 +16,7 @@ public class WardService {
         this.wardRepository = wardRepository;
     }
 
-    public Page<Ward> findAllByDistrictId(Integer districtId, Integer page, Integer size) {
+    public Page<Ward> findAllByDistrictId(Short districtId, Short page, Short size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         if (districtId == null) {
             return this.wardRepository.findAll(pageable);

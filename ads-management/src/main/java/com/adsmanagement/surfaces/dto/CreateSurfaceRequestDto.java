@@ -17,12 +17,12 @@ import java.util.Date;
 @Getter
 @Setter
 public class CreateSurfaceRequestDto {
-    private Integer userId;
-    private Integer surfaceId;
-    private Integer spaceId;
+    private Short userId;
+    private Short surfaceId;
+    private Short spaceId;
     private String content;
 
     public SurfaceRequest toSurfaceRequest(){
-        return new SurfaceRequest(0,new Date(),new User(userId),new Surface(surfaceId),new Space(spaceId),content,null,RequestState.IN_PROGRESS,null,null,null);
+        return new SurfaceRequest((short) 0,new Date(),new User(userId),new Surface(surfaceId),new Space(spaceId),content,null,RequestState.IN_PROGRESS,null,null,null);
     }
 }

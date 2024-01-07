@@ -30,11 +30,11 @@ public class SpaceController {
 
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<SpaceDto>>> list(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer cityId,
-            @RequestParam(required = false) List<Integer> wardIds,
-            @RequestParam(required = false) List<Integer> districtIds
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short cityId,
+            @RequestParam(required = false) List<Short> wardIds,
+            @RequestParam(required = false) List<Short> districtIds
             )   {
         var data = this.spaceService.findAll(page,size,cityId,wardIds, districtIds);
 
@@ -59,7 +59,7 @@ public class SpaceController {
 
     @PostMapping(path = "/{id}/request")
     public ResponseEntity<Response<SpaceRequestDto>> createRequest(
-            @PathVariable("id") int spaceId,
+            @PathVariable("id") Short spaceId,
             @RequestBody CreateSpaceRequestDto createSpaceRequestDto,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
@@ -72,11 +72,11 @@ public class SpaceController {
 
     @GetMapping(path = "/request")
     public ResponseEntity<Response<Page<SpaceRequestDto>>> listRequest(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(required = false) Integer cityId,
-            @RequestParam(required = false) List<Integer> wardIds,
-            @RequestParam(required = false) List<Integer> districtIds,
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short cityId,
+            @RequestParam(required = false) List<Short> wardIds,
+            @RequestParam(required = false) List<Short> districtIds,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
         var user = userDetails.getUser();

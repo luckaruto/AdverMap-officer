@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DistrictDTO {
-    private Integer id;
+    private Short id;
     private String name;
 }

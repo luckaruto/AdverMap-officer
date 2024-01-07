@@ -9,8 +9,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.util.List;
 import java.util.Optional;
 
-public interface WardRepository extends JpaRepository<Ward, Integer> {
-    Page<Ward> findAllByDistrict_Id(Integer districtId, Pageable pageable);
-    Page<Ward> findAllByDistrict_IdIn(List<Integer> districtIds, Pageable pageable);
+public interface WardRepository extends JpaRepository<Ward, Short> {
+    Page<Ward> findAllByDistrict_Id(Short districtId, Pageable pageable);
+    Page<Ward> findAllByDistrict_IdIn(List<Short> districtIds, Pageable pageable);
 
 }

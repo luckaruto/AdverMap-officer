@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class SurfaceRequestDto {
-    private Integer id;
+    private Short id;
     private Date reportDate;
     private UserDTO user;
     private SurfaceDto surface;

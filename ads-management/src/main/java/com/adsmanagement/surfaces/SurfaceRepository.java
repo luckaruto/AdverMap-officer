@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface SurfaceRepository extends JpaRepository<Surface, Integer>, CrudRepository<Surface, Integer> {
-    Page<Surface> findAllBySpaceIdIn(List<Integer> spaceIds, Pageable pageable);
+public interface SurfaceRepository extends JpaRepository<Surface, Short>, CrudRepository<Surface, Short> {
+    Page<Surface> findAllBySpaceIdIn(List<Short> spaceIds, Pageable pageable);
 }

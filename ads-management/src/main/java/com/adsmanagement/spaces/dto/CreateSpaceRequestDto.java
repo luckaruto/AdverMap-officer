@@ -18,13 +18,13 @@ import java.util.Date;
 public class CreateSpaceRequestDto {
     private String address;
     private Float longitude;
-    private Float lat;
-    private Integer spaceId;
-    private Integer wardId;
+    private Float latitude;
+    private Short spaceId;
+    private Short wardId;
     private String content;
     private SpaceType type;
     private SpaceFormat format;
     public SpaceRequest ToSpaceRequest(User user){
-        return new SpaceRequest(0,address,new Date(),user,longitude,lat,new Space(spaceId), new Ward(wardId),content,type,format,null, RequestState.IN_PROGRESS,null,null,null);
+        return new SpaceRequest((short) 0,address,new Date(),user,longitude,latitude,new Space(spaceId), new Ward(wardId),content,type,format,null, RequestState.IN_PROGRESS,null,null,null);
     }
 }

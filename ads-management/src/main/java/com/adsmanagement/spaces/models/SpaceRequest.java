@@ -17,12 +17,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "space_requests")
+@Table(name = "space_request")
 public class SpaceRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "address")
     private String address;
@@ -34,11 +34,11 @@ public class SpaceRequest {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Column(name = "long")
+    @Column(name = "longitude")
     private Float longitude;
 
-    @Column(name = "lat")
-    private Float lat;
+    @Column(name = "latitude")
+    private Float latitude;
 
     @ManyToOne
     @JoinColumn(name="space_id")
@@ -52,9 +52,11 @@ public class SpaceRequest {
     private String content;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private SpaceType type;
 
     @Column(name = "format")
+    @Enumerated(EnumType.STRING)
     private SpaceFormat format;
 
     @ManyToOne
@@ -62,6 +64,7 @@ public class SpaceRequest {
     private User approvedBy;
 
     @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private RequestState state;
 
     @Column(name = "response")
@@ -94,6 +97,6 @@ public class SpaceRequest {
             wardDto = ward.toDto();
         }
 
-        return new SpaceRequestDto(id,address,reportDate,userDto,longitude,lat,spaceDto,wardDto,content,type,format,approvedByDto,state,response);
+        return new SpaceRequestDto(id,address,reportDate,userDto,longitude,latitude,spaceDto,wardDto,content,type,format,approvedByDto,state,response);
     }
 }

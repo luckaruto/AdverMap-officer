@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +17,11 @@ import lombok.Setter;
 @Setter
 public class CreateSurfaceDto {
     private SurfaceFormat format;
-    private Integer width;
-    private Integer height;
-    private String imgUrl;
+    private Short width;
+    private Short height;
+    private List<String> imgUrl;
     private String content;
-    private Integer spaceId;
+    private Short spaceId;
     public Surface toSurface(){
 
         Space space = null;
@@ -27,6 +29,9 @@ public class CreateSurfaceDto {
             space = new Space(spaceId);
         }
 
-        return new Surface(0,format,width, height,imgUrl,content,space,null,null);
+        String imgUrls = String.join(", ", imgUrl);
+
+
+        return new Surface((short) 0,format,width, height,imgUrls,content,space,null,null);
     }
 }

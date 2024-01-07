@@ -7,7 +7,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -16,21 +19,22 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "surfaces")
+@Table(name = "surface")
 public class Surface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
-    @Column(name = "format", columnDefinition = "varchar(20)")
+    @Column(name = "format")
+    @Enumerated(EnumType.STRING)
     private SurfaceFormat format;
 
     @Column(name = "width")
-    private Integer width;
+    private Short width;
 
     @Column(name = "height")
-    private Integer height;
+    private Short height;
 
     @Column(name = "img_url")
     private String imgUrl;
@@ -48,7 +52,7 @@ public class Surface {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public Surface(Integer id ){
+    public Surface(Short id ){
         this.id = id;
     }
     public SurfaceDto toDto(){
@@ -56,7 +60,14 @@ public class Surface {
         if (space != null){
             spaceDto = space.ToDto();
         }
-        return new SurfaceDto(id,format,width,height,imgUrl,content,spaceDto);
+
+        List<String> imgUrls = new ArrayList<>();
+        if (this.imgUrl != null) {
+            String[] split = this.imgUrl.split(", ");
+            imgUrls = Arrays.stream(split).toList();
+        }
+
+        return new SurfaceDto(id,format,width,height,imgUrls,content,spaceDto);
     }
 
 }

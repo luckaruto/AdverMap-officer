@@ -34,7 +34,12 @@ public class District {
     @JoinColumn(name="city_id")
     private City city;
 
+    public District(Short id) {
+        this.id = id;
+    }
+
     public DistrictDTO toDto(){
         return new DistrictDTO(id,name);
     }
+
 }

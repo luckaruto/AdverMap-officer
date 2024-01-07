@@ -1,12 +1,15 @@
 package com.adsmanagement.reports;
 
+import com.adsmanagement.config.EmailService;
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.reports.dto.CreateReportDto;
+import com.adsmanagement.reports.dto.ProcessReportDto;
 import com.adsmanagement.reports.models.Report;
 import com.adsmanagement.reports.models.ReportState;
 import com.adsmanagement.spaces.SpaceRepository;
 import com.adsmanagement.surfaces.SurfaceRepository;
+import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import java.util.List;
 public class ReportService {
     private final SurfaceRepository surfaceRepository;
 
+    private final EmailService emailService;
     private final ReportRepository reportRepository;
     private final SpaceRepository spaceRepository;
 
@@ -36,13 +40,15 @@ public class ReportService {
             DistrictRepository districtRepository,
             WardRepository wardRepository,
             SpaceRepository spaceRepository,
-            ReportRepository reportRepository
+            ReportRepository reportRepository,
+            EmailService emailService
     ) {
         this.surfaceRepository = surfaceRepository;
         this.districtRepository = districtRepository;
         this.wardRepository = wardRepository;
         this.spaceRepository = spaceRepository;
         this.reportRepository = reportRepository;
+        this.emailService = emailService;
     }
 
     public Page<Report> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds, List<Short> surfaceIds, ReportState reportState) {
@@ -110,6 +116,23 @@ public class ReportService {
 
     public Report create(CreateReportDto createReportDto) {
         return this.reportRepository.save(createReportDto.toReport());
+    }
+
+    public Report process(Short id, User user, ProcessReportDto processReportDto) {
+        var report = this.reportRepository.findById(id);
+        if (report == null || report.isEmpty()){
+            return null;
+        }
+        var u = report.get();
+        u.setState(processReportDto.getState());
+        u.setResponse(processReportDto.getResponse());
+        u.setApprovedBy(new User(user.getId()));
+
+        var re = this.reportRepository.save(u);
+
+        this.emailService.sendReportMail(re);
+
+        return re;
     }
 
 }

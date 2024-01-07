@@ -1,10 +1,18 @@
 package com.adsmanagement.users.models;
 
+import com.adsmanagement.districts.District;
+import com.adsmanagement.districts.DistrictDTO;
 import com.adsmanagement.users.dto.UserDTO;
+import com.adsmanagement.wards.Ward;
+import com.adsmanagement.wards.WardDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -23,7 +31,8 @@ public class User {
     private String name;
 
     @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Column(name = "email",unique=true)
     private String email;
@@ -42,10 +51,42 @@ public class User {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @OneToMany(mappedBy="user")
+    private List<UserManagementWard> managementWards;
+
+    @OneToMany(mappedBy="user")
+    private List<UserManagementDistrict> managementDistricts;
+
+    @Column(name = "is_deleted")
+    @ColumnDefault("false")
+    private Boolean isDeleted;
+
     public User(Short id){
         this.id = id;
     }
     public UserDTO toDTO() {
-        return new UserDTO(id,name,role, email,phone,birthday);
+        List<WardDTO> wards = new ArrayList<>();
+        if (managementWards != null && managementWards.size() > 0){
+            for (var i = 0; i < managementWards.size(); i++){
+
+                var ward = managementWards.get(i).getWard();
+                if (ward != null) {
+                    wards.add(ward.toDto());
+                }
+
+            }
+        }
+
+        List<DistrictDTO> districts = new ArrayList<>();
+        if (managementDistricts != null && managementDistricts.size() > 0){
+            for (var i = 0; i < managementDistricts.size(); i++){
+                var dis = managementDistricts.get(i).getDistrict();
+                if (dis != null) {
+                    districts.add(dis.toDto());
+                }
+            }
+        }
+
+        return new UserDTO(id,name,role, email,phone,birthday,wards,districts);
     }
 }

@@ -4,6 +4,7 @@ package com.adsmanagement.reports;
 import com.adsmanagement.common.Response;
 import com.adsmanagement.config.UserInfoUserDetails;
 import com.adsmanagement.reports.dto.CreateReportDto;
+import com.adsmanagement.reports.dto.ProcessReportDto;
 import com.adsmanagement.reports.dto.ReportDto;
 import com.adsmanagement.reports.models.ReportState;
 import com.adsmanagement.surfaces.SurfaceService;
@@ -60,6 +61,20 @@ public class ReportController {
             @RequestBody CreateReportDto createReportDto
     )   {
         var data = this.reportService.create(createReportDto);
+        var res = new Response<>("",data.toDto());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/{id}/process")
+    public ResponseEntity<Response<ReportDto>> process(
+            @RequestBody ProcessReportDto processReportDto,
+            @PathVariable("id") Short id,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+
+    )   {
+        var user = userDetails.getUser();
+
+        var data = this.reportService.process(id,user,processReportDto);
         var res = new Response<>("",data.toDto());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface WardRepository extends JpaRepository<Ward, Short> {
     Page<Ward> findAllByDistrict_Id(Short districtId, Pageable pageable);
     Page<Ward> findAllByDistrict_IdIn(List<Short> districtIds, Pageable pageable);
-
 }

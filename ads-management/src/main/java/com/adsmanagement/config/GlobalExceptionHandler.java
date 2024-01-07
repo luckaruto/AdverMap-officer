@@ -18,15 +18,15 @@ public class GlobalExceptionHandler {
             errorMessage.append(fieldError.getDefaultMessage()).append(". ");
         });
 
-        var res = new Response<String>(errorMessage.toString(),null);
-        return ResponseEntity.badRequest().body(res);
+        var res = new Response<String>(errorMessage.toString(),null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<String>> handleUnwantedException(Exception e) {
         String errorMessage = "An unexpected error occurred: " + e.getMessage();
-        var res = new Response<String>(errorMessage.toString(), null);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+        var res = new Response<String>(errorMessage.toString(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+        return  new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

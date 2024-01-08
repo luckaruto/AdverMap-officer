@@ -1,5 +1,5 @@
 {
-  "name": "advermap-officer",
+  "name": "advermap-customer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,11 +28,23 @@
     "yup": "^1.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": " react-scripts start",
+    "build": " react-scripts build",
     "watch": "npx tailwindcss -i ./src/App.css -o ./src/dist/output.css --watch",
     "test": "react-scripts test",
+    "serve": " serve build",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "Google_API"
+    ]
   },
   "browserslist": {
     "production": [
@@ -47,19 +59,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
+    "tailwindcss": "^3.3.6",
     "postcss": "^8.4.31",
-    "sass": "^1.69.5",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
+    "sass": "^1.69.5"
   }
 }

@@ -1,8 +1,3 @@
-
-export class Page {
-	path: string;
-	name: string;
-}
 export const PAGE ={
 	HOME:{path:"/home", name: "Trang chủ"},
 	LOGIN:{path:"/login", name: "Đăng nhập"},

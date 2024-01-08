@@ -1,6 +1,5 @@
-import {DEFAULT, PAGE, ROLE} from "../constants.tsx";
-import BarItem, {BarItemProp} from "./barItem.tsx";
-import * as url from "url";
+import {DEFAULT, PAGE, ROLE} from "../constants";
+import BarItem, {BarItemProp} from "./BarItem";
 import {useSelector} from "react-redux";
 import {JwtPayload} from "jwt-decode";
 import List from "@mui/material/List";

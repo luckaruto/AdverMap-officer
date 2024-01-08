@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./dist/output.css";
 import reportWebVitals from "./reportWebVitals";
-import store from "./redux/store.tsx";
 import {Provider} from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

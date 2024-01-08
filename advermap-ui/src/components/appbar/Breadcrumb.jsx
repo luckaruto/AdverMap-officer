@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import {useDispatch, useSelector} from "react-redux";
-import {PAGE} from "../constants.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { PAGE } from "../constants";
 
-function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+function handleClick(event) {
     event.preventDefault();
     console.log(event);
     console.info('You clicked a breadcrumb.');
@@ -12,12 +12,12 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 
 export default function ActiveLastBreadcrumb() {
     const dispatch = useDispatch();
-    const {currentPage} = useSelector(state => state.currentPage);
+    const { currentPage } = useSelector(state => state.currentPage);
 
     return (
         <div role="presentation">
-            <Breadcrumbs aria-label="breadcrumb" sx={{padding: 5}} variant="h4">
-                <Link underline="hover" color="inherit" href={PAGE.HOME.path} >
+            <Breadcrumbs aria-label="breadcrumb" sx={{ padding: 5 }} variant="h4">
+                <Link underline="hover" color="inherit" href={PAGE.HOME.path} onClick={handleClick}>
                     Menu
                 </Link>
                 <Link
@@ -25,10 +25,10 @@ export default function ActiveLastBreadcrumb() {
                     color="text.primary"
                     href={currentPage.path}
                     aria-current="page"
+                    onClick={handleClick}
                 >
                     {currentPage.name}
                 </Link>
-
             </Breadcrumbs>
         </div>
     );

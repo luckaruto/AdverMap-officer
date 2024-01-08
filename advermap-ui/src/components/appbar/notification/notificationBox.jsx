@@ -1,30 +1,28 @@
 import * as React from 'react';
-
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import {DEFAULT} from "../../constants.tsx";
-import {useDispatch, useSelector} from "react-redux";
+import {DEFAULT} from "../../constants";
 import {useNavigate} from "react-router-dom";
-import NotificationList from "./notificationList.tsx";
+import NotificationList from "./notificationList";
 import { useSpring, useSpringRef, animated } from '@react-spring/web';
 import { useTransitionStateManager } from '@mui/base/useTransition';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function NotificationBox() {
-    const [anchor, setAnchor] = React.useState<null | HTMLElement>(null);
+    const [anchor, setAnchor] = React.useState(null);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (event) => {
         setAnchor(anchor ? null : event.currentTarget);
     };
 
     const open = Boolean(anchor);
 
-
-
-    const {notification} = useSelector(state => state.notification);
-    const dispatch = useDispatch();
-    const {currentPage} = useSelector(state => state.currentPage);
+    const {notification} = useSelector(state=>state.notification)
+    const dispatch = useDispatch()
+    const {currentPage} = useSelector((state) => state.currentPage);
     const navigate = useNavigate();
 
     return (
@@ -48,7 +46,7 @@ export default function NotificationBox() {
     )
 }
 
-function ReactSpringTransition({ children }: React.PropsWithChildren<{}>) {
+function ReactSpringTransition({ children }) {
     const { requestedEnter, onEntering, onEntered, onExiting, onExited } =
         useTransitionStateManager();
 

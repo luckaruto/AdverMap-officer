@@ -1,10 +1,9 @@
-import { AuthFieldForm } from "../../components/login/login";
-import { api } from "../apis/index.tsx"
-import { API } from "../apis/constants.tsx"
+import { api } from "../apis"
+import { API } from "../apis/constants"
 
 export class AuthService {
 	
-	static login = async (data: AuthFieldForm) => {
+	static login = async (data) => {
 		try {
 			const response = await api.post(API.AUTH,data)
 			return {

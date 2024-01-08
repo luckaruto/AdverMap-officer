@@ -11,15 +11,16 @@ import { setCurrentPage } from "../../redux/currentPage";
 
 
 export default function BarItem({ prop }) {
+  const  { page, icon} = this.prop;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    dispatch(setCurrentPage(prop.page));
-    navigate(prop.page.path);
+    dispatch(setCurrentPage(page));
+    navigate(page.path);
   };
 
   return (
-    <ListItem key={prop.page.path} disablePadding sx={{ display: 'block' }}>
+    <ListItem key={page?.path} disablePadding sx={{ display: 'block' }}>
       <ListItemButton
         sx={{
           minHeight: 48,
@@ -36,10 +37,10 @@ export default function BarItem({ prop }) {
           }}
         >
           <>
-            {prop.icon}
+            {icon}
           </>
         </ListItemIcon>
-        <ListItemText primary={prop.page.name} sx={{ opacity: open ? 1 : 0 }} />
+        <ListItemText primary={page?.name} sx={{ opacity: open ? 1 : 0 }} />
       </ListItemButton>
     </ListItem>
   );

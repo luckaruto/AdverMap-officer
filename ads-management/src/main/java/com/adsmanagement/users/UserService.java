@@ -4,10 +4,7 @@ import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.users.dto.CreateUserDTO;
 import com.adsmanagement.users.dto.UpdateUserDTO;
-import com.adsmanagement.users.models.User;
-import com.adsmanagement.users.models.UserManagementDistrict;
-import com.adsmanagement.users.models.UserManagementWard;
-import com.adsmanagement.users.models.UserRole;
+import com.adsmanagement.users.models.*;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -189,4 +191,63 @@ public class UserService {
         }
         return existUser.get();
     }
+    public UserPermission getUserPermission(Short id) {
+        var userO = this.userRepository.findById(id);
+        if (userO.isEmpty()){
+            return null;
+        }
+
+        var user = userO.get();
+        var permission = new UserPermission();
+        permission.setRole(user.getRole());
+
+        if (user.getRole() == UserRole.ADMIN){
+            return permission;
+        }
+
+        if (user.getRole() == UserRole.WARD_ADMIN){
+            var wards = this.userManagementWardRepository.findByUserId(id);
+
+            Map<Short,Boolean> wardMap = new HashMap<Short, Boolean>();
+
+            if (wards != null && wards.size() > 0 ){
+                for (var i = 0;i < wards.size(); i++){
+                    wardMap.put(wards.get(i).getId(), true);
+                }
+            }
+
+            permission.setWards(wardMap);
+            return permission;
+        }
+
+        if (user.getRole() == UserRole.DISTRICT_ADMIN){
+            var districts = this.userManagementDistrictRepository.findByUserId(id);
+
+            Map<Short,Boolean> districtMap = new HashMap<Short, Boolean>();
+            List<Short> districtIds = new ArrayList<>();
+            if (districts != null && districts.size() > 0 ){
+                for (var i = 0;i < districts.size(); i++){
+                    districtMap.put(districts.get(i).getId(), true);
+                    districtIds.add(districts.get(i).getId());
+                }
+            }
+
+            permission.setDistricts(districtMap);
+
+            var wards = this.wardRepository.findAllByDistrict_IdIn(districtIds);
+            Map<Short,Boolean> wardMap = new HashMap<Short, Boolean>();
+
+            if (wards != null && wards.size() > 0 ){
+                for (var i = 0;i < wards.size(); i++){
+                    wardMap.put(wards.get(i).getId(), true);
+                }
+            }
+
+            permission.setWards(wardMap);
+            return permission;
+        }
+
+        return permission;
+    }
+
 }

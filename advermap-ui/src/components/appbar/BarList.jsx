@@ -52,6 +52,7 @@ const ADMIN_LIST = [
 export default function BarList(){
     const {token} = useSelector(state => state.token);
     const role = token?.role;
+    console.log(role);
     var list = [];
 
     if (role == ROLE.WARD_ADMIN) {
@@ -64,7 +65,7 @@ export default function BarList(){
     return (
         <List>
             {list.map((data, index) => (
-                <BarItem key={index} prop={{page: data.page,icon: data.icon}}></BarItem>
+                <BarItem key={index} data={{page: data.page,icon: data.icon}}></BarItem>
             ))}
         </List>
     )

@@ -24,7 +24,7 @@ import NotificationBox from "./notification/notificationBox";
 
 const drawerWidth = 360;
 
-const openedMixin = (theme: Theme): CSSObject => ({
+const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -33,15 +33,15 @@ const openedMixin = (theme: Theme): CSSObject => ({
     overflowX: 'hidden',
 });
 
-const closedMixin = (theme: Theme): CSSObject => ({
+const closedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: `calc(${theme.spacing(4)} + ${DEFAULT.ICON_SIZE}px)`,
+    width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(5)} + ${DEFAULT.ICON_SIZE}px)`,
+        width: `calc(${theme.spacing(8)} + 1px)`,
     },
 });
 
@@ -54,13 +54,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
-}
-
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -105,9 +101,9 @@ export default function MiniDrawer() {
         setOpen(false);
     };
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);

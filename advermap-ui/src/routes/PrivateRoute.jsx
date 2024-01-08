@@ -12,7 +12,8 @@ const PrivateRoute = () => {
   // Check if the user is authenticated
 
   useEffect(() => {
-    if (!token) {
+    if (!token || token === null) {
+
       // If not authenticated, redirect to the login page
       navigate(PAGE.LOGIN.path, { replace: true });
     }

@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import route from "./routes/index";
 import LoadingPage from "pages/Loading/LoadingPage";
 
-import { ChakraProvider } from '@chakra-ui/react'
 function App() {
   const isLoading = useSelector((state) => state.appState.loading);
 

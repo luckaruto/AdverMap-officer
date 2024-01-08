@@ -100,11 +100,6 @@ export function getTheme(): Dict {
         }
       }
     },
-    fonts: {
-      heading: 'Poppins',
-      body: 'Poppins',
-      mono: 'Poppins'
-    }
   })
 
   return theme

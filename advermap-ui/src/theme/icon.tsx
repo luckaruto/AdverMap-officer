@@ -1,4 +1,5 @@
 import { createIcon } from '@chakra-ui/icons'
+import React from 'react'
 
 //* INFO: https://chakra-ui.com/docs/media-and-icons/icon#tips-for-generating-your-own-icons
 //* INFO: using `path`

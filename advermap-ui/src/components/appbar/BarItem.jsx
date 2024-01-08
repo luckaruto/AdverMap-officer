@@ -9,9 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPage } from "../../redux/currentPage";
 
-
-export default function BarItem({ prop }) {
-  const  { page, icon} = this.prop;
+export default function BarItem(props) {
+  const  { page, icon} = this.props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleOnClick = () => {

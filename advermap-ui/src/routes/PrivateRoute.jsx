@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PAGE } from '../components/constants';
 import { useEffect } from "react";
-import MiniDrawer from "../components/appbar/toolBar";
+// import MiniDrawer from "../components/appbar/toolBar";
 
 const PrivateRoute = () => {
   const { token } = useSelector((state) => state.token);
@@ -20,7 +20,7 @@ const PrivateRoute = () => {
 
   return  (
       <div className="h-screen w-screen bg-white">
-        <MiniDrawer />
+        {/* <MiniDrawer /> */}
       </div>
   );
 };

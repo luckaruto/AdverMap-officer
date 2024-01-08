@@ -1,9 +1,10 @@
-import {useEffect} from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { PAGE } from './../components/constants';
+import { PAGE } from '../components/constants';
+import { useEffect } from "react";
 
-const Layout = () => {
+const PrivateRoute = () => {
   const { token } = useSelector((state) => state.token);
 
   const navigate = useNavigate();
@@ -16,6 +17,6 @@ const Layout = () => {
     }
   }, []);
 
-  return <div className="h-screen w-screen bg-white"></div>;
+  return (<div className="h-screen w-screen bg-white">Nothing</div>);
 };
-export default Layout;
+export default PrivateRoute;

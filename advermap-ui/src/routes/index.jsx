@@ -1,4 +1,4 @@
-import Layout from "./Layout";
+import PrivateRoute from "./PrivateRoute";
 import { PAGE } from './../components/constants';
 import HomePage from './../pages/HomePage';
 import SignIn from "components/login/SignIn";
@@ -12,7 +12,7 @@ const route = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout/>,
+    element: <PrivateRoute/>,
     children: [{ path: PAGE.HOME.path, element: <HomePage /> }],
   },
 ]);

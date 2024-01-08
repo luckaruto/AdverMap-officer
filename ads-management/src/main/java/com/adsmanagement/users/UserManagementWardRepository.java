@@ -13,4 +13,6 @@ public interface UserManagementWardRepository extends JpaRepository<UserManageme
     Optional<UserManagementWard> findByUserIdAndWardId(Short userId, Short wardId);
 
     List<UserManagementWard> findByUserId(Short userId);
+    List<UserManagementWard> findByWardId(Short wardId);
+
 }

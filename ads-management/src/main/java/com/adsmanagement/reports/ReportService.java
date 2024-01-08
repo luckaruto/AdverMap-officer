@@ -3,6 +3,7 @@ package com.adsmanagement.reports;
 import com.adsmanagement.config.EmailService;
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
+import com.adsmanagement.notifications.NotificationService;
 import com.adsmanagement.reports.dto.CreateReportDto;
 import com.adsmanagement.reports.dto.ProcessReportDto;
 import com.adsmanagement.reports.models.Report;
@@ -13,10 +14,7 @@ import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +28,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final SpaceRepository spaceRepository;
 
+    private final NotificationService notificationService;
     private final DistrictRepository districtRepository;
 
     private final WardRepository wardRepository;
@@ -41,7 +40,8 @@ public class ReportService {
             WardRepository wardRepository,
             SpaceRepository spaceRepository,
             ReportRepository reportRepository,
-            EmailService emailService
+            EmailService emailService,
+            NotificationService notificationService
     ) {
         this.surfaceRepository = surfaceRepository;
         this.districtRepository = districtRepository;
@@ -49,6 +49,7 @@ public class ReportService {
         this.spaceRepository = spaceRepository;
         this.reportRepository = reportRepository;
         this.emailService = emailService;
+        this.notificationService = notificationService;
     }
 
     public Page<Report> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds, List<Short> surfaceIds, ReportState reportState) {
@@ -57,15 +58,23 @@ public class ReportService {
         if (wardIds == null || wardIds.isEmpty()) {
             // filter by cityId
             if (districtIds == null || districtIds.isEmpty()) {
-                Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
 
-                List<District> districts  = districtRes.getContent();
-                if (districts != null && !districts.isEmpty()) {
-                    districtIds = new ArrayList<>();
-                    for (int i = 0; i < districts.size(); i++ ){
-                        districtIds.add(districts.get(i).getId());
+                if (cityId != null) {
+                    Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
+                    List<District> districts  = districtRes.getContent();
+
+                    if (districts == null || districts.size() == 0) {
+                        return  new PageImpl<>(new ArrayList<>(),pageable,0);
+                    }
+
+                    if (districts != null && !districts.isEmpty()) {
+                        districtIds = new ArrayList<>();
+                        for (int i = 0; i < districts.size(); i++ ){
+                            districtIds.add(districts.get(i).getId());
+                        }
                     }
                 }
+
             }
 
             // filter by districtId
@@ -131,6 +140,8 @@ public class ReportService {
         var re = this.reportRepository.save(u);
 
         this.emailService.sendReportMail(re);
+
+        this.notificationService.sendNotifyForReport(id);
 
         return re;
     }

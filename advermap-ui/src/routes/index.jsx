@@ -11,6 +11,7 @@ import LoadingPage from "pages/Loading/LoadingPage";
 import SurfacePage from "pages/Surface/SurfacePage";
 import ReportPage from "pages/Report/ReportPage";
 import ReportDetail from "pages/Report/ReportDetail";
+import ForgotPassword from "components/login/ForgotPassword";
 
 const privateRoute = [{ path: PAGE.HOME.path, element: <HomePage /> }];
 
@@ -18,6 +19,10 @@ const route = createBrowserRouter([
   {
     path: PAGE.LOGIN.path,
     element: <SignIn />,
+  },
+  {
+    path: PAGE.FORGOT_PASSWORD.path,
+    element: <ForgotPassword />,
   },
   {
     path: "/",

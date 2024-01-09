@@ -54,6 +54,7 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/api/v1/auth/**","/uploads/*").permitAll()
                             .requestMatchers("/ws","/gs-guide-websocket").permitAll()
+                            .requestMatchers("/swagger-ui/*","/v3/**").permitAll()
                             .requestMatchers("/api/v1/**").authenticated();
                 })
 

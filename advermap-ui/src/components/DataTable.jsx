@@ -8,15 +8,12 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom';
-import { PAGE } from 'components/constants';
-import { useNavigate } from 'react-router-dom';
+import Button from "@mui/material/Button";
 
 const DataTable = (props) => {
-  const { columns, rows, height } = props;
+  const { columns, rows, height, onClickRow } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const navigate=useNavigate()
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -32,7 +29,7 @@ const DataTable = (props) => {
       <TableContainer sx={{ height: height }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow >
+            <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -49,8 +46,27 @@ const DataTable = (props) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow sx={{cursor:"pointer"}} hover role="checkbox" tabIndex={-1} key={row.id} onClick={()=>navigate(PAGE.SURFACE.path+`/${row.id}`)}>
+                  <TableRow
+                    sx={{ cursor: "pointer" }}
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.id}
+                  >
                     {columns.map((column) => {
+                      if (column.id == "detail") {
+                        return (
+                          <TableCell key={column.id}>
+                            <Button
+                              sx={{ fontSize: "12px" }}
+                              onClick={() => onClickRow(row)}
+                              variant="outlined"
+                            >
+                              Xem Chi Tiết
+                            </Button>
+                          </TableCell>
+                        );
+                      }
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align="left">
@@ -80,12 +96,14 @@ const DataTable = (props) => {
 DataTable.propTypes = {
   columns: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
-  height: PropTypes.number,
+  height: PropTypes.number.isRequired,
+  onClickRow: PropTypes.func.isRequired,
 };
 DataTable.defaultProps = {
   columns: [],
   rows: [],
   height: 440,
+  onClickRow: null,
 };
 
 export default DataTable;

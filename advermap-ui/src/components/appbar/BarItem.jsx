@@ -7,8 +7,8 @@ import ListItemText from "@mui/material/ListItemText";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setCurrentPage} from "../../redux/currentPage";
 import PropTypes from 'prop-types';
+import { setCurrentPage } from "redux/appSlice";
 
 BarItem.propTypes = {
     data: PropTypes.node.isRequired,

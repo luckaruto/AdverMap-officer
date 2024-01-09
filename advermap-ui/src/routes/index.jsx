@@ -1,10 +1,18 @@
 import PrivateRoute from "./PrivateRoute";
-import { PAGE } from './../components/constants';
-import HomePage from './../pages/HomePage';
+
 import SignIn from "components/login/SignIn";
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import SpacePage from "pages/Space";
+import SpacePage from "pages/Space/SpacePage";
+import ErrorPage from "pages/Error/ErrorPage";
+import { PAGE } from "components/constants";
+import HomePage from "pages/HomePage";
+import LoadingPage from "pages/Loading/LoadingPage";
+import SurfacePage from "pages/Surface/SurfacePage";
+import ReportPage from "pages/Report/ReportPage";
+import ReportDetail from "pages/Report/ReportDetail";
+
+const privateRoute = [{ path: PAGE.HOME.path, element: <HomePage /> }];
 
 const route = createBrowserRouter([
   {
@@ -13,13 +21,33 @@ const route = createBrowserRouter([
   },
   {
     path: "/",
-    element: <PrivateRoute/>,
-    children: [{ path: PAGE.HOME.path, element: <HomePage /> }],
+    element: <PrivateRoute />,
+    children: privateRoute,
   },
   {
-    path:PAGE.SPACE.path,
-    element:<SpacePage/>
-  }
+    path: PAGE.SPACE.path,
+    element: <SpacePage />,
+  },
+  {
+    path: PAGE.SPACE.path+"/:id",
+    element: <SurfacePage />,
+  },
+  {
+    path: PAGE.SURFACE.path+"/:id",
+    element: <ReportPage />,
+  },
+  {
+    path: PAGE.REPORT.path+"/:id",
+    element: <ReportDetail />,
+  },
+  {
+    path: "/test",
+    element: <LoadingPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
 
 export default route;

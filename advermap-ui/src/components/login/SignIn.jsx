@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -19,8 +18,8 @@ import { AxiosError } from 'axios';
 import { Alert } from '@mui/material';
 import { AuthService } from 'services/auth/authService';
 import { setToken } from 'redux/useToken';
-import { setCurrentPage } from 'redux/currentPage';
 import { PAGE } from 'components/constants';
+import { setCurrentPage } from 'redux/appSlice';
 
 function Copyright(props) {
   return (
@@ -44,9 +43,9 @@ const initialFields = {
 };
 
 const SignIn = () => {
-  const { token } = useSelector((state) => state.token);
+  const { token } = useSelector((state) => state.appState);
   const dispatch = useDispatch();
-  const { currentPage } = useSelector((state) => state.currentPage);
+  const { currentPage } = useSelector((state) => state.appState);
   const navigate = useNavigate();
 
   const [fields, setFields] = useState(initialFields);

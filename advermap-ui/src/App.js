@@ -1,24 +1,28 @@
 import {
   BrowserRouter,
-  createBrowserRouter, Navigate,
+  createBrowserRouter,
+  Navigate,
   Outlet,
   redirect,
   Router,
   RouterProvider,
   Routes,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import route from './routes/index';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import route from "./routes/index";
+import LoadingPage from "pages/Loading/LoadingPage";
 
 function App() {
+  const isLoading = useSelector((state) => state.appState.loading);
 
   return (
-        <RouterProvider router={route}/>
-  )
-
+    <>
+      {isLoading && <LoadingPage />}
+      <RouterProvider router={route} />
+    </>
+  );
 }
 
 export default App;

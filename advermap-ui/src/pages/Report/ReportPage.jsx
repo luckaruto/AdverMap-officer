@@ -2,7 +2,7 @@ import { formatImgUrl } from "pages/Space/SpacePage";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { setLoading } from "redux/appSlice";
 import { SurfaceServices } from "services/surface/SurfaceService";
 import DataTable from "components/DataTable";
@@ -60,7 +60,7 @@ const ReportPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const token = testToken;
+  const {token} = useSelector((state) => state.appState);
 
   const params = { wardIds: 2};
 

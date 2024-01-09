@@ -1,9 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PAGE } from "../components/constants";
+import {jwtDecode} from "jwt-decode";
+
+
+function getPayloadTokenFromStorage() {
+  const tokenString = localStorage.getItem("token");
+  if (!tokenString || tokenString == null) {
+    return null;
+  }
+
+  try {
+    const decodedToken = jwtDecode(tokenString); // decode your token here
+    let currentDate = new Date();
+
+    // JWT exp is in seconds
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      return null;
+    }
+
+    return decodedToken;
+  } catch (e) {
+    return null;
+  }
+}
+
+function  getTokenFromStorage(){
+  var tokenString = localStorage.getItem("token");
+  if (!tokenString || tokenString == null) {
+    return null;
+  }
+
+  tokenString = tokenString.replaceAll(`"`,'');
+  return tokenString;
+}
 
 const initialState = {
   currentPage: PAGE.HOME,
-  loading: true,
+  token: getTokenFromStorage(),
+  tokenPayload: getPayloadTokenFromStorage(),
+  loading: false,
   notification: [{ id: 1, message: "test notification" }],
 };
 
@@ -30,9 +65,20 @@ const appSlice = createSlice({
         (noti) => !isNotiEqual(noti, id)
       );
     },
+    setToken: (state, action) => {
+      const decodedToken = jwtDecode(action.payload); // decode your token here
+      state.tokenPayload = decodedToken;
+      state.token = action.payload;
+      localStorage.setItem("token", JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { setCurrentPage, setLoading, addNoti, deleteNoti } =
-  appSlice.actions;
+export const {
+  setCurrentPage,
+  setLoading,
+  addNoti,
+  deleteNoti,
+  setToken,
+} = appSlice.actions;
 export default appSlice.reducer;

@@ -1,5 +1,8 @@
 export const API={
 	AUTH:"/api/v1/auth/login",
+	NOTIFICATION: {
+		COUNT : '/api/v1/notifications/count',
+	},
 	SURFACE:"/api/v1/surfaces",
 	SPACE:"/api/v1/spaces",
 	REPORT:"/api/v1/reports",

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { SpaceService } from "services/space/SpaceService";
 import { Link } from "react-router-dom";
 import { PAGE } from "components/constants";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { setLoading } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
 import { testToken } from "services/apis/constants";
@@ -119,7 +119,7 @@ const SpacePage = () => {
 
   const handleClickRow = (row) => navigate(PAGE.SPACE.path + `/${row.id}`);
 
-  const token = testToken;
+  const {token} = useSelector((state) => state.appState);
 
   const fetchSpace = async (params) => {
     dispatch(setLoading(true));

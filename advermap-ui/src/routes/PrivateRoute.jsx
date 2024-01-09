@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PAGE } from '../components/constants';
 import { useEffect } from "react";
-// import MiniDrawer from "../components/appbar/toolBar";
+import MiniDrawer from "../components/appbar/toolBar";
+import app from "../App";
 
 const PrivateRoute = () => {
-  const { token } = useSelector((state) => state.token);
+  const {token} = useSelector((state) => state.appState);
 
   const navigate = useNavigate();
   // Check if the user is authenticated
@@ -21,7 +22,7 @@ const PrivateRoute = () => {
 
   return  (
       <div className="h-screen w-screen bg-white">
-        {/* <MiniDrawer /> */}
+        { <MiniDrawer /> }
       </div>
   );
 };

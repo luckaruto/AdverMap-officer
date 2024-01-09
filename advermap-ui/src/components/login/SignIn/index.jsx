@@ -2,22 +2,18 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthService } from 'services/auth/authService';
-import { setToken } from 'redux/useToken';
-// import { setCurrentPage } from 'redux/appSlice';
+ import {setCurrentPage, setToken} from 'redux/appSlice';
 import { PAGE } from 'components/constants';
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-// @ts-ignore
 import { LoginSchema } from '../../../constants/validation/index.ts';
-// @ts-ignore
 import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
 import FormInput from '../components/FormInput/index.jsx';
 import PasswordField from '../components/PasswordField/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
-import { setCurrentPage } from 'redux/appSlice.jsx';
 
 
 const SignIn = () => {
@@ -35,7 +31,7 @@ const SignIn = () => {
   } = method
   const toast = useToast()
   // @ts-ignore
-  const { token } = useSelector((state) => state.token);
+  const {currentPage,token} = useSelector((state) => state.appState);
   const dispatch = useDispatch();
   // @ts-ignore
   const navigate = useNavigate();

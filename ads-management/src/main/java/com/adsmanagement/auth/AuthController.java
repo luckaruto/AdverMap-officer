@@ -3,6 +3,7 @@ package com.adsmanagement.auth;
 import com.adsmanagement.jwt.JwtService;
 import com.adsmanagement.common.Response;
 import com.adsmanagement.users.UserRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/auth")
+@Tag(name = "Xử lý đăng nhập", description = "Dùng để đặng nhập tài khoản lấy token, refresh token")
 public class AuthController {
     @Autowired
     private JwtService jwtService;
@@ -46,8 +48,4 @@ public class AuthController {
 
     }
 
-    @GetMapping("/login_callback")
-    public Map<String, Object> loginCallback(@AuthenticationPrincipal OAuth2User oauth2User){
-        return oauth2User.getAttributes();
-    }
 }

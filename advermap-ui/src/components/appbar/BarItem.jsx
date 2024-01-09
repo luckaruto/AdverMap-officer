@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { setCurrentPage } from "redux/appSlice";
 
 BarItem.propTypes = {
-    data: PropTypes.node.isRequired,
+    data: PropTypes.object.isRequired,
 };
 export default function BarItem({data}) {
     const {page, icon} = data;

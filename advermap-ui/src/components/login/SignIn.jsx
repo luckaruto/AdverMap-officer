@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthService } from 'services/auth/authService';
 import { setToken } from 'redux/useToken';
-import { setCurrentPage } from 'redux/currentPage';
+// import { setCurrentPage } from 'redux/appSlice';
 import { PAGE } from 'components/constants';
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
@@ -17,13 +17,14 @@ import { loginFailedDescription, loginSuccessDescription } from '../../constants
 import FormInput from './components/FormInput';
 import PasswordField from './components/PasswordField/index.jsx';
 import { SubmitButton } from './authenticatePage.styles.js';
+import { setCurrentPage } from 'redux/appSlice.jsx';
 
 
 const SignIn = () => {
   // @ts-ignore
   const method = useForm({
     defaultValues: {
-      email: '',
+      username: '',
       password: ''
     },
     resolver: yupResolver(LoginSchema)
@@ -37,14 +38,13 @@ const SignIn = () => {
   const { token } = useSelector((state) => state.token);
   const dispatch = useDispatch();
   // @ts-ignore
-  const { currentPage } = useSelector((state) => state.currentPage);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(data){
     try {
-      const { email, password } = data
-      const res = await AuthService.login({ email, password });
+      const { username, password } = data
+      const res = await AuthService.login({ username, password });
       if (res.status === 200) {
         dispatch(setToken(res.data));
         dispatch(setCurrentPage(PAGE.HOME));
@@ -85,7 +85,7 @@ const SignIn = () => {
           <FormProvider {...method}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing="4">
-                <FormInput name="email" label="Email" placeholder="Your email" type="email" />
+                <FormInput name="username" label="Tên đăng nhập" placeholder="Tên đăng nhập" />
                 <PasswordField name="password" label="Mật khẩu" placeholder="Mật khẩu của bạn" />
                 <Text width="full" align="right" fontSize="sm">
                   <Link href={``} color="blue.600">

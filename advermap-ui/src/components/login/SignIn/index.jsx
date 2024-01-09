@@ -10,13 +10,13 @@ import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 // @ts-ignore
-import { LoginSchema } from '../../constants/validation/index.ts';
+import { LoginSchema } from '../../../constants/validation/index.ts';
 // @ts-ignore
-import { loginFailedDescription, loginSuccessDescription } from '../../constants/messages/index.ts';
+import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
-import FormInput from './components/FormInput';
-import PasswordField from './components/PasswordField/index.jsx';
-import { SubmitButton } from './authenticatePage.styles.js';
+import FormInput from '../components/FormInput/index.jsx';
+import PasswordField from '../components/PasswordField/index.jsx';
+import { SubmitButton } from '../authenticatePage.styles.js';
 import { setCurrentPage } from 'redux/appSlice.jsx';
 
 
@@ -51,13 +51,13 @@ const SignIn = () => {
         navigate(PAGE.HOME.path, { replace: true });
         toast({
           status: 'success',
-          description: loginSuccessDescription
+          description: 'Đăng nhập thành công'
         })
       } 
     } catch (error) {
       toast({
         status: 'error',
-        description: loginFailedDescription
+        description: 'Đăng nhập thất bại, vui lòng thử lại'
       })
     }
   }

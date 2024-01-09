@@ -12,7 +12,7 @@ function handleClick(event) {
 
 export default function ActiveLastBreadcrumb() {
     const dispatch = useDispatch();
-    const { currentPage } = useSelector(state => state.currentPage);
+    const { currentPage, loading ,token} = useSelector((state) => state.appState);
 
     return (
         <div role="presentation">

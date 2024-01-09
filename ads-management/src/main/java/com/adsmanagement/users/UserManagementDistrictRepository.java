@@ -12,4 +12,7 @@ public interface UserManagementDistrictRepository extends JpaRepository<UserMana
     Optional<UserManagementDistrict> findByUserIdAndDistrictId(Short userId, Short districtId);
 
     List<UserManagementDistrict> findByUserId(Short userId);
+
+    List<UserManagementDistrict> findByDistrictId(Short districtId);
+
 }

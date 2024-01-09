@@ -12,10 +12,7 @@ import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,13 +50,19 @@ public class SurfaceService {
         if (wardIds == null || wardIds.isEmpty()) {
             // filter by cityId
             if (districtIds == null || districtIds.isEmpty()) {
-                Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
+                if (cityId != null) {
+                    Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
+                    List<District> districts  = districtRes.getContent();
 
-                List<District> districts  = districtRes.getContent();
-                if (districts != null && !districts.isEmpty()) {
-                    districtIds = new ArrayList<>();
-                    for (int i = 0; i < districts.size(); i++ ){
-                        districtIds.add(districts.get(i).getId());
+                    if (districts == null || districts.size() == 0) {
+                        return  new PageImpl<>(new ArrayList<>(),pageable,0);
+                    }
+
+                    if (districts != null && !districts.isEmpty()) {
+                        districtIds = new ArrayList<>();
+                        for (int i = 0; i < districts.size(); i++ ){
+                            districtIds.add(districts.get(i).getId());
+                        }
                     }
                 }
             }
@@ -124,15 +127,22 @@ public class SurfaceService {
         if (wardIds == null || wardIds.isEmpty()) {
             // filter by cityId
             if (districtIds == null || districtIds.isEmpty()) {
-                Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
+                if (cityId != null) {
+                    Page<District> districtRes = this.districtRepository.findAllByCity_Id(cityId,pageable);
+                    List<District> districts  = districtRes.getContent();
 
-                List<District> districts  = districtRes.getContent();
-                if (districts != null && !districts.isEmpty()) {
-                    districtIds = new ArrayList<>();
-                    for (int i = 0; i < districts.size(); i++ ){
-                        districtIds.add(districts.get(i).getId());
+                    if (districts == null || districts.size() == 0) {
+                        return  new PageImpl<>(new ArrayList<>(),pageable,0);
+                    }
+
+                    if (districts != null && !districts.isEmpty()) {
+                        districtIds = new ArrayList<>();
+                        for (int i = 0; i < districts.size(); i++ ){
+                            districtIds.add(districts.get(i).getId());
+                        }
                     }
                 }
+
             }
 
             // filter by districtId

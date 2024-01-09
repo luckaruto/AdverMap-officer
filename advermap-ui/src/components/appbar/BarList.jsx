@@ -50,8 +50,8 @@ const ADMIN_LIST = [
 ]
 
 export default function BarList(){
-    const {token} = useSelector(state => state.token);
-    const role = token?.role;
+    const { currentPage, loading ,tokenPayload} = useSelector((state) => state.appState);
+    const role = tokenPayload?.role;
     console.log(role);
     var list = [];
 
@@ -62,10 +62,14 @@ export default function BarList(){
     } else if (role == ROLE.ADMIN) {
         list = ADMIN_LIST;
     }
+
+    console.log(list);
+
+
     return (
         <List>
-            {list.map((data, index) => (
-                <BarItem key={index} data={{page: data.page,icon: data.icon}}></BarItem>
+            {list.map((item, index) => (
+                <BarItem key={index} data={{page: item.page,icon: item.icon}}></BarItem>
             ))}
         </List>
     )

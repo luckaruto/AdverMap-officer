@@ -17,9 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AxiosError } from 'axios';
 import { Alert } from '@mui/material';
 import { AuthService } from 'services/auth/authService';
-import { setToken } from 'redux/useToken';
 import { PAGE } from 'components/constants';
-import { setCurrentPage } from 'redux/appSlice';
+import { setCurrentPage,setToken } from 'redux/appSlice';
 
 function Copyright(props) {
   return (
@@ -43,11 +42,9 @@ const initialFields = {
 };
 
 const SignIn = () => {
-  const { token } = useSelector((state) => state.appState);
   const dispatch = useDispatch();
-  const { currentPage } = useSelector((state) => state.appState);
+  const { currentPage, loading ,token} = useSelector((state) => state.appState);
   const navigate = useNavigate();
-
   const [fields, setFields] = useState(initialFields);
   const [message, setMessage] = useState('');
 
@@ -57,11 +54,10 @@ const SignIn = () => {
     try {
       const res = await AuthService.login(fields);
       if (res.status === 200) {
-       
-        dispatch(setToken(res.data));
-       
+
+        const tokenStr = res.data.replaceAll(`"`,"");
+        dispatch(setToken(tokenStr));
         dispatch(setCurrentPage(PAGE.HOME));
-       
         navigate(PAGE.HOME.path, { replace: true });
       } else {
         setMessage('Error: ' + res.message);

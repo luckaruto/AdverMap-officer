@@ -3,6 +3,7 @@ package com.adsmanagement.users.models;
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictDTO;
 import com.adsmanagement.users.dto.UserDTO;
+import com.adsmanagement.users.dto.UserFilterPermission;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -89,4 +90,5 @@ public class User {
 
         return new UserDTO(id,name,role, email,phone,birthday,wards,districts);
     }
+
 }

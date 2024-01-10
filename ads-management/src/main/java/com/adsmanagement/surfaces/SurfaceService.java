@@ -3,14 +3,19 @@ package com.adsmanagement.surfaces;
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.spaces.*;
+import com.adsmanagement.spaces.dto.ProcessResponseDto;
+import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.spaces.models.Space;
+import com.adsmanagement.spaces.models.SpaceRequest;
 import com.adsmanagement.surfaces.dto.CreateSurfaceDto;
 import com.adsmanagement.surfaces.dto.CreateSurfaceRequestDto;
+import com.adsmanagement.surfaces.dto.ProcessResponse;
 import com.adsmanagement.surfaces.models.Surface;
 import com.adsmanagement.surfaces.models.SurfaceRequest;
 import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -122,7 +127,31 @@ public class SurfaceService {
         return this.surfaceRequestRepository.save(createSurfaceRequestDto.toSurfaceRequest());
     }
 
-    public Page<SurfaceRequest> findAllRequest(Short page, Short size,Short cityId,List<Short> districtIds,List<Short> wardIds,List<Short> surfaceIds) {
+    @Transactional
+    public SurfaceRequest processRequest(SurfaceRequest req, ProcessResponse processResponseDto, User user){
+
+        req.setResponse(processResponseDto.getResponse());
+        req.setApprovedBy( new User(user.getId()));
+        req.setState(processResponseDto.getState());
+
+        var res = this.surfaceRequestRepository.save(req);
+
+        if (processResponseDto.getState() == RequestState.APPROVED) {
+            var surface = req.getSurface();
+            if (surface != null) {
+                surface.setFieldByRequest(req);
+                var sp = this.surfaceRepository.save(surface);
+            }
+
+            res.setSurface(surface);
+
+        }
+
+
+        return res;
+    }
+
+    public Page<SurfaceRequest> findAllRequest(Short page, Short size, Short cityId, List<Short> districtIds, List<Short> wardIds, List<Short> surfaceIds, RequestState state) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
         if (wardIds == null || wardIds.isEmpty()) {
@@ -161,15 +190,28 @@ public class SurfaceService {
         }
 
         if (wardIds != null && surfaceIds != null && wardIds.size() > 0 && surfaceIds.size() > 0){
+            if (state != null) {
+                return this.surfaceRequestRepository.findAllByWardIdsAndSurfaceIdsAndState(pageable, wardIds, surfaceIds,state);
+            }
             return this.surfaceRequestRepository.findAllByWardIdsAndSurfaceIds(pageable, wardIds, surfaceIds);
         }
 
         if (wardIds != null && wardIds.size() >0) {
+            if (state != null) {
+                return this.surfaceRequestRepository.findAllByWardIdsAndState(pageable, wardIds,state);
+            }
             return this.surfaceRequestRepository.findAllByWardIds(pageable, wardIds);
         }
 
         if (surfaceIds != null && surfaceIds.size() >0) {
+            if (state != null) {
+                return this.surfaceRequestRepository.findAllBySurfaceIdsAndState(pageable, surfaceIds,state);
+            }
             return this.surfaceRequestRepository.findAllBySurfaceIds(pageable, surfaceIds);
+        }
+
+        if (state != null) {
+            return this.surfaceRequestRepository.findAllByState(pageable,state);
         }
 
         return  this.surfaceRequestRepository.findAll(pageable);

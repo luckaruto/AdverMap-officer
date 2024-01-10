@@ -14,4 +14,7 @@ public interface WardRepository extends JpaRepository<Ward, Short> {
     Page<Ward> findAllByDistrict_IdIn(List<Short> districtIds, Pageable pageable);
     List<Ward> findAllByDistrict_IdIn(List<Short> districtIds);
 
+    List<Ward> findAllByIdIn(List<Short> ids);
+
+
 }

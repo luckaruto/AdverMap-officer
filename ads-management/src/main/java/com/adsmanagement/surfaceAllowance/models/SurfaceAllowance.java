@@ -4,6 +4,7 @@ import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.surfaceAllowance.dto.SurfaceAllowanceDto;
+import com.adsmanagement.surfaces.models.Surface;
 import com.adsmanagement.surfaces.models.SurfaceFormat;
 import com.adsmanagement.users.dto.UserDTO;
 import com.adsmanagement.users.models.User;
@@ -42,6 +43,10 @@ public class SurfaceAllowance {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name="approved_id")
+    private User approvedBy;
 
     @Column(name = "content")
     private String content;
@@ -116,5 +121,15 @@ public class SurfaceAllowance {
 
         return new SurfaceAllowanceDto(id,sp,w,u,content,imgUrls,
                 companyName,companyInfo,companyEmail,companyPhone,companyAddress,startDate,endDate,format,width,height,state, response);
+    }
+
+    public Surface toSurface() {
+        Space sp = new Space();
+        if (space != null) {
+            sp.setId(space.getId());
+        }
+
+        return new Surface((short) 0,format,width,height,imgUrl,content,sp, new Date(), new Date());
+
     }
 }

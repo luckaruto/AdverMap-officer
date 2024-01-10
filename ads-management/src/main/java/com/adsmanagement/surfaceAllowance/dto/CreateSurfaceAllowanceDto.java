@@ -40,7 +40,7 @@ public class CreateSurfaceAllowanceDto {
     private Short height;
 
     public SurfaceAllowance toSurfaceAllowance() {
-        return new SurfaceAllowance((short) 0, new Space(spaceId), new Ward(wardId), new User(userId), content,imgUrl.toString(), companyName,
+        return new SurfaceAllowance((short) 0, new Space(spaceId), new Ward(wardId), new User(userId),null, content,imgUrl.toString(), companyName,
                 companyInfo, companyEmail, companyPhone, companyAddress, new Date(startDate),
                 new Date(endDate),format,width,height,new Date(), RequestState.IN_PROGRESS, null);
     }

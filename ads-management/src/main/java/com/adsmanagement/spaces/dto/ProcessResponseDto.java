@@ -1,4 +1,4 @@
-package com.adsmanagement.surfaceAllowance.dto;
+package com.adsmanagement.spaces.dto;
 
 import com.adsmanagement.spaces.models.RequestState;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ProcessResponse {
+public class ProcessResponseDto {
     private RequestState state;
     private String response;
 }

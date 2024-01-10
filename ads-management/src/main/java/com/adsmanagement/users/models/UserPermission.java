@@ -1,10 +1,12 @@
 package com.adsmanagement.users.models;
 
+import com.adsmanagement.users.dto.UserFilterPermission;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,4 +64,14 @@ public class UserPermission {
 
         return true;
     }
+
+    public boolean hasPermission(List<Short> wardIds,List<Short> districtIds, List<Short> cityIds) {
+        if (role == UserRole.ADMIN){
+            return true;
+        }
+
+        return this.hasPermission(wardIds,districtIds);
+    }
+
+
 }

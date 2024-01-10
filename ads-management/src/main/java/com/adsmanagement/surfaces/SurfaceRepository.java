@@ -11,4 +11,6 @@ import java.util.List;
 public interface SurfaceRepository extends JpaRepository<Surface, Short>, CrudRepository<Surface, Short> {
     Page<Surface> findAllBySpaceIdIn(List<Short> spaceIds, Pageable pageable);
 
+    long countBySpaceId(Short spaceId);
+
 }

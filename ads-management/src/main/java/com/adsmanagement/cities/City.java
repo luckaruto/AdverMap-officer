@@ -46,4 +46,8 @@ public class City {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CityDto toDto() {
+        return new CityDto(id, name);
+    }
 }

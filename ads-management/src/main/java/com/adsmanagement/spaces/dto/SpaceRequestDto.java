@@ -8,6 +8,7 @@ import com.adsmanagement.wards.WardDTO;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -29,4 +30,6 @@ public class SpaceRequestDto {
     private UserDTO approvedBy;
     private RequestState state;
     private String response;
+    private boolean isPlanned;
+    private List<String> imgUrl;
 }

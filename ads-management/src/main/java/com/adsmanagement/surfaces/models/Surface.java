@@ -70,4 +70,13 @@ public class Surface {
         return new SurfaceDto(id,format,width,height,imgUrls,content,spaceDto);
     }
 
+    public void setFieldByRequest(SurfaceRequest req) {
+        this.imgUrl = req.getImgUrl();
+        this.content = req.getContent();
+        this.height  = req.getHeight();
+        this.format = req.getFormat();
+        this.space  = req.getSpace();
+        this.width =  req.getWidth();
+        this.updatedAt = new Date();
+    }
 }

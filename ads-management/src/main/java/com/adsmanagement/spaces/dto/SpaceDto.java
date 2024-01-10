@@ -25,4 +25,5 @@ public class SpaceDto {
     private List<String> imgUrl;
     private boolean isPlanned;
     private WardDTO ward;
+    private Long totalSurface;
 }

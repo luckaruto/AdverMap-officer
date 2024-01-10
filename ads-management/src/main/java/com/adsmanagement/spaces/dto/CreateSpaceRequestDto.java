@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -24,7 +25,9 @@ public class CreateSpaceRequestDto {
     private String content;
     private SpaceType type;
     private SpaceFormat format;
+    private boolean isPlanned;
+    private List<String> imgUrl;
     public SpaceRequest ToSpaceRequest(User user){
-        return new SpaceRequest((short) 0,address,new Date(),user,longitude,latitude,new Space(spaceId), new Ward(wardId),content,type,format,null, RequestState.IN_PROGRESS,null,null,null);
+        return new SpaceRequest((short) 0,address,new Date(),user,longitude,latitude,new Space(spaceId), new Ward(wardId),content,type,format,null, RequestState.IN_PROGRESS,null,null,null, isPlanned, imgUrl.toString());
     }
 }

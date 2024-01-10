@@ -11,9 +11,11 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 
 const DataTable = (props) => {
-  const { columns, rows, height, onClickRow } = props;
+  const { columns, rows, height, onClickRow, onClickDetail } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -22,6 +24,13 @@ const DataTable = (props) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const changeBgColor = (row) => {
+    if (selectedRow && row.id == selectedRow.id) {
+      return `rgb(229 231 235 / var(--tw-bg-opacity))`;
+    }
+    return "inherit";
   };
 
   return (
@@ -47,11 +56,14 @@ const DataTable = (props) => {
               .map((row) => {
                 return (
                   <TableRow
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: "pointer", bgcolor: changeBgColor(row) }}
                     hover
                     role="checkbox"
                     tabIndex={-1}
                     key={row.id}
+                    onClick={() => {
+                      onClickRow(row), setSelectedRow(row);
+                    }}
                   >
                     {columns.map((column) => {
                       if (column.id == "detail") {
@@ -59,10 +71,10 @@ const DataTable = (props) => {
                           <TableCell key={column.id}>
                             <Button
                               sx={{ fontSize: "12px" }}
-                              onClick={() => onClickRow(row)}
+                              onClick={() => onClickDetail(row)}
                               variant="outlined"
                             >
-                              Xem Chi Tiết
+                              {column.value}
                             </Button>
                           </TableCell>
                         );
@@ -98,12 +110,14 @@ DataTable.propTypes = {
   rows: PropTypes.array.isRequired,
   height: PropTypes.number.isRequired,
   onClickRow: PropTypes.func.isRequired,
+  onClickDetail: PropTypes.func.isRequired,
 };
 DataTable.defaultProps = {
   columns: [],
   rows: [],
   height: 440,
-  onClickRow: null,
+  onClickRow: ()=>{},
+  onClickDetail: ()=>{},
 };
 
 export default DataTable;

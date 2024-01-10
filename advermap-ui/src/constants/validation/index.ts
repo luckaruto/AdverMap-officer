@@ -15,6 +15,16 @@ export const ForgotPasswordSchema = yup.object().shape({
     .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Email must be a valid email')
 })
 
-export const SelectFleetSchema = yup.object().shape({
-  fleet: yup.string().required('This field is required')
+
+export const OTPConfirmSchema = yup.object().shape({
+  otp: yup.string().required('This field is required')
+  .matches(/^[0-9]{6}$/, 'OTP must be 6 digits')
+
+})
+
+export const ResetPasswordSchema = yup.object().shape({
+  password: yup.string().required('This field is required')
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, 'Password must be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character'),
+  confirmPassword: yup.string().required('This field is required')
+  .oneOf([yup.ref('password'), null], 'Passwords must match')
 })

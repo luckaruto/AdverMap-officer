@@ -8,22 +8,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { LoginSchema } from '../../../constants/validation/index.ts';
-import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
+import {  ResetPasswordSchema } from '../../../constants/validation/index.ts';
 // @ts-ignore
-import FormInput from '../components/FormInput/index.jsx';
 import PasswordField from '../components/PasswordField/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
 
 
-const SignIn = () => {
+const ResetPassword = () => {
   // @ts-ignore
   const method = useForm({
     defaultValues: {
-      username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     },
-    resolver: yupResolver(LoginSchema)
+    resolver: yupResolver(ResetPasswordSchema)
   })
   const {
     handleSubmit,
@@ -39,17 +37,19 @@ const SignIn = () => {
 
   async function onSubmit(data){
     try {
-      const { username, password } = data
-      const res = await AuthService.login({ username, password });
-      if (res.status === 200) {
-        dispatch(setToken(res.data));
-        dispatch(setCurrentPage(PAGE.HOME));
-        navigate(PAGE.HOME.path, { replace: true });
-        toast({
-          status: 'success',
-          description: 'Đăng nhập thành công'
-        })
-      } 
+      const { password, confirmPassword } = data
+      if (password === confirmPassword) {
+        const res = await AuthService.resetPassword({ password });
+        if (res.status === 200) {
+          dispatch(setToken(res.data));
+          dispatch(setCurrentPage(PAGE.HOME));
+          navigate(PAGE.HOME.path, { replace: true });
+          toast({
+            status: 'success',
+            description: 'Đăng nhập thành công'
+          })
+        } 
+      }
     } catch (error) {
       toast({
         status: 'error',
@@ -63,7 +63,6 @@ const SignIn = () => {
       <Box width="full" maxWidth="xl" marginX="auto" paddingY="188px">
         <Box maxWidth="416px" marginX={{ base: 8, md: 'auto' }}>
           <VStack marginBottom={12} width="full" alignItems="flex-start">
-            <Avatar size="lg" src="https://bit.ly/broken-link" />
             <Heading
               fontSize="24px"
               marginBottom={2}
@@ -72,22 +71,17 @@ const SignIn = () => {
               color="gray.900"
               lineHeight="26px"
             >
-              Đăng nhập
+              Đặt lại mật khẩu
             </Heading>
             <Text fontSize="md" color="gray.700">
-              Đăng nhập để tiếp tục
+              Nhập mật khẩu mới
             </Text>
           </VStack>
           <FormProvider {...method}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing="4">
-                <FormInput name="username" label="Tên đăng nhập" placeholder="Tên đăng nhập" />
                 <PasswordField name="password" label="Mật khẩu" placeholder="Mật khẩu của bạn" />
-                <Text width="full" align="right" fontSize="sm">
-                  <Link href={PAGE.FORGOT_PASSWORD.path} color="blue.500">
-                    Quên mật khẩu?
-                  </Link>
-                </Text>
+                <PasswordField name="confirmPassword" label="Xác nhận mật khẩu" placeholder="Xác nhận mật khẩu của bạn" />
                 <SubmitButton type="submit" isLoading={isSubmitting || isLoading}>
                   Đăng nhập
                 </SubmitButton>
@@ -101,4 +95,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ResetPassword;

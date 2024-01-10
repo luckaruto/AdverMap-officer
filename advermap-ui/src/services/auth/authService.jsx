@@ -39,5 +39,17 @@ export class AuthService {
 			throw error
 		}
 	}
+
+	static resetPassword = async (data) => {
+		try {
+			const response = await api.post(API.RESET_PASSWORD,data)
+			return {
+				status: response.status,
+				message: response.data.message
+			};
+		} catch (error) {
+			throw error
+		}
+	}
 }
 

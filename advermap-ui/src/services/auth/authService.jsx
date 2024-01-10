@@ -15,5 +15,29 @@ export class AuthService {
 			throw error
 		}
 	}
+
+	static forgotPassword = async (data) => {
+		try {
+			const response = await api.post(API.FORGOT_PASSWORD,data)
+			return {
+				status: response.status,
+				message: response.data.message
+			};
+		} catch (error) {
+			throw error
+		}
+	}
+
+	static verifyOtp = async (data) => {
+		try {
+			const response = await api.post(API.VERIFY_OTP,data)
+			return {
+				status: response.status,
+				message: response.data.message
+			};
+		} catch (error) {
+			throw error
+		}
+	}
 }
 

@@ -12,6 +12,7 @@ import SurfacePage from "pages/Surface/SurfacePage";
 import ReportPage from "pages/Report/ReportPage";
 import ReportDetail from "pages/Report/ReportDetail";
 import ForgotPassword from "components/login/ForgotPassword";
+import OtpConfirmInput from "components/login/InputOtp";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -46,10 +47,14 @@ const route = createBrowserRouter([
         path: PAGE.LOGIN.path,
         element: <SignIn/>,
     },
-  {
-    path: PAGE.FORGOT_PASSWORD.path,
-    element: <ForgotPassword />,
-  },
+    {
+        path: PAGE.FORGOT_PASSWORD.path,
+        element: <ForgotPassword />,
+    },
+    {
+        path: PAGE.OTP_INPUT.path,
+        element: <OtpConfirmInput/>,
+    },
     {
         path: "/",
         element: <PrivateRoute/>,

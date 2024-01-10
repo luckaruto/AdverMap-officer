@@ -36,7 +36,7 @@ public class Surface {
     @Column(name = "height")
     private Short height;
 
-    @Column(name = "img_url")
+    @Column(name = "img_url", columnDefinition = "text")
     private String imgUrl;
 
     @Column(name = "content")
@@ -58,7 +58,7 @@ public class Surface {
     public SurfaceDto toDto(){
         SpaceDto spaceDto = null;
         if (space != null){
-            spaceDto = space.ToDto();
+            spaceDto = space.toDto();
         }
 
         List<String> imgUrls = new ArrayList<>();

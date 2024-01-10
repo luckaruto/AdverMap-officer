@@ -3,6 +3,7 @@ package com.adsmanagement.surfaces;
 
 import com.adsmanagement.common.Response;
 import com.adsmanagement.config.UserInfoUserDetails;
+import com.adsmanagement.reports.dto.ReportDto;
 import com.adsmanagement.spaces.dto.CreateSpaceRequestDto;
 import com.adsmanagement.spaces.dto.SpaceRequestDto;
 import com.adsmanagement.surfaces.dto.CreateSurfaceDto;
@@ -97,6 +98,21 @@ public class SurfaceController {
 
         Page<SurfaceRequestDto> dataRes = new PageImpl<>(contents,data.getPageable(),data.getTotalElements());
         var res = new Response<>("",dataRes);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Response<SurfaceDto>> detail(
+            @PathVariable("id") Short id
+    )   {
+        var data = this.surfaceService.findById(id);
+
+        if (data.isEmpty() || data.get() == null) {
+            var res = new Response<SurfaceDto>("Điểm đặt báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var res = new Response<SurfaceDto>("",data.get().toDto(),HttpStatus.OK);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

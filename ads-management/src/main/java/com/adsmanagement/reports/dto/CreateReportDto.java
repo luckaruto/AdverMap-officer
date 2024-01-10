@@ -14,6 +14,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,12 +29,12 @@ public class CreateReportDto {
     private String content;
     private String email;
     private String phone;
-    private String imgUrl;
+    private List<String> imgUrl;
     private String userAddress;
     private String name;
 
 
     public Report toReport(){
-        return new Report((short) 0, new Surface(surface_id),address,new Ward(ward_id),longitude,latitude,LocalDate.now(),content,email,phone,ReportState.IN_PROGRESS,imgUrl,null,null, new Date(), new Date(),userAddress,name);
+        return new Report((short) 0, new Surface(surface_id),address,new Ward(ward_id),longitude,latitude,LocalDate.now(),content,email,phone,ReportState.IN_PROGRESS,imgUrl.toString(),null,null, new Date(), new Date(),userAddress,name);
     }
 }

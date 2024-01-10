@@ -3,10 +3,8 @@ package com.adsmanagement.spaces;
 
 import com.adsmanagement.common.Response;
 import com.adsmanagement.config.UserInfoUserDetails;
-import com.adsmanagement.spaces.dto.CreateSpaceDto;
-import com.adsmanagement.spaces.dto.CreateSpaceRequestDto;
-import com.adsmanagement.spaces.dto.SpaceDto;
-import com.adsmanagement.spaces.dto.SpaceRequestDto;
+import com.adsmanagement.spaces.dto.*;
+import com.adsmanagement.surfaces.dto.SurfaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -40,7 +38,7 @@ public class SpaceController {
 
         var contents = new ArrayList<SpaceDto>();
         for (int i = 0; i < data.getContent().size(); i++){
-            contents.add(data.getContent().get(i).ToDto());
+            contents.add(data.getContent().get(i).toDto());
         }
 
         Page<SpaceDto> dataRes = new PageImpl<>(contents,data.getPageable(),data.getTotalElements());
@@ -53,7 +51,7 @@ public class SpaceController {
            @RequestBody CreateSpaceDto createSpaceDto
     )   {
         var data = this.spaceService.create(createSpaceDto);
-        var res = new Response<>("",data.ToDto());
+        var res = new Response<>("",data.toDto());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -66,7 +64,7 @@ public class SpaceController {
         createSpaceRequestDto.setSpaceId(spaceId);
         var user = userDetails.getUser();
         var data = this.spaceService.createRequest(createSpaceRequestDto, user);
-        var res = new Response<>("",data.ToDto());
+        var res = new Response<>("",data.toDto());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -84,11 +82,27 @@ public class SpaceController {
 
         var contents = new ArrayList<SpaceRequestDto>();
         for (int i = 0; i < data.getContent().size(); i++){
-            contents.add(data.getContent().get(i).ToDto());
+            contents.add(data.getContent().get(i).toDto());
         }
 
         Page<SpaceRequestDto> dataRes = new PageImpl<>(contents,data.getPageable(),data.getTotalElements());
         var res = new Response<>("",dataRes);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Response<SpaceDto>> detail(
+            @PathVariable("id") Short id
+    )   {
+        var data = this.spaceService.findById(id);
+
+        if (data.isEmpty() || data.get() == null) {
+            var res = new Response<SpaceDto>("Quảng cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var res = new Response<>("",data.get().toDto(),HttpStatus.OK);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

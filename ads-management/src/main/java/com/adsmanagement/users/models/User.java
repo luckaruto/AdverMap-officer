@@ -64,7 +64,7 @@ public class User {
     public User(Short id){
         this.id = id;
     }
-    public UserDTO toDTO() {
+    public UserDTO toDto() {
         List<WardDTO> wards = new ArrayList<>();
         if (managementWards != null && managementWards.size() > 0){
             for (var i = 0; i < managementWards.size(); i++){

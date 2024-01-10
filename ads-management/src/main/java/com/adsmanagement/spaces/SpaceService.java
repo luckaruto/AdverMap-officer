@@ -4,9 +4,9 @@ import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.spaces.dto.CreateSpaceDto;
 import com.adsmanagement.spaces.dto.CreateSpaceRequestDto;
-import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.spaces.models.SpaceRequest;
+import com.adsmanagement.surfaceAllowance.SurfaceAllowanceRepository;
 import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SpaceService {
@@ -26,12 +27,20 @@ public class SpaceService {
 
     private final WardRepository wardRepository;
 
+    private final SurfaceAllowanceRepository surfaceAllowanceRepository;
+
     @Autowired
-    public SpaceService(SpaceRepository spaceRepository,DistrictRepository districtRepository,WardRepository wardRepository, SpaceRequestRepository spaceRequestRepository) {
+    public SpaceService(SpaceRepository spaceRepository,
+                        DistrictRepository districtRepository,
+                        WardRepository wardRepository,
+                        SpaceRequestRepository spaceRequestRepository,
+                        SurfaceAllowanceRepository surfaceAllowanceRepository
+    ) {
         this.spaceRepository = spaceRepository;
         this.districtRepository = districtRepository;
         this.wardRepository = wardRepository;
         this.spaceRequestRepository = spaceRequestRepository;
+        this.surfaceAllowanceRepository = surfaceAllowanceRepository;
     }
 
     public Page<Space> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds) {
@@ -89,8 +98,9 @@ public class SpaceService {
 
     public SpaceRequest createRequest(CreateSpaceRequestDto createSpaceRequestDto, User user){
         return this.spaceRequestRepository.save(createSpaceRequestDto.ToSpaceRequest(user));
-
     }
+
+
 
     public Page<SpaceRequest> findAllRequest(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
@@ -139,6 +149,11 @@ public class SpaceService {
         }
 
         return data;
+    }
+
+
+    public Optional<Space> findById(Short id) {
+        return this.spaceRepository.findById(id);
     }
 
 }

@@ -76,20 +76,20 @@ public class SpaceRequest {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public SpaceRequestDto ToDto(){
+    public SpaceRequestDto toDto(){
         UserDTO userDto = null;
         if (user != null) {
-            userDto = user.toDTO();
+            userDto = user.toDto();
         }
 
         UserDTO approvedByDto = null;
         if (approvedBy != null) {
-            approvedByDto = approvedBy.toDTO();
+            approvedByDto = approvedBy.toDto();
         }
 
         SpaceDto spaceDto = null;
         if (space != null){
-            spaceDto = space.ToDto();
+            spaceDto = space.toDto();
         }
 
         WardDTO wardDto = null;

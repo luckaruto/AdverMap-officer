@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SurfaceService {
@@ -173,5 +174,9 @@ public class SurfaceService {
 
         return  this.surfaceRequestRepository.findAll(pageable);
 
+    }
+
+    public Optional<Surface> findById(Short id) {
+        return this.surfaceRepository.findById(id);
     }
 }

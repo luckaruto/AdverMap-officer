@@ -79,4 +79,37 @@ public class ReportController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Response<ReportDto>> detail(
+            @PathVariable("id") Short id
+    )   {
+        var data = this.reportService.findById(id);
+
+        if (data.isEmpty() || data.get() == null) {
+            var res = new Response<ReportDto>("Báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var res = new Response<ReportDto>("",data.get().toDto(),HttpStatus.OK);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/surfaces/{id}")
+    public ResponseEntity<Response<Page<ReportDto>>>  findBySurfaceId(
+            @RequestParam(defaultValue = "0") Short page,
+            @RequestParam(defaultValue = "20") Short size,
+            @PathVariable("id") Short surfaceId
+    )   {
+        var data = this.reportService.findBySurfaceId(page,size,surfaceId);
+
+        var contents = new ArrayList<ReportDto>();
+        for (int i = 0; i < data.getContent().size(); i++){
+            contents.add(data.getContent().get(i).toDto());
+        }
+
+        Page<ReportDto> dataRes = new PageImpl<>(contents,data.getPageable(),data.getTotalElements());
+        var res = new Response<>("",dataRes);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

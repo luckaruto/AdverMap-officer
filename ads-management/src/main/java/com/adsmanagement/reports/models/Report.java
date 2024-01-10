@@ -12,7 +12,10 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -61,7 +64,7 @@ public class Report {
     @Enumerated(EnumType.STRING)
     private ReportState state;
 
-    @Column(name = "img_url")
+    @Column(name = "img_url", columnDefinition = "text")
     private String imgUrl;
 
     @ManyToOne
@@ -97,9 +100,15 @@ public class Report {
 
         UserDTO approvedByDto = null;
         if (approvedBy != null){
-            approvedByDto = approvedBy.toDTO();
+            approvedByDto = approvedBy.toDto();
         }
 
-        return new ReportDto(id,surfaceDto,address,wardDto,longitude,latitude,reportDate,content,email,phone,state,imgUrl,approvedByDto,response, userAddress, name);
+        List<String> imgUrls = new ArrayList<>();
+        if (this.imgUrl != null) {
+            String[] split = this.imgUrl.split(", ");
+            imgUrls = Arrays.stream(split).toList();
+        }
+        
+        return new ReportDto(id,surfaceDto,address,wardDto,longitude,latitude,reportDate,content,email,phone,state,imgUrls,approvedByDto,response, userAddress, name);
     }
 }

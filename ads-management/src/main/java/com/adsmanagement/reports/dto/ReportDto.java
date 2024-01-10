@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class ReportDto {
     private String email;
     private String phone;
     private ReportState state;
-    private String imgUrl;
+    private List<String> imgUrl;
     private UserDTO approvedBy;
     private String response;
     private String userAddress;

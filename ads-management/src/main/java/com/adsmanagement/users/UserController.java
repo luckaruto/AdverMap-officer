@@ -35,7 +35,7 @@ public class UserController {
         var data = this.userService.findAll(page,size);
         var contents = new ArrayList<UserDTO>();
         for (int i = 0; i < data.getContent().size(); i++){
-            contents.add(data.getContent().get(i).toDTO());
+            contents.add(data.getContent().get(i).toDto());
         }
 
         Page<UserDTO> dataRes = new PageImpl<>(contents,data.getPageable(),data.getTotalElements());
@@ -53,7 +53,7 @@ public class UserController {
                 throw new RuntimeException(e);
         }
 
-        var res = new Response<>("",data.toDTO());
+        var res = new Response<>("",data.toDto());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -70,7 +70,7 @@ public class UserController {
             throw new RuntimeException(e);
         }
 
-        var res = new Response<>("",data.toDTO());
+        var res = new Response<>("",data.toDto());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 

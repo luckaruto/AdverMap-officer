@@ -41,6 +41,7 @@ public class Space {
     @Enumerated(EnumType.STRING)
     private SpaceFormat format;
 
+    @Column(name = "img_url", columnDefinition = "text")
     private String imgUrl;
 
     @Column(name = "is_planned")
@@ -60,7 +61,7 @@ public class Space {
         this.id = spaceId;
     }
 
-    public SpaceDto ToDto(){
+    public SpaceDto toDto(){
         List<String> imgUrls = new ArrayList<>();
         if (this.imgUrl != null) {
             String[] split = this.imgUrl.split(", ");

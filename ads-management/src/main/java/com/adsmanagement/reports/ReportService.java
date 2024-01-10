@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReportService {
@@ -146,4 +147,15 @@ public class ReportService {
         return re;
     }
 
+    public Optional<Report> findById(Short id) {
+        return this.reportRepository.findById(id);
+    }
+
+    public  Page<Report> findBySurfaceId(Short page, Short size,Short id){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+
+        var list = new ArrayList<Short>();
+        list.add(id);
+        return this.reportRepository.findAllBySurfaceIdIn(pageable,list);
+    }
 }

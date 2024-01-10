@@ -13,6 +13,7 @@ import ReportPage from "pages/Report/ReportPage";
 import ReportDetail from "pages/Report/ReportDetail";
 import ForgotPassword from "components/login/ForgotPassword";
 import OtpConfirmInput from "components/login/InputOtp";
+import ResetPassword from "components/login/ResetPassword";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -54,6 +55,10 @@ const route = createBrowserRouter([
     {
         path: PAGE.OTP_INPUT.path,
         element: <OtpConfirmInput/>,
+    },
+    {
+        path: PAGE.RESET_PASSWORD.path,
+        element: <ResetPassword/>,
     },
     {
         path: "/",

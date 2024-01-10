@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { testToken } from "services/apis/constants";
 import { ReportService } from "services/report/ReportService";
 import { formatImgUrl } from "utils/format";
+import Heading1 from "components/Text/Heading1";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 100 },
@@ -88,9 +89,9 @@ const ReportPage = () => {
     <div className="max-w-[1400px] m-auto">
       {/* Report Infomation */}
       <div className="flex flex-col gap-[24px] mb-[32px]">
-        <h1 className="text-center font-bold text-blue-700 text-[32px] uppercase">
+        <Heading1>
           Danh sách các báo cáo
-        </h1>
+        </Heading1>
       </div>
       {rows ? (
         <DataTable

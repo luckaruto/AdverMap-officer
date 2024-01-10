@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      {/* {isLoading && <LoadingPage />} */}
+      {isLoading && <LoadingPage />}
       <RouterProvider router={route} />
     </>
   );

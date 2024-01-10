@@ -33,6 +33,8 @@ const DataTable = (props) => {
     return "inherit";
   };
 
+  const addExtendColumn = () => {};
+
   return (
     <Paper>
       <TableContainer sx={{ height: height }}>
@@ -116,8 +118,8 @@ DataTable.defaultProps = {
   columns: [],
   rows: [],
   height: 440,
-  onClickRow: ()=>{},
-  onClickDetail: ()=>{},
+  onClickRow: () => {},
+  onClickDetail: () => {},
 };
 
 export default DataTable;

@@ -9,6 +9,7 @@ import { setLoading } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
 import SpaceInfo from "./SpaceInfo";
 import { formatFormat, formatImgUrl, plannedFormat, typeFormat } from "utils/format";
+import Heading1 from "components/Text/Heading1";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -57,9 +58,9 @@ const columns = [
 const SpacePage = () => {
   const [rows, setRows] = useState(null);
   const [error, setError] = useState("");
-  const [city, setCity] = useState("");
-  const [ward, setWard] = useState("");
-  const [district, setDistrict] = useState("");
+  // const [city, setCity] = useState("");
+  // const [ward, setWard] = useState("");
+  // const [district, setDistrict] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
 
   const dispatch = useDispatch();
@@ -90,9 +91,9 @@ const SpacePage = () => {
 
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
-      <h1 className="text-center font-bold text-blue-700 text-[32px] uppercase">
-        Danh sách địa điểm
-      </h1>
+      <Heading1 >
+      Danh sách địa điểm
+      </Heading1>
       {rows ? (
         <DataTable
           columns={columns}

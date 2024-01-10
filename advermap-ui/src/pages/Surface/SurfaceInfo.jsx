@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import CarouselImage from "components/Carousels/CarouselImage";
 import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import SpaceInfo from "pages/Space/SpaceInfo";
+import Heading1 from "components/Text/Heading1";
+import Heading2 from "components/Text/Heading2";
 
 const SurfaceInfo = (props) => {
   const { data } = props;
   console.log(data);
   return (
     <>
-	 <h1 className="font-bold text-blue-500 text-[32px] uppercase">
-        Chi tiết Bảng quảng cáo
-      </h1>
+      <Heading2 className="text-left text-blue-500">Chi tiết Bảng quảng cáo</Heading2>
       <div className="flex flex-col gap-4">
         {data ? (
           <>
@@ -34,7 +34,7 @@ const SurfaceInfo = (props) => {
             <div className="w-[768px] h-[400px] flex m-auto">
               <CarouselImage data={data.imgUrl} />
             </div>
-			<SpaceInfo data={data.space}/>
+            <SpaceInfo data={data.space} />
           </>
         ) : (
           <p>No data</p>

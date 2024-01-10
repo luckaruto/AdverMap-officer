@@ -6,6 +6,8 @@ import { setLoading } from "redux/appSlice";
 import { ReportService } from "services/report/ReportService";
 import CarouselImage from "components/Carousels/CarouselImage";
 import SurfaceInfo from "pages/Surface/SurfaceInfo";
+import Heading1 from "components/Text/Heading1";
+import Heading2 from "components/Text/Heading2";
 
 const ReportDetail = () => {
   const { token } = useSelector((state) => state.appState);
@@ -44,9 +46,10 @@ const ReportDetail = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="font-bold text-blue-500 text-[32px] uppercase">
+     
+      <Heading2 className="text-left text-blue-500">
         Chi tiết báo cáo
-      </h1>
+      </Heading2>
       <div className="flex flex-col gap-4">
         {report ? (
           <>

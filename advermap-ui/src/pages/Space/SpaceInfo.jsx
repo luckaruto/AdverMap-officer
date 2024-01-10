@@ -2,15 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import CarouselImage from "components/Carousels/CarouselImage";
+import Heading1 from "components/Text/Heading1";
+import Heading2 from "components/Text/Heading2";
 
 const SpaceInfo = (props) => {
   const { data } = props;
-  console.log(data);
   return (
     <>
-	 <h1 className="font-bold text-blue-500 text-[32px] uppercase">
-        Chi tiết địa điểm
-      </h1>
+      <Heading2 className="text-left text-blue-500">Chi tiết địa điểm</Heading2>
       <div className="flex flex-col gap-4">
         {data ? (
           <>

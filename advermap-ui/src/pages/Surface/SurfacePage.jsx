@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { testToken } from "services/apis/constants";
 import SurfaceInfo from "./SurfaceInfo";
 import { formatImgUrl } from "utils/format";
+import Heading1 from "components/Text/Heading1";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -19,7 +20,7 @@ const columns = [
     minWidth: 200,
     format: (value) => value.address,
   },
-  
+
   {
     id: "height",
     label: "Chiều dài",
@@ -95,10 +96,7 @@ const SurfacePage = () => {
 
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
-      <h1 className="text-center font-bold text-blue-700 text-[32px] uppercase">
-        Danh sách bảng Quảng Cáo
-      </h1>
-
+      <Heading1>Danh sách bảng Quảng Cáo</Heading1>
       {rows ? (
         <DataTable
           columns={columns}

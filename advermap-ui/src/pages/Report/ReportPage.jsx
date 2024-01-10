@@ -6,10 +6,11 @@ import { SurfaceServices } from "services/surface/SurfaceService";
 import DataTable from "components/DataTable";
 import { PAGE } from "components/constants";
 import { useNavigate } from "react-router-dom";
-import { testToken } from "services/apis/constants";
 import { ReportService } from "services/report/ReportService";
 import { formatImgUrl } from "utils/format";
 import Heading1 from "components/Text/Heading1";
+import { useLocation } from "react-router-dom";
+
 
 const columns = [
   { id: "id", label: "ID", minWidth: 100 },
@@ -22,7 +23,7 @@ const columns = [
     id: "ward",
     label: "Phường",
     minWidth: 170,
-    format: (value) => value.name,
+    format: (value) => value?.name,
   },
 
   {
@@ -59,13 +60,14 @@ const ReportPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   const { token } = useSelector((state) => state.appState);
 
-  const params = { wardIds: 2 };
+  var params;
 
   console.log(rows);
-  console.log(error);
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
 
@@ -81,9 +83,14 @@ const ReportPage = () => {
     }
   };
 
+
   useEffect(() => {
+    const id = location.pathname.split("/")[2];
+    if (id) {
+      params = { surfaceIds: id };
+    } else params = { wardIds: 1 };
     fetchReport(params);
-  }, []);
+  }, [location]);
 
   return (
     <div className="max-w-[1400px] m-auto">

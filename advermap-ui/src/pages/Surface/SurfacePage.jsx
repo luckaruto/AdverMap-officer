@@ -55,18 +55,17 @@ const columns = [
 ];
 
 const SurfacePage = () => {
-  const location = useLocation();
-  const [id, setId] = useState(null);
   const [rows, setRows] = useState(null);
   const [error, setError] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
-
+  
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.appState);
 
-  const params = { spaceIds: id };
+  var params;
 
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickDetail = (row) => navigate(PAGE.SURFACE.path + `/${row.id}`);
@@ -83,16 +82,12 @@ const SurfacePage = () => {
   };
 
   useEffect(() => {
-    if (location) {
-      setId(location.pathname.split("/")[2]);
-    }
-  }, [location]);
-
-  useEffect(() => {
+    const id = location.pathname.split("/")[2];
     if (id) {
-      fetchSurface(params);
-    }
-  }, [id]);
+      params = { spaceIds: id };
+    } else params = { cityIds: 1 };
+    fetchSurface(params);
+  }, [location]);
 
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">

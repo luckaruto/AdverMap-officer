@@ -52,7 +52,7 @@ const ADMIN_LIST = [
 export default function BarList(){
     const { currentPage, loading ,tokenPayload} = useSelector((state) => state.appState);
     const role = tokenPayload?.role;
-    console.log(role);
+    // console.log(role);
     var list = [];
 
     if (role == ROLE.WARD_ADMIN) {
@@ -63,7 +63,7 @@ export default function BarList(){
         list = ADMIN_LIST;
     }
 
-    console.log(list);
+    // console.log(list);
 
 
     return (

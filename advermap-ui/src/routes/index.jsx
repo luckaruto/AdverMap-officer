@@ -24,12 +24,20 @@ const privateRoute = [
         element: <SurfacePage/>,
     },
     {
+        path: PAGE.SURFACE.path,
+        element: <SurfacePage/>,
+    },
+    {
         path: PAGE.SURFACE.path + "/:id",
         element: <ReportPage/>,
     },
     {
         path: PAGE.REPORT.path + "/:id",
         element: <ReportDetail/>,
+    },
+    {
+        path: PAGE.REPORT.path,
+        element: <ReportPage/>,
     },
     {
         path: "/test",

@@ -13,13 +13,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import route from "./routes/index";
 import LoadingPage from "pages/Loading/LoadingPage";
+import BasicSnackbar from "components/Snackbar/BasicSnackbar";
 
 function App() {
-  const isLoading = useSelector((state) => state.appState.loading);
+  // @ts-ignore
+  const { loading, snackbar } = useSelector((state) => state.appState);
 
   return (
     <>
-      {isLoading && <LoadingPage />}
+      {loading && <LoadingPage/>}
+
+      <BasicSnackbar {...snackbar} />
+
       <RouterProvider router={route} />
     </>
   );

@@ -2,18 +2,13 @@ import React from "react";
 import DataTable from "../../components/DataTable";
 import { useState, useEffect } from "react";
 import { SpaceService } from "services/space/SpaceService";
-import { Link } from "react-router-dom";
+
 import { PAGE } from "components/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "redux/appSlice";
+import { setLoading, setSnackbar } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
 import SpaceInfo from "./SpaceInfo";
-import {
-  formatFormat,
-  formatImgUrl,
-  plannedFormat,
-  typeFormat,
-} from "utils/format";
+import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import Button from "@mui/material/Button";
 import SpaceForm from "./SpaceForm";
@@ -51,12 +46,6 @@ const columns = [
     format: plannedFormat,
   },
   {
-    id: "imgUrl",
-    label: "Ảnh",
-    minWidth: 100,
-    format: formatImgUrl,
-  },
-  {
     id: "detail",
     label: "",
     value: "Xem Bảng quảng cáo",
@@ -74,8 +63,8 @@ const SpacePage = () => {
   const navigate = useNavigate();
 
   const params = { cityIds: 1 };
-
-  const { token } = useSelector((state) => state.appState);
+  // @ts-ignore
+  const { token, snackbar } = useSelector((state) => state.appState);
 
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);

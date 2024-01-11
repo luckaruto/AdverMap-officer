@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PAGE } from "../components/constants";
-import {jwtDecode} from "jwt-decode";
-
+import { jwtDecode } from "jwt-decode";
 
 function getPayloadTokenFromStorage() {
   const tokenString = localStorage.getItem("token");
@@ -24,7 +23,7 @@ function getPayloadTokenFromStorage() {
   }
 }
 
-function  getTokenFromStorage(){
+function getTokenFromStorage() {
   var tokenString = localStorage.getItem("token");
   if (!tokenString || tokenString == null) {
     return null;
@@ -40,6 +39,11 @@ const initialState = {
   tokenPayload: getPayloadTokenFromStorage(),
   loading: false,
   notification: [{ id: 1, message: "test notification" }],
+  snackbar: {
+    id: "",
+    status: "info",
+    message: "init message",
+  },
 };
 
 const isNotiEqual = (noti, id) => {
@@ -71,6 +75,16 @@ const appSlice = createSlice({
       state.token = action.payload;
       localStorage.setItem("token", JSON.stringify(action.payload));
     },
+    setSnackbar: (state, action) => {
+      const { payload } = action;
+      const id = new Date().toString();
+      const updateState = {
+        status: payload.status,
+        message: payload.message,
+        id: id,
+      };
+      state.snackbar = updateState;
+    },
   },
 });
 
@@ -80,5 +94,6 @@ export const {
   addNoti,
   deleteNoti,
   setToken,
+  setSnackbar,
 } = appSlice.actions;
 export default appSlice.reducer;

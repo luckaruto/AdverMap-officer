@@ -8,8 +8,12 @@ import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -76,6 +80,12 @@ public class SpaceRequest {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "is_planned")
+    private Boolean isPlanned;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
     public SpaceRequestDto toDto(){
         UserDTO userDto = null;
         if (user != null) {
@@ -96,7 +106,12 @@ public class SpaceRequest {
         if (ward != null){
             wardDto = ward.toDto();
         }
+        List<String> imgUrls = new ArrayList<>();
+        if (this.imgUrl != null) {
+            String[] split = this.imgUrl.split(", ");
+            imgUrls = Arrays.stream(split).toList();
+        }
 
-        return new SpaceRequestDto(id,address,reportDate,userDto,longitude,latitude,spaceDto,wardDto,content,type,format,approvedByDto,state,response);
+        return new SpaceRequestDto(id,address,reportDate,userDto,longitude,latitude,spaceDto,wardDto,content,type,format,approvedByDto,state,response, isPlanned, imgUrls);
     }
 }

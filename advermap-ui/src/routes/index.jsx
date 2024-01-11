@@ -1,6 +1,5 @@
 import PrivateRoute from "./PrivateRoute";
 
-import SignIn from "components/login/SignIn";
 import React from "react";
 import {createBrowserRouter} from "react-router-dom";
 import SpacePage from "pages/Space/SpacePage";
@@ -11,7 +10,10 @@ import LoadingPage from "pages/Loading/LoadingPage";
 import SurfacePage from "pages/Surface/SurfacePage";
 import ReportPage from "pages/Report/ReportPage";
 import ReportDetail from "pages/Report/ReportDetail";
-import ForgotPassword from "components/login/ForgotPassword";
+import SignIn from "pages/login/SignIn";
+import ForgotPassword from "pages/login/ForgotPassword";
+import OtpConfirmInput from "pages/login/InputOtp";
+import ResetPassword from "pages/login/ResetPassword";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -54,10 +56,18 @@ const route = createBrowserRouter([
         path: PAGE.LOGIN.path,
         element: <SignIn/>,
     },
-  {
-    path: PAGE.FORGOT_PASSWORD.path,
-    element: <ForgotPassword />,
-  },
+    {
+        path: PAGE.FORGOT_PASSWORD.path,
+        element: <ForgotPassword />,
+    },
+    {
+        path: PAGE.OTP_INPUT.path,
+        element: <OtpConfirmInput/>,
+    },
+    {
+        path: PAGE.RESET_PASSWORD.path,
+        element: <ResetPassword/>,
+    },
     {
         path: "/",
         element: <PrivateRoute/>,

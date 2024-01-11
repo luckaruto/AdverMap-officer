@@ -10,7 +10,10 @@ import com.adsmanagement.users.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -60,6 +63,20 @@ public class SurfaceRequest {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+
+    @Column(name = "format")
+    @Enumerated(EnumType.STRING)
+    private SurfaceFormat format;
+
+    @Column(name = "width")
+    private Short width;
+
+    @Column(name = "height")
+    private Short height;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
     public SurfaceRequestDto toDto(){
         UserDTO userDto = null;
         if (user != null) {
@@ -81,6 +98,12 @@ public class SurfaceRequest {
             surfaceDto = surface.toDto();
         }
 
-        return new SurfaceRequestDto(id,reportDate,userDto,surfaceDto,spaceDto,content,approvedByDto,state,response);
+        List<String> imgUrls = new ArrayList<>();
+        if (this.imgUrl != null) {
+            String[] split = this.imgUrl.split(", ");
+            imgUrls = Arrays.stream(split).toList();
+        }
+
+        return new SurfaceRequestDto(id,reportDate,userDto,surfaceDto,spaceDto,content,approvedByDto,state,response,format, width,height, imgUrls);
     }
 }

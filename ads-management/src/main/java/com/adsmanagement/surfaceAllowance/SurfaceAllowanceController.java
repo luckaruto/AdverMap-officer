@@ -5,6 +5,7 @@ import com.adsmanagement.common.Response;
 import com.adsmanagement.config.UserInfoUserDetails;
 import com.adsmanagement.spaces.SpaceRepository;
 import com.adsmanagement.spaces.dto.*;
+import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.surfaceAllowance.dto.CreateSurfaceAllowanceDto;
 import com.adsmanagement.surfaceAllowance.dto.ProcessResponse;
 import com.adsmanagement.surfaceAllowance.dto.SurfaceAllowanceDto;
@@ -36,11 +37,12 @@ public class SurfaceAllowanceController {
     public ResponseEntity<Response<Page<SurfaceAllowanceDto>>> list(
             @RequestParam(defaultValue = "0") Short page,
             @RequestParam(defaultValue = "20") Short size,
+            @RequestParam(required = false) Short spaceId,
             @RequestParam(required = false) Short cityId,
             @RequestParam(required = false) List<Short> wardIds,
             @RequestParam(required = false) List<Short> districtIds
             )   {
-        var data = this.surfaceAllowanceService.findAll(page,size,cityId,wardIds, districtIds);
+        var data = this.surfaceAllowanceService.findAll(page,size,cityId,wardIds, districtIds,spaceId);
 
         var contents = new ArrayList<SurfaceAllowanceDto>();
         for (int i = 0; i < data.getContent().size(); i++){
@@ -72,7 +74,7 @@ public class SurfaceAllowanceController {
             @RequestBody CreateSurfaceAllowanceDto createSurfaceAllowanceDto,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
-        var spaceId =  createSurfaceAllowanceDto.getWardId();
+        var spaceId =  createSurfaceAllowanceDto.getSpaceId();
 
         var spaceO = this.spaceRepository.findById(spaceId);
         if (spaceO== null || spaceO.isEmpty()) {
@@ -91,12 +93,53 @@ public class SurfaceAllowanceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/{id}")
+    @PostMapping(path = "/{id}/process")
     public ResponseEntity<Response<SurfaceAllowanceDto>> process(
+            @PathVariable("id") Short id,
             @RequestBody ProcessResponse processResponse,
             @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        var reqO = this.surfaceAllowanceService.findById(id);
+        if (reqO == null || reqO.isEmpty()) {
+            var res = new Response<SurfaceAllowanceDto>("Yêu cầu cấp phép không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
 
+        if (reqO.get().getState() != null && reqO.get().getState() == RequestState.APPROVED) {
+            var res = new Response<SurfaceAllowanceDto>("Yêu cầu cấp phép đã được duyệt",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var user = userDetails.getUser();
+
+        var data = this.surfaceAllowanceService.process(reqO.get(),processResponse, user);
+        var res = new Response<>("",data.toDto());
+
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+
+    }
+
+    @PostMapping(path = "/{id}/cancel")
+    public ResponseEntity<Response<SurfaceAllowanceDto>> cancel(
+            @PathVariable("id") Short id,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    )   {
+        var req = this.surfaceAllowanceService.findById(id);
+        if (req == null || req.isEmpty()) {
+            var res = new Response<SurfaceAllowanceDto>("Yêu cầu cấp phép không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        if (req.get().getState() != RequestState.IN_PROGRESS) {
+            var res = new Response<SurfaceAllowanceDto>("Không thể huỷ yêu cầu",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var user = userDetails.getUser();
+        var data = this.surfaceAllowanceService.process(req.get(),new ProcessResponse(RequestState.CANCELED, ""), user);
+        var res = new Response<>("",data.toDto());
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

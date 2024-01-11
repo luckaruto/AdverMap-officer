@@ -1,5 +1,6 @@
 package com.adsmanagement.spaces.models;
 
+import com.adsmanagement.spaces.dto.ProcessResponseDto;
 import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
@@ -73,6 +74,18 @@ public class Space {
             wardDto = ward.toDto();
         }
 
-        return new SpaceDto(id,address,longitude,latitude,type,format,imgUrls,isPlanned,wardDto);
+        return new SpaceDto(id,address,longitude,latitude,type,format,imgUrls,isPlanned,wardDto, 0L);
+    }
+
+    public void setFieldByRequest(SpaceRequest req) {
+        this.imgUrl = req.getImgUrl();
+        this.address = req.getAddress();
+        this.format = req.getFormat();
+        this.isPlanned = req.getIsPlanned();
+        this.latitude = req.getLatitude();
+        this.longitude = req.getLongitude();
+        this.type = req.getType();
+        this.ward = req.getWard();
+        this.updatedAt = new Date();
     }
 }

@@ -12,4 +12,10 @@ public interface SpaceRequestRepository extends JpaRepository<SpaceRequest, Shor
 
     Page<SpaceRequest> findAllByWardIdIn(List<Short> wardIds, Pageable pageable);
 
+    Page<SpaceRequest> findAllByWardIdInAndSpaceId(List<Short> wardIds,Short spaceId, Pageable pageable);
+
+    Page<SpaceRequest> findAllBySpaceId(Short spaceId, Pageable pageable);
+
+
+
 }

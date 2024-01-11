@@ -3,6 +3,8 @@ export const API={
 	NOTIFICATION: {
 		COUNT : '/api/v1/notifications/count',
 	},
+	FORGOT_PASSWORD:"/api/v1/auth/forgot-password",
+	VERIFY_OTP:"/api/v1/auth/verify-otp",
 	SURFACE:"/api/v1/surfaces",
 	SPACE:"/api/v1/spaces",
 	REPORT:"/api/v1/reports",

@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import {  ResetPasswordSchema } from '../../../constants/validation/index.ts';
+import {  ResetPasswordSchema } from '../../../constants/validation/index.jsx';
 // @ts-ignore
 import PasswordField from '../../../components/PasswordField/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';

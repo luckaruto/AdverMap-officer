@@ -8,8 +8,6 @@ import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar, HStack, FormErrorMessage, FormControl } from '@chakra-ui/react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 // @ts-ignore
-import { OTPConfirmSchema } from '../../../constants/validation/index.ts';
-// @ts-ignore
 import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
 import FormInput from '../../../components/FormInput/index.jsx';
@@ -17,6 +15,7 @@ import { SubmitButton } from '../authenticatePage.styles.js';
 import { setCurrentPage } from 'redux/appSlice.jsx';
 import OtpInput from 'react-otp-input';
 import get from 'lodash/get'
+import { OTPConfirmSchema } from 'constants/validation/index.jsx';
 
 const OtpConfirmInput = () => {
   // @ts-ignore

@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
 import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { LoginSchema } from '../../../constants/validation/index.ts';
+import { LoginSchema } from '../../../constants/validation/index.jsx';
 import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
 import FormInput from '../../../components/FormInput/index.jsx';
@@ -62,7 +62,6 @@ const SignIn = () => {
   }
   return (
     <ChakraHook>
-      <Box minHeight={'100vh'}>
       <Box width="full" maxWidth="xl" marginX="auto" paddingY="188px">
         <Box maxWidth="416px" marginX={{ base: 8, md: 'auto' }}>
           <VStack marginBottom={12} width="full" alignItems="flex-start">

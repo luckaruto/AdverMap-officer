@@ -112,7 +112,7 @@ public class UserController {
             return new ResponseEntity<>(new Response<UserFilterPermission>("Bạn không có quyền truy cập",null, HttpStatus.FORBIDDEN), HttpStatus.OK);
         }
 
-        var data = this.userService.getFilterPermission(id,cityIds,districtIds,wardIds);
+        var data = this.userService.getFilterPermission(id);
 
         var res = new Response<>("",data);
         return new ResponseEntity<>(res, HttpStatus.OK);

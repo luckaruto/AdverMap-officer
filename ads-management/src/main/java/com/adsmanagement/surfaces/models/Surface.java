@@ -26,7 +26,7 @@ public class Surface {
     @Column(name = "id")
     private Short id;
 
-    @Column(name = "format")
+    @Column(name = "format", columnDefinition = "varchar(255)")
     @Enumerated(EnumType.STRING)
     private SurfaceFormat format;
 

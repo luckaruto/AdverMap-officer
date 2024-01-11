@@ -51,5 +51,20 @@ export class AuthService {
 			throw error
 		}
 	}
+
+	static refreshToken = async ({headers}) => {
+		try {
+			const response = await api.post(API.REFRESH_TOKEN, {},{
+				headers: headers
+			})
+			return {
+				status: response.status,
+				message: response.data.message,
+				data: response.data.data,
+			};
+		} catch (error) {
+			throw error
+		}
+	}
 }
 

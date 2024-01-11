@@ -2,11 +2,17 @@ package com.adsmanagement.config;
 
 import com.adsmanagement.reports.models.Report;
 import com.adsmanagement.reports.models.ReportState;
+import com.adsmanagement.users.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.Formatter;
 
 @Service
@@ -14,6 +20,13 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender emailSender;
+
+    @Autowired
+    private final TemplateEngine templateEngine;
+
+    public EmailService(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
 
     public void sendSimpleMessage(
       String to, String subject, String text) {
@@ -51,5 +64,26 @@ public class EmailService {
                 name, report.getAddress(),report.getResponse(), report.getId());
 
         sendSimpleMessage(report.getEmail(), subject, text);
+    }
+
+    public void sendForgotPasswordMail(User user, String otp) {
+        String subject = "OTP CẬP NHẬT MẬT KHẨU";
+
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
+        try {
+            helper.setTo(user.getEmail());
+            helper.setSubject(subject);
+
+            Context context = new Context();
+            context.setVariable("name", user.getName());
+            context.setVariable("otp", otp);
+            String htmlContent = templateEngine.process("forgot-password-template.html", context);
+            helper.setText(htmlContent, true);
+            emailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            // Handle exception
+        }
+
     }
 }

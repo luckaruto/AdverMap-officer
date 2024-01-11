@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PAGE } from "../components/constants";
 import {jwtDecode} from "jwt-decode";
+import {useDispatch, useSelector} from "react-redux";
 
 
 function getPayloadTokenFromStorage() {
@@ -12,7 +13,6 @@ function getPayloadTokenFromStorage() {
   try {
     const decodedToken = jwtDecode(tokenString); // decode your token here
     let currentDate = new Date();
-
     // JWT exp is in seconds
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       return null;
@@ -20,6 +20,7 @@ function getPayloadTokenFromStorage() {
 
     return decodedToken;
   } catch (e) {
+
     return null;
   }
 }
@@ -34,10 +35,21 @@ function  getTokenFromStorage(){
   return tokenString;
 }
 
+function  getRefreshTokenFromStorage(){
+  var tokenString = localStorage.getItem("refreshToken");
+  if (!tokenString || tokenString == null) {
+    return null;
+  }
+
+  tokenString = tokenString.replaceAll(`"`,'');
+  return tokenString;
+}
+
 const initialState = {
   currentPage: PAGE.HOME,
   token: getTokenFromStorage(),
   tokenPayload: getPayloadTokenFromStorage(),
+  refreshToken:  getRefreshTokenFromStorage(),
   loading: false,
   notification: [{ id: 1, message: "test notification" }],
 };
@@ -71,6 +83,11 @@ const appSlice = createSlice({
       state.token = action.payload;
       localStorage.setItem("token", JSON.stringify(action.payload));
     },
+
+    setRefreshToken: (state, action) => {
+      state.refreshToken = action.payload;
+      localStorage.setItem("refreshToken", JSON.stringify(action.payload));
+    },
   },
 });
 
@@ -80,5 +97,6 @@ export const {
   addNoti,
   deleteNoti,
   setToken,
+  setRefreshToken,
 } = appSlice.actions;
 export default appSlice.reducer;

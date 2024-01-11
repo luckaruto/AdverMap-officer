@@ -3,14 +3,18 @@ import {
     Button,
     Grid,
     GridItem,
-    Stack
+    Spinner,
+    Stack,
+    useToast
   } from '@chakra-ui/react'
   import { yupResolver } from '@hookform/resolvers/yup'
   import get from 'lodash/get'
   import React, { memo, useEffect } from 'react'
-  import { useForm, FormProvider } from 'react-hook-form'
+  import { useForm, FormProvider, set } from 'react-hook-form'
   import FormInput from 'components/FormInput'
   import { AccountFormSchema } from './constants.ts'
+import { UserService } from 'services/user/usersService.jsx'
+import moment from 'moment'
   
   
   const AccountDetailForm = () => {
@@ -21,25 +25,72 @@ import {
       resolver: yupResolver(AccountFormSchema)
     })
   
-    const { handleSubmit, reset, control, formState } = method
+    const { handleSubmit, reset, formState } = method
     const { errors } = formState
+    const toast = useToast()
+    const [isLoading, setIsLoading] = React.useState(false)
   
   
     async function fetchData() {
       try {
-        // setIsLoading(true)
+        setIsLoading(true)
+        const response = await UserService.getCurrentUser()
+        const data = get(response, 'data.data.content[0]')
+        console.log("🚀 ~ fetchData ~ data:", data)
+        const birthday = get(data, 'birthday')
+        reset({
+          email: get(data, 'email'),
+          name: get(data, 'name'),
+          phone: get(data, 'phone'),
+          birthday: moment(birthday).format('DD/MM/YYYY'),
+          role: get(data, 'role'),
+        })
+        setIsLoading(false)
       }
-      catch (error) {}
+      catch (error) {
+        setIsLoading(false)
+        toast({
+          status: 'error',
+          description: 'There was an error. Please try again.'
+        })
+      }
     }
   
     useEffect(() => {
-      if (currentAccountId) {
-        fetchData()
-      }
-    }, [currentAccountId])
+      fetchData()
+    }, [])
 
-    function onSubmit(data) {
-      console.log(data)
+    async function onSubmit(data) {
+      try {
+        setIsLoading(true)
+        const birthday = moment(data.birthday, 'DD/MM/YYYY').format('YYYY-MM-DD')
+        const payload = {
+          email: data.email,
+          name: data.name,
+          phone: data.phone,
+          birthday: birthday,
+          role: data.role,
+        }
+        console.log("🚀 ~ onSubmit ~ payload", payload)
+        await UserService.updateUser(payload)
+        toast({
+          status: 'success',
+          description: 'Update successfully'
+        })
+        setIsLoading(false)
+
+      } catch (error) {
+        setIsLoading(false)
+        toast({
+          status: 'error',
+          description: 'There was an error. Please try again.'
+        })
+      }
+
+    }
+
+    if (isLoading) {
+      return <Spinner size="sm" color="blue.600" />
     }
     return (
       <FormProvider {...method}>
@@ -59,7 +110,7 @@ import {
                     <FormInput label="sinh nhật" name="birthday" type="text" />
                 </GridItem>
                 <GridItem w="100%" colSpan={12} >
-                    <FormInput label="vai trò" name="role" type="text" />
+                    <FormInput label="vai trò" name="role" type="text" readonly />
                 </GridItem>
             </Grid>
           </Box>

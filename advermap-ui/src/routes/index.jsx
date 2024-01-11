@@ -1,6 +1,5 @@
 import PrivateRoute from "./PrivateRoute";
 
-import SignIn from "components/login/SignIn";
 import React from "react";
 import {createBrowserRouter} from "react-router-dom";
 import SpacePage from "pages/Space/SpacePage";
@@ -11,9 +10,10 @@ import LoadingPage from "pages/Loading/LoadingPage";
 import SurfacePage from "pages/Surface/SurfacePage";
 import ReportPage from "pages/Report/ReportPage";
 import ReportDetail from "pages/Report/ReportDetail";
-import ForgotPassword from "components/login/ForgotPassword";
-import OtpConfirmInput from "components/login/InputOtp";
-import ResetPassword from "components/login/ResetPassword";
+import SignIn from "pages/login/SignIn";
+import ForgotPassword from "pages/login/ForgotPassword";
+import OtpConfirmInput from "pages/login/InputOtp";
+import ResetPassword from "pages/login/ResetPassword";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},

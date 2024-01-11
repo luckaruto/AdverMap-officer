@@ -22,6 +22,9 @@ import {DEFAULT, PAGE} from "../constants";
 import BarList from "./BarList";
 import ActiveLastBreadcrumb from "./Breadcrumb";
 import NotificationBox from "./notification/notificationBox";
+import {setCurrentPage, setToken} from 'redux/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 360;
 
@@ -91,6 +94,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
 
@@ -122,6 +127,12 @@ export default function MiniDrawer() {
         handleMobileMenuClose();
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch(setCurrentPage(PAGE.LOGIN));
+        navigate(PAGE.LOGIN.path, { replace: true });
+    };
+
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
@@ -145,6 +156,7 @@ export default function MiniDrawer() {
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
 

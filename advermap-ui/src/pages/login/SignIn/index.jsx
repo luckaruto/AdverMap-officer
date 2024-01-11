@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthService } from 'services/auth/authService';
- import {setCurrentPage, setToken} from 'redux/appSlice';
+import {setCurrentPage, setToken} from 'redux/appSlice';
 import { PAGE } from 'components/constants';
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
@@ -11,8 +11,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { LoginSchema } from '../../../constants/validation/index.ts';
 import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
-import FormInput from '../components/FormInput/index.jsx';
-import PasswordField from '../components/PasswordField/index.jsx';
+import FormInput from '../../../components/FormInput/index.jsx';
+import PasswordField from '../../../components/PasswordField/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
 
 

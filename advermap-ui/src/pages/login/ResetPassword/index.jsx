@@ -10,7 +10,7 @@ import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chak
 import { FormProvider, useForm } from 'react-hook-form';
 import {  ResetPasswordSchema } from '../../../constants/validation/index.ts';
 // @ts-ignore
-import PasswordField from '../components/PasswordField/index.jsx';
+import PasswordField from '../../../components/PasswordField/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
 
 

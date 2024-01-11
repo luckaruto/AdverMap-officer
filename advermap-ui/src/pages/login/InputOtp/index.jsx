@@ -12,7 +12,7 @@ import { OTPConfirmSchema } from '../../../constants/validation/index.ts';
 // @ts-ignore
 import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
 // @ts-ignore
-import FormInput from '../components/FormInput/index.jsx';
+import FormInput from '../../../components/FormInput/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
 import { setCurrentPage } from 'redux/appSlice.jsx';
 import OtpInput from 'react-otp-input';

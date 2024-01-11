@@ -3,7 +3,7 @@
 import { FormControl, FormErrorMessage, FormLabel, HStack, Input } from '@chakra-ui/react'
 import get from 'lodash/get'
 import { Controller, useFormContext } from 'react-hook-form'
-import { PASSWORD_PATTERN } from '../../../../constants/common.ts'
+import { PASSWORD_PATTERN } from '../../constants/common.ts'
 import React from 'react'
 
 const PasswordField = (props) => {

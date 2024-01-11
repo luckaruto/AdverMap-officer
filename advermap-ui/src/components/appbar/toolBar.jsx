@@ -133,6 +133,11 @@ export default function MiniDrawer() {
         navigate(PAGE.LOGIN.path, { replace: true });
     };
 
+    const goToProfile = () => {
+        dispatch(setCurrentPage(PAGE.PROFILE));
+        navigate(PAGE.PROFILE.path);
+    };
+
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
@@ -154,9 +159,8 @@ export default function MiniDrawer() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={goToProfile}>Thông tin cá nhân</MenuItem>
+            <MenuItem onClick={handleLogout}>Đăng suất</MenuItem>
         </Menu>
     );
 

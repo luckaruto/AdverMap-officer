@@ -23,9 +23,12 @@ const PrivateRoute = () => {
                         dispatch(setLoading(true));
                         const res = AuthService.refreshToken({headers:{"refresh-token": refreshToken}}).then((res) =>{
                             console.log(res);
-                            if (res.status === 200) {
+                            if (res.status === "OK") {
                                 dispatch(setToken(res.data.token));
                                 dispatch(setRefreshToken(res.data.refreshToken));
+                            } else {
+                                dispatch(setLoading(false));
+                                navigate(PAGE.LOGIN.path, {replace: true});
                             }
                         });
                     } catch (error) {

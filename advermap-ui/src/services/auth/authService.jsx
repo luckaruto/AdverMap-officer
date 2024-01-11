@@ -58,7 +58,7 @@ export class AuthService {
 				headers: headers
 			})
 			return {
-				status: response.status,
+				status: response.data.status,
 				message: response.data.message,
 				data: response.data.data,
 			};

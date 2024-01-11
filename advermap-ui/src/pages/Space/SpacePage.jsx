@@ -85,9 +85,21 @@ const SpacePage = () => {
   const handleClickDetail = (row) => navigate(PAGE.SPACE.path + `/${row.id}`);
   const handleClickRow = (row) => setSelectedRow(row);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (selectedRow) {
       console.log("delete", selectedRow);
+    }
+    const { id } = selectedRow;
+    dispatch(setLoading(true));
+    try {
+      const res = await SpaceService.delete(id, token);
+      dispatch(setSnackbar({ status: "success", message: res }));
+    } catch (error) {
+      dispatch(setSnackbar({ status: "error", message: error }));
+    } finally {
+      setSelectedRow(null)
+      dispatch(setLoading(false));
+      setOpenConfirm(false);
     }
   };
 

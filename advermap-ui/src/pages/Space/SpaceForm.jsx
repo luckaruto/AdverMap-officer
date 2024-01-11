@@ -57,8 +57,8 @@ const SpaceForm = (props) => {
         urls = [...resUrls];
       }
 
-      //handle Create
       const req = { ...data, imgUrl: [...urls] };
+      //handle Create
       const res = await SpaceService.create(req, token);
       dispatch(
         setSnackbar({ status: "success", message: res })

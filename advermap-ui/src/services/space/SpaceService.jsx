@@ -52,4 +52,21 @@ export class SpaceService {
       }
     });
   }
+  static async delete(id, token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` }; // Fix: Use an object for headers
+        const response = await api.delete(API.SPACE+`/${id}`, {
+          headers: headers,
+        });
+        if (response.status === 200 ) {
+          resolve(response.data);
+        } else {
+          reject(response.data);
+        }
+      } catch (error) {
+        reject(error.message);
+      }
+    });
+  }
 }

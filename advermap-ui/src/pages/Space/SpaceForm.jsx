@@ -14,20 +14,19 @@ import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import BasicInput from "components/Input/BasicInput";
 import ImageInput from "components/Input/ImageInput";
 import { useState } from "react";
-import { setLoading } from "redux/appSlice";
+import { setLoading, setSnackbar } from "redux/appSlice";
 import { uploadImgToFireBase } from "utils/firebase";
 import Heading1 from "components/Text/Heading1";
+import { SpaceService } from "services/space/SpaceService";
 
 const SpaceForm = (props) => {
   const [mode, setMode] = useState(FormMode.CREATE);
   const { open, handleClose, existData } = props;
 
-  const toast = useToast();
-
   const [images, setImages] = useState([]);
 
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, snackbar } = useSelector((state) => state.appState);
 
   const dispatch = useDispatch();
 
@@ -52,14 +51,23 @@ const SpaceForm = (props) => {
     let urls = [];
     dispatch(setLoading(true));
     try {
+      //handle upload imgs
       if (images.length <= 2 && images.length > 0) {
         const resUrls = await uploadImgToFireBase(images);
         urls = [...resUrls];
       }
+
+      const req = { ...data, imgUrl: [...urls] };
+      //handle Create
+      const res = await SpaceService.create(req, token);
+      dispatch(
+        setSnackbar({ status: "success", message: res })
+      );
+      reset(undefined, { keepDirtyValues: true });
+      handleClose();
     } catch (error) {
-      toast({ status: "error", description: "Error when upload images" });
+      dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
-      console.log({ ...data, urls });
       dispatch(setLoading(false));
     }
   };
@@ -74,10 +82,11 @@ const SpaceForm = (props) => {
     setValue("wardId", +existData.ward?.id);
   };
 
+  //handle Load data when edit
   useEffect(() => {
     if (existData) {
       setMode((prev) => FormMode.EDIT);
-      setExistData()
+      setExistData();
     } else {
       setMode((prev) => FormMode.CREATE);
       reset(undefined, { keepDirtyValues: true });
@@ -97,9 +106,7 @@ const SpaceForm = (props) => {
             className="p-6 rounded-lg bg-blue-200 "
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Heading1 className="mb-4">
-              Thông tin địa điểm
-            </Heading1>
+            <Heading1 className="mb-4">Thông tin địa điểm</Heading1>
             <div className=" flex flex-row gap-2 justify-center">
               <div className="flex flex-col items-center gap-4">
                 <BasicInput name="address" label="Địa chỉ" />
@@ -132,7 +139,10 @@ const SpaceForm = (props) => {
               </div>
 
               <div className="flex flex-col items-center gap-4">
-                <ImageInput setImages={setImages} existData={existData?.imgUrl||null} />
+                <ImageInput
+                  setImages={setImages}
+                  existData={existData?.imgUrl || null}
+                />
               </div>
             </div>
             <div className="flex flex-row justify-center mt-4">

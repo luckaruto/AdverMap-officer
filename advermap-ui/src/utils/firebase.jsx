@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage } from "firebase/storage";
 import { ref, uploadBytes } from "firebase/storage";
-import { v4 } from 'uuid';
-
+import { v4 } from "uuid";
+import { useToast } from "@chakra-ui/react";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -21,18 +21,21 @@ const storage = getStorage(app);
 
 export { storage, ref, uploadBytes }; // Export the storage for use in other components
 
-export const uploadImgToFireBase=async (images)=>{
-  let urls=[]
+export const uploadImgToFireBase = async (images) => {
+
+  let urls = [];
   for (let index = 0; index < images.length; index++) {
     let img = images[index];
     try {
       const imageRef = ref(storage, `images/${v4()}_image`);
       await uploadBytes(imageRef, img);
       const imageDownloadURL = await getDownloadURL(imageRef);
-      urls.push(imageDownloadURL)
+      urls.push(imageDownloadURL);
+      console.log(urls);
     } catch (error) {
       console.log(error.message);
+      // toast({ status: "error", description: "Error when upload images" });
     }
   }
-  return urls
-}
+  return urls;
+};

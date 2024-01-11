@@ -6,7 +6,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PropTypes from "prop-types";
-import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
 
 export default function ConfirmModal(props) {
@@ -23,7 +22,7 @@ export default function ConfirmModal(props) {
         <DialogTitle id="alert-dialog-title">{"Confirm Modal"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description ">
-            <Heading2 className="text-red-400 normal-case">{message}</Heading2>
+            <Heading2 className="text-red-400 normal-case font-light">{message}</Heading2>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

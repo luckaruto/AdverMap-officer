@@ -23,8 +23,4 @@ public class UserFilterPermission {
 
     private List<CityDto> cities;
 
-    private List<DistrictDTO> districts;
-
-    private List<WardDTO> wards;
-
 }

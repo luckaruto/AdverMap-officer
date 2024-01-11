@@ -1,5 +1,6 @@
 package com.adsmanagement.users;
 
+import com.adsmanagement.cities.City;
 import com.adsmanagement.cities.CityDto;
 import com.adsmanagement.cities.CityRepository;
 import com.adsmanagement.districts.District;
@@ -260,61 +261,178 @@ public class UserService {
         return permission;
     }
 
-    public UserFilterPermission getFilterPermission(Short userId,List<Short> cityIds,  List<Short> districtIds, List<Short> wardIds){
-        var permission = this.getUserPermission(userId);
-        if (!permission.hasPermission(wardIds,districtIds,cityIds)){
+
+    public UserFilterPermission getFilterPermission(Short userId) {
+        var userO = this.userRepository.findById(userId);
+        if (userO == null || userO.isEmpty()) {
             return null;
         }
+        var user = userO.get();
 
-        if (wardIds != null && wardIds.size()>0){
+        var permission = this.getUserPermission(userId);
+
+        var role = permission.getRole();
+        if (role == UserRole.ADMIN) {
+            var city = this.cityRepository.findAll();
+            return getUserPermissionForCity(city,role);
+        }
+
+        if (role == UserRole.DISTRICT_ADMIN) {
+            var cityDto = new ArrayList<CityDto>();
+
+            var managementDistricts = user.getManagementDistricts();
+            if (managementDistricts == null || managementDistricts.isEmpty()){
+                return new UserFilterPermission(role,cityDto);
+            }
+
+            var districtIds = new ArrayList<Short>();
+            if (managementDistricts != null && managementDistricts.size()>0){
+                for (var i=0; i < managementDistricts.size(); i++){
+                    if (managementDistricts.get(i).getDistrict() != null){
+                        districtIds.add( managementDistricts.get(i).getDistrict().getId());
+                    }
+                }
+            }
+
+            var cities = this.cityRepository.findByDistrictIds(districtIds);
+            var districts = this.districtRepository.findAllByIdIn(districtIds);
+
+            if (cities != null) {
+                for (var i =0; i < cities.size();i++){
+                    var ci = cities.get(i).toDto();
+
+                    var districtDto = new ArrayList<DistrictDTO>();
+                    if (districts != null) {
+                        for (var j =0; j < districts.size();j++){
+                            if (districts.get(j).getCity()!= null && districts.get(j).getCity().getId() == ci.getId()){
+                                var dis = districts.get(j).toDto();
+
+                                var wards = this.wardRepository.findAllByDistrict_Id(districts.get(j).getId());
+                                var wardDto = new ArrayList<WardDTO>();
+                                if (wards != null) {
+                                    for (var t =0; t < wards.size();t++){
+                                        wardDto.add(wards.get(t).toDto());
+                                    }
+                                }
+                                dis.setWards(wardDto);
+                                districtDto.add(dis);
+                            }
+
+
+                        }
+                    }
+
+                    ci.setDistricts(districtDto);
+                    cityDto.add(ci);
+                }
+            }
+
+            return new UserFilterPermission(role,cityDto);
+        }
+
+        if (role == UserRole.WARD_ADMIN) {
+            var cityDto = new ArrayList<CityDto>();
+
+            var managementWards = user.getManagementWards();
+            if (managementWards == null || managementWards.isEmpty()){
+                return new UserFilterPermission(role,cityDto);
+            }
+
+            var wardIds = new ArrayList<Short>();
+            for (var i=0; i < managementWards.size(); i++){
+                if (managementWards.get(i).getWard() != null){
+                    wardIds.add( managementWards.get(i).getWard().getId());
+                }
+            }
+
+
             var wards = this.wardRepository.findAllByIdIn(wardIds);
 
-            var wardDto = new ArrayList<WardDTO>();
-            if (wards != null) {
-                for (var i =0; i < wards.size();i++){
-                    wardDto.add(wards.get(i).toDto());
+            var districtIds = new ArrayList<Short>();
+            if (wards != null && wards.size()>0){
+                for (var i=0; i < wards.size(); i++){
+                    var district = wards.get(i).getDistrict();
+                    if (district != null) {
+                        districtIds.add(district.getId());
+                    }
+
                 }
             }
 
-            return new UserFilterPermission(permission.getRole(),null,null,wardDto);
-        }
+            var cities = this.cityRepository.findByDistrictIds(districtIds);
+            var districts = this.districtRepository.findAllByIdIn(districtIds);
 
-        if (districtIds != null && districtIds.size()>0){
-            var wards = this.wardRepository.findAllByDistrict_IdIn(districtIds);
+            if (cities != null) {
+                for (var i =0; i < cities.size();i++){
+                    var ci = cities.get(i).toDto();
 
-            var wardDto = new ArrayList<WardDTO>();
-            if (wards != null) {
-                for (var i =0; i < wards.size();i++){
-                    wardDto.add(wards.get(i).toDto());
+                    var districtDto = new ArrayList<DistrictDTO>();
+                    if (districts != null) {
+                        for (var j =0; j < districts.size();j++){
+                            if (districts.get(j).getCity()!= null && districts.get(j).getCity().getId() == ci.getId()){
+                                var dis = districts.get(j).toDto();
+
+                                var wards2 = this.wardRepository.findAllByDistrict_IdAndIdIn(districts.get(j).getId(), wardIds);
+                                var wardDto = new ArrayList<WardDTO>();
+                                if (wards2 != null) {
+                                    for (var t =0; t < wards2.size();t++){
+                                        wardDto.add(wards2.get(t).toDto());
+                                    }
+                                }
+                                dis.setWards(wardDto);
+                                districtDto.add(dis);
+                            }
+
+
+                        }
+                    }
+
+                    ci.setDistricts(districtDto);
+                    cityDto.add(ci);
                 }
             }
 
-            return new UserFilterPermission(permission.getRole(),null,null,wardDto);
+            return new UserFilterPermission(role,cityDto);
+
         }
 
-        if (cityIds != null && cityIds.size() > 0) {
-            var districts = this.districtRepository.findAllByCity_IdIn(districtIds);
+        return new UserFilterPermission(role,null);
 
-            var districtDto = new ArrayList<DistrictDTO>();
-            if (districts != null) {
-                for (var i =0; i < districts.size();i++){
-                    districtDto.add(districts.get(i).toDto());
-                }
-            }
+    }
 
-            return new UserFilterPermission(permission.getRole(),null,districtDto,null);
-        }
-
-        var city = this.cityRepository.findAll();
+    UserFilterPermission getUserPermissionForCity(List<City> city,UserRole role) {
         var cityDto = new ArrayList<CityDto>();
         if (city != null) {
             for (var i =0; i < city.size();i++){
-                cityDto.add(city.get(i).toDto());
+                var ci = city.get(i).toDto();
+
+                var districts = this.districtRepository.findAllByCity_Id(city.get(i).getId());
+                var districtDto = new ArrayList<DistrictDTO>();
+                if (districts != null) {
+                    for (var j =0; j < districts.size();j++){
+                        var dis = districts.get(j).toDto();
+
+                        var wards = this.wardRepository.findAllByDistrict_Id(districts.get(j).getId());
+                        var wardDto = new ArrayList<WardDTO>();
+                        if (wards != null) {
+                            for (var t =0; t < wards.size();t++){
+                                wardDto.add(wards.get(t).toDto());
+                            }
+                        }
+                        dis.setWards(wardDto);
+                        districtDto.add(dis);
+
+                    }
+                }
+
+                ci.setDistricts(districtDto);
+                cityDto.add(ci);
             }
         }
 
-        return new UserFilterPermission(permission.getRole(), cityDto, null, null);
+        return new UserFilterPermission(role,cityDto);
 
     }
+
 
 }

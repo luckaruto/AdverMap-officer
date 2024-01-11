@@ -17,6 +17,7 @@ import {
 import Heading1 from "components/Text/Heading1";
 import Button from "@mui/material/Button";
 import SpaceForm from "./SpaceForm";
+import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -65,24 +66,41 @@ const columns = [
 const SpacePage = () => {
   const [rows, setRows] = useState(null);
   const [error, setError] = useState("");
-  // const [city, setCity] = useState("");
-  // const [ward, setWard] = useState("");
-  // const [district, setDistrict] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
   const [openForm, setOpenForm] = useState(false);
-
-  const handleOpenForm = () => setOpenForm(true);
-  const handleCloseForm = () => setOpenForm(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const params = { cityIds: 1 };
 
+  const { token } = useSelector((state) => state.appState);
+
+  const handleOpenForm = () => setOpenForm(true);
+  const handleCloseForm = () => setOpenForm(false);
+
+  const handleClickCreate = () => {
+    setSelectedRow(null);
+    setTimeout(() => {
+      handleOpenForm();
+    }, 0);
+  };
+  const handleClickEdit = () => {
+    handleOpenForm();
+  };
+  const handleClickDelete = () => {
+    setOpenConfirm(true);
+  };
+
   const handleClickDetail = (row) => navigate(PAGE.SPACE.path + `/${row.id}`);
   const handleClickRow = (row) => setSelectedRow(row);
 
-  const { token } = useSelector((state) => state.appState);
+  const handleDelete = () => {
+    if (selectedRow) {
+      console.log("delete", selectedRow);
+    }
+  };
 
   const fetchSpace = async (params) => {
     dispatch(setLoading(true));
@@ -105,13 +123,27 @@ const SpacePage = () => {
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
         <div className="flex gap-6 ml-auto">
-          <Button variant="outlined" color="success" onClick={handleOpenForm}>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={handleClickCreate}
+          >
             Tạo mới
           </Button>
-          <Button variant="outlined" color="info" disabled={!selectedRow}>
+          <Button
+            variant="outlined"
+            color="info"
+            onClick={handleClickEdit}
+            disabled={!selectedRow}
+          >
             Chỉnh Sửa
           </Button>
-          <Button variant="outlined" color="error" disabled={!selectedRow}>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleClickDelete}
+            disabled={!selectedRow}
+          >
             Xóa
           </Button>
         </div>
@@ -127,7 +159,17 @@ const SpacePage = () => {
           <p className="text-center text-red-500 text-lg font-bold">{error}</p>
         )}
         {selectedRow && <SpaceInfo data={selectedRow} />}
-        <SpaceForm open={openForm} handleClose={handleCloseForm} />
+        <SpaceForm
+          open={openForm}
+          handleClose={handleCloseForm}
+          existData={selectedRow}
+        />
+        <ConfirmModal
+          open={openConfirm}
+          handleClose={() => setOpenConfirm(false)}
+          handleSubmit={handleDelete}
+          message="Xác nhận xóa địa điểm được chọn?"
+        />
       </div>
     </>
   );

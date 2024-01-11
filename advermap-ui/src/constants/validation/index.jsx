@@ -30,10 +30,8 @@ export const ResetPasswordSchema = yup.object().shape({
 })
 
 
-export const requiredAddressError='Tên đăng nhập không được để trống'
-
 export const requiredError={
-  address:'Tên đăng nhập không được để trống',
+  address:'Địa chỉ không được để trống',
   password:'Tên đăng nhập không được để trống',
   default:'Trường này không được để trống',
 }

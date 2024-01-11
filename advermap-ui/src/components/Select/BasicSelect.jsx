@@ -1,55 +1,58 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import React from "react";
 import PropTypes from "prop-types";
-import { Controller, useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const BasicSelect = (props) => {
+  const { label, name, choices, format } = props;
+
   const {
     control,
-    register,
     formState: { errors },
   } = useFormContext();
-  const { items, format, label, name } = props;
 
   return (
     <Controller
+      name={name}
       control={control}
-      name={name} 
-      render={({ field: { value, onChange } }) => (
+      render={({ field }) => (
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
-            defaultValue={items[0]}
             label={label}
-            value={value}
-            onChange={onChange}
+            value={field.value  || ""}
+            onChange={field.onChange}
+            inputRef={field.ref}
           >
-            {items &&
-              items.map((item) => (
+            {choices &&
+              choices.map((item) => (
                 <MenuItem key={item} value={item}>
                   {format(item)}
                 </MenuItem>
               ))}
           </Select>
+          {errors[name] && (
+            <FormHelperText error>{`${errors[name].message}`}</FormHelperText>
+          )}
         </FormControl>
       )}
     />
   );
 };
 BasicSelect.propTypes = {
-  items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  choices: PropTypes.array.isRequired,
   format: PropTypes.func.isRequired,
 };
 BasicSelect.defaultProps = {
-  items: [],
-  format: () => {},
   label: "Label",
   name: "",
+  choices: [],
+  format: () => "error",
 };
 export default BasicSelect;

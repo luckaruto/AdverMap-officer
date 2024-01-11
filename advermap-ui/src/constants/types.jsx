@@ -49,3 +49,10 @@ export const UserRole = {
   DISTRICT_ADMIN: "DISTRICT_ADMIN",
   ADMIN: "ADMIN",
 };
+
+
+//Form Mode
+export const FormMode = {
+  CREATE:"CREATE",
+  EDIT:"EDIT",
+};

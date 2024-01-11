@@ -5,8 +5,7 @@ export const plannedFormat = (value) => {
 	  case true:
 		return "Đã chứng nhận";
 		break;
-  
-	  default:
+	  case false:
 		return "Chưa chứng nhận";
 		break;
 	}

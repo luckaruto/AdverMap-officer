@@ -8,12 +8,12 @@ import ChakraHook from 'hooks';
 import {Box, Heading, VStack, Text, useToast, Stack, Link, Avatar} from '@chakra-ui/react';
 import {FormProvider, useForm} from 'react-hook-form';
 // @ts-ignore
-import {ForgotPasswordSchema} from '../../../constants/validation/index.ts';
 // @ts-ignore
 import {loginFailedDescription, loginSuccessDescription} from '../../../constants/messages/index.ts';
 // @ts-ignore
 import FormInput from '../components/FormInput/index.jsx';
 import {SubmitButton} from '../authenticatePage.styles.js';
+import { ForgotPasswordSchema } from 'constants/validation/index.jsx';
 
 
 const ForgotPassword = () => {

@@ -18,3 +18,17 @@ export const ForgotPasswordSchema = yup.object().shape({
 export const SelectFleetSchema = yup.object().shape({
   fleet: yup.string().required('This field is required')
 })
+
+
+export const requiredAddressError='Tên đăng nhập không được để trống'
+
+export const requiredError={
+  address:'Tên đăng nhập không được để trống',
+  password:'Tên đăng nhập không được để trống',
+  default:'Trường này không được để trống',
+}
+
+export const validatedError={
+  email:'Email must be a valid email',
+  phone:'Value must be a valid phone number',
+}

@@ -1,3 +1,4 @@
+import { SpaceFormat, SpaceType, SurfaceFormat } from "constants/types";
 import React from "react";
 export const plannedFormat = (value) => {
 	switch (value) {
@@ -12,24 +13,56 @@ export const plannedFormat = (value) => {
   };
   export const typeFormat = (value) => {
 	switch (value) {
-	  case "PUBLIC_LAND":
+	  case SpaceType.PUBLIC_LAND:
 		return "Công cộng";
-		break;
-  
+	  case SpaceType.PARK:
+		return "Công viên";
+	  case SpaceType.TRAFFIC_CORRIDOR:
+		return "Đường giao thông";
+	  case SpaceType.PRIVATE_LAND:
+		return "Đất riêng";
+	  case SpaceType.SHOPPING_CENTER:
+		return "Trung tâm mua sắm";
+	  case SpaceType.MARKET:
+		return "Chợ";
+	  case SpaceType.GAS_STATION:
+		return "Trạm xăng";
+	  case SpaceType.BUS_SHELTER:
+		return "Trạm dừng xe bus";
 	  default:
 		return "Cá Nhân";
-		break;
 	}
   };
   export const formatFormat = (value) => {
 	switch (value) {
-	  case "COMMERCIAL_ADS":
-		return "Biển quảng cáo";
-		break;
-  
+	  case SpaceFormat.POLITICAL_MOBILIZATION:
+		return "Mobilization quốc gia";
+	  case SpaceFormat.COMMERCIAL_ADS:
+		return "Quảng cáo thương mại";
+	  case SpaceFormat.SOCIALIZATION:
+		return "Tổ chức xã hội";
+	  case SurfaceFormat.HIFLEX_POST:
+		return "Biển quảng cáo Hiflex";
+	  case SurfaceFormat.LED_SCREEN:
+		return "Màn hình LED";
+	  case SurfaceFormat.LIGHT_BOX:
+		return "Hộp đèn";
+	  case SurfaceFormat.HIFLEX_WALL:
+		return "Biển quảng cáo Hiflex trên tường";
+	  case SurfaceFormat.WALL_MOUNTED_LED_SCREEN:
+		return "Màn hình LED treo tường";
+	  case SurfaceFormat.VERTICAL_BANNER:
+		return "Banner đứng";
+	  case SurfaceFormat.HORIZONTAL_BANNER:
+		return "Banner nằm";
+	  case SurfaceFormat.PANEL:
+		return "Bảng hiển thị";
+	  case SurfaceFormat.WELCOME_GATE:
+		return "Cổng chào";
+	  case SurfaceFormat.SHOPPING_CENTER:
+		return "Khu mua sắm";
 	  default:
 		return "Chưa xác định";
-		break;
 	}
   };
   

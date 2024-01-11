@@ -8,8 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
 import SpaceInfo from "./SpaceInfo";
-import { formatFormat, formatImgUrl, plannedFormat, typeFormat } from "utils/format";
+import {
+  formatFormat,
+  formatImgUrl,
+  plannedFormat,
+  typeFormat,
+} from "utils/format";
 import Heading1 from "components/Text/Heading1";
+import Button from "@mui/material/Button";
+import SpaceForm from "./SpaceForm";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -62,6 +69,10 @@ const SpacePage = () => {
   // const [ward, setWard] = useState("");
   // const [district, setDistrict] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
+  const [openForm, setOpenForm] = useState(false);
+
+  const handleOpenForm = () => setOpenForm(true);
+  const handleCloseForm = () => setOpenForm(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -90,22 +101,35 @@ const SpacePage = () => {
   }, []);
 
   return (
-    <div className="max-w-[1400px] m-auto flex flex-col gap-6">
-      <Heading1 >
-      Danh sách địa điểm
-      </Heading1>
-      {rows ? (
-        <DataTable
-          columns={columns}
-          rows={rows}
-          onClickDetail={handleClickDetail}
-          onClickRow={handleClickRow}
-        />
-      ) : (
-        <p className="text-center text-red-500 text-lg font-bold">{error}</p>
-      )}
-      {selectedRow && <SpaceInfo data={selectedRow} />}
-    </div>
+    <>
+      <div className="max-w-[1400px] m-auto flex flex-col gap-4">
+        <Heading1>Danh sách địa điểm</Heading1>
+        <div className="flex gap-6 ml-auto">
+          <Button variant="outlined" color="success" onClick={handleOpenForm}>
+            Tạo mới
+          </Button>
+          <Button variant="outlined" color="info" disabled={!selectedRow}>
+            Chỉnh Sửa
+          </Button>
+          <Button variant="outlined" color="error" disabled={!selectedRow}>
+            Xóa
+          </Button>
+        </div>
+
+        {rows ? (
+          <DataTable
+            columns={columns}
+            rows={rows}
+            onClickDetail={handleClickDetail}
+            onClickRow={handleClickRow}
+          />
+        ) : (
+          <p className="text-center text-red-500 text-lg font-bold">{error}</p>
+        )}
+        {selectedRow && <SpaceInfo data={selectedRow} />}
+        <SpaceForm open={openForm} handleClose={handleCloseForm} />
+      </div>
+    </>
   );
 };
 

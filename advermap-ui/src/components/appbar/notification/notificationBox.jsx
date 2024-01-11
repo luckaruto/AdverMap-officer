@@ -10,10 +10,7 @@ import { useTransitionStateManager } from '@mui/base/useTransition';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import NotificationItem from "./notificationItem";
-import {AuthService} from "../../../services/auth/authService";
-import {AxiosError} from "axios";
-import {NotificationService} from "../../../services/notification/notificationService";
+
 
 export default function NotificationBox() {
     const [anchor, setAnchor] = React.useState(null);

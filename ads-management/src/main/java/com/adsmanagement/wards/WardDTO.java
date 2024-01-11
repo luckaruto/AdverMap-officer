@@ -13,10 +13,5 @@ import lombok.Setter;
 public class WardDTO {
     private Short id;
     private String name;
-    private DistrictDTO district;
 
-    WardDTO(Short id, String name){
-        this.id = id;
-        this.name = name;
-    }
 }

@@ -31,60 +31,56 @@ const ReportDetail = () => {
 
   useEffect(() => {
     if (location) {
-      const id=location.pathname.split("/")[2]
+      const id = location.pathname.split("/")[2];
       if (id) {
         fetchReport(id);
       }
     }
   }, [location]);
 
-
   console.log(report);
 
   return (
     <div className="flex flex-col gap-6">
-     
-      <Heading2 className="text-left text-blue-500">
-        Chi tiết báo cáo
-      </Heading2>
+      <Heading2 className="text-left text-blue-500">Chi tiết báo cáo</Heading2>
       <div className="flex flex-col gap-4">
         {report ? (
           <>
             <p>
               <span className="font-bold text-base">Địa chỉ: </span>
-              {report.address}
+              {report.address || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Phường: </span>
-              {report.ward.name}
+              {report.ward.name || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Người báo cáo: </span>
-              {report.name}
+              {report.name || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Email: </span>
-              {report.email}
+              {report.email || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Số điện thoại: </span>
-              {report.phone}
+              {report.phone || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Ngày báo cáo: </span>
-              {report.reportDate}
+              {report.reportDate || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Trạng thái: </span>
-              {report.state||"Không xác định"}
+              {report.state || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Xét duyệt bởi: </span>
-              {report.approvedBy||"Chưa có"}
+              {report.approvedBy || "Chưa có"}
             </p>
             <p>
               <span className="font-bold text-base">Thông tin phản hồi: </span>
-              {report.response||"Chưa có"}
+              {report.response || "Chưa có"}
             </p>
             <p>
               <div className="font-bold text-base">Nội dung: </div>

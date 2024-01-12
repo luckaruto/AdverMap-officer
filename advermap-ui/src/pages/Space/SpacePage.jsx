@@ -8,16 +8,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
 import SpaceInfo from "./SpaceInfo";
-import { formatFormat, plannedFormat, typeFormat } from "utils/format";
+import { formatFormat, typeFormat } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import Button from "@mui/material/Button";
 import SpaceForm from "./SpaceForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import { fetchSpaces } from "redux/spaceSlice";
 import { testParams } from "services/apis/constants";
+import { formatFormatUI, plannedFormatUI, typeFormatUI } from "utils/formatToUI";
 
 const columns = [
-  { id: "id", label: "ID", minWidth: 170 },
+  { id: "id", label: "ID" },
   {
     id: "address",
     label: "Địa chỉ",
@@ -27,13 +28,13 @@ const columns = [
     id: "type",
     label: "Loại",
     minWidth: 170,
-    format: typeFormat,
+    format: typeFormatUI,
   },
   {
     id: "format",
     label: "Hình thức",
     minWidth: 170,
-    format: formatFormat,
+    format: formatFormatUI,
   },
   {
     id: "ward",
@@ -44,8 +45,8 @@ const columns = [
   {
     id: "planned",
     label: "Trạng thái",
-    minWidth: 170,
-    format: plannedFormat,
+    minWidth: 200,
+    format: plannedFormatUI,
   },
   {
     id: "detail",

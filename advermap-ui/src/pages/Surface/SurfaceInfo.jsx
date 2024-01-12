@@ -5,6 +5,7 @@ import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import SpaceInfo from "pages/Space/SpaceInfo";
 import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
+import { formatFormatUI } from "utils/formatToUI";
 
 const SurfaceInfo = (props) => {
   const { data } = props;
@@ -25,7 +26,7 @@ const SurfaceInfo = (props) => {
             </p>
             <p>
               <span className="font-bold text-base">Hình thức: </span>
-              {formatFormat(data.format)}
+              {formatFormatUI(data.format)}
             </p>
             <p>
               <span className="font-bold text-base">Nội dung: </span>

@@ -7,13 +7,14 @@ import DataTable from "components/DataTable";
 import { PAGE } from "components/constants";
 import { useNavigate } from "react-router-dom";
 import { ReportService } from "services/report/ReportService";
-import { formatImgUrl } from "utils/format";
+
 import Heading1 from "components/Text/Heading1";
 import { useLocation } from "react-router-dom";
 import { fetchReports } from "redux/reportSlice";
+import { stateFormatUI } from "utils/formatToUI";
 
 const columns = [
-  { id: "id", label: "ID", minWidth: 100 },
+  { id: "id", label: "ID"},
   {
     id: "address",
     label: "Địa chỉ",
@@ -40,6 +41,7 @@ const columns = [
     id: "state",
     label: "Trạng thái",
     minWidth: 100,
+    format:stateFormatUI
   },
   {
     id: "detail",

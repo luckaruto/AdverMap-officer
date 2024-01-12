@@ -9,12 +9,13 @@ import { PAGE } from "components/constants";
 import { useNavigate } from "react-router-dom";
 import { testToken } from "services/apis/constants";
 import SurfaceInfo from "./SurfaceInfo";
-import { formatImgUrl } from "utils/format";
+import { formatFormat, formatImgUrl } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import { fetchSurfaces } from "redux/surfaceSlice";
+import { formatFormatUI } from "utils/formatToUI";
 
 const columns = [
-  { id: "id", label: "ID", minWidth: 170 },
+  { id: "id", label: "ID" },
   {
     id: "space",
     label: "Địa chỉ",
@@ -36,11 +37,12 @@ const columns = [
     id: "format",
     label: "Hình thức",
     minWidth: 170,
+    format:formatFormatUI
   },
   {
     id: "content",
     label: "Nội dung",
-    //   minWidth: 170,
+      minWidth: 200,
   },
   {
     id: "detail",

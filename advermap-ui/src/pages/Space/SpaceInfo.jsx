@@ -4,6 +4,7 @@ import { formatFormat, plannedFormat, typeFormat } from "utils/format";
 import CarouselImage from "components/Carousels/CarouselImage";
 import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
+import { formatFormatUI, plannedFormatUI, typeFormatUI } from "utils/formatToUI";
 
 const SpaceInfo = (props) => {
   const { data } = props;
@@ -19,11 +20,11 @@ const SpaceInfo = (props) => {
             </p>
             <p>
               <span className="font-bold text-base">Loại: </span>
-              {typeFormat(data.type)}
+              {typeFormatUI(data.type)}
             </p>
             <p>
               <span className="font-bold text-base">Hình thức: </span>
-              {formatFormat(data.format)}
+              {formatFormatUI(data.format)}
             </p>
             <p>
               <span className="font-bold text-base">Phường: </span>
@@ -31,7 +32,7 @@ const SpaceInfo = (props) => {
             </p>
             <p>
               <span className="font-bold text-base">Trạng thái: </span>
-              {plannedFormat(data.planned)}
+              {plannedFormatUI(data.planned)}
             </p>
             <div className="w-[768px] h-[400px] flex m-auto">
               <CarouselImage data={data.imgUrl} />

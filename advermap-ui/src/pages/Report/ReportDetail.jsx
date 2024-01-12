@@ -12,7 +12,6 @@ import Heading2 from "components/Text/Heading2";
 const ReportDetail = () => {
   const { token } = useSelector((state) => state.appState);
   const location = useLocation();
-  const [id, setId] = useState(null);
   const [error, setError] = useState("");
   const [report, setReport] = useState(null);
 
@@ -32,17 +31,15 @@ const ReportDetail = () => {
 
   useEffect(() => {
     if (location) {
-      setId(location.pathname.split("/")[2]);
+      const id=location.pathname.split("/")[2]
+      if (id) {
+        fetchReport(id);
+      }
     }
   }, [location]);
 
-  useEffect(() => {
-    if (id) {
-      fetchReport(id);
-    }
-  }, [id]);
 
-  console.log(report, id);
+  console.log(report);
 
   return (
     <div className="flex flex-col gap-6">
@@ -79,15 +76,15 @@ const ReportDetail = () => {
             </p>
             <p>
               <span className="font-bold text-base">Trạng thái: </span>
-              {report.state}
+              {report.state||"Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Xét duyệt bởi: </span>
-              {report.approvedBy}
+              {report.approvedBy||"Chưa có"}
             </p>
             <p>
               <span className="font-bold text-base">Thông tin phản hồi: </span>
-              {report.response}
+              {report.response||"Chưa có"}
             </p>
             <p>
               <div className="font-bold text-base">Nội dung: </div>

@@ -49,4 +49,7 @@ public interface SurfaceRequestRepository extends JpaRepository<SurfaceRequest, 
             countQuery = "SELECT count(*) FROM surface_requests sw INNER JOIN surfaces s ON s.id = sw.surface_id  WHERE s.id IN (:surface_ids) and sw.state = :state",
             nativeQuery = true)
     Page<SurfaceRequest> findAllBySurfaceIdsAndState(Pageable pageable,@Param("surface_ids") List<Short> surfaceIds, RequestState state);
+
+    void deleteBySpaceId(Short spaceId);
+
 }

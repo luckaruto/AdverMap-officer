@@ -17,5 +17,8 @@ public interface SpaceRequestRepository extends JpaRepository<SpaceRequest, Shor
     Page<SpaceRequest> findAllBySpaceId(Short spaceId, Pageable pageable);
 
 
+    void deleteBySpaceId(Short spaceId);
+
+
 
 }

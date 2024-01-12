@@ -184,6 +184,21 @@ public class UserService {
         return  createdUser.get();
     }
 
+
+    public User changePassword(Short id, String password) {
+        var existUser = this.userRepository.findById(id);
+        if (existUser == null || existUser.isEmpty()) {
+            return null;
+        }
+
+        var user = existUser.get();
+
+        var bcryptEncoder  = new BCryptPasswordEncoder();
+        var bcryptPassword = bcryptEncoder.encode(password);
+        user.setPassword(bcryptPassword);
+
+        return this.userRepository.save(user);
+    }
     public User delete(Short id){
         var existUser = this.userRepository.findById(id);
         if (existUser == null || existUser.isEmpty()) {

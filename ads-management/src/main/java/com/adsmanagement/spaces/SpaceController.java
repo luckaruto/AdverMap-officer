@@ -80,7 +80,7 @@ public class SpaceController {
             return new ResponseEntity<>(res, HttpStatus.OK);
         }
 
-        this.spaceRepository.delete(spaceO.get());
+        this.spaceService.delete(spaceId);
         var res = new Response<>("","ok");
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
@@ -188,7 +188,7 @@ public class SpaceController {
         var data = this.spaceService.findById(id);
 
         if (data.isEmpty() || data.get() == null) {
-            var res = new Response<SpaceDto>("Quảng cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            var res = new Response<SpaceDto>("Điểm đặt quảng cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(res, HttpStatus.OK);
         }
 

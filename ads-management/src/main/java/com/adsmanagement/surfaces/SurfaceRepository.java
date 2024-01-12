@@ -13,4 +13,6 @@ public interface SurfaceRepository extends JpaRepository<Surface, Short>, CrudRe
 
     long countBySpaceId(Short spaceId);
 
+    void deleteBySpaceId(Short spaceId);
+
 }

@@ -193,4 +193,39 @@ public class SurfaceController {
         var res = new Response<SurfaceDto>("",data.get().toDto(),HttpStatus.OK);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+
+    @PostMapping(path = "/{id}")
+    public ResponseEntity<Response<SurfaceDto>> update(
+            @PathVariable("id") Short id,
+            UpdateSurfaceDto dto
+    )   {
+        var data = this.surfaceService.findById(id);
+
+        if (data.isEmpty() || data.get() == null) {
+            var res = new Response<SurfaceDto>("Điểm đặt báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var resData = this.surfaceService.update(id,dto);
+
+        var res = new Response<>("",resData.toDto(),HttpStatus.OK);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Response<String>> delete(
+            @PathVariable("id") Short id
+    )   {
+        var data = this.surfaceService.findById(id);
+
+        if (data.isEmpty() || data.get() == null) {
+            var res = new Response<String>("Điểm đặt báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        this.surfaceService.delete(id);
+
+        var res = new Response<>("","ok",HttpStatus.OK);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 }

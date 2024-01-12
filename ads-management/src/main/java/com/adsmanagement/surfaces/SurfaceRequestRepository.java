@@ -52,4 +52,7 @@ public interface SurfaceRequestRepository extends JpaRepository<SurfaceRequest, 
 
     void deleteBySpaceId(Short spaceId);
 
+    void deleteBySurfaceId(Short surfaceId);
+
+
 }

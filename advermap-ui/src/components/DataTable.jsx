@@ -11,11 +11,10 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 
 const DataTable = (props) => {
-  const { columns, rows, height, onClickRow, onClickDetail } = props;
+  const { columns, rows, height, onClickRow, onClickDetail, selectedRow } =
+    props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const [selectedRow, setSelectedRow] = React.useState(null);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -28,6 +27,7 @@ const DataTable = (props) => {
 
   const changeBgColor = (row) => {
     if (selectedRow && row.id == selectedRow.id) {
+      console.log(row.id, selectedRow.id);
       return `rgb(229 231 235 / var(--tw-bg-opacity))`;
     }
     return "inherit";
@@ -62,7 +62,7 @@ const DataTable = (props) => {
                     tabIndex={-1}
                     key={row.id}
                     onClick={() => {
-                      onClickRow(row), setSelectedRow(row);
+                      onClickRow(row);
                     }}
                   >
                     {columns.map((column) => {
@@ -111,6 +111,7 @@ DataTable.propTypes = {
   height: PropTypes.number.isRequired,
   onClickRow: PropTypes.func.isRequired,
   onClickDetail: PropTypes.func.isRequired,
+  selectedRow: PropTypes.any,
 };
 DataTable.defaultProps = {
   columns: [],
@@ -118,6 +119,7 @@ DataTable.defaultProps = {
   height: 440,
   onClickRow: () => {},
   onClickDetail: () => {},
+  selectedRow: null,
 };
 
 export default DataTable;

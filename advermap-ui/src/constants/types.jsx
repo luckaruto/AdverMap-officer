@@ -20,6 +20,7 @@ export const RequestState = {
   IN_PROGRESS: "IN_PROGRESS",
   REJECTED: "REJECTED",
   APPROVED: "APPROVED",
+  CANCELED: "CANCELED",
 };
 
 // Surface

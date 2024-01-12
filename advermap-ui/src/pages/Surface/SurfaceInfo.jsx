@@ -12,8 +12,10 @@ const SurfaceInfo = (props) => {
   console.log(data);
   return (
     <>
-      <Heading2 className="text-left text-blue-500">Chi tiết Bảng quảng cáo</Heading2>
-      <div className="flex flex-col gap-4">
+      <Heading2 className="text-left text-blue-500">
+        Chi tiết Bảng quảng cáo
+      </Heading2>
+      <div className="flex flex-col gap-4 p-4 ring-2 ring-blue-400">
         {data ? (
           <>
             <p>
@@ -35,12 +37,12 @@ const SurfaceInfo = (props) => {
             <div className="w-[768px] h-[400px] flex m-auto">
               <CarouselImage data={data.imgUrl} />
             </div>
-            <SpaceInfo data={data.space} />
           </>
         ) : (
           <p>No data</p>
         )}
       </div>
+      <SpaceInfo data={data.space} />
     </>
   );
 };

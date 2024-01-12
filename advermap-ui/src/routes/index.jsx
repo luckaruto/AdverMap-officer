@@ -14,6 +14,7 @@ import SignIn from "pages/login/SignIn";
 import ForgotPassword from "pages/login/ForgotPassword";
 import OtpConfirmInput from "pages/login/InputOtp";
 import ResetPassword from "pages/login/ResetPassword";
+import SpaceRequestPage from "pages/SpaceRequest/SpaceRequestPage";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -40,6 +41,10 @@ const privateRoute = [
     {
         path: PAGE.REPORT.path,
         element: <ReportPage/>,
+    },
+    {
+        path: PAGE.SPACE_REQUEST.path,
+        element: <SpaceRequestPage/>,
     },
     {
         path: "/test",

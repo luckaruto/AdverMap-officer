@@ -13,6 +13,8 @@ import Heading1 from "components/Text/Heading1";
 import Button from "@mui/material/Button";
 import SpaceForm from "./SpaceForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
+import { fetchSpaces } from "redux/spaceSlice";
+import { testParams } from "services/apis/constants";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -53,8 +55,6 @@ const columns = [
 ];
 
 const SpacePage = () => {
-  const [rows, setRows] = useState(null);
-  const [error, setError] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
   const [openForm, setOpenForm] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -62,9 +62,11 @@ const SpacePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const params = { cityIds: 1 };
   // @ts-ignore
   const { token, snackbar } = useSelector((state) => state.appState);
+
+  // @ts-ignore
+  const { entities, error, loading } = useSelector((state) => state.spaces);
 
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
@@ -97,27 +99,20 @@ const SpacePage = () => {
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
-      setSelectedRow(null)
+      setSelectedRow(null);
       dispatch(setLoading(false));
       setOpenConfirm(false);
     }
   };
 
-  const fetchSpace = async (params) => {
-    dispatch(setLoading(true));
-    try {
-      const data = await SpaceService.getWithParams(params, token);
-      setRows(data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(fetchSpaces({ testParams, token }));
+  }, []);
 
   useEffect(() => {
-    fetchSpace(params);
-  }, []);
+    dispatch(setLoading(loading));
+  }, [loading]);
 
   return (
     <>
@@ -149,14 +144,20 @@ const SpacePage = () => {
           </Button>
         </div>
 
-        {rows ? (
+        {entities && entities.length > 0 ? (
           <DataTable
             columns={columns}
-            rows={rows}
+            rows={entities}
             onClickDetail={handleClickDetail}
             onClickRow={handleClickRow}
           />
         ) : (
+          <p className="text-center text-blue-400 text-lg font-bold">
+            No data ...
+          </p>
+        )}
+
+        {error && (
           <p className="text-center text-red-500 text-lg font-bold">{error}</p>
         )}
         {selectedRow && <SpaceInfo data={selectedRow} />}

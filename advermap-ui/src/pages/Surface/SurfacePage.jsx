@@ -11,6 +11,7 @@ import { testToken } from "services/apis/constants";
 import SurfaceInfo from "./SurfaceInfo";
 import { formatImgUrl } from "utils/format";
 import Heading1 from "components/Text/Heading1";
+import { fetchSurfaces } from "redux/surfaceSlice";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
@@ -42,12 +43,6 @@ const columns = [
     //   minWidth: 170,
   },
   {
-    id: "imgUrl",
-    label: "Ảnh",
-    minWidth: 100,
-    format: formatImgUrl,
-  },
-  {
     id: "detail",
     label: "",
     value: "Xem Báo cáo",
@@ -55,51 +50,51 @@ const columns = [
 ];
 
 const SurfacePage = () => {
-  const [rows, setRows] = useState(null);
-  const [error, setError] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
-  
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  // @ts-ignore
   const { token } = useSelector((state) => state.appState);
+  // @ts-ignore
+  const { entities, error, loading } = useSelector((state) => state.surfaces);
+
 
   var params;
 
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickDetail = (row) => navigate(PAGE.SURFACE.path + `/${row.id}`);
-  const fetchSurface = async (params) => {
-    dispatch(setLoading(true));
-    try {
-      const data = await SurfaceServices.getWithParams(params, token);
-      setRows(data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
 
   useEffect(() => {
     const id = location.pathname.split("/")[2];
     if (id) {
       params = { spaceIds: id };
     } else params = { cityIds: 1 };
-    fetchSurface(params);
+    // @ts-ignore
+    dispatch(fetchSurfaces({ params, token }));
   }, [location]);
+
+  useEffect(() => {
+    dispatch(setLoading(loading));
+  }, [loading]);
 
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
       <Heading1>Danh sách bảng Quảng Cáo</Heading1>
-      {rows ? (
+      {entities && entities.length > 0 ? (
         <DataTable
           columns={columns}
-          rows={rows}
+          rows={entities}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
         />
       ) : (
+        <p className="text-center text-blue-400 text-lg font-bold">
+          No data ...
+        </p>
+      )}
+      {error && (
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
       {selectedRow && <SurfaceInfo data={selectedRow} />}

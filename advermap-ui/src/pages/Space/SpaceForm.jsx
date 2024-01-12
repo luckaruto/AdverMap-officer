@@ -18,6 +18,8 @@ import { setLoading, setSnackbar } from "redux/appSlice";
 import { uploadImgToFireBase } from "utils/firebase";
 import Heading1 from "components/Text/Heading1";
 import { SpaceService } from "services/space/SpaceService";
+import { fetchSpaces } from "redux/spaceSlice";
+import { testParams } from "services/apis/constants";
 
 const SpaceForm = (props) => {
   const [mode, setMode] = useState(FormMode.CREATE);
@@ -60,9 +62,13 @@ const SpaceForm = (props) => {
       const req = { ...data, imgUrl: [...urls] };
       //handle Create
       const res = await SpaceService.create(req, token);
+
+      //handleSuccess
       dispatch(
         setSnackbar({ status: "success", message: res })
       );
+      // @ts-ignore
+      dispatch(fetchSpaces({testParams,token}))
       reset(undefined, { keepDirtyValues: true });
       handleClose();
     } catch (error) {

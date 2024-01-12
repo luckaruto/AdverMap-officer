@@ -2,29 +2,17 @@ import { api } from "services/apis";
 import { API } from "./../apis/constants";
 
 export class ReportService {
-  static async getAll() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await api.get(API.SPACE);
-        if (response.status === 200) {
-          resolve(response.data);
-        } else {
-          reject(response.data);
-        }
-      } catch (error) {
-        reject(error.message);
-      }
-    });
-  }
   static async getById(id, token) {
     return new Promise(async (resolve, reject) => {
       try {
-        const headers = { Authorization: `Bearer ${token}` }; 
-        const response = await api.get(API.REPORT + `/${id}`,{headers:headers});
-        if (response.status === 200) {
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await api.get(API.REPORT + `/${id}`, {
+          headers: headers,
+        });
+        if (response.status === 200 && response.data.data) {
           resolve(response.data.data);
         } else {
-          reject(response.data);
+          reject(response.data.message);
         }
       } catch (error) {
         reject(error.message);
@@ -34,15 +22,15 @@ export class ReportService {
   static async getWithParams(params, token) {
     return new Promise(async (resolve, reject) => {
       try {
-        const headers = { Authorization: `Bearer ${token}` }; 
+        const headers = { Authorization: `Bearer ${token}` };
         const response = await api.get(API.REPORT, {
           params: params,
           headers: headers,
         });
-        if (response.status === 200) {
+        if (response.status === 200 && response.data.data) {
           resolve(response.data.data.content);
         } else {
-          reject(response.data);
+          reject(response.data.message);
         }
       } catch (error) {
         reject(error.message);

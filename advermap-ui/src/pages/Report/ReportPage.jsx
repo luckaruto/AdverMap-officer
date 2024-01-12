@@ -10,7 +10,7 @@ import { ReportService } from "services/report/ReportService";
 import { formatImgUrl } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import { useLocation } from "react-router-dom";
-
+import { fetchReports } from "redux/reportSlice";
 
 const columns = [
   { id: "id", label: "ID", minWidth: 100 },
@@ -37,12 +37,6 @@ const columns = [
     minWidth: 170,
   },
   {
-    id: "imgUrl",
-    label: "Ảnh",
-    minWidth: 100,
-    format: formatImgUrl,
-  },
-  {
     id: "state",
     label: "Trạng thái",
     minWidth: 100,
@@ -55,58 +49,50 @@ const columns = [
 ];
 
 const ReportPage = () => {
-  const [rows, setRows] = useState(null);
-  const [error, setError] = useState("");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
-
+  // @ts-ignore
   const { token } = useSelector((state) => state.appState);
+  // @ts-ignore
+  const { entities, error, loading } = useSelector((state) => state.reports);
 
   var params;
 
-  console.log(rows);
-
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
-
-  const fetchReport = async (params) => {
-    dispatch(setLoading(true));
-    try {
-      const data = await ReportService.getWithParams(params, token);
-      setRows(data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-
 
   useEffect(() => {
     const id = location.pathname.split("/")[2];
     if (id) {
       params = { surfaceIds: id };
     } else params = { wardIds: 1 };
-    fetchReport(params);
+    // @ts-ignore
+    dispatch(fetchReports({ params, token }));
   }, [location]);
+
+  useEffect(() => {
+    dispatch(setLoading(loading));
+  }, [loading]);
 
   return (
     <div className="max-w-[1400px] m-auto">
       {/* Report Infomation */}
       <div className="flex flex-col gap-[24px] mb-[32px]">
-        <Heading1>
-          Danh sách các báo cáo
-        </Heading1>
+        <Heading1>Danh sách các báo cáo</Heading1>
       </div>
-      {rows ? (
+      {entities && entities.length > 0 ? (
         <DataTable
           columns={columns}
-          rows={rows}
+          rows={entities}
           onClickDetail={handleClickDetail}
         />
       ) : (
+        <p className="text-center text-blue-400 text-lg font-bold">
+          No data ...
+        </p>
+      )}
+      {error && (
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
     </div>

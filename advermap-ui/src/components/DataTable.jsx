@@ -33,8 +33,6 @@ const DataTable = (props) => {
     return "inherit";
   };
 
-  const addExtendColumn = () => {};
-
   return (
     <Paper>
       <TableContainer sx={{ height: height }}>

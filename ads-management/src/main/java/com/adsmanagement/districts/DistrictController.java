@@ -6,6 +6,8 @@ import com.adsmanagement.cities.CityRepository;
 import com.adsmanagement.cities.UpdateCityDto;
 import com.adsmanagement.common.PaginationResult;
 import com.adsmanagement.common.Response;
+import com.adsmanagement.wards.Ward;
+import com.adsmanagement.wards.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -21,12 +23,15 @@ public class DistrictController {
     private final DistrictService districtService;
     private final DistrictRepository districtRepository;
 
+    private final WardRepository wardRepository;
+
     private final CityRepository cityRepository;
 
     @Autowired
-    public DistrictController(DistrictService districtService, DistrictRepository districtRepository, CityRepository cityRepository) {
+    public DistrictController(DistrictService districtService, DistrictRepository districtRepository, WardRepository wardRepository, CityRepository cityRepository) {
         this.districtService = districtService;
         this.districtRepository = districtRepository;
+        this.wardRepository = wardRepository;
         this.cityRepository = cityRepository;
     }
 
@@ -109,6 +114,12 @@ public class DistrictController {
         var updatedDistrict = this.districtRepository.findById(id);
         if (updatedDistrict == null || updatedDistrict.isEmpty()){
             var res = new Response<String>("Quận không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var ward = this.wardRepository.findAllByDistrict_Id(id);
+        if (!ward.isEmpty()) {
+            var res = new Response<String>("Không thể xoá quận vì có phường trực thuộc",null,HttpStatus.BAD_REQUEST);
             return new ResponseEntity<>(res, HttpStatus.OK);
         }
 

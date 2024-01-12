@@ -23,4 +23,6 @@ public interface DistrictRepository extends JpaRepository<District, Short>, Crud
 
     List<District> findAllByIdIn(List<Short> ids);
 
+    Long countByCityId(Short cityId);
+
 }

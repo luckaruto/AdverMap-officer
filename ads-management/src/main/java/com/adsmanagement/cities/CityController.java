@@ -2,6 +2,7 @@ package com.adsmanagement.cities;
 
 
 import com.adsmanagement.common.Response;
+import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.reports.dto.ReportDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class CityController {
     private final CityService cityService;
 
+    private final DistrictRepository districtRepository;
+
     @Autowired
-    public CityController(CityService cityService) {
+    public CityController(CityService cityService, DistrictRepository districtRepository) {
         this.cityService = cityService;
+        this.districtRepository = districtRepository;
     }
 
     @GetMapping(path = "/all")
@@ -87,6 +91,11 @@ public class CityController {
             return new ResponseEntity<>(res, HttpStatus.OK);
         }
 
+        var districts = this.districtRepository.countByCityId(id);
+        if (districts != null && districts > 0) {
+            var res = new Response<String>("Không thể xoá vì có quận trực thuộc",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
         this.cityService.delete(id);
 
         return new ResponseEntity<>(new Response<String>("","ok",HttpStatus.OK), HttpStatus.OK);

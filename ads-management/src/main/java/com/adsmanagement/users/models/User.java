@@ -2,6 +2,7 @@ package com.adsmanagement.users.models;
 
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictDTO;
+import com.adsmanagement.users.dto.ProfileDTO;
 import com.adsmanagement.users.dto.UserDTO;
 import com.adsmanagement.users.dto.UserFilterPermission;
 import com.adsmanagement.wards.Ward;
@@ -91,4 +92,7 @@ public class User {
         return new UserDTO(id,name,role, email,phone,birthday,wards,districts);
     }
 
+    public ProfileDTO toProfile(){
+        return new ProfileDTO(id,name,role,email,phone,birthday);
+    }
 }

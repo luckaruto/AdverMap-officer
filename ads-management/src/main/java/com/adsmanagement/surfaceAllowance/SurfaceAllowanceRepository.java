@@ -21,4 +21,7 @@ public interface SurfaceAllowanceRepository extends JpaRepository<SurfaceAllowan
 
     List<SurfaceAllowance> findAllByWardIdInAndSpaceId(List<Short> wardIds, Short spaceId);
 
+    void deleteBySpaceId(Short spaceId);
+
+
 }

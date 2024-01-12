@@ -21,5 +21,6 @@ public interface WardRepository extends JpaRepository<Ward, Short> {
 
     List<Ward> findAllByIdIn(List<Short> ids);
 
+    Optional<Ward> findByName(String name);
 
 }

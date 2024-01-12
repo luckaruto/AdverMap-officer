@@ -1,4 +1,5 @@
-package com.adsmanagement.auth;
+package com.adsmanagement.districts;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OtpDto {
-    private String otp;
-    private String email;
-    private String password;
+public class CreateDistrictDto {
+    private String name;
+    private Short cityId;
 }

@@ -136,5 +136,24 @@ public class NotificationService {
         return this.notificationRepository.save(noti);
     }
 
+    public Integer seenAll(Short userId) {
+
+        var notiList = this.notificationRepository.findAllByUserIdAndIsSeen(userId,false);
+        if (notiList== null || notiList.size() == 0){
+            return 0;
+        }
+
+
+        for (var i = 0; i< notiList.size();i++){
+            var noti = notiList.get(i);
+            noti.setIsSeen(true);
+            this.notificationRepository.save(noti);
+        }
+
+
+
+        return notiList.size();
+    }
+
 
 }

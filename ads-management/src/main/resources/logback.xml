@@ -42,4 +42,16 @@
         <appender-ref ref="DEBUG-FILE" />
         <appender-ref ref="STDOUT" />
     </logger>
+    <logger name="com.adsmanagement.surfaces.SurfaceService" level="debug" additivity="false">
+        <appender-ref ref="DEBUG-FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.adsmanagement.users.UserService" level="debug" additivity="false">
+        <appender-ref ref="DEBUG-FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.adsmanagement.reports.ReportService" level="debug" additivity="false">
+        <appender-ref ref="DEBUG-FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
 </configuration>

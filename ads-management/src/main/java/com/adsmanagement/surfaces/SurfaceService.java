@@ -7,9 +7,12 @@ import com.adsmanagement.spaces.dto.ProcessResponseDto;
 import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.spaces.models.SpaceRequest;
+import com.adsmanagement.surfaceAllowance.SurfaceAllowanceRepository;
+import com.adsmanagement.surfaceAllowance.models.SurfaceAllowance;
 import com.adsmanagement.surfaces.dto.CreateSurfaceDto;
 import com.adsmanagement.surfaces.dto.CreateSurfaceRequestDto;
 import com.adsmanagement.surfaces.dto.ProcessResponse;
+import com.adsmanagement.surfaces.dto.UpdateSurfaceDto;
 import com.adsmanagement.surfaces.models.Surface;
 import com.adsmanagement.surfaces.models.SurfaceRequest;
 import com.adsmanagement.users.models.User;
@@ -29,6 +32,7 @@ public class SurfaceService {
     private final SurfaceRepository surfaceRepository;
 
     private final  SurfaceRequestRepository surfaceRequestRepository;
+    private final SurfaceAllowanceRepository surfaceAllowanceRepository;
     private final SpaceRepository spaceRepository;
 
     private final DistrictRepository districtRepository;
@@ -41,13 +45,14 @@ public class SurfaceService {
             DistrictRepository districtRepository,
             WardRepository wardRepository,
             SpaceRepository spaceRepository,
-            SurfaceRequestRepository surfaceRequestRepository
+            SurfaceRequestRepository surfaceRequestRepository, SurfaceAllowanceRepository surfaceAllowanceRepository
     ) {
         this.surfaceRepository = surfaceRepository;
         this.districtRepository = districtRepository;
         this.wardRepository = wardRepository;
         this.spaceRepository = spaceRepository;
         this.surfaceRequestRepository = surfaceRequestRepository;
+        this.surfaceAllowanceRepository = surfaceAllowanceRepository;
     }
 
     public Page<Surface> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds, List<Short> spaceIds) {
@@ -220,5 +225,30 @@ public class SurfaceService {
 
     public Optional<Surface> findById(Short id) {
         return this.surfaceRepository.findById(id);
+    }
+
+    public Surface update(Short id, UpdateSurfaceDto dto){
+
+        var sur = this.surfaceRepository.findById(id);
+        if (sur == null || sur.isEmpty()){
+            return  null;
+        }
+
+        var surface = sur.get();
+        surface.setFieldByUpdateDto(dto);
+        var res = this.surfaceRepository.save(surface);
+        return res;
+    }
+
+    @Transactional
+    public void delete(Short id){
+
+        var sur = this.surfaceRepository.findById(id);
+        if (sur == null || sur.isEmpty()){
+            return;
+        }
+
+        this.surfaceRequestRepository.deleteBySurfaceId(id);
+        this.surfaceRepository.deleteById(id);
     }
 }

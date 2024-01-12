@@ -24,4 +24,5 @@ public interface SurfaceAllowanceRepository extends JpaRepository<SurfaceAllowan
     void deleteBySpaceId(Short spaceId);
 
 
+
 }

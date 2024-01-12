@@ -70,6 +70,42 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Response<String>> delete(
+            @PathVariable("id") Short spaceId
+    )   {
+        var spaceO = this.spaceRepository.findById(spaceId);
+        if (spaceO == null || spaceO.isEmpty()) {
+            var res = new Response<String>("Điểm đặt báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        this.spaceRepository.delete(spaceO.get());
+        var res = new Response<>("","ok");
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/{id}")
+    public ResponseEntity<Response<SpaceDto>> update(
+            @PathVariable("id") Short spaceId,
+            @RequestBody UpdateSpaceDto updateSpaceDto,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    )   {
+        var spaceO = this.spaceRepository.findById(spaceId);
+        if (spaceO == null || spaceO.isEmpty()) {
+            var res = new Response<SpaceDto>("Điểm đặt báo cáo không tồn tại",null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+
+        var space = spaceO.get();
+        updateSpaceDto.setSpaceId(spaceId);
+
+        space.setFieldByUpdateDto(updateSpaceDto);
+        var sp = this.spaceRepository.save(space);
+        var res = new Response<>("",sp.toDto());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @PostMapping(path = "/{id}/request")
     public ResponseEntity<Response<SpaceRequestDto>> createRequest(
             @PathVariable("id") Short spaceId,

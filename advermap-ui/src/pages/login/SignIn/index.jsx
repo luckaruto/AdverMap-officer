@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthService } from 'services/auth/authService';
-import {setCurrentPage, setLoading, setToken} from 'redux/appSlice';
+import {setCurrentPage, setLoading, setRefreshToken, setToken} from 'redux/appSlice';
 import { PAGE } from 'components/constants';
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChakraHook from 'hooks';
@@ -43,7 +43,8 @@ const SignIn = () => {
       const { username, password } = data;
       const res = await AuthService.login({ username, password });
       if (res.status === 200) {
-        dispatch(setToken(res.data));
+        dispatch(setToken(res.data.token));
+        dispatch(setRefreshToken(res.data.refreshToken));
         dispatch(setCurrentPage(PAGE.HOME));
         navigate(PAGE.HOME.path, { replace: true });
         toast({

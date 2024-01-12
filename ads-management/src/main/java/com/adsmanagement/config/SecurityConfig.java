@@ -118,7 +118,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         // You might need to set additional headers if required
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type","Refresh-Token"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -2,6 +2,7 @@ package com.adsmanagement.spaces.models;
 
 import com.adsmanagement.spaces.dto.ProcessResponseDto;
 import com.adsmanagement.spaces.dto.SpaceDto;
+import com.adsmanagement.spaces.dto.UpdateSpaceDto;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
 import jakarta.persistence.*;
@@ -34,11 +35,11 @@ public class Space {
     @Column(name = "latitude")
     private Float latitude;
 
-    @Column(name = "type", columnDefinition = "varchar(20)")
+    @Column(name = "type", columnDefinition = "varchar(255)")
     @Enumerated(EnumType.STRING)
     private SpaceType type;
 
-    @Column(name = "format", columnDefinition = "varchar(20)")
+    @Column(name = "format", columnDefinition = "varchar(255)")
     @Enumerated(EnumType.STRING)
     private SpaceFormat format;
 
@@ -87,5 +88,27 @@ public class Space {
         this.type = req.getType();
         this.ward = req.getWard();
         this.updatedAt = new Date();
+    }
+
+    public void setFieldByUpdateDto(UpdateSpaceDto req) {
+        String imgUrls = null;
+        if (req.getImgUrl() != null) {
+            imgUrls = req.getImgUrl().toString();
+        }
+        this.imgUrl = imgUrls;
+        this.address = req.getAddress();
+        this.format = req.getFormat();
+        this.isPlanned = req.isPlanned();
+        this.latitude = req.getLatitude();
+        this.longitude = req.getLongitude();
+        this.type = req.getType();
+
+        Ward ward = null;
+        if (req.getWardId() != null) {
+            ward = new Ward(req.getWardId());
+        }
+        this.ward = ward;
+        this.updatedAt = new Date();
+
     }
 }

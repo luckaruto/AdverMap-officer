@@ -96,6 +96,7 @@ public class SpaceService {
             data = this.spaceRepository.findAll(pageable);
         }
 
+        logger.info("Testing logging flow.");
         return data;
     }
 

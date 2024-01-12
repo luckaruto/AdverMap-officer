@@ -1,6 +1,9 @@
 package com.adsmanagement.reports.models;
 
 import com.adsmanagement.reports.dto.ReportDto;
+import com.adsmanagement.reports.dto.ReportTypeDto;
+import com.adsmanagement.spaces.dto.SpaceDto;
+import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.surfaces.dto.SurfaceDto;
 import com.adsmanagement.surfaces.models.Surface;
 import com.adsmanagement.users.models.User;
@@ -87,10 +90,23 @@ public class Report {
     @Column
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name="space_id")
+    private Space space;
+
+    @ManyToOne
+    @JoinColumn(name="report_type_id")
+    private ReportType reportType;
+
     public ReportDto toDto(){
         SurfaceDto surfaceDto = null;
         if (surface != null){
             surfaceDto = surface.toDto();
+        }
+
+        SpaceDto spaceDto = null;
+        if (space != null){
+            spaceDto = space.toDto();
         }
 
         WardDTO wardDto = null;
@@ -108,7 +124,13 @@ public class Report {
             String[] split = this.imgUrl.split(", ");
             imgUrls = Arrays.stream(split).toList();
         }
+
+        ReportTypeDto ty = null;
+        if (this.reportType != null){
+            ty = this.reportType.toDto();
+        }
         
-        return new ReportDto(id,surfaceDto,address,wardDto,longitude,latitude,reportDate,content,email,phone,state,imgUrls,approvedByDto,response, userAddress, name);
+        return new ReportDto(id,surfaceDto,address,wardDto,longitude,latitude,reportDate,content,
+                email,phone,state,imgUrls,approvedByDto,response, userAddress, name,spaceDto,ty );
     }
 }

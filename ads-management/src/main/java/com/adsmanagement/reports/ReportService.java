@@ -158,4 +158,8 @@ public class ReportService {
         list.add(id);
         return this.reportRepository.findAllBySurfaceIdIn(pageable,list);
     }
+
+    public Long countByReportType(Short reportTypeId) {
+        return this.reportRepository.countByReportTypeId(reportTypeId);
+    }
 }

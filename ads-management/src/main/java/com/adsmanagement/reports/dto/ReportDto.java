@@ -1,6 +1,7 @@
 package com.adsmanagement.reports.dto;
 
 import com.adsmanagement.reports.models.ReportState;
+import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.surfaces.dto.SurfaceDto;
 import com.adsmanagement.users.dto.UserDTO;
 import com.adsmanagement.wards.WardDTO;
@@ -31,5 +32,7 @@ public class ReportDto {
     private String response;
     private String userAddress;
     private String name;
+    private SpaceDto space;
+    private ReportTypeDto reportType;
 
 }

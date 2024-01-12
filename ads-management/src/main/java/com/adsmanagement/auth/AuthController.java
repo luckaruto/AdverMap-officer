@@ -114,7 +114,7 @@ public class AuthController {
 
         var user = usero.get();
 
-        user.setPassword("11111");
+        user.setPassword(dto.getPassword());
         var bcryptEncoder  = new BCryptPasswordEncoder();
         var bcryptPassword = bcryptEncoder.encode(user.getPassword());
         user.setPassword(bcryptPassword);

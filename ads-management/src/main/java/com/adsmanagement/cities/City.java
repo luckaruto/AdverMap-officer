@@ -15,7 +15,7 @@ public class City {
     @Column(name = "id")
     private Short id;
 
-    @Column(name = "name")
+    @Column(name = "name",unique = true)
     private String name;
 
     @OneToMany(mappedBy = "city")

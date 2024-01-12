@@ -21,9 +21,17 @@ public interface NotificationRepository extends JpaRepository<Notification, Shor
 
     Page<Notification> findAllByUserId(Pageable pageable, Short userId);
 
+    List<Notification> findAllByUserId( Short userId);
+
+    List<Notification> findAllByUserIdAndIsSeen( Short userId, Boolean isSeen);
+
+
+
     Page<Notification> findAllByIsSeenAndUserAddress(Pageable pageable, Boolean isSeen, String userAddress);
 
 
     long countByUserIdAndIsSeen(Short userId, Boolean isSeen);
+
+
 
 }

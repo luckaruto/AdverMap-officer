@@ -68,5 +68,16 @@ public class NotificationController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/seen-all")
+    public ResponseEntity<Response<String>> seenAllNotification(
+            @AuthenticationPrincipal UserInfoUserDetails userDetails,
+            @PathVariable("id") Short id
+    )   {
+        var user = userDetails.getUser();
+        var data = this.notificationService.seenAll(user.getId());
+        var res = new Response<>("","ok");
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 
 }

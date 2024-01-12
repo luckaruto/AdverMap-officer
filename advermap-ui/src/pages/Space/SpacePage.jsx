@@ -71,6 +71,8 @@ const SpacePage = () => {
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
 
+  console.log(selectedRow);
+
   const handleClickCreate = () => {
     setSelectedRow(null);
     setTimeout(() => {
@@ -88,14 +90,13 @@ const SpacePage = () => {
   const handleClickRow = (row) => setSelectedRow(row);
 
   const handleDelete = async () => {
-    if (selectedRow) {
-      console.log("delete", selectedRow);
-    }
     const { id } = selectedRow;
     dispatch(setLoading(true));
     try {
       const res = await SpaceService.delete(id, token);
       dispatch(setSnackbar({ status: "success", message: res }));
+      // @ts-ignore
+      dispatch(fetchSpaces({ testParams, token }));
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {

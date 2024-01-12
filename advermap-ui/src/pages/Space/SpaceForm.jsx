@@ -38,7 +38,7 @@ const SpaceForm = (props) => {
     latitude: yup.number().required(requiredError.default),
     type: yup.string().required(requiredError.default),
     format: yup.string().required(requiredError.default),
-    isPlanned: yup.boolean().required(requiredError.default),
+    planned: yup.boolean().required(requiredError.default),
     wardId: yup.number().required(requiredError.default),
   });
 
@@ -60,21 +60,26 @@ const SpaceForm = (props) => {
       }
 
       const req = { ...data, imgUrl: [...urls] };
-      //handle Create
-      const res = await SpaceService.create(req, token);
+      let res;
+      if (mode == FormMode.CREATE) {
+        //handle Create
+        res = await SpaceService.create(req, token);
+      } else {
+        //handle Edit
+        const { id } = existData;
+        res = await SpaceService.edit(id, req, token);
+      }
 
       //handleSuccess
-      dispatch(
-        setSnackbar({ status: "success", message: res })
-      );
+      dispatch(setSnackbar({ status: "success", message: res }));
       // @ts-ignore
-      dispatch(fetchSpaces({testParams,token}))
-      reset(undefined, { keepDirtyValues: true });
+      dispatch(fetchSpaces({ testParams, token }));
       handleClose();
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
       dispatch(setLoading(false));
+      reset(undefined, { keepDirtyValues: true });
     }
   };
 
@@ -84,7 +89,7 @@ const SpaceForm = (props) => {
     setValue("latitude", +existData.latitude);
     setValue("type", existData.type);
     setValue("format", existData.format);
-    setValue("isPlanned", !existData.isPlanned);
+    setValue("planned", !!existData.planned);
     setValue("wardId", +existData.ward?.id);
   };
 
@@ -138,7 +143,7 @@ const SpaceForm = (props) => {
 
                 <BasicSelect
                   label="Trạng thái"
-                  name="isPlanned"
+                  name="planned"
                   choices={[true, false]}
                   format={plannedFormat}
                 />

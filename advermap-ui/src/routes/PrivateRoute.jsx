@@ -17,7 +17,7 @@ const PrivateRoute = () => {
     // Check if the user is authenticated
 
     useEffect( () => {
-            if (!tokenPayload || tokenPayload === null) {
+            if (!tokenPayload || tokenPayload === null || tokenPayload === "") {
                 if (refreshToken) {
                     try {
                         dispatch(setLoading(true));

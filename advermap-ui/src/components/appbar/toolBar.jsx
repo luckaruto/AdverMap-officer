@@ -129,6 +129,7 @@ export default function MiniDrawer() {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        dispatch(setToken(null));
         dispatch(setCurrentPage(PAGE.LOGIN));
         navigate(PAGE.LOGIN.path, { replace: true });
     };

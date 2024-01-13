@@ -1,14 +1,12 @@
-import { api } from 'services/apis';
+import { api, auth } from 'services/apis';
 import { API } from '../apis/constants'; // Adjust the import based on your project structure
 
 export class CityService {
-    static async getCities(params, token) {
+    static async getCities() {
         return new Promise(async (resolve, reject) => {
             try {
-                const headers = { Authorization: `Bearer ${token}` };
                 const response = await api.get(API.CITY, {
-                    params: params,
-                    headers: headers,
+                    headers: auth(),
                 });
                 if (response.status === 200 && response.data.data) {
                     resolve(response.data.data.content);

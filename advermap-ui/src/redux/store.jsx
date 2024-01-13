@@ -10,6 +10,7 @@ import permission from "./permission";
 import spaceRequestSlice from "./spaceRequestSlice";
 import userSlice from "./userSlice";
 import navSlice from "./navSlice";
+import citySlice from "./citySlice";
 
 
 const persistConfig = {
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   reports: reportSlice,
   permission: permission,
   users: userSlice,
+  cities: citySlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

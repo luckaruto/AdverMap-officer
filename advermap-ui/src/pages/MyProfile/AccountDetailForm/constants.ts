@@ -13,6 +13,5 @@ export const AccountFormSchema = yup.object().shape({
     .string()
     .required('Ngày sinh không được rỗng.')
     .matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, 'Sinh nhật có format DD/MM/YYYY'),
-  name: yup.string().required('Tên không được rỗng.'),
-  role: yup.string().required('Vai trò không được rỗng.')
+  name: yup.string().required('Tên không được rỗng.')
 })

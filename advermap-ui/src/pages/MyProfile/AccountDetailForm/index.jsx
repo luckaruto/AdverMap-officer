@@ -29,15 +29,16 @@ import moment from 'moment'
     const { errors } = formState
     const toast = useToast()
     const [isLoading, setIsLoading] = React.useState(false)
+    const [userId, setUserId] = React.useState(0)
   
   
     async function fetchData() {
       try {
         setIsLoading(true)
         const response = await UserService.getCurrentUser()
-        const data = get(response, 'data.data.content[0]')
-        console.log("🚀 ~ fetchData ~ data:", data)
+        const data = get(response, 'data')
         const birthday = get(data, 'birthday')
+        setUserId(get(data, 'id'))
         reset({
           email: get(data, 'email'),
           name: get(data, 'name'),
@@ -63,15 +64,12 @@ import moment from 'moment'
     async function onSubmit(data) {
       try {
         setIsLoading(true)
-        const birthday = moment(data.birthday, 'DD/MM/YYYY').format('YYYY-MM-DD')
         const payload = {
           email: data.email,
           name: data.name,
           phone: data.phone,
-          birthday: birthday,
-          role: data.role,
+          birthday: new Date(data.birthday),
         }
-        console.log("🚀 ~ onSubmit ~ payload", payload)
         await UserService.updateUser(payload)
         toast({
           status: 'success',

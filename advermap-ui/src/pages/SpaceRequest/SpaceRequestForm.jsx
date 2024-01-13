@@ -175,7 +175,7 @@ const SpaceRequestForm = (props) => {
 SpaceRequestForm.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  existData: PropTypes.object.isRequired,
+  existData: PropTypes.object,
 };
 SpaceRequestForm.defaultProps = {
   open: false,

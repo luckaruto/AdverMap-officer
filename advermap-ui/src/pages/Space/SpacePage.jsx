@@ -21,6 +21,7 @@ import {
 } from "utils/formatToUI";
 import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
 import { useLocation } from "react-router-dom";
+import HomePage from "pages/HomePage";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -71,7 +72,9 @@ const SpacePage = () => {
   const { state } = useLocation();
 
   // @ts-ignore
-  const { token, snackbar } = useSelector((state) => state.appState);
+  const { token, snackbar, params } = useSelector((state) => state.appState);
+
+  // console.log(params.content);
 
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.spaces);
@@ -82,7 +85,7 @@ const SpacePage = () => {
   const handleOpenRequestForm = () => setOpenRequestForm(true);
   const handleCloseRequestForm = () => setOpenRequestForm(false);
 
-  console.log(selectedRow);
+  // console.log(selectedRow);
 
   const handleClickCreate = () => {
     setSelectedRow(null);
@@ -118,13 +121,15 @@ const SpacePage = () => {
   };
 
   useEffect(() => {
+    const reqParams = params.content;
+    console.log("reqParams", reqParams);
     // @ts-ignore
-    dispatch(fetchSpaces({ testParams, token }));
-  }, []);
+    dispatch(fetchSpaces({ reqParams, token }));
+  }, [params]);
 
   useEffect(() => {
-    if(state){
-      setSelectedRow(state)
+    if (state) {
+      setSelectedRow(state);
     }
   }, [state]);
 
@@ -134,6 +139,7 @@ const SpacePage = () => {
 
   return (
     <>
+    <HomePage/>
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
         <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>

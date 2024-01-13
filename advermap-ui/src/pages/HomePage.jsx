@@ -23,10 +23,9 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    console.log("getPermission");
     getPermission();
-  }, []);
-
-  console.log(params);
+  }, [token]);
 
   return (
     <>

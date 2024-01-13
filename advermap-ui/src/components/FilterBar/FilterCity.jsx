@@ -8,11 +8,13 @@ import { info } from "sass";
 
 const FilterCity = () => {
   // @ts-ignore
-  const { cities } = useSelector((state) => state.appState);
+  const { cities,params } = useSelector((state) => state.appState);
 
-  const [city, setCity] = useState("");
-  const [district, setDistrict] = useState("");
-  const [ward, setWard] = useState("");
+  const {info}=params
+
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
+  const [ward, setWard] = useState('');
 
   const [cityData, setCityData] = useState([]);
   const [districtData, setDistrictData] = useState([]);

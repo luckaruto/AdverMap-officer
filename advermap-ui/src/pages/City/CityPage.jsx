@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../components/DataTable";
-import { CityService } from "../../services/city/CityService"; // Adjust the import path based on your project structure
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "../../redux/appSlice";
 import { PAGE } from "../../components/constants";
 import Heading1 from "../../components/Text/Heading1";
 import Button from "@mui/material/Button";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
-import { fetchCities } from "../../redux/citySlice";
-import { testParams } from "../../services/apis/constants"; // Assuming you have a citySlice similar to spaceSlice
+import { CityService } from "services/city/CityService";
 
 const columns = [
     { id: "id", label: "ID" },
@@ -34,7 +32,7 @@ const CityPage = () => {
     const handleOpenRequestForm = () => {
         setSelectedRow(null);
         setTimeout(() => {
-            handleOpenForm();
+            // handleOpenForm();
         }, 0);
     };
 
@@ -54,7 +52,7 @@ const CityPage = () => {
         try {
             const res = await CityService.deleteCity(id, token);
             dispatch(setSnackbar({ status: "success", message: res }));
-            dispatch(fetchCities({ testParams, token }));
+            // dispatch(fetchCities({ testParams, token }));
         } catch (error) {
             dispatch(setSnackbar({ status: "error", message: error }));
         } finally {
@@ -65,7 +63,7 @@ const CityPage = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchCities({ testParams, token }));
+        // dispatch(fetchCities({ testParams, token }));
     }, [dispatch, token]);
 
     return (

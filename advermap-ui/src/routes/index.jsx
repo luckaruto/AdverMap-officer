@@ -17,6 +17,7 @@ import ResetPassword from "pages/login/ResetPassword";
 import SpaceRequestPage from "pages/SpaceRequest/SpaceRequestPage";
 import MyProfilePage from "pages/MyProfile";
 import UserPage from "../pages/User/UserPage";
+import CityPage from "pages/City/CityPage";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -68,14 +69,14 @@ const privateRoute = [
         path: "cities",
         element: <CityPage/>,
     },
-    {
-        path: "districts",
-        element: <DistrictPage/>,
-    },
-    {
-        path: "wards",
-        element: <WardPage/>,
-    }
+    // {
+    //     path: "districts",
+    //     element: <DistrictPage/>,
+    // },
+    // {
+    //     path: "wards",
+    //     element: <WardPage/>,
+    // }
 ];
 
 const route = createBrowserRouter([

@@ -12,6 +12,7 @@ export default function FilterBar() {
   );
 
   const { userId } = tokenPayload;
+  console.log(userId);
 
   const dispatch = useDispatch();
 

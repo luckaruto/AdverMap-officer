@@ -9,7 +9,7 @@ import { formatFormatUI } from "utils/formatToUI";
 
 const SurfaceInfo = (props) => {
   const { data } = props;
-  console.log(data);
+  
   return (
     <>
       <Heading2 className="text-left text-blue-500">

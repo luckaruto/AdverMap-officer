@@ -1,5 +1,4 @@
 package com.adsmanagement.surfaceAllowance;
-;
 import com.adsmanagement.surfaceAllowance.models.SurfaceAllowance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

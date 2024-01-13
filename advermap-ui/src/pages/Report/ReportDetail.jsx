@@ -10,6 +10,7 @@ import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
 
 const ReportDetail = () => {
+    // @ts-ignore
   const { token } = useSelector((state) => state.appState);
   const location = useLocation();
   const [error, setError] = useState("");

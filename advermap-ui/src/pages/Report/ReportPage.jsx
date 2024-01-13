@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,8 +78,6 @@ const ReportPage = () => {
   const { entities, error, loading } = useSelector((state) => state.reports);
 
   const [listReport, setListReport] = useState(entities);
-
-  var params;
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
 

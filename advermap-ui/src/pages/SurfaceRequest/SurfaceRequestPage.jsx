@@ -39,6 +39,11 @@ const columns = [
     minWidth: 170,
     format: formatFormatUI,
   },
+  {
+    id: "content",
+    label: "Nội dung",
+    minWidth: 170,
+  },
 
   {
     id: "user",

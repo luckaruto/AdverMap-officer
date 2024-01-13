@@ -77,6 +77,7 @@ const SignIn = () => {
       dispatch(setLoading(false));
     }
   }
+  dispatch(setLoading(false));
 
   return (
     <ChakraHook>

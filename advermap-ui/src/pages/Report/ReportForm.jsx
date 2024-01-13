@@ -20,6 +20,7 @@ import Heading1 from "components/Text/Heading1";
 import { SurfaceServices } from "services/surface/SurfaceService";
 import { fetchSurfaces } from "redux/surfaceSlice";
 import { testParams } from "services/apis/constants";
+import { ReportService } from "services/report/ReportService";
 
 const SurfaceForm = (props) => {
   const [mode, setMode] = useState(FormMode.CREATE);
@@ -34,11 +35,20 @@ const SurfaceForm = (props) => {
 
   const surfaceSchema = yup.object().shape({
     // address: yup.string().required(requiredError.address),
-    width: yup.number().required(requiredError.default),
-    height: yup.number().required(requiredError.default),
-    format: yup.string().required(requiredError.default),
+    surface_id: yup.number().required(requiredError.default),
+    address: yup.string().required(requiredError.default),
+    userAddress: yup.string().required(requiredError.default),
+    ward_id: yup.number().required(requiredError.default),
+    longitude: yup.number().required(requiredError.default),
+    latitude: yup.number().required(requiredError.default),
+    email: yup.string().required(requiredError.default),
     content: yup.string().required(requiredError.default),
-    spaceId: yup.number().required(requiredError.default),
+    space_id: yup.number().required(requiredError.default),
+    phone: yup.string().required(requiredError.default),
+    report_type_id: yup.number().required(requiredError.default),
+    name: yup.string().required(requiredError.default),
+
+
   });
 
   const method = useForm({
@@ -50,10 +60,6 @@ const SurfaceForm = (props) => {
   const { handleSubmit, setValue, reset } = method;
 
   const onSubmit = async (data) => {
-   
-  
- 
-  
     dispatch(setLoading(true));
     let urls = [];
     dispatch(setLoading(true));
@@ -69,12 +75,12 @@ const SurfaceForm = (props) => {
       if (mode === FormMode.CREATE) {
         // handle Create
         console.log("Creating surface...");
-        res = await SurfaceServices.create(req, token);
+        res = await ReportService.create(req, token);
       } else {
         // handle Edit
         console.log("Editing surface...");
         const { id } = existData;
-        res = await SurfaceServices.edit(id, req, token);
+        res = await ReportService.edit(id, req, token);
       }
   
       console.log("API Response:", res);
@@ -95,12 +101,21 @@ const SurfaceForm = (props) => {
   
 
   const setExistData = () => {
-    // setValue("address", existData.address);
-    setValue("width", +existData.width);
-    setValue("height", +existData.height);
-    setValue("format", existData.format);
+    setValue("address", existData.address);
     setValue("content", existData.content);
-    setValue("spaceId", +existData.spaceId);
+    setValue("space_id", +existData.space_id);
+    setValue("surface_id", +existData.surface_id);
+    setValue("address", existData.address);
+    setValue("ward_id", +existData.ward_id);
+    setValue("email", existData.email);
+    setValue("phone", existData.phone);
+    setValue("userAddress", existData.userAddress);
+    setValue("longitude", +existData.longitude);
+    setValue("name", existData.name);
+    setValue("latitude", +existData.latitude);
+    setValue("report_type_id", +existData.report_type_id);
+
+
   };
 
 
@@ -115,6 +130,7 @@ const SurfaceForm = (props) => {
     }
   }, [existData, setValue]);
 
+
   return (
     <Modal
       open={open}
@@ -122,10 +138,11 @@ const SurfaceForm = (props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] ">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px]"
+       style={{ maxHeight: '800px', overflowY: 'auto' }}>
         <FormProvider {...method}>
           <form
-            className="p-6 rounded-lg bg-blue-200"
+            className="p-4 rounded-lg bg-blue-200"
             onSubmit={handleSubmit(onSubmit)}
           >
             <Heading1 className="mb-4">Thông tin địa điểm</Heading1>
@@ -133,17 +150,20 @@ const SurfaceForm = (props) => {
               <div className="flex flex-col items-center gap-4">
                 {/* <BasicInput name="address" label="Địa chỉ" /> */}
                 <div className="w-full flex gap-2">
-                  <BasicInput name="width" type="number" label="Chiều rộng" />
-                  <BasicInput name="height" type="number" label="Chiều dài" />
+                  <BasicInput name="width" type="number" label="Kinh Độ" />
+                  <BasicInput name="height" type="number" label="Vĩ Độ" />
                 </div>
+                <BasicInput name="userAddress" label="Địa Chi Người Gửi" />
+                <BasicInput name="name" label="name" />
+                <BasicInput name="address" label="Địa chỉ báo cáo" />
                 <BasicInput name="content" label="Nội dung" />
-                <BasicSelect
-                  label="Hình thức"
-                  name="format"
-                  choices={Object.values(SurfaceFormat)}
-                  format={formatFormat}
-                />
-                <BasicInput name="spaceId" type="number" label="Space" />
+                <BasicInput name="email" type="email" label="Email" />
+                <BasicInput name="phone" label="phone" />
+                <BasicInput name="surface_id" type="number" label="surface_id" />
+                <BasicInput name="ward_id" type="number" label="ward_id" />
+                <BasicInput name="space_id" type="number" label="space_id" />
+                <BasicInput name="report_type_id" type="number" label="report_type_id" />
+
               </div>
 
               <div className="flex flex-col items-center gap-4">
@@ -170,6 +190,7 @@ SurfaceForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   existData: PropTypes.object,
 };
+
 SurfaceForm.defaultProps = {
   open: false,
   handleClose: () => {},

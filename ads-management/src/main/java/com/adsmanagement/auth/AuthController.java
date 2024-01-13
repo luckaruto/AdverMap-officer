@@ -93,7 +93,7 @@ public class AuthController {
         }
 
         this.emailService.sendForgotPasswordMail(user.get(),"11111");
-        return new ResponseEntity<>(new Response<>("","ok"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Response<>("","ok"), HttpStatus.OK);
     }
 
     @PostMapping("/verify-otp")

@@ -56,6 +56,8 @@ const initialState = {
     status: "info",
     message: "init message",
   },
+  otp: 0,
+  forgotPasswordEmail: ""
 };
 
 const isNotiEqual = (noti, id) => {
@@ -102,6 +104,12 @@ const appSlice = createSlice({
       };
       state.snackbar = updateState;
     },
+    setOtp: (state, action) => {
+      state.otp = action.payload;
+    },
+    setForgotPasswordEmail: (state, action) => {
+      state.forgotPasswordEmail = action.payload;
+    }
   },
 });
 
@@ -113,5 +121,7 @@ export const {
   setToken,
   setSnackbar,
   setRefreshToken,
+  setOtp,
+  setForgotPasswordEmail
 } = appSlice.actions;
 export default appSlice.reducer;

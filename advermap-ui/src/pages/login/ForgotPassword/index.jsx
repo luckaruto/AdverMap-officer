@@ -14,7 +14,7 @@ import {loginFailedDescription, loginSuccessDescription} from '../../../constant
 import FormInput from '../../../components/FormInput/index.jsx';
 import {SubmitButton} from '../authenticatePage.styles.js';
 import { ForgotPasswordSchema } from 'constants/validation/index.jsx';
-import { setCurrentPage } from 'redux/appSlice.jsx';
+import { setCurrentPage, setForgotPasswordEmail } from 'redux/appSlice.jsx';
 
 
 const ForgotPassword = () => {
@@ -39,16 +39,16 @@ const ForgotPassword = () => {
     async function onSubmit(data) {
         try {
             const {email} = data
-            dispatch(setCurrentPage(PAGE.OTP_INPUT));
-            navigate(PAGE.OTP_INPUT.path, {replace: true});
-            // const res = await AuthService.login({email});
-            // if (res.status === 200) {
-            //     //TODO: go to input OTP page
-            //     toast({
-            //         status: 'success',
-            //         description: 'Gửi email thành công'
-            //     })
-            // }
+            const res = await AuthService.forgotPassword({email});
+            if (res.status === 200) {
+                dispatch(setForgotPasswordEmail(email));
+                dispatch(setCurrentPage(PAGE.OTP_INPUT));
+                navigate(PAGE.OTP_INPUT.path, {replace: true});
+                toast({
+                    status: 'success',
+                    description: 'Gửi email thành công'
+                })
+            }
         } catch (error) {
             toast({
                 status: 'error',

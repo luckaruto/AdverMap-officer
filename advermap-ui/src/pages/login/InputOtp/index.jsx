@@ -12,7 +12,7 @@ import { loginFailedDescription, loginSuccessDescription } from '../../../consta
 // @ts-ignore
 import FormInput from '../../../components/FormInput/index.jsx';
 import { SubmitButton } from '../authenticatePage.styles.js';
-import { setCurrentPage } from 'redux/appSlice.jsx';
+import { setCurrentPage, setOtp, setToken } from 'redux/appSlice.jsx';
 import OtpInput from 'react-otp-input';
 import get from 'lodash/get'
 import { OTPConfirmSchema } from 'constants/validation/index.jsx';
@@ -37,26 +37,17 @@ const OtpConfirmInput = () => {
   const error = get(method.formState.errors, `otp.message`, '')
 
   async function onSubmit(data){
-    try {
       const { otp } = data
       console.log("🚀 ~ onSubmit ~ otp:", otp)
-      // const res = await AuthService.verifyOtp({ otp });
       dispatch(setCurrentPage(PAGE.RESET_PASSWORD));
+      dispatch(setOtp(otp));
       navigate(PAGE.RESET_PASSWORD.path, { replace: true });
-      // if (res.status === 200) {
-      //   //TODO: go to set password page
-      //   toast({
-      //     status: 'success',
-      //     description: 'Gửi OTP thành công, vui lòng nhập password mới'
-      //   })
-      // } 
-    } catch (error) {
       toast({
-        status: 'error',
-        description: 'Gửi OTP thất bại, vui lòng thử lại'
+        status: 'success',
+        description: 'Gửi OTP thành công, vui lòng nhập password mới'
       })
-    }
-  }
+  } 
+
   return (
     <ChakraHook>
       <Box minHeight={'100vh'}>
@@ -89,7 +80,7 @@ const OtpConfirmInput = () => {
                           {...field}
                           value={field.value}
                           onChange={field.onChange}
-                          numInputs={6}
+                          numInputs={5}
                           inputStyle={{
                             width: '60px',
                             height: '100px',

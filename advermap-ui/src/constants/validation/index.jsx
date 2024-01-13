@@ -18,8 +18,7 @@ export const ForgotPasswordSchema = yup.object().shape({
 
 export const OTPConfirmSchema = yup.object().shape({
   otp: yup.string().required('This field is required')
-  .matches(/^[0-9]{6}$/, 'OTP must be 6 digits')
-
+  .matches(/^[0-9]{5}$/, 'OTP must be 5 digits')
 })
 
 export const ResetPasswordSchema = yup.object().shape({

@@ -7,6 +7,7 @@ import MiniDrawer from "../components/appbar/toolBar";
 import app from "../App";
 import {setCurrentPage, setLoading, setRefreshToken, setToken} from "../redux/appSlice";
 import {AuthService} from "../services/auth/authService";
+import HomePage from "pages/HomePage";
 
 const PrivateRoute = () => {
     const {token, tokenPayload, refreshToken} = useSelector((state) => state.appState);

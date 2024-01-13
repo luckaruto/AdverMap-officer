@@ -3,6 +3,7 @@ package com.adsmanagement.surfaces.models;
 import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.spaces.dto.SpaceDto;
 import com.adsmanagement.surfaces.dto.SurfaceDto;
+import com.adsmanagement.surfaces.dto.UpdateSurfaceDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -79,4 +80,19 @@ public class Surface {
         this.width =  req.getWidth();
         this.updatedAt = new Date();
     }
+
+    public void setFieldByUpdateDto(UpdateSurfaceDto dto) {
+        String imgUrl =null;
+        if (dto.getImgUrl() != null && dto.getImgUrl().size() >0){
+            imgUrl = dto.getImgUrl().toString();
+        }
+
+        this.imgUrl = imgUrl;
+        this.content = dto.getContent();
+        this.height  = dto.getHeight();
+        this.format = dto.getFormat();
+        this.width =  dto.getWidth();
+        this.updatedAt = new Date();
+    }
+
 }

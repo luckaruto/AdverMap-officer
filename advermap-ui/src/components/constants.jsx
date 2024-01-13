@@ -5,12 +5,14 @@ export const PAGE ={
 	OTP_INPUT:{path:"/otp-input", name: "Nhập mã OTP"},
 	RESET_PASSWORD:{path:"/reset-password", name: "Đặt lại mật khẩu"},
 	SPACE:{path:"/spaces", name: "Quản lý điểm đặt quảng cáo"},
+	SPACE_REQUEST:{path:"/spaceRequest", name: "Quản lý yêu cầu chỉnh sửa điểm"},
 	SURFACE:{path:"/surfaces", name: "Quản lý quảng cáo"},
 	REPORT:{path:"/reports", name: "Quản lý báo cáo"},
 	USER:{path:"/users", name: "Quản lý tài khoản"},
 	DISTRICT:{path:"/districts", name: "Quản lý quận"},
 	WARD:{path:"/wards", name: "Quản lý phường"},
 	CITY: {path:"/cities", name: "Quản lý thành phố"},
+	PROFILE: {path:"/profile", name: "Thông tin cá nhân"},
 }
 
 export const ROLE = {

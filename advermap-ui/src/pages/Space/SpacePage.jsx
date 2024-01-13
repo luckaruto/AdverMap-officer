@@ -2,7 +2,6 @@ import React from "react";
 import DataTable from "../../components/DataTable";
 import { useState, useEffect } from "react";
 import { SpaceService } from "services/space/SpaceService";
-
 import { PAGE } from "components/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
@@ -15,7 +14,15 @@ import SpaceForm from "./SpaceForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import { fetchSpaces } from "redux/spaceSlice";
 import { testParams } from "services/apis/constants";
-import { formatFormatUI, plannedFormatUI, typeFormatUI } from "utils/formatToUI";
+import {
+  formatFormatUI,
+  plannedFormatUI,
+  typeFormatUI,
+} from "utils/formatToUI";
+import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
+import { useLocation } from "react-router-dom";
+import HomePage from "pages/HomePage";
+import { UserRole } from "constants/types";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -58,13 +65,19 @@ const columns = [
 const SpacePage = () => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openForm, setOpenForm] = useState(false);
+  const [openRequestForm, setOpenRequestForm] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
-  // @ts-ignore
-  const { token, snackbar } = useSelector((state) => state.appState);
+  const { token, snackbar, params, tokenPayload } = useSelector(
+    // @ts-ignore
+    (state) => state.appState
+  );
+
+  // console.log(params.content);
 
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.spaces);
@@ -72,7 +85,10 @@ const SpacePage = () => {
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
 
-  console.log(selectedRow);
+  const handleOpenRequestForm = () => setOpenRequestForm(true);
+  const handleCloseRequestForm = () => setOpenRequestForm(false);
+
+  // console.log(selectedRow);
 
   const handleClickCreate = () => {
     setSelectedRow(null);
@@ -108,9 +124,17 @@ const SpacePage = () => {
   };
 
   useEffect(() => {
+    const reqParams = params.content;
+    console.log("reqParams", reqParams);
     // @ts-ignore
-    dispatch(fetchSpaces({ testParams, token }));
-  }, []);
+    dispatch(fetchSpaces({ reqParams, token }));
+  }, [params]);
+
+  useEffect(() => {
+    if (state) {
+      setSelectedRow(state);
+    }
+  }, [state]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
@@ -118,32 +142,51 @@ const SpacePage = () => {
 
   return (
     <>
+      <HomePage />
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
+        <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>
+          Danh sách yêu cầu
+        </Button>
         <div className="flex gap-6 ml-auto">
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={handleClickCreate}
-          >
-            Tạo mới
-          </Button>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleClickEdit}
-            disabled={!selectedRow}
-          >
-            Chỉnh Sửa
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            Xóa
-          </Button>
+          {tokenPayload.role != UserRole.ADMIN && (
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleOpenRequestForm}
+              disabled={!selectedRow}
+            >
+              Yêu cầu chỉnh sửa
+            </Button>
+          )}
+          {tokenPayload.role == UserRole.ADMIN && (
+            <>
+              {" "}
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleClickCreate}
+              >
+                Tạo mới
+              </Button>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={handleClickEdit}
+                disabled={!selectedRow}
+              >
+                Chỉnh Sửa
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+                disabled={!selectedRow}
+              >
+                Xóa
+              </Button>
+            </>
+          )}
         </div>
 
         {entities && entities.length > 0 ? (
@@ -152,6 +195,7 @@ const SpacePage = () => {
             rows={entities}
             onClickDetail={handleClickDetail}
             onClickRow={handleClickRow}
+            selectedRow={selectedRow}
           />
         ) : (
           <p className="text-center text-blue-400 text-lg font-bold">
@@ -166,6 +210,11 @@ const SpacePage = () => {
         <SpaceForm
           open={openForm}
           handleClose={handleCloseForm}
+          existData={selectedRow}
+        />
+        <SpaceRequestForm
+          open={openRequestForm}
+          handleClose={handleCloseRequestForm}
           existData={selectedRow}
         />
         <ConfirmModal

@@ -12,5 +12,5 @@ import lombok.Setter;
 public class OtpDto {
     private String otp;
     private String email;
-
+    private String password;
 }

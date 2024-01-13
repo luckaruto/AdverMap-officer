@@ -21,4 +21,6 @@ public interface SurfaceAllowanceRepository
 
     List<SurfaceAllowance> findAllByWardIdInAndSpaceId(List<Short> wardIds, Short spaceId);
 
+    void deleteBySpaceId(Short spaceId);
+
 }

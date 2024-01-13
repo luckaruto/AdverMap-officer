@@ -7,6 +7,7 @@ import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictDTO;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.users.dto.CreateUserDTO;
+import com.adsmanagement.users.dto.UpdateProfileDTO;
 import com.adsmanagement.users.dto.UpdateUserDTO;
 import com.adsmanagement.users.dto.UserFilterPermission;
 import com.adsmanagement.users.models.*;
@@ -66,6 +67,16 @@ public class UserService {
     public User save(CreateUserDTO createUserDTO)  throws Exception {
         User user = createUserDTO.ToUser();
 
+        var existsEmail = this.userRepository.findByEmail(user.getEmail());
+        if (existsEmail != null && !existsEmail.isEmpty()){
+            throw new Exception("Email đã tồn tại");
+        }
+
+        var existsPhone = this.userRepository.findByPhone(user.getPhone());
+        if (existsPhone != null && !existsPhone.isEmpty()){
+            throw new Exception("Số điện thoại đã tồn tại");
+        }
+
         var bcryptEncoder  = new BCryptPasswordEncoder();
         var bcryptPassword = bcryptEncoder.encode(user.getPassword());
         user.setPassword(bcryptPassword);
@@ -119,9 +130,20 @@ public class UserService {
     public User update(Short id,UpdateUserDTO userDto)  throws Exception {
         User user = userDto.ToUser();
         user.setId(id);
+
         var existUser = this.userRepository.findById(id);
         if (existUser == null || existUser.isEmpty()) {
-            throw new Exception("user is not exist");
+            throw new Exception("Tài khoản không tồn tại");
+        }
+
+        var existsEmail = this.userRepository.findByEmail(userDto.getEmail());
+        if (existsEmail != null && !existsEmail.isEmpty() && existsEmail.get().getId() != existUser.get().getId()){
+            throw new Exception("Email đã tồn tại");
+        }
+
+        var existsPhone = this.userRepository.findByPhone(userDto.getPhone());
+        if (existsPhone != null && !existsPhone.isEmpty() && existsPhone.get().getId() != existUser.get().getId()){
+            throw new Exception("Số điện thoại đã tồn tại");
         }
 
         if (userDto.getPassword() != null || userDto.getPassword() != ""){
@@ -184,6 +206,21 @@ public class UserService {
         return  createdUser.get();
     }
 
+
+    public User changePassword(Short id, String password) {
+        var existUser = this.userRepository.findById(id);
+        if (existUser == null || existUser.isEmpty()) {
+            return null;
+        }
+
+        var user = existUser.get();
+
+        var bcryptEncoder  = new BCryptPasswordEncoder();
+        var bcryptPassword = bcryptEncoder.encode(password);
+        user.setPassword(bcryptPassword);
+
+        return this.userRepository.save(user);
+    }
     public User delete(Short id){
         var existUser = this.userRepository.findById(id);
         if (existUser == null || existUser.isEmpty()) {
@@ -432,6 +469,28 @@ public class UserService {
 
         return new UserFilterPermission(role,cityDto);
 
+    }
+
+    @Transactional
+    public User updateProfile(User user, UpdateProfileDTO dto)  throws Exception {
+
+        var existsEmail = this.userRepository.findByEmail(dto.getEmail());
+        if (existsEmail != null && !existsEmail.isEmpty() && existsEmail.get().getId() != user.getId()) {
+            throw new Exception("Email đã tồn tại");
+        }
+
+        var existsPhone = this.userRepository.findByPhone(dto.getPhone());
+        if (existsPhone != null && !existsPhone.isEmpty() && existsPhone.get().getId() != user.getId()) {
+            throw new Exception("Số điện thoại đã tồn tại");
+        }
+
+        user.setEmail(dto.getEmail());
+        user.setBirthday(dto.getBirthday());
+        user.setName(dto.getName());
+        user.setPhone(dto.getPhone());
+
+        var newUser = this.userRepository.save(user);
+        return newUser;
     }
 
 

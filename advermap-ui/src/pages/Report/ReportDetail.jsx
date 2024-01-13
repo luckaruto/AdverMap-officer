@@ -71,12 +71,16 @@ const ReportDetail = () => {
               {report.reportDate || "Không xác định"}
             </p>
             <p>
+              <span className="font-bold text-base">Hình thức báo cáo: </span>
+              {report?.reportType?.name || "Không xác định"}
+            </p>
+            <p>
               <span className="font-bold text-base">Trạng thái: </span>
               {report.state || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Xét duyệt bởi: </span>
-              {report.approvedBy || "Chưa có"}
+              {report?.approvedBy?.name || "Chưa có"}
             </p>
             <p>
               <span className="font-bold text-base">Thông tin phản hồi: </span>

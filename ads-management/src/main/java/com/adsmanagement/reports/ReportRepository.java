@@ -28,4 +28,5 @@ public interface ReportRepository extends JpaRepository<Report, Short>, CrudRepo
     Page<Report> findAllByWardIdInAndSurfaceIdIn(Pageable pageable, List<Short> wardIds, List<Short> surfaceIds);
     Page<Report> findAllByWardIdInAndSurfaceIdInAndState(Pageable pageable, List<Short> wardIds, List<Short> surfaceIds, ReportState state);
 
+    Long countByReportTypeId(Short reportTypeId);
 }

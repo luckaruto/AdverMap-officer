@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cbe78b7-0b9c-4a18-a799-5705b1aebcd2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/advermap-ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/advermap-ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/advermap-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/advermap-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/advermap-ui/src/pages/Surface/SurfacePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/advermap-ui/src/pages/Surface/SurfacePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/advermap-ui/src/services/surface/SurfaceService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/advermap-ui/src/services/surface/SurfaceService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/advermap-ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/advermap-ui/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +24,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2ZcxVWAI0t0H2Km0NNPTePd3d74" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,12 +37,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/viet68/Documents/ads-sys/adverMap-officer",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/hanhs/Downloads/PTUDWNC/adverMap-officer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -49,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702735192378</updated>
       <workItem from="1702735193419" duration="1152000" />
+      <workItem from="1705129096279" duration="132000" />
     </task>
     <servers />
   </component>

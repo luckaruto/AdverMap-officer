@@ -4,10 +4,7 @@ package com.adsmanagement.users;
 import com.adsmanagement.common.Response;
 import com.adsmanagement.config.UserInfoUserDetails;
 import com.adsmanagement.surfaces.dto.SurfaceDto;
-import com.adsmanagement.users.dto.CreateUserDTO;
-import com.adsmanagement.users.dto.UpdateUserDTO;
-import com.adsmanagement.users.dto.UserDTO;
-import com.adsmanagement.users.dto.UserFilterPermission;
+import com.adsmanagement.users.dto.*;
 import com.adsmanagement.users.models.User;
 import com.adsmanagement.users.models.UserPermission;
 import com.adsmanagement.users.models.UserRole;
@@ -80,6 +77,19 @@ public class UserController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/change-password")
+    public ResponseEntity<Response<String>> changePassword(
+            @RequestBody() ChangePasswordDTO dto,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    ) {
+        var user = userDetails.getUser();
+
+        user.setPassword(dto.getPassword());
+        this.userService.changePassword(user.getId(), dto.getPassword());
+        var res = new Response<>("","ok");
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Response<String>> delete(
             @PathVariable("id") Short id
@@ -115,6 +125,37 @@ public class UserController {
         var data = this.userService.getFilterPermission(id);
 
         var res = new Response<>("",data);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/profile")
+    public ResponseEntity<Response<ProfileDTO>> getProfile(
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    ) {
+        var currentUser = userDetails.getUser();
+        var user = this.userService.findById(currentUser.getId());
+        if (user == null) {
+            return new ResponseEntity<>(new Response<ProfileDTO>("Tài khoản không tồn tại",null, HttpStatus.BAD_REQUEST), HttpStatus.OK);
+        }
+
+        var res = new Response<>("",user.toProfile());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/profile")
+    public ResponseEntity<Response<ProfileDTO>> updateProfile(
+            @RequestBody() UpdateProfileDTO dto,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    ) throws Exception {
+        var currentUser = userDetails.getUser();
+        var user = this.userService.findById(currentUser.getId());
+        if (user == null) {
+            return new ResponseEntity<>(new Response<ProfileDTO>("Tài khoản không tồn tại",null, HttpStatus.BAD_REQUEST), HttpStatus.OK);
+        }
+
+        var data = this.userService.updateProfile(currentUser,dto);
+
+        var res = new Response<>("",data.toProfile());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 

@@ -15,5 +15,10 @@ public interface UserRepository extends JpaRepository<User, Short>, CrudReposito
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByPhone(String phone);
+
+
+    Optional<User> findByEmailAndIsDeleted(String email, Boolean isDeleted);
+
     Page<User> findAllByIsDeleted(Pageable pageable,Boolean isDeleted);
 }

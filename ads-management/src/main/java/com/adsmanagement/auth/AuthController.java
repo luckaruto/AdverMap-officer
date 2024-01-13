@@ -45,7 +45,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Response<TokenDto>> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         //return jwtService.generateToken(authRequest.getUsername());
-        var user = this.userRepository.findByEmail(authRequest.getUsername());
+        var user = this.userRepository.findByEmailAndIsDeleted(authRequest.getUsername(), false);
         if (user.isEmpty()){
             return new ResponseEntity<>(new Response<>("invalid user request !",null), HttpStatus.BAD_REQUEST);
         }
@@ -68,7 +68,7 @@ public class AuthController {
         var username = jwtService.extractUsername(refreshToken);
 
 
-        var user = this.userRepository.findByEmail(username);
+        var user = this.userRepository.findByEmailAndIsDeleted(username, false);
         if (user.isEmpty()){
             return new ResponseEntity<>(new Response<>("invalid user request !",null), HttpStatus.BAD_REQUEST);
         }
@@ -87,13 +87,13 @@ public class AuthController {
     public ResponseEntity<Response<String>> forgotPassword(
             @RequestBody ForgotPasswordDto dto
     ) {
-        var user = this.userRepository.findByEmail(dto.getEmail());
+        var user = this.userRepository.findByEmailAndIsDeleted(dto.getEmail(), false);
         if (user.isEmpty()){
             return new ResponseEntity<>(new Response<>("invalid user request !",null), HttpStatus.BAD_REQUEST);
         }
 
         this.emailService.sendForgotPasswordMail(user.get(),"11111");
-        return new ResponseEntity<>(new Response<>("","ok"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Response<>("","ok"), HttpStatus.OK);
     }
 
     @PostMapping("/verify-otp")
@@ -107,14 +107,14 @@ public class AuthController {
         }
 
 
-        var usero = this.userRepository.findByEmail(dto.getEmail());
+        var usero = this.userRepository.findByEmailAndIsDeleted(dto.getEmail(), false);
         if (usero.isEmpty()){
             return new ResponseEntity<>(new Response<>("invalid user request !",null), HttpStatus.BAD_REQUEST);
         }
 
         var user = usero.get();
 
-        user.setPassword("11111");
+        user.setPassword(dto.getPassword());
         var bcryptEncoder  = new BCryptPasswordEncoder();
         var bcryptPassword = bcryptEncoder.encode(user.getPassword());
         user.setPassword(bcryptPassword);

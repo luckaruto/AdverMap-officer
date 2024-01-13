@@ -1,10 +1,22 @@
 import Alert from "@mui/material/Alert";
 import React from "react";
-import { RequestState, SpaceFormat, SpaceType, SurfaceFormat } from "constants/types";
+import {
+  RequestState,
+  SpaceFormat,
+  SpaceType,
+  SurfaceFormat,
+} from "constants/types";
 import { formatFormat, plannedFormat, stateFormat, typeFormat } from "./format";
 
-const styles={ padding: 1, fontSize: "12px" ,maxWidth:"150px", display:"flex", justifyContent:"center",alignItems:"center",textAlign:"center" }
-
+const styles = {
+  padding: 1,
+  fontSize: "12px",
+  maxWidth: "150px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+};
 
 export const stateFormatUI = (value) => {
   const content = stateFormat(value);
@@ -17,6 +29,9 @@ export const stateFormatUI = (value) => {
     case RequestState.REJECTED:
       status = "error";
       break;
+    case RequestState.CANCELED:
+      status = "error";
+      break;
     case RequestState.APPROVED:
       status = "success";
       break;
@@ -27,6 +42,7 @@ export const stateFormatUI = (value) => {
 
   return (
     <Alert
+      icon={false}
       sx={styles}
       variant="standard"
       // @ts-ignore
@@ -41,6 +57,7 @@ export const plannedFormatUI = (value) => {
   const content = plannedFormat(value);
   return (
     <Alert
+      icon={false}
       sx={styles}
       variant="standard"
       severity={value ? "success" : "error"}
@@ -52,12 +69,7 @@ export const plannedFormatUI = (value) => {
 export const typeFormatUI = (value) => {
   const content = typeFormat(value);
   return (
-    <Alert
-	icon={false}
-      sx={styles}
-      variant="standard"
-      severity={"info"}
-    >
+    <Alert icon={false} sx={styles} variant="standard" severity={"info"}>
       {content}
     </Alert>
   );
@@ -65,12 +77,7 @@ export const typeFormatUI = (value) => {
 export const formatFormatUI = (value) => {
   const content = formatFormat(value);
   return (
-    <Alert
-	icon={false}
-      sx={styles}
-      variant="outlined"
-      severity={"info"}
-    >
+    <Alert icon={false} sx={styles} variant="outlined" severity={"info"}>
       {content}
     </Alert>
   );

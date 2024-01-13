@@ -1,4 +1,9 @@
-import { RequestState, SpaceFormat, SpaceType, SurfaceFormat } from "constants/types";
+import {
+  RequestState,
+  SpaceFormat,
+  SpaceType,
+  SurfaceFormat,
+} from "constants/types";
 import React from "react";
 
 export const plannedFormat = (value) => {
@@ -68,18 +73,19 @@ export const formatFormat = (value) => {
 };
 
 export const stateFormat = (value) => {
-	switch (value) {
-	  case RequestState.IN_PROGRESS:
-		return "Đang xử lý";
-	  case RequestState.REJECTED:
-		return "Từ chối";
-	  case RequestState.APPROVED:
-		return "Đã duyệt";
-	  default:
-		return "Không xác định";
-	}
-  };
-
+  switch (value) {
+    case RequestState.IN_PROGRESS:
+      return "Đang xử lý";
+    case RequestState.REJECTED:
+      return "Từ chối";
+    case RequestState.CANCELED:
+      return "Đã hủy";
+    case RequestState.APPROVED:
+      return "Đã duyệt";
+    default:
+      return "Không xác định";
+  }
+};
 
 export const formatImgUrl = (value) => {
   // Check if value is an array

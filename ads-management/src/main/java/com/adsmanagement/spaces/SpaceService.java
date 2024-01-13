@@ -10,6 +10,7 @@ import com.adsmanagement.spaces.models.Space;
 import com.adsmanagement.spaces.models.SpaceRequest;
 import com.adsmanagement.surfaceAllowance.SurfaceAllowanceRepository;
 import com.adsmanagement.surfaces.SurfaceRepository;
+import com.adsmanagement.surfaces.SurfaceRequestRepository;
 import com.adsmanagement.users.models.User;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardRepository;
@@ -34,13 +35,15 @@ public class SpaceService {
 
     private final SurfaceAllowanceRepository surfaceAllowanceRepository;
 
+    private final SurfaceRequestRepository surfaceRequestRepository;
+
     @Autowired
     public SpaceService(SpaceRepository spaceRepository,
                         DistrictRepository districtRepository,
                         WardRepository wardRepository,
                         SpaceRequestRepository spaceRequestRepository,
                         SurfaceAllowanceRepository surfaceAllowanceRepository,
-                        SurfaceRepository  surfaceRepository
+                        SurfaceRepository  surfaceRepository, SurfaceRequestRepository surfaceRequestRepository
     ) {
         this.spaceRepository = spaceRepository;
         this.districtRepository = districtRepository;
@@ -48,6 +51,7 @@ public class SpaceService {
         this.spaceRequestRepository = spaceRequestRepository;
         this.surfaceAllowanceRepository = surfaceAllowanceRepository;
         this.surfaceRepository = surfaceRepository;
+        this.surfaceRequestRepository = surfaceRequestRepository;
     }
 
     public Page<Space> findAll(Short page, Short size, Short cityId, List<Short> wardIds, List<Short> districtIds) {
@@ -191,4 +195,12 @@ public class SpaceService {
         return this.spaceRepository.findById(id);
     }
 
+    @Transactional
+    public void delete(Short id) {
+        this.spaceRequestRepository.deleteBySpaceId(id);
+        this.surfaceAllowanceRepository.deleteBySpaceId(id);
+        this.surfaceRequestRepository.deleteBySpaceId(id);
+        this.surfaceRepository.deleteBySpaceId(id);
+        this.spaceRepository.deleteById(id);
+    }
 }

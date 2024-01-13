@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
 import { CityService } from "services/city/CityService";
+// @ts-ignore
 import { fetchCities } from "redux/citySlice";
 
 const CityForm = ({ open, handleClose, existData }) => {

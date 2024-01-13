@@ -23,10 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LoginSchema } from "../../../constants/validation/index.jsx";
-import {
-  loginFailedDescription,
-  loginSuccessDescription,
-} from "../../../constants/messages/index.ts";
 // @ts-ignore
 import FormInput from "../../../components/FormInput/index.jsx";
 import PasswordField from "../../../components/PasswordField/index.jsx";

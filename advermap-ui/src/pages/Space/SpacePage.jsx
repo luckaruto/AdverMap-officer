@@ -212,11 +212,13 @@ const SpacePage = () => {
           handleClose={handleCloseForm}
           existData={selectedRow}
         />
-        <SpaceRequestForm
-          open={openRequestForm}
-          handleClose={handleCloseRequestForm}
-          existData={selectedRow}
-        />
+        {openRequestForm && (
+          <SpaceRequestForm
+            handleClose={handleCloseRequestForm}
+            existData={selectedRow}
+          />
+        )}
+
         <ConfirmModal
           open={openConfirm}
           handleClose={() => setOpenConfirm(false)}

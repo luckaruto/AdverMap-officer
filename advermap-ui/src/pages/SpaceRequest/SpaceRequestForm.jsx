@@ -1,4 +1,3 @@
-import Modal from "@mui/material/Modal";
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import * as yup from "yup";
@@ -21,6 +20,9 @@ import { testParams } from "services/apis/constants";
 import { fetchSpaceRequest } from "redux/spaceRequestSlice";
 import { useNavigate } from "react-router-dom";
 import { PAGE } from "components/constants";
+import AutocompleteComponent from "../Space/AutocompleteComponent";
+import Modal from "components/Model/Modal";
+import { selectGeocoding } from "redux/navSlice";
 
 const SpaceRequestForm = (props) => {
   const [mode, setMode] = useState(FormMode.CREATE);
@@ -34,6 +36,7 @@ const SpaceRequestForm = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const geoCoding = useSelector(selectGeocoding);
 
   const schema = yup.object().shape({
     address: yup.string().required(requiredError.address),
@@ -108,13 +111,16 @@ const SpaceRequestForm = (props) => {
     }
   }, [existData, setValue]);
 
+  useEffect(() => {
+    if (geoCoding) {
+      setValue("longitude", geoCoding?.lng);
+      setValue("latitude", geoCoding?.lat);
+      setValue("address", geoCoding?.address);
+    }
+  }, [geoCoding]);
+
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <Modal HandleFalse={handleClose}>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] ">
         <FormProvider {...method}>
           <form
@@ -124,6 +130,11 @@ const SpaceRequestForm = (props) => {
             <Heading1 className="mb-4">Thông tin địa điểm</Heading1>
             <div className=" flex flex-row gap-2 justify-center">
               <div className="flex flex-col items-center gap-4">
+                <div className="w-full flex flex-col ">
+                  <label>Địa điểm: </label>
+                  <AutocompleteComponent className="w-full "></AutocompleteComponent>
+                </div>
+
                 <BasicInput name="address" label="Địa chỉ" />
                 <div className="w-full flex gap-2">
                   <BasicInput name="longitude" type="number" label="Kinh độ" />

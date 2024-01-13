@@ -20,6 +20,7 @@ import Heading1 from "components/Text/Heading1";
 import { SpaceService } from "services/space/SpaceService";
 import { fetchSpaces } from "redux/spaceSlice";
 import { testParams } from "services/apis/constants";
+import AutocompleteComponent from "./AutocompleteComponent";
 
 const SpaceForm = (props) => {
   const [mode, setMode] = useState(FormMode.CREATE);

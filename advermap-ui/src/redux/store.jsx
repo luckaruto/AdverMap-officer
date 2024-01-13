@@ -9,6 +9,9 @@ import reportSlice from "./reportSlice";
 import permission from "./permission";
 import spaceRequestSlice from "./spaceRequestSlice";
 import navSlice from "./navSlice";
+import citySlice from "./citySlice";
+import wardSlice from "./wardSlice";
+import districtSlice from "./districtSlice";
 
 const persistConfig = {
   key: "root", // Change this key as needed
@@ -24,6 +27,9 @@ const rootReducer = combineReducers({
   nav: navSlice,
   reports: reportSlice,
   permission: permission,
+  cities: citySlice,
+  wards: wardSlice,
+  district: districtSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

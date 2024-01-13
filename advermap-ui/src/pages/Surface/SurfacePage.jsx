@@ -16,6 +16,8 @@ import Button from "@mui/material/Button";
 import SurfaceForm from "./SurfaceForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import { setLoading, setSnackbar } from "redux/appSlice";
+import { UserRole } from "constants/types";
+import SurfaceRequestForm from "pages/SurfaceRequest/SurfaceRequestForm";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -60,11 +62,17 @@ const SurfacePage = () => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const [openRequestForm, setOpenRequestForm] = useState(false);
   const navigate = useNavigate();
+
   // @ts-ignore
-  const { token, params } = useSelector((state) => state.appState);
+
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.surfaces);
+  const { token, snackbar, params, tokenPayload } = useSelector(
+    // @ts-ignore
+    (state) => state.appState
+  );
 
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
@@ -82,6 +90,8 @@ const SurfacePage = () => {
   const handleClickDelete = () => {
     setOpenConfirm(true);
   };
+  const handleCloseRequestForm = () => setOpenRequestForm(false);
+  const handleOpenRequestForm = () => setOpenRequestForm(true);
 
   const handleDelete = async () => {
     const { id } = selectedRow;
@@ -128,26 +138,45 @@ const SurfacePage = () => {
       <Button onClick={() => navigate(PAGE.SURFACE_REQUEST.path)}>
         Danh sách yêu cầu
       </Button>
+
       <div className="flex gap-6 ml-auto">
-        <Button variant="outlined" color="success" onClick={handleClickCreate}>
-          Tạo mới
-        </Button>
-        <Button
-          variant="outlined"
-          color="info"
-          onClick={handleClickEdit}
-          disabled={!selectedRow}
-        >
-          Chỉnh Sửa
-        </Button>
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={handleClickDelete}
-          disabled={!selectedRow}
-        >
-          Xóa
-        </Button>
+        {tokenPayload.role != UserRole.ADMIN && (
+          <Button
+            variant="contained"
+            color="info"
+            onClick={handleOpenRequestForm}
+            disabled={!selectedRow}
+          >
+            Yêu cầu chỉnh sửa
+          </Button>
+        )}
+        {tokenPayload.role == UserRole.ADMIN && (
+          <>
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={handleClickCreate}
+            >
+              Tạo mới
+            </Button>
+            <Button
+              variant="outlined"
+              color="info"
+              onClick={handleClickEdit}
+              disabled={!selectedRow}
+            >
+              Chỉnh Sửa
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={handleClickDelete}
+              disabled={!selectedRow}
+            >
+              Xóa
+            </Button>
+          </>
+        )}
       </div>
       {entities && entities.length > 0 ? (
         <DataTable
@@ -173,6 +202,12 @@ const SurfacePage = () => {
         handleClose={handleCloseForm}
         existData={selectedRow}
       />
+      <SurfaceRequestForm
+        open={openRequestForm}
+        handleClose={handleCloseRequestForm}
+        existData={selectedRow}
+      />
+
       <ConfirmModal
         open={openConfirm}
         handleClose={() => setOpenConfirm(false)}

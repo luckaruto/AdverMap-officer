@@ -8,6 +8,7 @@ import CarouselImage from "components/Carousels/CarouselImage";
 import SurfaceInfo from "pages/Surface/SurfaceInfo";
 import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
+import { stateFormatUI } from "utils/formatToUI";
 
 const ReportDetail = () => {
     // @ts-ignore
@@ -77,7 +78,7 @@ const ReportDetail = () => {
             </p>
             <p>
               <span className="font-bold text-base">Trạng thái: </span>
-              {report.state || "Không xác định"}
+              {stateFormatUI(report.state) || "Không xác định"}
             </p>
             <p>
               <span className="font-bold text-base">Xét duyệt bởi: </span>

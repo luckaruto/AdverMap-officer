@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,9 @@ import { fetchReports } from "redux/reportSlice";
 import { stateFormatUI } from "utils/formatToUI";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import ReportForm from "./ReportForm";
+import DropDownSort from "./DropDownSort";
+import { ReportState } from "constants/types";
+import { stateFormat } from "utils/format";
 import ResponseForm from "pages/SpaceRequest/ResponseForm";
 
 const columns = [
@@ -69,12 +73,14 @@ const ReportPage = () => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [openResponseForm, setOpenResponseForm] = useState(false);
 
- 
-
   // @ts-ignore
   const { token, params } = useSelector((state) => state.appState);
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.reports);
+
+  const [listReport, setListReport] = useState(entities);
+
+  var params;
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
 
@@ -88,7 +94,6 @@ const ReportPage = () => {
   const handleClickResponse = () => {
     handleOpenResponseForm();
   };
- 
 
   const fetchData = () => {
     console.log("fetch Data");
@@ -99,6 +104,26 @@ const ReportPage = () => {
     } else reqParams = params.content;
     // @ts-ignore
     dispatch(fetchReports({ params: reqParams, token }));
+  };
+  const filterListReport = (type) => {
+    if (stateFormat(ReportState.APPROVED) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.APPROVED)
+      );
+    }
+    if (stateFormat(ReportState.IN_PROGRESS) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.IN_PROGRESS)
+      );
+    }
+    if (stateFormat(ReportState.REJECTED) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.REJECTED)
+      );
+    }
+    if (type === "Tất cả") {
+      setListReport(entities);
+    }
   };
 
   useEffect(() => {
@@ -115,6 +140,7 @@ const ReportPage = () => {
       <div className="flex flex-col gap-[24px] mb-[32px]">
         <Heading1>Danh sách các báo cáo</Heading1>
         <div className="flex gap-6 ml-auto">
+          <DropDownSort filterListReport={filterListReport}></DropDownSort>
           <Button
             variant="outlined"
             color="info"
@@ -123,13 +149,12 @@ const ReportPage = () => {
           >
             Phản hồi
           </Button>
-          
         </div>
       </div>
-      {entities && entities.length > 0 ? (
+      {listReport && listReport?.length > 0 ? (
         <DataTable
           columns={columns}
-          rows={entities}
+          rows={listReport}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
           selectedRow={selectedRow}
@@ -155,7 +180,6 @@ const ReportPage = () => {
         updated={fetchData}
         responseService={ReportService.response}
       />
-     
     </div>
   );
 };

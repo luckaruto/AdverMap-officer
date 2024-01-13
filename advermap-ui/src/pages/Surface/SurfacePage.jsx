@@ -101,6 +101,13 @@ const SurfacePage = () => {
       setOpenConfirm(false);
     }
   };
+  const { state } = useLocation();
+  useEffect(() => {
+    if (state) {
+      setSelectedRow(state);
+    }
+  }, [state]);
+
   useEffect(() => {
     const id = location.pathname.split("/")[2];
     let reqParams;
@@ -109,7 +116,7 @@ const SurfacePage = () => {
     } else reqParams = params.content;
     // @ts-ignore
     dispatch(fetchSurfaces({ params: reqParams, token }));
-  }, [location,params]);
+  }, [location, params]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
@@ -118,6 +125,9 @@ const SurfacePage = () => {
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
       <Heading1>Danh sách bảng Quảng Cáo</Heading1>
+      <Button onClick={() => navigate(PAGE.SURFACE_REQUEST.path)}>
+        Danh sách yêu cầu
+      </Button>
       <div className="flex gap-6 ml-auto">
         <Button variant="outlined" color="success" onClick={handleClickCreate}>
           Tạo mới

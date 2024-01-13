@@ -18,65 +18,70 @@ import SpaceRequestPage from "pages/SpaceRequest/SpaceRequestPage";
 import MyProfilePage from "pages/MyProfile";
 import UserPage from "../pages/User/UserPage";
 import CityPage from "pages/City/CityPage";
+import SurfaceRequestPage from "pages/SurfaceRequest/SurfaceRequestPage";
 
 const privateRoute = [
-    {path: PAGE.HOME.path, element: <HomePage/>},
-    {
-        path: PAGE.SPACE.path,
-        element: <SpacePage/>,
-    },
-    {
-        path: PAGE.SPACE.path + "/:id",
-        element: <SurfacePage/>,
-    },
-    {
-        path: PAGE.SURFACE.path,
-        element: <SurfacePage/>,
-    },
-    {
-        path: PAGE.SURFACE.path + "/:id",
-        element: <ReportPage/>,
-    },
-    {
-        path: PAGE.REPORT.path + "/:id",
-        element: <ReportDetail/>,
-    },
-    {
-        path: PAGE.REPORT.path,
-        element: <ReportPage/>,
-    },
-    {
-        path: PAGE.SPACE_REQUEST.path,
-        element: <SpaceRequestPage/>,
-    },
-    {
-        path: PAGE.PROFILE.path,
-        element: <MyProfilePage/>,
-    },
-    {
-        path: PAGE.USER.path,
-        element: <UserPage/>,
-    },
-    {
-        path: "/test",
-        element: <LoadingPage/>,
-    },
-    {
-        path: "*",
-        element: <ErrorPage/>,
-    },
-    {
-        path: "cities",
-        element: <CityPage/>,
-    },
-    // {
-    //     path: "districts",
-    //     element: <DistrictPage/>,
-    // },
-    // {
-    //     path: "wards",
-    //     element: <WardPage/>,
-    // }
+  { path: PAGE.HOME.path, element: <HomePage /> },
+  {
+    path: PAGE.SPACE.path,
+    element: <SpacePage />,
+  },
+  {
+    path: PAGE.SPACE.path + "/:id",
+    element: <SurfacePage />,
+  },
+  {
+    path: PAGE.SURFACE.path,
+    element: <SurfacePage />,
+  },
+  {
+    path: PAGE.SURFACE.path + "/:id",
+    element: <ReportPage />,
+  },
+  {
+    path: PAGE.REPORT.path + "/:id",
+    element: <ReportDetail />,
+  },
+  {
+    path: PAGE.REPORT.path,
+    element: <ReportPage />,
+  },
+  {
+    path: PAGE.SPACE_REQUEST.path,
+    element: <SpaceRequestPage />,
+  },
+  {
+    path: PAGE.SURFACE_REQUEST.path,
+    element: <SurfaceRequestPage />,
+  },
+  {
+    path: PAGE.PROFILE.path,
+    element: <MyProfilePage />,
+  },
+  {
+    path: PAGE.USER.path,
+    element: <UserPage />,
+  },
+  {
+    path: "/test",
+    element: <LoadingPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+  {
+    path: "cities",
+    element: <CityPage />,
+  },
+  // {
+  //     path: "districts",
+  //     element: <DistrictPage/>,
+  // },
+  // {
+  //     path: "wards",
+  //     element: <WardPage/>,
+  // }
 ];
 
 const route = createBrowserRouter([

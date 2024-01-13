@@ -10,7 +10,7 @@ import permission from "./permission";
 import spaceRequestSlice from "./spaceRequestSlice";
 import userSlice from "./userSlice";
 import navSlice from "./navSlice";
-
+import surfaceRequestSlice from "./surfaceRequestSlice";
 
 const persistConfig = {
   key: "root", // Change this key as needed
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
   spaces: spaceSlice,
   spaceRequest: spaceRequestSlice,
   surfaces: surfaceSlice,
+  surfaceRequest: surfaceRequestSlice,
   nav: navSlice,
   reports: reportSlice,
   permission: permission,

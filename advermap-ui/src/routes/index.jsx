@@ -1,11 +1,11 @@
 import PrivateRoute from "./PrivateRoute";
 
 import React from "react";
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import SpacePage from "pages/Space/SpacePage";
 import ErrorPage from "pages/Error/ErrorPage";
-import {PAGE} from "components/constants";
-import HomePage from "pages/HomePage";
+import { PAGE } from "components/constants";
+import HomePage from "pages/Home/HomePage";
 import LoadingPage from "pages/Loading/LoadingPage";
 import SurfacePage from "pages/Surface/SurfacePage";
 import ReportPage from "pages/Report/ReportPage";
@@ -16,63 +16,65 @@ import OtpConfirmInput from "pages/login/InputOtp";
 import ResetPassword from "pages/login/ResetPassword";
 
 const privateRoute = [
-    {path: PAGE.HOME.path, element: <HomePage/>},
-    {
-        path: PAGE.SPACE.path,
-        element: <SpacePage/>,
-    },
-    {
-        path: PAGE.SPACE.path + "/:id",
-        element: <SurfacePage/>,
-    },
-    {
-        path: PAGE.SURFACE.path,
-        element: <SurfacePage/>,
-    },
-    {
-        path: PAGE.SURFACE.path + "/:id",
-        element: <ReportPage/>,
-    },
-    {
-        path: PAGE.REPORT.path + "/:id",
-        element: <ReportDetail/>,
-    },
-    {
-        path: PAGE.REPORT.path,
-        element: <ReportPage/>,
-    },
-    {
-        path: "/test",
-        element: <LoadingPage/>,
-    },
-    {
-        path: "*",
-        element: <ErrorPage/>,
-    },
+  { path: PAGE.HOME.path, element: <HomePage /> },
+  {
+    path: PAGE.SPACE.path,
+    element: <SpacePage />,
+  },
+
+  {
+    path: PAGE.SPACE.path + "/:id",
+    element: <SurfacePage />,
+  },
+  {
+    path: PAGE.SURFACE.path,
+    element: <SurfacePage />,
+  },
+  {
+    path: PAGE.SURFACE.path + "/:id",
+    element: <ReportPage />,
+  },
+  {
+    path: PAGE.REPORT.path + "/:id",
+    element: <ReportDetail />,
+  },
+  {
+    path: PAGE.REPORT.path,
+    element: <ReportPage />,
+  },
+  {
+    path: "/test",
+    element: <LoadingPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ];
 
 const route = createBrowserRouter([
-    {
-        path: PAGE.LOGIN.path,
-        element: <SignIn/>,
-    },
-    {
-        path: PAGE.FORGOT_PASSWORD.path,
-        element: <ForgotPassword />,
-    },
-    {
-        path: PAGE.OTP_INPUT.path,
-        element: <OtpConfirmInput/>,
-    },
-    {
-        path: PAGE.RESET_PASSWORD.path,
-        element: <ResetPassword/>,
-    },
-    {
-        path: "/",
-        element: <PrivateRoute/>,
-        children: privateRoute,
-    },
+  {
+    path: PAGE.LOGIN.path,
+    element: <SignIn />,
+  },
+  {
+    path: PAGE.FORGOT_PASSWORD.path,
+    element: <ForgotPassword />,
+  },
+  {
+    path: PAGE.OTP_INPUT.path,
+    element: <OtpConfirmInput />,
+  },
+  {
+    path: PAGE.RESET_PASSWORD.path,
+    element: <ResetPassword />,
+  },
+
+  {
+    path: "/",
+    element: <PrivateRoute />,
+    children: privateRoute,
+  },
 ]);
 
 export default route;

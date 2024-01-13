@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCities, setLoading } from "redux/appSlice";
 import { UserService } from "services/user/UserService";
 
-export default function HomePage() {
+export default function FilterBar() {
   const { tokenPayload, token, params } = useSelector(
     // @ts-ignore
     (state) => state.appState

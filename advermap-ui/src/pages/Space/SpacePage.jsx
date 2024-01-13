@@ -21,7 +21,7 @@ import {
 } from "utils/formatToUI";
 import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
 import { useLocation } from "react-router-dom";
-import HomePage from "pages/HomePage";
+import HomePage from "components/FilterBar/FilterBar";
 import { UserRole } from "constants/types";
 
 const columns = [

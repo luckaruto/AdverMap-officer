@@ -64,6 +64,18 @@ const privateRoute = [
         path: "*",
         element: <ErrorPage/>,
     },
+    {
+        path: "cities",
+        element: <CityPage/>,
+    },
+    {
+        path: "districts",
+        element: <DistrictPage/>,
+    },
+    {
+        path: "wards",
+        element: <WardPage/>,
+    }
 ];
 
 const route = createBrowserRouter([

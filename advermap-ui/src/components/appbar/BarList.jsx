@@ -20,7 +20,7 @@ const nav = {
     report:   { page: PAGE.REPORT,icon: <BugReportIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
     surface:   { page: PAGE.SURFACE,icon: <PlaceIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
     space:   { page: PAGE.SPACE,icon: <ViewInArIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
-    surface_request:   { page: PAGE.SURFACE,icon: <SummarizeIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
+    surface_request:   { page: PAGE.SURFACE_ALLOWANCE,icon: <SummarizeIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
     user:   { page: PAGE.USER,icon: <SummarizeIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
 }
 

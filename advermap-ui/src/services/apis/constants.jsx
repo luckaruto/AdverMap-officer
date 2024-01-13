@@ -10,6 +10,9 @@ export const API={
 	SPACE:"/api/v1/spaces",
 	REPORT:"/api/v1/reports",
 	USER:"/api/v1/users",
+	CITY:"/api/v1/cities",
+	WARD:"/api/v1/wards",
+	DISTRICT: "/api/v1/districts"
 }
 export const testToken=`eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiRElTVFJJQ1RfQURNSU4iLCJzdWIiOiJkaXN0cmljdGFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcwNDc5NDcxMSwiZXhwIjoxNzA0Nzk2NTExfQ.APL5p0IeVByd9e-i7AQ1bK1jH57hzTNGfRu_tb_onCk`
 

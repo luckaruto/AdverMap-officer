@@ -101,11 +101,10 @@ const SurfaceForm = (props) => {
   
 
   const setExistData = () => {
-    setValue("address", existData.address);
+    setValue("address", existData.surface.space.address);
     setValue("content", existData.content);
-    setValue("space_id", +existData.space_id);
-    setValue("surface_id", +existData.surface_id);
-    setValue("address", existData.address);
+    setValue("space_id", +existData.surface.space.id);
+    setValue("surface_id", +existData.surface.id);
     setValue("ward_id", +existData.ward_id);
     setValue("email", existData.email);
     setValue("phone", existData.phone);
@@ -114,8 +113,6 @@ const SurfaceForm = (props) => {
     setValue("name", existData.name);
     setValue("latitude", +existData.latitude);
     setValue("report_type_id", +existData.report_type_id);
-
-
   };
 
 

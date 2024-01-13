@@ -18,6 +18,7 @@ import ReportForm from "./ReportForm";
 import DropDownSort from "./DropDownSort";
 import { ReportState } from "constants/types";
 import { stateFormat } from "utils/format";
+import ResponseForm from "pages/SpaceRequest/ResponseForm";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -46,8 +47,17 @@ const columns = [
   {
     id: "state",
     label: "Trạng thái",
-    minWidth: 100,
+    minWidth: 150,
     format: stateFormatUI,
+  },
+  {
+    id: "response",
+    label: "Phản hồi",
+    minWidth: 200,
+    format: (value) => {
+      if (value) return value;
+      return "Chưa có";
+    },
   },
   {
     id: "detail",
@@ -61,11 +71,10 @@ const ReportPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedRow, setSelectedRow] = useState(null);
-  const [openForm, setOpenForm] = useState(false);
-  const [openConfirm, setOpenConfirm] = useState(false);
+  const [openResponseForm, setOpenResponseForm] = useState(false);
 
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, params } = useSelector((state) => state.appState);
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.reports);
 
@@ -74,37 +83,27 @@ const ReportPage = () => {
   var params;
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
-  const handleOpenForm = () => setOpenForm(true);
-  const handleCloseForm = () => setOpenForm(false);
+
+  console.log(selectedRow);
+
+  const handleOpenResponseForm = () => setOpenResponseForm(true);
+  const handleCloseResponseForm = () => setOpenResponseForm(false);
+
   const handleClickRow = (row) => setSelectedRow(row);
-  const handleClickCreate = () => {
-    setSelectedRow(null);
-    setTimeout(() => {
-      handleOpenForm();
-    }, 0);
-  };
-  const handleClickEdit = () => {
-    handleOpenForm();
-  };
-  const handleClickDelete = () => {
-    setOpenConfirm(true);
+
+  const handleClickResponse = () => {
+    handleOpenResponseForm();
   };
 
-  const handleDelete = async () => {
-    const { id } = selectedRow;
-    dispatch(setLoading(true));
-    try {
-      const res = await ReportService.delete(id, token);
-      dispatch(setSnackbar({ status: "success", message: res }));
-      // @ts-ignore
-      dispatch(fetchSpaceRequest({ testParams, token }));
-    } catch (error) {
-      dispatch(setSnackbar({ status: "error", message: error }));
-    } finally {
-      setSelectedRow(null);
-      dispatch(setLoading(false));
-      setOpenConfirm(false);
-    }
+  const fetchData = () => {
+    console.log("fetch Data");
+    const id = location.pathname.split("/")[2];
+    let reqParams;
+    if (id) {
+      reqParams = { surfaceIds: id };
+    } else reqParams = params.content;
+    // @ts-ignore
+    dispatch(fetchReports({ params: reqParams, token }));
   };
   const filterListReport = (type) => {
     if (stateFormat(ReportState.APPROVED) === type) {
@@ -128,13 +127,8 @@ const ReportPage = () => {
   };
 
   useEffect(() => {
-    const id = location.pathname.split("/")[2];
-    if (id) {
-      params = { surfaceIds: id };
-    } else params = { wardIds: 1 };
-    // @ts-ignore
-    dispatch(fetchReports({ params, token }));
-  }, [location]);
+    fetchData();
+  }, [params, location]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
@@ -149,26 +143,11 @@ const ReportPage = () => {
           <DropDownSort filterListReport={filterListReport}></DropDownSort>
           <Button
             variant="outlined"
-            color="success"
-            onClick={handleClickCreate}
-          >
-            Tạo mới
-          </Button>
-          <Button
-            variant="outlined"
             color="info"
-            onClick={handleClickEdit}
+            onClick={handleClickResponse}
             disabled={!selectedRow}
           >
-            Chỉnh Sửa
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            Xóa
+            Phản hồi
           </Button>
         </div>
       </div>
@@ -178,6 +157,7 @@ const ReportPage = () => {
           rows={listReport}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
+          selectedRow={selectedRow}
         />
       ) : (
         <p className="text-center text-blue-400 text-lg font-bold">
@@ -193,16 +173,12 @@ const ReportPage = () => {
       {error && (
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
-      <ReportForm
-        open={openForm}
-        handleClose={handleCloseForm}
+      <ResponseForm
+        open={openResponseForm}
+        handleClose={handleCloseResponseForm}
         existData={selectedRow}
-      />
-      <ConfirmModal
-        open={openConfirm}
-        handleClose={() => setOpenConfirm(false)}
-        handleSubmit={handleDelete}
-        message="Xác nhận xóa địa điểm được chọn?"
+        updated={fetchData}
+        responseService={ReportService.response}
       />
     </div>
   );

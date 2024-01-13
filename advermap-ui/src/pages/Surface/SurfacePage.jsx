@@ -62,11 +62,10 @@ const SurfacePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, params } = useSelector((state) => state.appState);
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.surfaces);
 
-  var params;
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
   const handleClickRow = (row) => setSelectedRow(row);
@@ -89,9 +88,11 @@ const SurfacePage = () => {
     dispatch(setLoading(true));
     try {
       const res = await SurfaceServices.delete(id, token);
+      console.log(res);
       dispatch(setSnackbar({ status: "success", message: res }));
+      const { content } = params;
       // @ts-ignore
-      dispatch(fetchSpaceRequest({ testParams, token }));
+      dispatch(fetchSurfaces({ content, token }));
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
@@ -109,12 +110,13 @@ const SurfacePage = () => {
 
   useEffect(() => {
     const id = location.pathname.split("/")[2];
+    let reqParams;
     if (id) {
-      params = { spaceIds: id };
-    } else params = { cityIds: 1 };
+      reqParams = { spaceIds: id };
+    } else reqParams = params.content;
     // @ts-ignore
-    dispatch(fetchSurfaces({ params, token }));
-  }, [location]);
+    dispatch(fetchSurfaces({ params: reqParams, token }));
+  }, [location, params]);
 
   useEffect(() => {
     dispatch(setLoading(loading));

@@ -23,7 +23,7 @@ function App() {
     <>
       {loading && <LoadingPage/>}
 
-      <BasicSnackbar {...snackbar} />
+      {/* <BasicSnackbar {...snackbar} /> */}
 
       <RouterProvider router={route} />
     </>

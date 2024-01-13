@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthService } from 'services/auth/authService';
-import {setCurrentPage, setLoading, setRefreshToken, setToken} from 'redux/appSlice';
-import { PAGE } from 'components/constants';
-import { yupResolver } from '@hookform/resolvers/yup'
-import ChakraHook from 'hooks';
-import { Box, Heading, VStack, Text, useToast, Stack, Link, Avatar } from '@chakra-ui/react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { LoginSchema } from '../../../constants/validation/index.jsx';
-import { loginFailedDescription, loginSuccessDescription } from '../../../constants/messages/index.ts';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthService } from "services/auth/authService";
+import {
+  setCurrentPage,
+  setLoading,
+  setRefreshToken,
+  setToken,
+} from "redux/appSlice";
+import { PAGE } from "components/constants";
+import { yupResolver } from "@hookform/resolvers/yup";
+import ChakraHook from "hooks";
+import {
+  Box,
+  Heading,
+  VStack,
+  Text,
+  useToast,
+  Stack,
+  Link,
+  Avatar,
+} from "@chakra-ui/react";
+import { FormProvider, useForm } from "react-hook-form";
+import { LoginSchema } from "../../../constants/validation/index.jsx";
+import {
+  loginFailedDescription,
+  loginSuccessDescription,
+} from "../../../constants/messages/index.ts";
 // @ts-ignore
-import FormInput from '../../../components/FormInput/index.jsx';
-import PasswordField from '../../../components/PasswordField/index.jsx';
-import { SubmitButton } from '../authenticatePage.styles.js';
-
+import FormInput from "../../../components/FormInput/index.jsx";
+import PasswordField from "../../../components/PasswordField/index.jsx";
+import { SubmitButton } from "../authenticatePage.styles.js";
 
 const SignIn = () => {
   // @ts-ignore
@@ -61,10 +77,11 @@ const SignIn = () => {
       dispatch(setLoading(false));
     }
   }
+
   return (
     <ChakraHook>
       <Box width="full" maxWidth="xl" marginX="auto" paddingY="188px">
-        <Box maxWidth="416px" marginX={{ base: 8, md: 'auto' }}>
+        <Box maxWidth="416px" marginX={{ base: 8, md: "auto" }}>
           <VStack marginBottom={12} width="full" alignItems="flex-start">
             <Avatar size="lg" src="https://bit.ly/broken-link" />
             <Heading
@@ -84,14 +101,25 @@ const SignIn = () => {
           <FormProvider {...method}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing="4">
-                <FormInput name="username" label="Tên đăng nhập" placeholder="Tên đăng nhập" />
-                <PasswordField name="password" label="Mật khẩu" placeholder="Mật khẩu của bạn" />
+                <FormInput
+                  name="username"
+                  label="Tên đăng nhập"
+                  placeholder="Tên đăng nhập"
+                />
+                <PasswordField
+                  name="password"
+                  label="Mật khẩu"
+                  placeholder="Mật khẩu của bạn"
+                />
                 <Text width="full" align="right" fontSize="sm">
                   <Link href={PAGE.FORGOT_PASSWORD.path} color="blue.500">
                     Quên mật khẩu?
                   </Link>
                 </Text>
-                <SubmitButton type="submit" isLoading={isSubmitting || isLoading}>
+                <SubmitButton
+                  type="submit"
+                  isLoading={isSubmitting || isLoading}
+                >
                   Đăng nhập
                 </SubmitButton>
               </Stack>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +14,13 @@ import { useLocation } from "react-router-dom";
 import { fetchReports } from "redux/reportSlice";
 import { stateFormatUI } from "utils/formatToUI";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
-import ReportForm from "./ReportForm"
-
-
+import ReportForm from "./ReportForm";
+import DropDownSort from "./DropDownSort";
+import { ReportState } from "constants/types";
+import { stateFormat } from "utils/format";
 
 const columns = [
-  { id: "id", label: "ID"},
+  { id: "id", label: "ID" },
   {
     id: "address",
     label: "Địa chỉ",
@@ -26,7 +28,7 @@ const columns = [
   },
   {
     id: "ward",
-    label: "Phường", 
+    label: "Phường",
     minWidth: 170,
     format: (value) => value?.name,
   },
@@ -45,7 +47,7 @@ const columns = [
     id: "state",
     label: "Trạng thái",
     minWidth: 100,
-    format:stateFormatUI
+    format: stateFormatUI,
   },
   {
     id: "detail",
@@ -67,6 +69,8 @@ const ReportPage = () => {
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.reports);
 
+  const [listReport, setListReport] = useState(entities);
+
   var params;
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
@@ -74,7 +78,6 @@ const ReportPage = () => {
   const handleCloseForm = () => setOpenForm(false);
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickCreate = () => {
- 
     setSelectedRow(null);
     setTimeout(() => {
       handleOpenForm();
@@ -82,14 +85,11 @@ const ReportPage = () => {
   };
   const handleClickEdit = () => {
     handleOpenForm();
-
   };
   const handleClickDelete = () => {
     setOpenConfirm(true);
-
   };
 
- 
   const handleDelete = async () => {
     const { id } = selectedRow;
     dispatch(setLoading(true));
@@ -105,8 +105,28 @@ const ReportPage = () => {
       dispatch(setLoading(false));
       setOpenConfirm(false);
     }
-   
   };
+  const filterListReport = (type) => {
+    if (stateFormat(ReportState.APPROVED) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.APPROVED)
+      );
+    }
+    if (stateFormat(ReportState.IN_PROGRESS) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.IN_PROGRESS)
+      );
+    }
+    if (stateFormat(ReportState.REJECTED) === type) {
+      setListReport(
+        entities.filter((entity) => entity.state === ReportState.REJECTED)
+      );
+    }
+    if (type === "Tất cả") {
+      setListReport(entities);
+    }
+  };
+
   useEffect(() => {
     const id = location.pathname.split("/")[2];
     if (id) {
@@ -126,6 +146,7 @@ const ReportPage = () => {
       <div className="flex flex-col gap-[24px] mb-[32px]">
         <Heading1>Danh sách các báo cáo</Heading1>
         <div className="flex gap-6 ml-auto">
+          <DropDownSort filterListReport={filterListReport}></DropDownSort>
           <Button
             variant="outlined"
             color="success"
@@ -151,10 +172,10 @@ const ReportPage = () => {
           </Button>
         </div>
       </div>
-      {entities && entities.length > 0 ? (
+      {listReport && listReport?.length > 0 ? (
         <DataTable
           columns={columns}
-          rows={entities}
+          rows={listReport}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
         />
@@ -163,26 +184,26 @@ const ReportPage = () => {
           No data ...
         </p>
       )}
-       {error && (
+      {error && (
         <p className="text-center text-red-500 text-lg font-bold">
           Error: {error.message} {/* Display a user-friendly error message */}
         </p>
       )}
-      
+
       {error && (
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
-        <ReportForm
-          open={openForm}
-          handleClose={handleCloseForm}
-          existData={selectedRow}
-        />
-         <ConfirmModal
-          open={openConfirm}
-          handleClose={() => setOpenConfirm(false)}
-          handleSubmit={handleDelete}
-          message="Xác nhận xóa địa điểm được chọn?"
-        />
+      <ReportForm
+        open={openForm}
+        handleClose={handleCloseForm}
+        existData={selectedRow}
+      />
+      <ConfirmModal
+        open={openConfirm}
+        handleClose={() => setOpenConfirm(false)}
+        handleSubmit={handleDelete}
+        message="Xác nhận xóa địa điểm được chọn?"
+      />
     </div>
   );
 };

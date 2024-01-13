@@ -192,9 +192,7 @@ export default function HomePage() {
   return (
     <>
       <div className="w-full h-screen m-auto  gap-4 flex flex-row">
-        <div
-          className={`relative ${show ? "h-full w-[80%]" : "h-full w-full"}`}
-        >
+        <div className={`relative ${show ? "h-full w-full" : "h-full w-full"}`}>
           <button
             className="absolute top-5 right-6 z-10  "
             onClick={onClickToMyLocation}

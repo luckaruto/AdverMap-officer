@@ -143,7 +143,6 @@ const SpacePage = () => {
 
   return (
     <>
-      <FilterBar />
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
         <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>

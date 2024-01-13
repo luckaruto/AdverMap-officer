@@ -33,21 +33,21 @@ export default function FilterBar() {
       <FilterCity />
 
       <div className="mt-4 flex flex-col gap-4">
-        <Heading1>
-          Thông tin các trường tìm kiếm
-        </Heading1>
-        <p>
-          <span className="font-bold text-base">Thành phố: </span>
-          {params.info.city && params.info.city.name}
-        </p>
-        <p>
-          <span className="font-bold text-base">Quận: </span>
-          {params.info.district && params.info.district.name}
-        </p>
-        <p>
-          <span className="font-bold text-base">Phường: </span>
-          {params.info.ward && params.info.ward.name}
-        </p>
+        <Heading1 className="text-base">Thông tin các trường tìm kiếm</Heading1>
+        <div className="flex flex-row gap-4 justify-center">
+          <div>
+            <span className="font-bold text-base">Thành phố: </span>
+            {params.info.city && params.info.city.name}
+          </div>
+          <div>
+            <span className="font-bold text-base">Quận: </span>
+            {params.info.district && params.info.district.name}
+          </div>
+          <div>
+            <span className="font-bold text-base">Phường: </span>
+            {params.info.ward && params.info.ward.name}
+          </div>
+        </div>
       </div>
     </>
   );

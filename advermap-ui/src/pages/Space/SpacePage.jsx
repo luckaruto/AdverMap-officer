@@ -22,6 +22,7 @@ import {
 import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
 import { useLocation } from "react-router-dom";
 import HomePage from "pages/HomePage";
+import { UserRole } from "constants/types";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -71,8 +72,10 @@ const SpacePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  // @ts-ignore
-  const { token, snackbar, params } = useSelector((state) => state.appState);
+  const { token, snackbar, params, tokenPayload } = useSelector(
+    // @ts-ignore
+    (state) => state.appState
+  );
 
   // console.log(params.content);
 
@@ -139,44 +142,51 @@ const SpacePage = () => {
 
   return (
     <>
-    <HomePage/>
+      <HomePage />
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
         <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>
           Danh sách yêu cầu
         </Button>
         <div className="flex gap-6 ml-auto">
-          <Button
-            variant="contained"
-            color="info"
-            onClick={handleOpenRequestForm}
-            disabled={!selectedRow}
-          >
-            Yêu cầu chỉnh sửa
-          </Button>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={handleClickCreate}
-          >
-            Tạo mới
-          </Button>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleClickEdit}
-            disabled={!selectedRow}
-          >
-            Chỉnh Sửa
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            Xóa
-          </Button>
+          {tokenPayload.role != UserRole.ADMIN && (
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleOpenRequestForm}
+              disabled={!selectedRow}
+            >
+              Yêu cầu chỉnh sửa
+            </Button>
+          )}
+          {tokenPayload.role == UserRole.ADMIN && (
+            <>
+              {" "}
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleClickCreate}
+              >
+                Tạo mới
+              </Button>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={handleClickEdit}
+                disabled={!selectedRow}
+              >
+                Chỉnh Sửa
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+                disabled={!selectedRow}
+              >
+                Xóa
+              </Button>
+            </>
+          )}
         </div>
 
         {entities && entities.length > 0 ? (

@@ -51,9 +51,15 @@ export const UserRole = {
   ADMIN: "ADMIN",
 };
 
-
 //Form Mode
 export const FormMode = {
-  CREATE:"CREATE",
-  EDIT:"EDIT",
+  CREATE: "CREATE",
+  EDIT: "EDIT",
+};
+
+//User
+export const Role = {
+  WARD_ADMIN: "WARD_ADMIN",
+  DISTRICT_ADMIN: "DISTRICT_ADMIN",
+  ADMIN: "ADMIN",
 };

@@ -40,12 +40,12 @@ const columns = [
     id: "format",
     label: "Hình thức",
     minWidth: 170,
-    format:formatFormatUI
+    format: formatFormatUI,
   },
   {
     id: "content",
     label: "Nội dung",
-      minWidth: 200,
+    minWidth: 200,
   },
   {
     id: "detail",
@@ -62,18 +62,15 @@ const SurfacePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, params } = useSelector((state) => state.appState);
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.surfaces);
 
-
-  var params;
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickDetail = (row) => navigate(PAGE.SURFACE.path + `/${row.id}`);
   const handleClickCreate = () => {
- 
     setSelectedRow(null);
     setTimeout(() => {
       handleOpenForm();
@@ -81,22 +78,21 @@ const SurfacePage = () => {
   };
   const handleClickEdit = () => {
     handleOpenForm();
-
   };
   const handleClickDelete = () => {
     setOpenConfirm(true);
-
   };
 
- 
   const handleDelete = async () => {
     const { id } = selectedRow;
     dispatch(setLoading(true));
     try {
       const res = await SurfaceServices.delete(id, token);
+      console.log(res);
       dispatch(setSnackbar({ status: "success", message: res }));
+      const { content } = params;
       // @ts-ignore
-      dispatch(fetchSpaceRequest({ testParams, token }));
+      dispatch(fetchSurfaces({ content, token }));
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
@@ -104,16 +100,16 @@ const SurfacePage = () => {
       dispatch(setLoading(false));
       setOpenConfirm(false);
     }
-   
   };
   useEffect(() => {
     const id = location.pathname.split("/")[2];
+    let reqParams;
     if (id) {
-      params = { spaceIds: id };
-    } else params = { cityIds: 1 };
+      reqParams = { spaceIds: id };
+    } else reqParams = params.content;
     // @ts-ignore
-    dispatch(fetchSurfaces({ params, token }));
-  }, [location]);
+    dispatch(fetchSurfaces({ params: reqParams, token }));
+  }, [location,params]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
@@ -123,60 +119,56 @@ const SurfacePage = () => {
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
       <Heading1>Danh sách bảng Quảng Cáo</Heading1>
       <div className="flex gap-6 ml-auto">
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={handleClickCreate}
-          >
-            Tạo mới
-          </Button>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleClickEdit}
-            disabled={!selectedRow}
-          >
-            Chỉnh Sửa
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            Xóa
-          </Button>
-        </div>
+        <Button variant="outlined" color="success" onClick={handleClickCreate}>
+          Tạo mới
+        </Button>
+        <Button
+          variant="outlined"
+          color="info"
+          onClick={handleClickEdit}
+          disabled={!selectedRow}
+        >
+          Chỉnh Sửa
+        </Button>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleClickDelete}
+          disabled={!selectedRow}
+        >
+          Xóa
+        </Button>
+      </div>
       {entities && entities.length > 0 ? (
         <DataTable
           columns={columns}
           rows={entities}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
+          selectedRow={selectedRow}
         />
       ) : (
         <p className="text-center text-blue-400 text-lg font-bold">
           No data ...
         </p>
       )}
-       {error && (
+      {error && (
         <p className="text-center text-red-500 text-lg font-bold">
           Error: {error.message} {/* Display a user-friendly error message */}
         </p>
       )}
       {selectedRow && <SurfaceInfo data={selectedRow} />}
-        <SurfaceForm
-          open={openForm}
-          handleClose={handleCloseForm}
-          existData={selectedRow}
-        />
-        <ConfirmModal
-          open={openConfirm}
-          handleClose={() => setOpenConfirm(false)}
-          handleSubmit={handleDelete}
-          message="Xác nhận xóa địa điểm được chọn?"
-        />
-     
+      <SurfaceForm
+        open={openForm}
+        handleClose={handleCloseForm}
+        existData={selectedRow}
+      />
+      <ConfirmModal
+        open={openConfirm}
+        handleClose={() => setOpenConfirm(false)}
+        handleSubmit={handleDelete}
+        message="Xác nhận xóa địa điểm được chọn?"
+      />
     </div>
   );
 };

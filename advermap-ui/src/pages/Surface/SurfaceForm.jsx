@@ -100,7 +100,7 @@ const SurfaceForm = (props) => {
     setValue("height", +existData.height);
     setValue("format", existData.format);
     setValue("content", existData.content);
-    setValue("spaceId", +existData.spaceId);
+    setValue("spaceId", +existData.space.id);
   };
 
 

@@ -13,12 +13,11 @@ import { useLocation } from "react-router-dom";
 import { fetchReports } from "redux/reportSlice";
 import { stateFormatUI } from "utils/formatToUI";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
-import ReportForm from "./ReportForm"
-
-
+import ReportForm from "./ReportForm";
+import ResponseForm from "pages/SpaceRequest/ResponseForm";
 
 const columns = [
-  { id: "id", label: "ID"},
+  { id: "id", label: "ID" },
   {
     id: "address",
     label: "Địa chỉ",
@@ -26,7 +25,7 @@ const columns = [
   },
   {
     id: "ward",
-    label: "Phường", 
+    label: "Phường",
     minWidth: 170,
     format: (value) => value?.name,
   },
@@ -44,8 +43,17 @@ const columns = [
   {
     id: "state",
     label: "Trạng thái",
-    minWidth: 100,
-    format:stateFormatUI
+    minWidth: 150,
+    format: stateFormatUI,
+  },
+  {
+    id: "response",
+    label: "Phản hồi",
+    minWidth: 200,
+    format: (value) => {
+      if (value) return value;
+      return "Chưa có";
+    },
   },
   {
     id: "detail",
@@ -59,62 +67,43 @@ const ReportPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedRow, setSelectedRow] = useState(null);
-  const [openForm, setOpenForm] = useState(false);
-  const [openConfirm, setOpenConfirm] = useState(false);
+  const [openResponseForm, setOpenResponseForm] = useState(false);
+
+ 
 
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, params } = useSelector((state) => state.appState);
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.reports);
 
-  var params;
-
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
-  const handleOpenForm = () => setOpenForm(true);
-  const handleCloseForm = () => setOpenForm(false);
+
+  console.log(selectedRow);
+
+  const handleOpenResponseForm = () => setOpenResponseForm(true);
+  const handleCloseResponseForm = () => setOpenResponseForm(false);
+
   const handleClickRow = (row) => setSelectedRow(row);
-  const handleClickCreate = () => {
+
+  const handleClickResponse = () => {
+    handleOpenResponseForm();
+  };
  
-    setSelectedRow(null);
-    setTimeout(() => {
-      handleOpenForm();
-    }, 0);
-  };
-  const handleClickEdit = () => {
-    handleOpenForm();
 
-  };
-  const handleClickDelete = () => {
-    setOpenConfirm(true);
-
-  };
-
- 
-  const handleDelete = async () => {
-    const { id } = selectedRow;
-    dispatch(setLoading(true));
-    try {
-      const res = await ReportService.delete(id, token);
-      dispatch(setSnackbar({ status: "success", message: res }));
-      // @ts-ignore
-      dispatch(fetchSpaceRequest({ testParams, token }));
-    } catch (error) {
-      dispatch(setSnackbar({ status: "error", message: error }));
-    } finally {
-      setSelectedRow(null);
-      dispatch(setLoading(false));
-      setOpenConfirm(false);
-    }
-   
-  };
-  useEffect(() => {
+  const fetchData = () => {
+    console.log("fetch Data");
     const id = location.pathname.split("/")[2];
+    let reqParams;
     if (id) {
-      params = { surfaceIds: id };
-    } else params = { wardIds: 1 };
+      reqParams = { surfaceIds: id };
+    } else reqParams = params.content;
     // @ts-ignore
-    dispatch(fetchReports({ params, token }));
-  }, [location]);
+    dispatch(fetchReports({ params: reqParams, token }));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [params, location]);
 
   useEffect(() => {
     dispatch(setLoading(loading));
@@ -128,27 +117,13 @@ const ReportPage = () => {
         <div className="flex gap-6 ml-auto">
           <Button
             variant="outlined"
-            color="success"
-            onClick={handleClickCreate}
-          >
-            Tạo mới
-          </Button>
-          <Button
-            variant="outlined"
             color="info"
-            onClick={handleClickEdit}
+            onClick={handleClickResponse}
             disabled={!selectedRow}
           >
-            Chỉnh Sửa
+            Phản hồi
           </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            Xóa
-          </Button>
+          
         </div>
       </div>
       {entities && entities.length > 0 ? (
@@ -157,32 +132,30 @@ const ReportPage = () => {
           rows={entities}
           onClickDetail={handleClickDetail}
           onClickRow={handleClickRow}
+          selectedRow={selectedRow}
         />
       ) : (
         <p className="text-center text-blue-400 text-lg font-bold">
           No data ...
         </p>
       )}
-       {error && (
+      {error && (
         <p className="text-center text-red-500 text-lg font-bold">
           Error: {error.message} {/* Display a user-friendly error message */}
         </p>
       )}
-      
+
       {error && (
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
-        <ReportForm
-          open={openForm}
-          handleClose={handleCloseForm}
-          existData={selectedRow}
-        />
-         <ConfirmModal
-          open={openConfirm}
-          handleClose={() => setOpenConfirm(false)}
-          handleSubmit={handleDelete}
-          message="Xác nhận xóa địa điểm được chọn?"
-        />
+      <ResponseForm
+        open={openResponseForm}
+        handleClose={handleCloseResponseForm}
+        existData={selectedRow}
+        updated={fetchData}
+        responseService={ReportService.response}
+      />
+     
     </div>
   );
 };

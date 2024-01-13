@@ -21,6 +21,7 @@ const nav = {
     surface:   { page: PAGE.SURFACE,icon: <PlaceIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
     space:   { page: PAGE.SPACE,icon: <ViewInArIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
     surface_request:   { page: PAGE.SURFACE,icon: <SummarizeIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
+    user:   { page: PAGE.USER,icon: <SummarizeIcon sx={{fontSize:DEFAULT.ICON_SIZE}}/>},
 }
 
 const WARD_ADMIN_LIST = [
@@ -46,7 +47,8 @@ const ADMIN_LIST = [
     nav.surface_request,
     nav.city,
     nav.district,
-    nav.ward
+    nav.ward,
+    nav.user,
 ]
 
 export default function BarList(){

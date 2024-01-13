@@ -6,6 +6,7 @@ import surfaceSlice from "./surfaceSlice";
 import reportSlice from "./reportSlice";
 import permission from "./permission";
 import spaceRequestSlice from "./spaceRequestSlice";
+import userSlice from "./userSlice";
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     surfaces:surfaceSlice,
     reports:reportSlice,
     permission: permission,
+    users: userSlice,
   },
 });

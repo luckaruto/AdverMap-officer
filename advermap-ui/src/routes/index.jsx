@@ -16,6 +16,7 @@ import OtpConfirmInput from "pages/login/InputOtp";
 import ResetPassword from "pages/login/ResetPassword";
 import SpaceRequestPage from "pages/SpaceRequest/SpaceRequestPage";
 import MyProfilePage from "pages/MyProfile";
+import UserPage from "../pages/User/UserPage";
 
 const privateRoute = [
     {path: PAGE.HOME.path, element: <HomePage/>},
@@ -50,6 +51,10 @@ const privateRoute = [
     {
         path: PAGE.PROFILE.path,
         element: <MyProfilePage/>,
+    },
+    {
+        path: PAGE.USER.path,
+        element: <UserPage/>,
     },
     {
         path: "/test",

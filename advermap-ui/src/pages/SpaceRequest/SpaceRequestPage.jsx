@@ -2,7 +2,6 @@ import React from "react";
 import DataTable from "../../components/DataTable";
 import { useState, useEffect } from "react";
 import { SpaceService } from "services/space/SpaceService";
-
 import { PAGE } from "components/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
@@ -86,7 +85,7 @@ const SpaceRequestPage = () => {
   const navigate = useNavigate();
 
   // @ts-ignore
-  const { token, snackbar } = useSelector((state) => state.appState);
+  const { token } = useSelector((state) => state.appState);
 
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.spaces);
@@ -96,7 +95,7 @@ const SpaceRequestPage = () => {
 
   // console.log(selectedRow);
 
-  const handleClickEdit = () => {
+  const handleClickResponse = () => {
     handleOpenResponseForm();
   };
   const handleClickDelete = () => {
@@ -156,7 +155,7 @@ const SpaceRequestPage = () => {
           <Button
             variant="outlined"
             color="info"
-            onClick={handleClickEdit}
+            onClick={handleClickResponse}
             disabled={!selectedRow}
           >
             Phản hồi
@@ -177,6 +176,7 @@ const SpaceRequestPage = () => {
             rows={entities}
             onClickDetail={() => {}}
             onClickRow={handleClickRow}
+            selectedRow={selectedRow}
           />
         ) : (
           <p className="text-center text-blue-400 text-lg font-bold">
@@ -197,6 +197,7 @@ const SpaceRequestPage = () => {
           handleClose={handleCloseResponseForm}
           existData={selectedRow}
           updated={fetchData}
+          responseService={SpaceService.responseRequest}
         />
         <ConfirmModal
           open={openConfirm}

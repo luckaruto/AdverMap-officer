@@ -35,7 +35,7 @@ const SpaceRequestForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spaceSchema = yup.object().shape({
+  const schema = yup.object().shape({
     address: yup.string().required(requiredError.address),
     longitude: yup.number().required(requiredError.default),
     latitude: yup.number().required(requiredError.default),
@@ -47,7 +47,7 @@ const SpaceRequestForm = (props) => {
 
   const method = useForm({
     mode: "onSubmit",
-    resolver: yupResolver(spaceSchema),
+    resolver: yupResolver(schema),
   });
 
   const { handleSubmit, setValue, reset } = method;

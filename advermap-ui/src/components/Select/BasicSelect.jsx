@@ -47,12 +47,12 @@ BasicSelect.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   choices: PropTypes.array.isRequired,
-  format: PropTypes.func.isRequired,
+  format: PropTypes.func,
 };
 BasicSelect.defaultProps = {
   label: "Label",
   name: "",
   choices: [],
-  format: () => "error",
+  format: (value) =>value,
 };
 export default BasicSelect;

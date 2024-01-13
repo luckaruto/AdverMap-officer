@@ -22,7 +22,7 @@ import { fetchSpaces } from "redux/spaceSlice";
 import { testParams } from "services/apis/constants";
 
 const ResponseForm = (props) => {
-  const { open, handleClose, existData,updated } = props;
+  const { open, handleClose, existData,updated,responseService } = props;
 
   // @ts-ignore
   const { token, snackbar } = useSelector((state) => state.appState);
@@ -30,7 +30,7 @@ const ResponseForm = (props) => {
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
-    response: yup.string().required(requiredError.default),
+    response: yup.string(),
     state: yup.string().required(requiredError.default),
   });
 
@@ -49,7 +49,7 @@ const ResponseForm = (props) => {
       let res;
 
       //handle res
-      res = await SpaceService.responseRequest(id,req, token);
+      res = await responseService(id,req, token);
 
       //handleSuccess
       dispatch(setSnackbar({ status: "success", message: res }));
@@ -121,6 +121,7 @@ ResponseForm.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   updated: PropTypes.func.isRequired,
+  responseService: PropTypes.func.isRequired,
   existData: PropTypes.object,
 };
 ResponseForm.defaultProps = {
@@ -128,6 +129,7 @@ ResponseForm.defaultProps = {
   handleClose: () => {},
   updated: () => {},
   existData: null,
+  responseService:SpaceService.responseRequest
 };
 
 export default ResponseForm;

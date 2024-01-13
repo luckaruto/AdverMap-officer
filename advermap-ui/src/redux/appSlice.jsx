@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PAGE } from "../components/constants";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 
 function getPayloadTokenFromStorage() {
@@ -19,7 +19,6 @@ function getPayloadTokenFromStorage() {
 
     return decodedToken;
   } catch (e) {
-
     return null;
   }
 }
@@ -30,17 +29,17 @@ function getTokenFromStorage() {
     return null;
   }
 
-  tokenString = tokenString.replaceAll(`"`,'');
+  tokenString = tokenString.replaceAll(`"`, "");
   return tokenString;
 }
 
-function  getRefreshTokenFromStorage(){
+function getRefreshTokenFromStorage() {
   var tokenString = localStorage.getItem("refreshToken");
   if (!tokenString || tokenString == null) {
     return null;
   }
 
-  tokenString = tokenString.replaceAll(`"`,'');
+  tokenString = tokenString.replaceAll(`"`, "");
   return tokenString;
 }
 
@@ -48,13 +47,26 @@ const initialState = {
   currentPage: PAGE.HOME,
   token: getTokenFromStorage(),
   tokenPayload: getPayloadTokenFromStorage(),
-  refreshToken:  getRefreshTokenFromStorage(),
+  refreshToken: getRefreshTokenFromStorage(),
   loading: false,
   notification: [{ id: 1, message: "test notification" }],
   snackbar: {
     id: "",
     status: "info",
     message: "init message",
+  },
+  cities: [],
+  params: {
+    content: {
+      cityId: null,
+      wardIds: null,
+      districtIds: null,
+    },
+    info: {
+      city: null,
+      district: null,
+      ward: null,
+    },
   },
 };
 
@@ -102,6 +114,12 @@ const appSlice = createSlice({
       };
       state.snackbar = updateState;
     },
+    setCities: (state, action) => {
+      state.cities = action.payload;
+    },
+    setParams: (state, action) => {
+      state.params = action.payload;
+    },
   },
 });
 
@@ -113,5 +131,7 @@ export const {
   setToken,
   setSnackbar,
   setRefreshToken,
+  setParams,
+  setCities,
 } = appSlice.actions;
 export default appSlice.reducer;

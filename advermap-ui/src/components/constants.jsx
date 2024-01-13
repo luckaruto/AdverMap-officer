@@ -22,6 +22,6 @@ export const ROLE = {
 }
 
 export const DEFAULT = {
-	ICON_SIZE: 60,
-	DRAWER_SIZE: 100,
+	ICON_SIZE: 40,
+	DRAWER_SIZE: 80,
 }

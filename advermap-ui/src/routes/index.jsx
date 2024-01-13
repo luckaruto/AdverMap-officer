@@ -16,49 +16,67 @@ import OtpConfirmInput from "pages/login/InputOtp";
 import ResetPassword from "pages/login/ResetPassword";
 import SpaceRequestPage from "pages/SpaceRequest/SpaceRequestPage";
 import MyProfilePage from "pages/MyProfile";
+import UserPage from "../pages/User/UserPage";
+import CityPage from "pages/City/CityPage";
 
 const privateRoute = [
-  { path: PAGE.HOME.path, element: <HomePage /> },
-  {
-    path: PAGE.SPACE.path,
-    element: <SpacePage />,
-  },
-  {
-    path: PAGE.SPACE.path + "/:id",
-    element: <SurfacePage />,
-  },
-  {
-    path: PAGE.SURFACE.path,
-    element: <SurfacePage />,
-  },
-  {
-    path: PAGE.SURFACE.path + "/:id",
-    element: <ReportPage />,
-  },
-  {
-    path: PAGE.REPORT.path + "/:id",
-    element: <ReportDetail />,
-  },
-  {
-    path: PAGE.REPORT.path,
-    element: <ReportPage />,
-  },
-  {
-    path: PAGE.SPACE_REQUEST.path,
-    element: <SpaceRequestPage />,
-  },
-  {
-    path: PAGE.PROFILE.path,
-    element: <MyProfilePage />,
-  },
-  {
-    path: "/test",
-    element: <LoadingPage />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
+    {path: PAGE.HOME.path, element: <HomePage/>},
+    {
+        path: PAGE.SPACE.path,
+        element: <SpacePage/>,
+    },
+    {
+        path: PAGE.SPACE.path + "/:id",
+        element: <SurfacePage/>,
+    },
+    {
+        path: PAGE.SURFACE.path,
+        element: <SurfacePage/>,
+    },
+    {
+        path: PAGE.SURFACE.path + "/:id",
+        element: <ReportPage/>,
+    },
+    {
+        path: PAGE.REPORT.path + "/:id",
+        element: <ReportDetail/>,
+    },
+    {
+        path: PAGE.REPORT.path,
+        element: <ReportPage/>,
+    },
+    {
+        path: PAGE.SPACE_REQUEST.path,
+        element: <SpaceRequestPage/>,
+    },
+    {
+        path: PAGE.PROFILE.path,
+        element: <MyProfilePage/>,
+    },
+    {
+        path: PAGE.USER.path,
+        element: <UserPage/>,
+    },
+    {
+        path: "/test",
+        element: <LoadingPage/>,
+    },
+    {
+        path: "*",
+        element: <ErrorPage/>,
+    },
+    {
+        path: "cities",
+        element: <CityPage/>,
+    },
+    // {
+    //     path: "districts",
+    //     element: <DistrictPage/>,
+    // },
+    // {
+    //     path: "wards",
+    //     element: <WardPage/>,
+    // }
 ];
 
 const route = createBrowserRouter([

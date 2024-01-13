@@ -21,8 +21,9 @@ import {
 } from "utils/formatToUI";
 import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
 import { useLocation } from "react-router-dom";
-import HomePage from "pages/HomePage";
+import HomePage from "components/FilterBar/FilterBar";
 import { UserRole } from "constants/types";
+import FilterBar from "components/FilterBar/FilterBar";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -142,7 +143,6 @@ const SpacePage = () => {
 
   return (
     <>
-      <HomePage />
       <div className="max-w-[1400px] m-auto flex flex-col gap-4">
         <Heading1>Danh sách địa điểm</Heading1>
         <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>

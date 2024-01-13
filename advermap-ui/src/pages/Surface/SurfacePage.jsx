@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "redux/appSlice";
 import { SurfaceServices } from "services/surface/SurfaceService";
 import DataTable from "components/DataTable";
 import { PAGE } from "components/constants";
@@ -16,6 +15,7 @@ import { formatFormatUI } from "utils/formatToUI";
 import Button from "@mui/material/Button";
 import SurfaceForm from "./SurfaceForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
+import { setLoading, setSnackbar } from "redux/appSlice";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -68,14 +68,12 @@ const SurfacePage = () => {
 
 
   var params;
-  const handleOpenForm = () => {
-    console.log('open form');
-    setOpenForm(true)};
+  const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickDetail = (row) => navigate(PAGE.SURFACE.path + `/${row.id}`);
   const handleClickCreate = () => {
-    console.log("Create button clicked");
+ 
     setSelectedRow(null);
     setTimeout(() => {
       handleOpenForm();
@@ -92,8 +90,20 @@ const SurfacePage = () => {
 
  
   const handleDelete = async () => {
-    alert('delete')
-
+    const { id } = selectedRow;
+    dispatch(setLoading(true));
+    try {
+      const res = await SurfaceServices.delete(id, token);
+      dispatch(setSnackbar({ status: "success", message: res }));
+      // @ts-ignore
+      dispatch(fetchSpaceRequest({ testParams, token }));
+    } catch (error) {
+      dispatch(setSnackbar({ status: "error", message: error }));
+    } finally {
+      setSelectedRow(null);
+      dispatch(setLoading(false));
+      setOpenConfirm(false);
+    }
    
   };
   useEffect(() => {
@@ -149,8 +159,10 @@ const SurfacePage = () => {
           No data ...
         </p>
       )}
-      {error && (
-        <p className="text-center text-red-500 text-lg font-bold">{error}</p>
+       {error && (
+        <p className="text-center text-red-500 text-lg font-bold">
+          Error: {error.message} {/* Display a user-friendly error message */}
+        </p>
       )}
       {selectedRow && <SurfaceInfo data={selectedRow} />}
         <SurfaceForm

@@ -197,7 +197,7 @@ public class SurfaceController {
     @PostMapping(path = "/{id}")
     public ResponseEntity<Response<SurfaceDto>> update(
             @PathVariable("id") Short id,
-            UpdateSurfaceDto dto
+            @RequestBody UpdateSurfaceDto dto
     )   {
         var data = this.surfaceService.findById(id);
 

@@ -19,6 +19,7 @@ import MyProfilePage from "pages/MyProfile";
 import UserPage from "../pages/User/UserPage";
 import CityPage from "pages/City/CityPage";
 import SurfaceRequestPage from "pages/SurfaceRequest/SurfaceRequestPage";
+import SurfaceAllowancePage from "pages/SurfaceAllowance/SurfaceAllowancePage";
 
 const privateRoute = [
   { path: PAGE.HOME.path, element: <HomePage /> },
@@ -61,6 +62,10 @@ const privateRoute = [
   {
     path: PAGE.USER.path,
     element: <UserPage />,
+  },
+  {
+    path: PAGE.SURFACE_ALLOWANCE.path,
+    element: <SurfaceAllowancePage />,
   },
   {
     path: "/test",

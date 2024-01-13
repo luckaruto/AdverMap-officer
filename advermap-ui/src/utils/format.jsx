@@ -98,7 +98,15 @@ export function formatDateTime(isoTimestamp) {
 
   return `${hour}:${minute}-${day} ${month} ${year}`;
 }
+export function formatDateToUNIX(value) {
+  // Convert the date string to a JavaScript Date object
+  var selectedDate = new Date(value);
 
+  // Get the Unix timestamp in milliseconds
+  var unixTimestamp = selectedDate.getTime();
+
+  return unixTimestamp;
+}
 export const formatImgUrl = (value) => {
   // Check if value is an array
   if (!Array.isArray(value)) {

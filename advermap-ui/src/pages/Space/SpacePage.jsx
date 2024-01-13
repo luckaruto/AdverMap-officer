@@ -24,6 +24,7 @@ import { useLocation } from "react-router-dom";
 import HomePage from "components/FilterBar/FilterBar";
 import { UserRole } from "constants/types";
 import FilterBar from "components/FilterBar/FilterBar";
+import SurfaceAllowanceForm from "pages/SurfaceAllowance/SurfaceAllowanceForm";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -68,6 +69,7 @@ const SpacePage = () => {
   const [openForm, setOpenForm] = useState(false);
   const [openRequestForm, setOpenRequestForm] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
+  const [openAllowForm,setOpenAllowForm]=useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -88,6 +90,9 @@ const SpacePage = () => {
 
   const handleOpenRequestForm = () => setOpenRequestForm(true);
   const handleCloseRequestForm = () => setOpenRequestForm(false);
+
+  const handleOpenAllowForm = () => setOpenAllowForm(true);
+  const handleCloseAllowForm = () => setOpenAllowForm(false);
 
   // console.log(selectedRow);
 
@@ -148,16 +153,29 @@ const SpacePage = () => {
         <Button onClick={() => navigate(PAGE.SPACE_REQUEST.path)}>
           Danh sách yêu cầu
         </Button>
+        <Button onClick={() => navigate(PAGE.SURFACE_ALLOWANCE.path)}>
+          Danh sách cấp phép
+        </Button>
         <div className="flex gap-6 ml-auto">
           {tokenPayload.role != UserRole.ADMIN && (
-            <Button
-              variant="contained"
-              color="info"
-              onClick={handleOpenRequestForm}
-              disabled={!selectedRow}
-            >
-              Yêu cầu chỉnh sửa
-            </Button>
+            <>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={handleOpenRequestForm}
+                disabled={!selectedRow}
+              >
+                Yêu cầu chỉnh sửa
+              </Button>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={handleOpenAllowForm}
+                disabled={!selectedRow}
+              >
+                Yêu cầu cấp phép
+              </Button>
+            </>
           )}
           {tokenPayload.role == UserRole.ADMIN && (
             <>
@@ -217,6 +235,7 @@ const SpacePage = () => {
           handleClose={handleCloseRequestForm}
           existData={selectedRow}
         />
+        <SurfaceAllowanceForm open={openAllowForm} handleClose={handleCloseAllowForm}/>
         <ConfirmModal
           open={openConfirm}
           handleClose={() => setOpenConfirm(false)}

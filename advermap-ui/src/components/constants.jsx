@@ -20,6 +20,7 @@ export const PAGE = {
   WARD: { path: "/wards", name: "Quản lý phường" },
   CITY: { path: "/cities", name: "Quản lý thành phố" },
   PROFILE: { path: "/profile", name: "Thông tin cá nhân" },
+  SURFACE_ALLOWANCE: { path: "/surface-allowance", name: "Cấp phép Bảng quảng cáo" },
 };
 
 export const ROLE = {

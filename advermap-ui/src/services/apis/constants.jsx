@@ -12,6 +12,7 @@ export const API = {
   USER: "/api/v1/users",
   CITY: "/api/v1/cities",
   WARD: "/api/v1/wards",
+  SURFACE_ALLOWANCE: "/api/v1/surface-allowance",
   DISTRICT: "/api/v2/districts",
 };
 export const testToken = `eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiRElTVFJJQ1RfQURNSU4iLCJzdWIiOiJkaXN0cmljdGFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcwNDc5NDcxMSwiZXhwIjoxNzA0Nzk2NTExfQ.APL5p0IeVByd9e-i7AQ1bK1jH57hzTNGfRu_tb_onCk`;

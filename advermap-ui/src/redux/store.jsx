@@ -11,6 +11,7 @@ import spaceRequestSlice from "./spaceRequestSlice";
 import userSlice from "./userSlice";
 import navSlice from "./navSlice";
 import surfaceRequestSlice from "./surfaceRequestSlice";
+import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
 
 const persistConfig = {
   key: "root", // Change this key as needed
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   reports: reportSlice,
   permission: permission,
   users: userSlice,
+  surfaceAllowances: surfaceAllowanceSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

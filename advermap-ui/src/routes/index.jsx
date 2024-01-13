@@ -84,6 +84,18 @@ const route = createBrowserRouter([
     element: <PrivateRoute />,
     children: privateRoute,
   },
+  {
+        path: "cities",
+        element: <CityPage/>,
+    },
+    {
+        path: "districts",
+        element: <DistrictPage/>,
+    },
+    {
+        path: "wards",
+        element: <WardPage/>,
+    }
 ]);
 
 export default route;

@@ -13,6 +13,9 @@ import { formatFormat, formatImgUrl } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import { fetchSurfaces } from "redux/surfaceSlice";
 import { formatFormatUI } from "utils/formatToUI";
+import Button from "@mui/material/Button";
+import SurfaceForm from "./SurfaceForm";
+import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -53,7 +56,8 @@ const columns = [
 
 const SurfacePage = () => {
   const [selectedRow, setSelectedRow] = useState(null);
-
+  const [openForm, setOpenForm] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,10 +68,34 @@ const SurfacePage = () => {
 
 
   var params;
-
+  const handleOpenForm = () => {
+    console.log('open form');
+    setOpenForm(true)};
+  const handleCloseForm = () => setOpenForm(false);
   const handleClickRow = (row) => setSelectedRow(row);
   const handleClickDetail = (row) => navigate(PAGE.SURFACE.path + `/${row.id}`);
+  const handleClickCreate = () => {
+    console.log("Create button clicked");
+    setSelectedRow(null);
+    setTimeout(() => {
+      handleOpenForm();
+    }, 0);
+  };
+  const handleClickEdit = () => {
+    handleOpenForm();
 
+  };
+  const handleClickDelete = () => {
+    setOpenConfirm(true);
+
+  };
+
+ 
+  const handleDelete = async () => {
+    alert('delete')
+
+   
+  };
   useEffect(() => {
     const id = location.pathname.split("/")[2];
     if (id) {
@@ -84,6 +112,31 @@ const SurfacePage = () => {
   return (
     <div className="max-w-[1400px] m-auto flex flex-col gap-6">
       <Heading1>Danh sách bảng Quảng Cáo</Heading1>
+      <div className="flex gap-6 ml-auto">
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={handleClickCreate}
+          >
+            Tạo mới
+          </Button>
+          <Button
+            variant="outlined"
+            color="info"
+            onClick={handleClickEdit}
+            disabled={!selectedRow}
+          >
+            Chỉnh Sửa
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleClickDelete}
+            disabled={!selectedRow}
+          >
+            Xóa
+          </Button>
+        </div>
       {entities && entities.length > 0 ? (
         <DataTable
           columns={columns}
@@ -100,6 +153,18 @@ const SurfacePage = () => {
         <p className="text-center text-red-500 text-lg font-bold">{error}</p>
       )}
       {selectedRow && <SurfaceInfo data={selectedRow} />}
+        <SurfaceForm
+          open={openForm}
+          handleClose={handleCloseForm}
+          existData={selectedRow}
+        />
+        <ConfirmModal
+          open={openConfirm}
+          handleClose={() => setOpenConfirm(false)}
+          handleSubmit={handleDelete}
+          message="Xác nhận xóa địa điểm được chọn?"
+        />
+     
     </div>
   );
 };

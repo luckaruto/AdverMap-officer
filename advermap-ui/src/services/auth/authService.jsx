@@ -42,10 +42,12 @@ export class AuthService {
 
 	static resetPassword = async (data) => {
 		try {
-			const response = await api.post(API.RESET_PASSWORD,data)
+			const response = await api.post("/api/v1/auth/verify-otp",data)
+			console.log("🚀 ~ AuthService ~ resetPassword= ~ response:", response)
 			return {
 				status: response.status,
-				message: response.data.message
+				message: response.data.message,
+				data: response.data.data
 			};
 		} catch (error) {
 			throw error

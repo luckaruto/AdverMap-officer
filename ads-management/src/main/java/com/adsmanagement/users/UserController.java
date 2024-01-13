@@ -142,4 +142,21 @@ public class UserController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @PostMapping(path = "/profile")
+    public ResponseEntity<Response<ProfileDTO>> updateProfile(
+            @RequestBody() UpdateProfileDTO dto,
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
+    ) throws Exception {
+        var currentUser = userDetails.getUser();
+        var user = this.userService.findById(currentUser.getId());
+        if (user == null) {
+            return new ResponseEntity<>(new Response<ProfileDTO>("Tài khoản không tồn tại",null, HttpStatus.BAD_REQUEST), HttpStatus.OK);
+        }
+
+        var data = this.userService.updateProfile(currentUser,dto);
+
+        var res = new Response<>("",data.toProfile());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }

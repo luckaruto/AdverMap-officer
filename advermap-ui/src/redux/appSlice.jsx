@@ -68,6 +68,8 @@ const initialState = {
       ward: null,
     },
   },
+  otp: 0,
+  forgotPasswordEmail: ""
 };
 
 const isNotiEqual = (noti, id) => {
@@ -120,6 +122,12 @@ const appSlice = createSlice({
     setParams: (state, action) => {
       state.params = action.payload;
     },
+    setOtp: (state, action) => {
+      state.otp = action.payload;
+    },
+    setForgotPasswordEmail: (state, action) => {
+      state.forgotPasswordEmail = action.payload;
+    }
   },
 });
 
@@ -133,5 +141,7 @@ export const {
   setRefreshToken,
   setParams,
   setCities,
+  setOtp,
+  setForgotPasswordEmail
 } = appSlice.actions;
 export default appSlice.reducer;

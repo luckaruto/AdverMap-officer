@@ -12,6 +12,7 @@ export const PAGE ={
 	DISTRICT:{path:"/districts", name: "Quản lý quận"},
 	WARD:{path:"/wards", name: "Quản lý phường"},
 	CITY: {path:"/cities", name: "Quản lý thành phố"},
+	PROFILE: {path:"/profile", name: "Thông tin cá nhân"},
 }
 
 export const ROLE = {

@@ -80,8 +80,6 @@ const ReportPage = () => {
 
   const [listReport, setListReport] = useState(entities);
 
-  var params;
-
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
 
   console.log(selectedRow);

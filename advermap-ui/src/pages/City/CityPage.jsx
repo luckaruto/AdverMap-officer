@@ -8,8 +8,8 @@ import Button from "@mui/material/Button";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 // @ts-ignore
 import { CityService } from "services/city/CityService";
-import { fetchCities } from "redux/CitySlice";
 import CityForm from "./CityForm";
+import { fetchCities } from "redux/citySlice";
 
 const columns = [
   { id: "id", label: "ID" },

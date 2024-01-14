@@ -21,6 +21,7 @@ import SpaceRequestForm from "pages/SpaceRequest/SpaceRequestForm";
 import { fetchSpaceRequest } from "redux/spaceRequestSlice";
 import ResponeForm from "./ResponseForm";
 import ResponseForm from "./ResponseForm";
+import { UserRole } from "constants/types";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -86,7 +87,7 @@ const SpaceRequestPage = () => {
   const navigate = useNavigate();
 
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, tokenPayload } = useSelector((state) => state.appState);
 
   // @ts-ignore
   const { entities, error, loading } = useSelector(
@@ -156,22 +157,26 @@ const SpaceRequestPage = () => {
           >
             Tới thông tin địa điểm
           </Button>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleClickResponse}
-            disabled={!selectedRow}
-          >
-            Phản hồi
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            XÓa
-          </Button>
+          {tokenPayload.role == UserRole.ADMIN && (
+            <>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={handleClickResponse}
+                disabled={!selectedRow}
+              >
+                Phản hồi
+              </Button>
+            </>
+          )}
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+                disabled={!selectedRow}
+              >
+                XÓa
+              </Button>
         </div>
 
         {entities && entities.length > 0 ? (

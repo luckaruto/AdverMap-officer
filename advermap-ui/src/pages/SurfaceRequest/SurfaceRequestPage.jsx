@@ -23,6 +23,7 @@ import { fetchSurfaceRequest } from "redux/surfaceRequestSlice";
 import ResponseForm from "../SpaceRequest/ResponseForm";
 import { formatDateTime } from "utils/format";
 import { SurfaceServices } from "services/surface/SurfaceService";
+import { UserRole } from "constants/types";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -87,7 +88,7 @@ const SurfaceRequestPage = () => {
   const navigate = useNavigate();
 
   // @ts-ignore
-  const { token } = useSelector((state) => state.appState);
+  const { token, tokenPayload } = useSelector((state) => state.appState);
 
   // @ts-ignore
   const { entities, error, loading } = useSelector(
@@ -158,22 +159,26 @@ const SurfaceRequestPage = () => {
           >
             Tới thông tin bảng quảng cáo
           </Button>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={handleClickResponse}
-            disabled={!selectedRow}
-          >
-            Phản hồi
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleClickDelete}
-            disabled={!selectedRow}
-          >
-            XÓa
-          </Button>
+          {tokenPayload.role == UserRole.ADMIN && (
+            <>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={handleClickResponse}
+                disabled={!selectedRow}
+              >
+                Phản hồi
+              </Button>
+            </>
+          )}
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+                disabled={!selectedRow}
+              >
+                XÓa
+              </Button>
         </div>
 
         {entities && entities.length > 0 ? (

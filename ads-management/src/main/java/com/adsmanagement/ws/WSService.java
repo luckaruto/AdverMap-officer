@@ -13,7 +13,13 @@ public class WSService {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void notifyUser(final String id, final String message) {
-        messagingTemplate.convertAndSendToUser(id,"/topic/private-notifications", message);
+    public void notifyUser(final String id, final Message message) {
+        System.out.println(id);
+        System.out.println(message.toString());
+        try {
+            messagingTemplate.convertAndSendToUser(id,"/private", message);
+        } catch (Exception e){
+
+        }
     }
 }

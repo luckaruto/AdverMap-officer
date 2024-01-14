@@ -15,6 +15,7 @@ import ResponseForm from "pages/SpaceRequest/ResponseForm";
 import { SurfaceAllowanceService } from "services/surfaceAllowance/SurfaceAllowanceService";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import { SurfaceServices } from "services/surface/SurfaceService";
+import { UserRole } from "constants/types";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -129,14 +130,16 @@ const SurfaceAllowancePage = () => {
     <div className="max-w-[1400px] m-auto flex flex-col gap-4">
       <Heading1>Danh sách Cấp phép</Heading1>
       <div className="flex gap-6 ml-auto">
-        <Button
-          variant="outlined"
-          color="info"
-          onClick={handleClickResponse}
-          disabled={!selectedRow}
-        >
-          Phản hồi
-        </Button>
+        {tokenPayload.role == UserRole.ADMIN && (
+          <Button
+            variant="outlined"
+            color="info"
+            onClick={handleClickResponse}
+            disabled={!selectedRow}
+          >
+            Phản hồi
+          </Button>
+        )}
         <Button
           variant="outlined"
           color="error"

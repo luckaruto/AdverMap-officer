@@ -6,6 +6,7 @@ import { setCities, setLoading } from "redux/appSlice";
 import { UserService } from "services/user/UserService";
 import { useNavigate } from "react-router-dom";
 import { PAGE } from "components/constants";
+import { setPermission } from "redux/permission";
 
 export default function FilterBar() {
   const { tokenPayload, token, params } = useSelector(
@@ -30,7 +31,7 @@ export default function FilterBar() {
   const getPermission = async () => {
     dispatch(setLoading(true));
     const { role, cities } = await UserService.getPermission(userId, token);
-    dispatch(setCities(cities));
+    dispatch(setPermission({role,cities}));
     dispatch(setLoading(false));
   };
 

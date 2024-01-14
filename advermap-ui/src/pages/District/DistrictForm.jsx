@@ -18,7 +18,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 // @ts-ignore
 import { fetchDistricts } from "redux/DistrictSlice";
-import { fetchCities } from "redux/CitySlice";
+import { fetchCities } from "redux/citySlice";
 import BasicInput from "components/Input/BasicInput";
 import { useFormContext, Controller } from "react-hook-form";
 import FormControl from "@mui/material/FormControl";

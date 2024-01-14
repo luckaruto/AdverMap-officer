@@ -82,7 +82,7 @@ window.env = {
   "npm_config_zmq_prebuilt_binary_host_mirror": "https://npm.taobao.org/mirrors/zmq-prebuilt/v{version}",
   "npm_execpath": "C:\\Users\\Acer\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js",
   "npm_lifecycle_event": "start",
-  "npm_lifecycle_script": "react-dotenv && react-scripts start",
+  "npm_lifecycle_script": "react-dotenv && node scripts/start.js",
   "npm_node_execpath": "C:\\Program Files\\nodejs\\node.exe",
   "npm_package_json": "D:\\adverMap-officer\\advermap-ui\\package.json",
   "npm_package_name": "advermap-customer",

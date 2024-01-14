@@ -35,6 +35,7 @@ const columns = [
     minWidth: 170,
     format: typeFormatUI,
   },
+
   {
     id: "format",
     label: "Hình thức",
@@ -85,10 +86,13 @@ const SpaceRequestPage = () => {
   const navigate = useNavigate();
 
   // @ts-ignore
-  const { token,params } = useSelector((state) => state.appState);
+  const { token } = useSelector((state) => state.appState);
 
   // @ts-ignore
-  const { entities, error, loading } = useSelector((state) => state.spaceRequest);
+  const { entities, error, loading } = useSelector(
+    // @ts-ignore
+    (state) => state.spaceRequest
+  );
 
   const handleOpenResponseForm = () => setOpenResponseForm(true);
   const handleCloseResponseForm = () => setOpenResponseForm(false);
@@ -108,9 +112,8 @@ const SpaceRequestPage = () => {
   };
 
   const fetchData = () => {
-    const reqParams=params.content
     // @ts-ignore
-    dispatch(fetchSpaceRequest({ params:reqParams, token }));
+    dispatch(fetchSpaceRequest({ testParams, token }));
   };
 
   const handleClickRow = (row) => setSelectedRow(row);
@@ -121,7 +124,8 @@ const SpaceRequestPage = () => {
     try {
       const res = await SpaceService.cancelRequest(id, token);
       dispatch(setSnackbar({ status: "success", message: res }));
-      fetchData()
+      // @ts-ignore
+      dispatch(fetchSpaceRequest({ testParams, token }));
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {

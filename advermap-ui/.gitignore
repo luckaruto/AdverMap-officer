@@ -5,11 +5,17 @@
 /.pnp
 .pnp.js
 
+
+
 # testing
 /coverage
 
 # production
 /build
+
+# lock files
+yarn.lock
+package-lock.json
 
 # misc
 .DS_Store

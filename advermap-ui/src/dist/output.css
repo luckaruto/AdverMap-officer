@@ -748,10 +748,6 @@ video {
   z-index: 20;
 }
 
-.z-30 {
-  z-index: 30;
-}
-
 .z-50 {
   z-index: 50;
 }
@@ -1187,6 +1183,10 @@ video {
   width: 2.25rem;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .w-\[100vw\] {
   width: 100vw;
 }
@@ -1230,10 +1230,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[100\%\] {
-  width: 100%;
 }
 
 .min-w-\[100vw\] {
@@ -1716,14 +1712,6 @@ video {
   border-width: 4px;
 }
 
-.border-\[3px\] {
-  border-width: 3px;
-}
-
-.border-\[1px\] {
-  border-width: 1px;
-}
-
 .border-\[2px\] {
   border-width: 2px;
 }
@@ -1779,6 +1767,11 @@ video {
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
 .border-gray-900 {
@@ -1838,26 +1831,6 @@ video {
 .border-yellow-500 {
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
-}
-
-.border-gray-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
-.border-gray-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
-.border-gray-100 {
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
-}
-
-.border-gray-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
 .\!border-t-transparent {
@@ -2097,6 +2070,10 @@ video {
   background-color: rgb(234 179 8 / 0.2);
 }
 
+.bg-opacity-0 {
+  --tw-bg-opacity: 0;
+}
+
 .bg-opacity-60 {
   --tw-bg-opacity: 0.6;
 }
@@ -2111,14 +2088,6 @@ video {
 
 .bg-opacity-\[80\%\] {
   --tw-bg-opacity: 80%;
-}
-
-.bg-opacity-10 {
-  --tw-bg-opacity: 0.1;
-}
-
-.bg-opacity-0 {
-  --tw-bg-opacity: 0;
 }
 
 .bg-gradient-to-tr {
@@ -2421,8 +2390,8 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pl-\[40px\] {
-  padding-left: 40px;
+.pl-\[20px\] {
+  padding-left: 20px;
 }
 
 .pt-0 {
@@ -2451,10 +2420,6 @@ video {
 
 .pt-px {
   padding-top: 1px;
-}
-
-.pl-\[20px\] {
-  padding-left: 20px;
 }
 
 .text-left {

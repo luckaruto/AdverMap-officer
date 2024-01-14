@@ -46,14 +46,9 @@ const SurfaceForm = (props) => {
     resolver: yupResolver(surfaceSchema),
   });
 
-
   const { handleSubmit, setValue, reset } = method;
 
   const onSubmit = async (data) => {
-   
-  
- 
-  
     dispatch(setLoading(true));
     let urls = [];
     dispatch(setLoading(true));
@@ -76,9 +71,9 @@ const SurfaceForm = (props) => {
         const { id } = existData;
         res = await SurfaceServices.edit(id, req, token);
       }
-  
+
       console.log("API Response:", res);
-  
+
       // handleSuccess
       dispatch(setSnackbar({ status: "success", message: res }));
       // @ts-ignore
@@ -92,7 +87,6 @@ const SurfaceForm = (props) => {
       reset(undefined, { keepDirtyValues: true });
     }
   };
-  
 
   const setExistData = () => {
     // setValue("address", existData.address);
@@ -102,7 +96,6 @@ const SurfaceForm = (props) => {
     setValue("content", existData.content);
     setValue("spaceId", +existData.space.id);
   };
-
 
   // handle Load data when editing
   useEffect(() => {
@@ -131,7 +124,6 @@ const SurfaceForm = (props) => {
             <Heading1 className="mb-4">Thông tin địa điểm</Heading1>
             <div className="flex flex-row gap-2 justify-center">
               <div className="flex flex-col items-center gap-4">
-                {/* <BasicInput name="address" label="Địa chỉ" /> */}
                 <div className="w-full flex gap-2">
                   <BasicInput name="width" type="number" label="Chiều rộng" />
                   <BasicInput name="height" type="number" label="Chiều dài" />

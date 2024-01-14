@@ -99,6 +99,7 @@ const ReportPage = () => {
     if (id) {
       reqParams = { surfaceIds: id };
     } else reqParams = params.content;
+    console.log(reqParams);
     // @ts-ignore
     dispatch(fetchReports({ params: reqParams, token }));
   };

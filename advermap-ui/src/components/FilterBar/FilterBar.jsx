@@ -4,17 +4,28 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCities, setLoading } from "redux/appSlice";
 import { UserService } from "services/user/UserService";
+import { useNavigate } from "react-router-dom";
+import { PAGE } from "components/constants";
 
 export default function FilterBar() {
   const { tokenPayload, token, params } = useSelector(
     // @ts-ignore
-    (state) => state.appState
+    (state) => state.appState || {}
   );
 
-  const { userId } = tokenPayload;
+  let userId = null;
+  // Check if tokenPayload is not null
+  if (tokenPayload && tokenPayload.userId !== undefined) {
+    // Destructure userId from tokenPayload
+    userId = tokenPayload.userId;
+  } else {
+    // If tokenPayload is null or userId is undefined, set userId to null (or perform your desired action)
+    userId = null;
+  }
   console.log(userId);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getPermission = async () => {
     dispatch(setLoading(true));
@@ -24,8 +35,9 @@ export default function FilterBar() {
   };
 
   useEffect(() => {
-    console.log("getPermission");
-    getPermission();
+    if (userId) {
+      getPermission();
+    } else navigate(PAGE.LOGIN.path);
   }, [token]);
 
   return (

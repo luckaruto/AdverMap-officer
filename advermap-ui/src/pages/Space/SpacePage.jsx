@@ -133,7 +133,7 @@ const SpacePage = () => {
     const reqParams = params.content;
     console.log("reqParams", reqParams);
     // @ts-ignore
-    dispatch(fetchSpaces({ reqParams, token }));
+    dispatch(fetchSpaces({ params:reqParams, token }));
   }, [params]);
 
   useEffect(() => {

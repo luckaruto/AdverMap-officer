@@ -12,7 +12,7 @@ import userSlice from "./userSlice";
 import navSlice from "./navSlice";
 import surfaceRequestSlice from "./surfaceRequestSlice";
 import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
-import citySlice from "./citySlice";
+import citySlice from "./CitySlice";
 
 const persistConfig = {
   key: "root", // Change this key as needed

@@ -7,8 +7,8 @@ import Heading1 from "../../components/Text/Heading1";
 import Button from "@mui/material/Button";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { CityService } from "services/city/CityService";
-// @ts-ignore
-import { fetchCities } from "redux/citySlice";
+import { fetchCities } from "redux/CitySlice";
+import CityForm from "./CityForm";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -22,26 +22,21 @@ const columns = [
 
 const CityPage = () => {
   const [selectedRow, setSelectedRow] = useState(null);
+  console.log("🚀 ~ CityPage ~ selectedRow:", selectedRow);
   const [openConfirm, setOpenConfirm] = useState(false);
-
+  const [openForm, setOpenForm] = useState(false);
   const dispatch = useDispatch();
-
-  // @ts-ignore
-  // @ts-ignore
   const { token, entities, error, loading } = useSelector(
-    // @ts-ignore
     (state) => state.cities || {}
   );
-
+  const handleCloseForm = () => setOpenForm(false);
   const handleOpenRequestForm = () => {
-    setSelectedRow(null);
-    setTimeout(() => {
-      // handleOpenForm();
-    }, 0);
+    setOpenForm(true);
   };
 
   const handleClickCreate = () => {
-    // Implement your logic for handling create action
+    setSelectedRow(null);
+    setOpenForm(true);
   };
 
   const handleClickDelete = () => {
@@ -54,9 +49,10 @@ const CityPage = () => {
     const { id } = selectedRow;
     dispatch(setLoading(true));
     try {
-      const res = await CityService.deleteCity(id, token);
+      const res = await CityService.deleteCity(id);
       dispatch(setSnackbar({ status: "success", message: res }));
-      // dispatch(fetchCities({ testParams, token }));
+      // @ts-ignore
+      dispatch(fetchCities({}));
     } catch (error) {
       dispatch(setSnackbar({ status: "error", message: error }));
     } finally {
@@ -69,7 +65,7 @@ const CityPage = () => {
   useEffect(() => {
     // @ts-ignore
     dispatch(fetchCities({}));
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   return (
     <>
@@ -113,10 +109,11 @@ const CityPage = () => {
             No data ...
           </p>
         )}
-
-        {error && (
-          <p className="text-center text-red-500 text-lg font-bold">{error}</p>
-        )}
+        <CityForm
+          open={openForm}
+          handleClose={handleCloseForm}
+          existData={selectedRow}
+        />
 
         <ConfirmModal
           open={openConfirm}

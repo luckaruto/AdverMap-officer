@@ -1,0 +1,869 @@
+commit d0c35247e8d7d500bc5a88966378476e36f1fc52
+Merge: c234837 dd7fe86
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 13:47:58 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit c2348374ae142633df69b67d1a1b30f0be2ef276
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 13:47:34 2024 +0700
+
+    add change about .env and more
+
+commit dd7fe86faf3ea7f21a9e3ba4031d5563c8392948
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Sun Jan 14 13:31:42 2024 +0700
+
+    Ward & District
+
+commit b1b6cba52fea635afc4364ac6e1b90e87e9eb9ff
+Merge: 97f1963 fa4f694
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 12:15:16 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit 97f1963a5c5e3e5b732c71fea84ea76582914989
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 12:13:45 2024 +0700
+
+    adđ some change
+
+commit fa4f694c094120e1c9aab0e3b06cc8e14585742f
+Merge: ad2abe0 c0dff56
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 12:13:05 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit ad2abe04ce0841d56c6ceb2ebfb203a3ef2d2c9a
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 12:12:38 2024 +0700
+
+    fix Space Fetch
+
+commit c0dff56985d922a3f9ac537f6804c28c68fd72d0
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Sun Jan 14 11:52:07 2024 +0700
+
+    City page
+
+commit 6c426826a1aea2af4774d46b0bb1dcbcdb9f2978
+Merge: 1333bb1 8970bf9
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 11:24:23 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit 1333bb16f22acfa2936d48e778ec4200beb7fcc0
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 11:23:44 2024 +0700
+
+    add some change
+
+commit 8970bf98c2c2485dccf97a61d83ff05cd7fa0623
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 11:02:24 2024 +0700
+
+    fix error
+
+commit fd486eb19b597438db8a6883e41d37884a914463
+Merge: 66d511b 87edc2e
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 10:45:53 2024 +0700
+
+    merge city with main
+
+commit 66d511b30ab2537ec042e71d6c0d2eaf9d498bde
+Merge: 1bae1d2 366ae97
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 02:43:08 2024 +0700
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 1bae1d26962e8cd9c8cda4f22d07627aa0130f63
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 02:41:56 2024 +0700
+
+    add some feature about form
+
+commit 366ae97a70e924c05377a6b92e9d666200cd57d1
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 02:29:37 2024 +0700
+
+    UI/add Surface Allowance
+
+commit 72afe5d9cd9faf01acd1e2e26bcfe33a57cd1adb
+Merge: 1a61965 1083102
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 00:44:00 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit 1a619659133d5e1084c89cd84cbccecf0d9be6f1
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 00:43:57 2024 +0700
+
+    fix
+
+commit 1083102ab63b9daf90a8e4ba5e0f32607b59b502
+Merge: c87497a 9608053
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 00:35:11 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit c87497a5c91d8b5a1df1c5467554060cb20fd4fc
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sun Jan 14 00:34:10 2024 +0700
+
+    add some feature edit
+
+commit 96080531a6a00a0def226c6cc6e4daf4dae12fbd
+Merge: d4c24a6 567a8ed
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 00:10:40 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit d4c24a6f41e5db3fae7cfa60d8c2e608a8160b07
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sun Jan 14 00:10:37 2024 +0700
+
+    UI/fix report
+
+commit 567a8ed04f8ff3015e25c3a9bd009535d7b4c3b4
+Merge: 5b75b6e 6e26991
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 23:55:57 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit 5b75b6e9657bca5bbb875f5506254ea8dabc05ee
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 23:52:26 2024 +0700
+
+    add some page
+
+commit 6e2699148f162cde1b213f17de5e7c7f44ecbab8
+Merge: fcf0501 941ae93
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 23:51:35 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit fcf05011d01c25509edd4838696fc5ff03462afe
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 23:51:33 2024 +0700
+
+    UI/add report
+
+commit 87edc2e08803b8acfa8510c4cede1eed1eaddfa9
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Sat Jan 13 22:58:14 2024 +0700
+
+    City page
+
+commit 941ae931b07aa600cf5b43e74042e9476cfe47e1
+Merge: ed61c11 4241d22
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 21:18:52 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit ed61c11cb0a5fe8049c05cfe40d77193720df04f
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 21:17:11 2024 +0700
+
+    add some changes
+
+commit 4241d22b5d5f56343b1288ff27a89dba07b5b0d3
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 21:16:38 2024 +0700
+
+    UI/add FilterBar
+
+commit c35b3dae08fb0d5ddb53ab7bf18c4ba9143eba23
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 20:36:32 2024 +0700
+
+    Fix bugs
+
+commit 7fff921953d6729807744016ab3d74dcc64676a8
+Merge: d4b7e6e 30d6437
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 20:17:39 2024 +0700
+
+    Merge remote-tracking branch 'remotes/origin/report-surfaces'
+
+commit d4b7e6e05fb8b4b393265a60f58b9bcccfa307d2
+Merge: 9c17763 2f7dbbc
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 20:13:10 2024 +0700
+
+    Merge remote-tracking branch 'remotes/origin/crud-city,-district,-ward'
+
+commit 30d6437e2ac6a1d44d201d08f48d9796465de1ae
+Author: DucHanh Le <leDucHanh>
+Date:   Sat Jan 13 20:12:06 2024 +0700
+
+    CRUD surfaces report
+
+commit 9c177630b1057926bf4e3734f782a88d4a6dc7df
+Merge: faa35f3 5992a0f
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 19:24:28 2024 +0700
+
+    merge
+
+commit 5992a0f52cc11964585adba03b8b14a8bd508926
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 19:16:42 2024 +0700
+
+    fix surface update, add user management
+
+commit faa35f3190a5e1dccc81541063af1d4eec185152
+Merge: 242ad0c 0674563
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 19:03:06 2024 +0700
+
+    Merge remote-tracking branch 'refs/remotes/origin/main'
+
+commit 242ad0c420cb9693bc7502d49a054997d94d5985
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Jan 13 18:57:20 2024 +0700
+
+    add map top officer
+
+commit 067456361babaea2b490923bd9bb76927f9ad8bf
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 16:52:31 2024 +0700
+
+    UI/Authorization for space
+
+commit 2f83cb5587d5be583d848a9b95085ad6c69ac5d3
+Merge: 81ea285 be2622c
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 15:28:53 2024 +0700
+
+    fix conflict surface
+
+commit be2622c3e5f6046cadeb3666ac98d2805903fe34
+Author: DucHanh Le <leDucHanh>
+Date:   Sat Jan 13 15:24:12 2024 +0700
+
+    surfaces code
+
+commit 81ea285b7a876610008196947d4c61b9a959b821
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 15:03:48 2024 +0700
+
+    UI/merge otp with filter
+
+commit 5801dcde83d66f1ecb6878aa7dabc1c4fab8b231
+Merge: 4589bf6 0b105ae
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 15:03:28 2024 +0700
+
+    merge opt and filter
+
+commit 2f7dbbc5f72784d4ce348de7f7412cc21197020d
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:28:26 2024 +0700
+
+    Update constants.jsx
+
+commit 0b35ab79951bca64f1891e2d780c74bad8a1640d
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:26:11 2024 +0700
+
+    Delete advermap-ui/src/services/city/a.txt
+
+commit 7db725d92d4bfdd0cf801a5ebcf504ff3c456681
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:25:58 2024 +0700
+
+    Create cityService.jsx
+
+commit 8e8d410b560552bca3dc72813e87422f3766d622
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:25:25 2024 +0700
+
+    Delete advermap-ui/src/services/cityService.jsx
+
+commit 723649c80d873f9ad2b1ac543dad5d32ea3dc7f1
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:25:00 2024 +0700
+
+    Create a.txt
+
+commit 25ae5eeb6abd0dcc63a28d8cb8dd2d2ac521abf0
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:24:14 2024 +0700
+
+    Create cityService.jsx
+
+commit ab34b65d60c85dacbe879f5b1c0cd2863756443a
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:22:34 2024 +0700
+
+    Create CityForm.jsx
+
+commit ca8d652e0d07f22e3cfdca5f90c558717abeed2a
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:21:47 2024 +0700
+
+    Create CityPage.jsx
+
+commit f82f622588d390b9894c93bb7281e97a9241d7a1
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:20:48 2024 +0700
+
+    Create CitySlice.jsx
+
+commit 3d66e506278b9c93f87cd879737b956b5f4cb492
+Author: LamDDT <108422896+LamDDT@users.noreply.github.com>
+Date:   Sat Jan 13 14:19:54 2024 +0700
+
+    Update index.jsx
+
+commit 4589bf6482b279efe3fb3919ddb009a33fd33e82
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 14:11:33 2024 +0700
+
+    UI/Add filter
+
+commit 0b105ae6bd3b791ff07c83541e7a2809b5bf2c34
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 13:36:38 2024 +0700
+
+    fix report detail
+
+commit afa76b7b8766f7bb49f5f7f6d45137de4b2dd465
+Merge: cd134d1 7fe10f0
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Sat Jan 13 13:17:14 2024 +0700
+
+    Merge pull request #14 from luckaruto/report-type
+    
+    fix user conflict email,phone
+
+commit 7fe10f06d23b79ee03486310122bf12c3c42df97
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 13:16:35 2024 +0700
+
+    fix user conflict email,phone
+
+commit cd134d1323a8761875c2556ea9ec1b3780dbbb3c
+Merge: 8a0e6b1 81647c0
+Author: Minh Đức <73150582+Duc-267@users.noreply.github.com>
+Date:   Sat Jan 13 11:25:43 2024 +0700
+
+    Merge pull request #13 from luckaruto/feature/my-profile
+    
+    auth
+
+commit 81647c0bca910eaca69f75d4bd210d6164b3b6ec
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Sat Jan 13 11:24:59 2024 +0700
+
+    Done auth flow
+
+commit d70aaaa0a86fc6448598b12113f068c011f91e18
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Thu Jan 11 22:49:49 2024 +0700
+
+    Update my profile page
+
+commit eb1841074e6db8b48b41b69946e07b66df658309
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Thu Jan 11 13:12:31 2024 +0700
+
+    my profile UI
+
+commit 8a0e6b1c121fef5baaa4794b5462bd8e0a9e97fe
+Merge: 1a9450d c4ddecf
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Sat Jan 13 01:19:52 2024 +0700
+
+    Merge pull request #12 from luckaruto/report-type
+    
+    add UD surface
+
+commit c4ddecfede27a2b067de6bdbf4d4d46e8312e524
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 01:18:45 2024 +0700
+
+    add UD surface
+
+commit 1a9450d8d6ce3f8ed53df5d34627f0dd9294bc18
+Merge: 6501a3a 7acb78e
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 00:57:08 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit 6501a3ad0d7080aadee7525d15c91d4cc8d6e18b
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Sat Jan 13 00:57:05 2024 +0700
+
+    UI/add Request Space
+
+commit 7acb78e4d5d68f93fd32fb5cadf4ee73d789984a
+Merge: b2d1c22 46cf717
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Sat Jan 13 00:55:17 2024 +0700
+
+    Merge pull request #11 from luckaruto/report-type
+    
+    add reportType, add basic CURD wards,districts,city, userId token
+
+commit 46cf71710395215617227b49afe763da4a296c8b
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 00:52:51 2024 +0700
+
+    fix delete
+
+commit 8059725b5fa2619e4e922c47beb85378436fba5f
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sat Jan 13 00:46:52 2024 +0700
+
+    add reportType, add basic CURD wards,districts,city, userId token
+
+commit b2d1c2298358f846fa6808150da17f4863dbbf70
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 16:54:00 2024 +0700
+
+    UI/fix UI
+
+commit fcf1fb635cb61e287b0b18bbb485ca4df4b87e6e
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 16:52:07 2024 +0700
+
+    UI/add UI format
+
+commit 0b4df87cd5cb3f3c107b23cbf5048a161d84491f
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 16:02:34 2024 +0700
+
+    UI/done CRUD space
+
+commit ad52360b71cb01df00fbb098856e0659d4b71fca
+Merge: 654909e 73adc9b
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 15:20:29 2024 +0700
+
+    merge UI/redux-thunk
+
+commit 654909e767a5c55c8091a85ed496655265de59a4
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 15:18:48 2024 +0700
+
+    UI/add redux-thunk for space,surface,report
+
+commit 73adc9bb7180f622a54cdf8dc50330842dce201b
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Fri Jan 12 01:48:15 2024 +0700
+
+    fix auth
+
+commit ae6c7c767344b1d3dac0351d30408e463237028b
+Merge: 85392f5 d421d22
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Fri Jan 12 01:41:48 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit 85392f59a290d7f9eb338c1313a7667e199eff51
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Fri Jan 12 01:39:22 2024 +0700
+
+    add refresh token, forgot password
+
+commit d421d22cca98e1a68b7e80fc99d27e9dc6f7e7c9
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Fri Jan 12 00:15:47 2024 +0700
+
+    UI/add delete Space
+
+commit bc170cb211f4c8f9a35141db887c12df774efa21
+Merge: 289c33b 534fa0a
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 23:43:24 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit 289c33b7a6534a734a8b2eb1f5ed4401b4237bce
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 23:43:20 2024 +0700
+
+    UI/fix UI form
+
+commit 534fa0a65f04e7a7eccc5deca687b5aed0359c25
+Merge: d61ce01 bd32dc9
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Thu Jan 11 23:04:45 2024 +0700
+
+    Merge pull request #10 from luckaruto/permission
+    
+    fix permission api
+
+commit bd32dc90a1c5c9c6c14f5531453f0e2affb3d32f
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Thu Jan 11 23:03:52 2024 +0700
+
+    fix permission api
+
+commit d61ce01c25e47e4f0c26fa7415279566059d348a
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 19:16:07 2024 +0700
+
+    UI/add CRUD form Space
+
+commit b8ae54e5540dbf1f02d0bceb980462508141d1c5
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 14:13:17 2024 +0700
+
+    UI/fix Import file
+
+commit 24f0b09842708cb82f7bf5254e48231047217956
+Merge: 022a45f d5f58a3
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 13:54:55 2024 +0700
+
+    UI/fix conflict
+
+commit 022a45f0935c410b3b253cb15ed818473b78f0e2
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Thu Jan 11 13:52:30 2024 +0700
+
+    UI/add Form Space
+
+commit d5f58a3b23c141ec5fb3645b7e064a3552c55b47
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Thu Jan 11 12:19:02 2024 +0700
+
+    Add log-out
+
+commit 290c77be756f200bb919ddbab96ddf80ccf19542
+Merge: 7c202f7 833e450
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Thu Jan 11 01:11:19 2024 +0700
+
+    Merge branch 'add-permission-change-req'
+
+commit 833e450797332fe3fd12ec08b734915066bf16bf
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Thu Jan 11 01:10:41 2024 +0700
+
+    add user permission API, done flow request
+
+commit 7c202f7f7a1a2999e1ac6049736e145a19e377e2
+Merge: af81dd5 f38e421
+Author: Minh Đức <73150582+Duc-267@users.noreply.github.com>
+Date:   Wed Jan 10 21:55:07 2024 +0700
+
+    Merge pull request #9 from luckaruto/feature/set-password
+    
+    Reset password
+
+commit f38e4211b93bf46a9e4b0daccb71d06fc3873e6e
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Wed Jan 10 21:54:51 2024 +0700
+
+    Reset password
+
+commit af81dd5cd7c601806a3b016077cc043bd8d56ec4
+Merge: 6ac6741 2fbef3d
+Author: Minh Đức <73150582+Duc-267@users.noreply.github.com>
+Date:   Wed Jan 10 21:34:16 2024 +0700
+
+    Merge pull request #8 from luckaruto/feature/otp
+    
+    OTP input
+
+commit 2fbef3d73f5b867046b58cc6a3531f11cc5bb848
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Wed Jan 10 21:33:19 2024 +0700
+
+    OTP input
+
+commit 72fa3348c1c5485e9cd7d4b1dcc7abfc7ab8ffb9
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Wed Jan 10 19:17:31 2024 +0700
+
+    FE/Add routes
+
+commit 6ac6741589d234637f96ffea60d7293f8ad0fdde
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Wed Jan 10 18:04:30 2024 +0700
+
+    UI/Refactor code
+
+commit 16a67c483fa196f299314c88921a42e570e640d0
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Wed Jan 10 17:01:56 2024 +0700
+
+    UI/add Detail Info of Tables
+
+commit 86e1ffbffec974d67f4a5f2de4539edc08a70d0b
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Wed Jan 10 16:09:08 2024 +0700
+
+    add report API
+
+commit 918fe495ae5842778fc66f3b43ce79a643db1bfc
+Merge: 8ac5a68 d77c539
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Tue Jan 9 23:54:56 2024 +0700
+
+    fix conflict
+
+commit d77c5395ad7d1b3f097c041ea882a20159b59f4d
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Tue Jan 9 23:43:00 2024 +0700
+
+    fix auth,toolbar
+
+commit 8ac5a6849ee2ac596fda1ef878356fa7528bfde4
+Merge: f27ab7c 1acb6fc
+Author: Minh Đức <73150582+Duc-267@users.noreply.github.com>
+Date:   Tue Jan 9 23:18:44 2024 +0700
+
+    Merge pull request #7 from luckaruto/feature/forgot-pass
+    
+    Forgot password
+
+commit 1acb6fc6961b5cbbf6bb2d3f3ea8dfa6693f450e
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Tue Jan 9 23:18:07 2024 +0700
+
+    Forgot password
+
+commit f27ab7cb73df0d8121404899540bc09cad94d786
+Merge: 2b07726 a0bfcd6
+Author: Minh Đức <73150582+Duc-267@users.noreply.github.com>
+Date:   Tue Jan 9 23:03:31 2024 +0700
+
+    Merge pull request #6 from luckaruto/feature/login
+    
+    Login
+
+commit a0bfcd6299e2c6c9a41748211c151bc1e1600663
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Tue Jan 9 23:02:40 2024 +0700
+
+    Update fields
+
+commit 960c98012e27847033cd18a4ae81d63ecb69c209
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Mon Jan 8 22:25:13 2024 +0700
+
+    Init login screen with chakra
+
+commit b453b9a4df47642fb44c349aef97765b13fb044f
+Author: Minh Đức <mduc2672002@gmail.com>
+Date:   Sun Jan 7 23:45:22 2024 +0700
+
+    WIP
+
+commit 2b07726f17ceedcc87050d48834e0d2991c68bda
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Tue Jan 9 22:52:55 2024 +0700
+
+    noti
+
+commit 89b9b6ab07ad68e253baa10a507edf7788545639
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Tue Jan 9 17:30:39 2024 +0700
+
+    done Surface,Space,Report Page
+
+commit e3eb5f26b90349a873680dd4aabe72ec9abd4ff8
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Tue Jan 9 00:03:07 2024 +0700
+
+    add Space Page
+
+commit 0a1013aef7f0a8a23057ec10b8dcde225c107224
+Merge: ca00752 83105d2
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 23:59:21 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit ca0075237e4958f6230c62bbf79bc9d35e4940c1
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 23:55:11 2024 +0700
+
+    add Space page
+
+commit 83105d2705078e3115af7942b9ed042d5cec02f5
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Mon Jan 8 22:33:25 2024 +0700
+
+    fix toolBar
+
+commit aa1c71aa24261ad839f2bddf31691148833f02fd
+Merge: e812a91 5316c52
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 21:08:14 2024 +0700
+
+    Merge branch 'main' of https://github.com/luckaruto/adverMap-officer
+
+commit 5316c5288a0be7239cc1f1f58bddc6c784c69025
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Mon Jan 8 21:05:40 2024 +0700
+
+    add toolBar
+
+commit e812a91772d16c7bc020ac1d9cee65a66a7ccab9
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 18:26:39 2024 +0700
+
+    fix UI config
+
+commit e7689be7c714f6ddf690a7d7aa70c53ecebf3b0d
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 18:18:04 2024 +0700
+
+    fix config ui
+
+commit 12bf9b04f25a0cae8731490e89fb25d2d7ac975f
+Author: tranhuanhcmus <tranhuanbs02@gmail.com>
+Date:   Mon Jan 8 18:10:57 2024 +0700
+
+    fix UI config
+
+commit 948f5a695ca34531e8b939a9997b3eb0c01f6e6b
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Mon Jan 8 01:31:42 2024 +0700
+
+    simple permission, mail function, report
+
+commit bac053a2c245f72b84048bdd13f20a7babd3594b
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sun Jan 7 15:22:23 2024 +0700
+
+    fix db
+
+commit 2a1b5b8c955dab3663aadb944bdc557e1b1ec6a2
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Thu Jan 4 02:14:51 2024 +0700
+
+    add missing user file
+
+commit c9d94fe3349005a9bced532ebff8aa9429892dcc
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Thu Jan 4 02:14:25 2024 +0700
+
+    modify toolBar + notifaction + menu navigation
+
+commit f38a4adfb81aaf09c580450fa2799d2518ffbbc4
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Wed Jan 3 01:34:39 2024 +0700
+
+    add simple toolBar + fix auth + redux
+
+commit 8ac9125e08d62ab353766e1894175ae9fbe5858f
+Author: viet68 <tanviet060801@gmail.com>
+Date:   Sun Dec 31 01:57:11 2023 +0700
+
+    Add simple login + app bar
+
+commit 47515470310401f027c00d223201341d114ba548
+Merge: c1d7023 b5e1a4e
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Fri Dec 29 00:06:54 2023 +0700
+
+    Merge pull request #4 from luckaruto/login
+    
+    Login
+
+commit b5e1a4ed8ef89ef6fcb05e0d081828b7b986d433
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Fri Dec 29 00:06:06 2023 +0700
+
+    add report api
+
+commit 8e4f89ae85b7ef68c3029ec444e9e9c400e57b30
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Thu Dec 28 01:53:30 2023 +0700
+
+    fix surface_request list api
+
+commit c1d702356881b0c2edcc3d7b7df2dc25b79361de
+Merge: 4c1f255 743cc1a
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Wed Dec 27 00:47:58 2023 +0700
+
+    Merge pull request #3 from luckaruto/login
+    
+    add surfaces, surface_request, spaces API
+
+commit 743cc1abc724387f6fc43373e91b43599e2f8f1b
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Wed Dec 27 00:47:30 2023 +0700
+
+    add surfaces, surface_request, spaces API
+
+commit 4c1f2555b28c794365558f41dd24d96a41f07732
+Merge: 4615f5d 22bef40
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Tue Dec 26 01:17:11 2023 +0700
+
+    Merge pull request #2 from luckaruto/login
+    
+    add space request list api
+
+commit 22bef400a824573153e44a8be2acc086b6dad30e
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Tue Dec 26 01:15:46 2023 +0700
+
+    add space request list api
+
+commit 4615f5da9f9c2794b2a1ca14a2598b2b04c3bf7a
+Merge: 801970f ab58006
+Author: Viet68 <92423967+Viet68@users.noreply.github.com>
+Date:   Mon Dec 25 02:01:48 2023 +0700
+
+    Merge pull request #1 from luckaruto/login
+    
+    auth+simple space/ward/district/city API
+
+commit ab58006f5934045f19f0f7b7f6287dafe6d88225
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Mon Dec 25 01:59:37 2023 +0700
+
+    add spaces api
+
+commit d9404402cb145c774380c6fb61c59846511ef541
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Sun Dec 24 23:07:40 2023 +0700
+
+    add ward api, upload api
+
+commit 799d2b3e19ac61e0f5af9d17c0073e95c2fbfd20
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Mon Dec 18 00:34:12 2023 +0700
+
+    fix version login
+
+commit 801970f08b9b83aa7d35ed1217ce9db9ad87e273
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Mon Dec 18 00:33:21 2023 +0700
+
+    fix cors
+
+commit fe1968740fdf9bf53f7075d283ed6ca6b1eccc9c
+Author: VIET68 <viet68@VIET68s-MacBook-Pro.local>
+Date:   Sat Dec 16 21:00:47 2023 +0700
+
+    add be source
+
+commit 77ed81e4da2efb775660494ceaee717cba712bbc
+Author: luckaruto <lucmten@gmail.com>
+Date:   Sat Dec 16 20:10:51 2023 +0700
+
+    base project

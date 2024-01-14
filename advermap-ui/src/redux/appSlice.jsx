@@ -96,6 +96,12 @@ const appSlice = createSlice({
       );
     },
     setToken: (state, action) => {
+      if (!action.payload) {
+        state.token = null;
+        state.tokenPayload = null;
+        localStorage.removeItem("token");
+        return;
+      }
       const decodedToken = jwtDecode(action.payload); // decode your token here
       state.tokenPayload = decodedToken;
       state.token = action.payload;

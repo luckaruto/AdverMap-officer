@@ -12,6 +12,8 @@ import userSlice from "./userSlice";
 import navSlice from "./navSlice";
 import surfaceRequestSlice from "./surfaceRequestSlice";
 import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
+import citySlice from "./citySlice";
+
 
 const persistConfig = {
   key: "root", // Change this key as needed
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   permission: permission,
   users: userSlice,
   surfaceAllowances: surfaceAllowanceSlice,
+  cities: citySlice,
 });
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);

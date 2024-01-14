@@ -127,11 +127,12 @@ export default function MiniDrawer() {
     handleMobileMenuClose();
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(setCurrentPage(PAGE.LOGIN));
-    navigate(PAGE.LOGIN.path, { replace: true });
-  };
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch(setToken(null));
+        dispatch(setCurrentPage(PAGE.LOGIN));
+        navigate(PAGE.LOGIN.path, { replace: true });
+    };
 
   const goToProfile = () => {
     dispatch(setCurrentPage(PAGE.PROFILE));

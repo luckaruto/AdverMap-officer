@@ -97,7 +97,6 @@ const UserPage = () => {
     dispatch(setLoading(true));
     try {
       //const res = await SpaceService.delete(id, token);
-      // @ts-ignore
       // dispatch(setSnackbar({ status: "success", message: res }));
       // @ts-ignore
       dispatch(fetchUser({ testParams, token }));

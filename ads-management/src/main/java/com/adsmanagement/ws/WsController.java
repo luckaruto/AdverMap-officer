@@ -9,11 +9,20 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WsController {
 
-    @MessageMapping("/notify")
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+    @MessageMapping("/message") // app/message
     @SendTo("/topic/notification")
-    public Message notify(Message message) throws Exception {
+    public Message receiveMessage(Message message) throws Exception {
         Thread.sleep(1000); // simulated delay
         return message;
     }
+
+//    @MessageMapping("/private") // app/private-message
+//    public Message receivePrivateMessage(Message message) throws Exception {
+//        System.out.println(message.toString());
+//        simpMessagingTemplate.convertAndSendToUser(message.getReceiverId().toString(), "/private", message);
+//        return message;
+//    }
 
 }

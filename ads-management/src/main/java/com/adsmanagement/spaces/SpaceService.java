@@ -2,6 +2,10 @@ package com.adsmanagement.spaces;
 
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
+import com.adsmanagement.notifications.Notification;
+import com.adsmanagement.notifications.NotificationRepository;
+import com.adsmanagement.notifications.NotificationService;
+import com.adsmanagement.notifications.NotificationType;
 import com.adsmanagement.spaces.dto.CreateSpaceDto;
 import com.adsmanagement.spaces.dto.CreateSpaceRequestDto;
 import com.adsmanagement.spaces.dto.ProcessResponseDto;
@@ -20,6 +24,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +33,8 @@ public class SpaceService {
     private final SpaceRepository spaceRepository;
     private final SurfaceRepository  surfaceRepository;
     private final SpaceRequestRepository spaceRequestRepository;
+
+    private final NotificationService notificationService;
 
     private final DistrictRepository districtRepository;
 
@@ -43,7 +50,7 @@ public class SpaceService {
                         WardRepository wardRepository,
                         SpaceRequestRepository spaceRequestRepository,
                         SurfaceAllowanceRepository surfaceAllowanceRepository,
-                        SurfaceRepository  surfaceRepository, SurfaceRequestRepository surfaceRequestRepository
+                        SurfaceRepository  surfaceRepository, NotificationService notificationService, SurfaceRequestRepository surfaceRequestRepository
     ) {
         this.spaceRepository = spaceRepository;
         this.districtRepository = districtRepository;
@@ -51,6 +58,7 @@ public class SpaceService {
         this.spaceRequestRepository = spaceRequestRepository;
         this.surfaceAllowanceRepository = surfaceAllowanceRepository;
         this.surfaceRepository = surfaceRepository;
+        this.notificationService = notificationService;
         this.surfaceRequestRepository = surfaceRequestRepository;
     }
 
@@ -120,14 +128,28 @@ public class SpaceService {
 
         var res = this.spaceRequestRepository.save(req);
 
+        var space = req.getSpace();
+
         if (processResponseDto.getState() == RequestState.APPROVED) {
-            var space = req.getSpace();
             if (space != null) {
                 space.setFieldByRequest(req);
                 var sp = this.spaceRepository.save(space);
             }
 
         }
+
+        NotificationType notificationType;
+        switch (processResponseDto.getState()){
+            case APPROVED -> notificationType = NotificationType.REQUEST_APPROVED;
+            case REJECTED -> notificationType = NotificationType.REQUEST_REJECTED;
+            case CANCELED -> notificationType = NotificationType.REQUEST_CANCELED;
+            default -> notificationType = NotificationType.REQUEST_IN_PROGRESS;
+        }
+        var noti = new Notification((short) 0,req.getUser(),false,new Date(),new Date(),"",req.getResponse(),
+                notificationType, space.getLatitude(), space.getLongitude());
+
+        this.notificationService.save(noti);
+
 
         return res;
     }

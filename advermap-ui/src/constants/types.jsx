@@ -51,6 +51,12 @@ export const UserRole = {
   ADMIN: "ADMIN",
 };
 
+export const UserRoleName = {
+  WARD_ADMIN: "Cán bộ phường",
+  DISTRICT_ADMIN: "Cán bộ quận",
+  ADMIN: "Cán bộ sở VH-TT",
+}
+
 //Form Mode
 export const FormMode = {
   CREATE: "CREATE",

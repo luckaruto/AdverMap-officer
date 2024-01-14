@@ -1,11 +1,9 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PAGE } from "../components/constants";
-import { useEffect } from "react";
 import MiniDrawer from "../components/appbar/toolBar";
-import app from "../App";
 import {
   setCurrentPage,
   setLoading,
@@ -15,23 +13,23 @@ import {
 import { AuthService } from "../services/auth/authService";
 
 const PrivateRoute = () => {
-  const { token, tokenPayload, refreshToken } = useSelector(
+  const { tokenPayload, refreshToken } = useSelector(
     (state) => state.appState
   );
   const isLoading = useSelector((state) => state.appState.loading);
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-  // Check if the user is authenticated
 
+  // Check if the user is authenticated
   useEffect(() => {
-    if (!tokenPayload || tokenPayload === null) {
-      if (refreshToken) {
-        try {
-          dispatch(setLoading(true));
-          const res = AuthService.refreshToken({
-            headers: { "refresh-token": refreshToken },
-          }).then((res) => {
+    const fetchData = async () => {
+      if (!tokenPayload || tokenPayload === null || tokenPayload === "") {
+        if (refreshToken) {
+          try {
+            dispatch(setLoading(true));
+            const res = await AuthService.refreshToken({
+              headers: { "refresh-token": refreshToken },
+            });
             console.log(res);
             if (res.status === "OK") {
               dispatch(setToken(res.data.token));
@@ -40,18 +38,21 @@ const PrivateRoute = () => {
               dispatch(setLoading(false));
               navigate(PAGE.LOGIN.path, { replace: true });
             }
-          });
-        } catch (error) {
+          } catch (error) {
+            navigate(PAGE.LOGIN.path, { replace: true });
+          } finally {
+            dispatch(setLoading(false));
+          }
+        } else {
           navigate(PAGE.LOGIN.path, { replace: true });
-        } finally {
-          dispatch(setLoading(false));
         }
-      } else {
-        navigate(PAGE.LOGIN.path, { replace: true });
       }
-    }
-  }, []);
+    };
+
+    fetchData();
+  }, [tokenPayload, refreshToken, dispatch, navigate]);
 
   return <div className="h-screen w-screen bg-white">{<MiniDrawer />}</div>;
 };
+
 export default PrivateRoute;

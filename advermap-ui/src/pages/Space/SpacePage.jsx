@@ -49,7 +49,7 @@ const columns = [
     id: "ward",
     label: "Phường",
     minWidth: 170,
-    format: (value) => value.name,
+    format: (value) => value.name ?? "",
   },
   {
     id: "planned",

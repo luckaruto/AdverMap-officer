@@ -3,9 +3,10 @@ import { CityService } from "services/city/CityService"; // Adjust the import pa
 
 export const fetchCities = createAsyncThunk(
     "city/fetchCities",
-    async ({ params, token }, thunkApi) => {
+    async ({  }, thunkApi) => {
         try {
-            const cities = await CityService.getCities(params, token);
+            const cities = await CityService.getCities();
+            console.log("🚀 ~ cities:", cities)
             return cities;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -26,25 +27,25 @@ const citySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchCities.fulfilled, (state, action) => {
             return {
-                entities: action.payload,
-                loading: false,
-                error: null,
+              entities: action.payload,
+              loading: false,
+              error: null,
             };
-        });
-        builder.addCase(fetchCities.pending, (state, action) => {
+          });
+          builder.addCase(fetchCities.pending, (state, action) => {
             return {
-                entities: [],
-                loading: true,
-                error: null,
+              entities: [],
+              loading: true,
+              error: null,
             };
-        });
-        builder.addCase(fetchCities.rejected, (state, action) => {
+          });
+          builder.addCase(fetchCities.rejected, (state, action) => {
             return {
-                entities: [],
-                loading: false,
-                error: action.payload,
+              entities: [],
+              loading: false,
+              error: action.payload,
             };
-        });
+          });
     },
 });
 

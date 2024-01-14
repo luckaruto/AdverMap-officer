@@ -21,12 +21,11 @@ export class UserService {
   }
   static async getCurrentUser() {
     try {
-      //TODO: update later
-      const response = await api.get('api/v1/users', {
+      const response = await api.get('api/v1/users/profile', {
         headers: auth(),
       });
       return {
-        data: response.data
+        data: response.data.data
       };
     } catch (error) {
         throw error;
@@ -35,7 +34,7 @@ export class UserService {
 
   static async updateUser( payload) {
     try {
-      const response = await api.put(`api/v1/users`, payload, {
+      const response = await api.post(`api/v1/users/profile`, payload, {
         headers: auth(),
       });
       return {

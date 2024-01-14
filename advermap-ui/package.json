@@ -59,11 +59,6 @@
       "react-app/jest"
     ]
   },
-  "react-dotenv": {
-    "whitelist": [
-      "GOOGLE_API"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

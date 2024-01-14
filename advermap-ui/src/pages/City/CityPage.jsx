@@ -6,6 +6,7 @@ import { PAGE } from "../../components/constants";
 import Heading1 from "../../components/Text/Heading1";
 import Button from "@mui/material/Button";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+// @ts-ignore
 import { CityService } from "services/city/CityService";
 import { fetchCities } from "redux/CitySlice";
 import CityForm from "./CityForm";

@@ -133,7 +133,7 @@ const SpacePage = () => {
     const reqParams = params.content;
     console.log("reqParams", reqParams);
     // @ts-ignore
-    dispatch(fetchSpaces({ params:reqParams, token }));
+    dispatch(fetchSpaces({ params: reqParams, token }));
   }, [params]);
 
   useEffect(() => {
@@ -144,9 +144,8 @@ const SpacePage = () => {
 
   useEffect(() => {
     dispatch(setLoading(loading));
-    // @ts-ignore
-    console.log(window.env.GOOLE_API);
   }, [loading]);
+  // @ts-ignore
 
   return (
     <>
@@ -227,11 +226,10 @@ const SpacePage = () => {
           <p className="text-center text-red-500 text-lg font-bold">{error}</p>
         )}
         {selectedRow && <SpaceInfo data={selectedRow} />}
-        <SpaceForm
-          open={openForm}
-          handleClose={handleCloseForm}
-          existData={selectedRow}
-        />
+
+        {openForm && (
+          <SpaceForm handleClose={handleCloseForm} existData={selectedRow} />
+        )}
         {openRequestForm && (
           <SpaceRequestForm
             handleClose={handleCloseRequestForm}

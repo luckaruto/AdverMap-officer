@@ -24,16 +24,21 @@ const BasicSelect = (props) => {
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
             label={label}
-            value={field.value  || ""}
+            value={field.value || ""}
             onChange={field.onChange}
             inputRef={field.ref}
           >
             {choices &&
-              choices.map((item) => (
-                <MenuItem key={item} value={item}>
-                  {format(item)}
-                </MenuItem>
-              ))}
+              choices.map((item) => {
+                return (
+                  <MenuItem
+                    key={item.id ? item.id : item}
+                    value={item.id ? item.id : item}
+                  >
+                    {format(item)}
+                  </MenuItem>
+                );
+              })}
           </Select>
           {errors[name] && (
             <FormHelperText error>{`${errors[name].message}`}</FormHelperText>
@@ -53,6 +58,6 @@ BasicSelect.defaultProps = {
   label: "Label",
   name: "",
   choices: [],
-  format: (value) =>value,
+  format: (value) => value,
 };
 export default BasicSelect;

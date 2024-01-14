@@ -33,6 +33,10 @@ const SpaceForm = (props) => {
   // @ts-ignore
   const { token, snackbar } = useSelector((state) => state.appState);
 
+  // @ts-ignore
+  const { cities } = useSelector((state) => state.permission.permission);
+  const [wards, setWards] = useState([]);
+
   const dispatch = useDispatch();
 
   const spaceSchema = yup.object().shape({
@@ -53,6 +57,7 @@ const SpaceForm = (props) => {
   const { handleSubmit, setValue, reset } = method;
 
   const onSubmit = async (data) => {
+ 
     let urls = [];
     dispatch(setLoading(true));
     try {
@@ -62,7 +67,7 @@ const SpaceForm = (props) => {
         urls = [...resUrls];
       }
 
-      const req = { ...data, imgUrl: [...urls] };
+      const req = { ...data, imgUrl: [...urls]};
       let res;
       if (mode == FormMode.CREATE) {
         //handle Create
@@ -115,6 +120,23 @@ const SpaceForm = (props) => {
     }
   }, [geoCoding]);
 
+  useEffect(() => {
+    let districts = [];
+    let wards = [];
+
+    if (cities && cities.length > 0) {
+      cities.forEach((city) => {
+        districts = [...districts, ...city.districts];
+      });
+
+      districts.forEach((district) => {
+        wards = [...wards, ...district.wards];
+      });
+    }
+
+    setWards(wards);
+  }, [cities]);
+
   return (
     <Modal HandleFalse={handleClose}>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] ">
@@ -141,19 +163,23 @@ const SpaceForm = (props) => {
                   choices={Object.values(SpaceType)}
                   format={typeFormat}
                 />
-
-                
               </div>
 
               <div className="flex flex-col items-center gap-4">
-              <BasicSelect
+                <BasicSelect
                   label="Hình thức"
                   name="format"
                   choices={Object.values(SpaceFormat)}
                   format={formatFormat}
                 />
 
-                <BasicInput name="wardId" type="number" label="Phường" />
+                {/* <BasicInput name="wardId" type="number" label="Phường" /> */}
+                <BasicSelect
+                  name="wardId"
+                  label="Phường"
+                  choices={wards}
+                  format={(value) => value.name}
+                />
 
                 <BasicSelect
                   label="Trạng thái"

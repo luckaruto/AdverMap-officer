@@ -9,6 +9,7 @@ import com.adsmanagement.surfaces.models.Surface;
 import com.adsmanagement.users.dto.UserDTO;
 import com.adsmanagement.wards.Ward;
 import com.adsmanagement.wards.WardDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,20 +24,44 @@ import java.util.List;
 @Getter
 @Setter
 public class CreateReportDto {
+    @Schema(example = "1", description = "Identifier for the surface associated with the report")
     private Short surface_id;
-    private String address;
-    private Short ward_id;
-    private Float longitude;
-    private Float latitude;
-    private String content;
-    private String email;
-    private String phone;
-    private List<String> imgUrl;
-    private String userAddress;
-    private String name;
-    private Short space_id;
-    private Short report_type_id;
 
+    @Schema(example = "123 Main Street", description = "The address where the report is located")
+    private String address;
+
+    @Schema(example = "2", description = "Identifier for the ward associated with the report")
+    private Short ward_id;
+
+    @Schema(example = "45.6789", description = "The longitude coordinate of the report location")
+    private Float longitude;
+
+    @Schema(example = "-78.9012", description = "The latitude coordinate of the report location")
+    private Float latitude;
+
+    @Schema(example = "Report about a damaged property", description = "The content or description of the report")
+    private String content;
+
+    @Schema(example = "user@example.com", description = "The email associated with the report")
+    private String email;
+
+    @Schema(example = "123-456-7890", description = "The phone number associated with the report")
+    private String phone;
+
+    @Schema(example = "[\"https://example.com/image1.jpg\", \"https://example.com/image2.jpg\"]", description = "List of image URLs related to the report")
+    private List<String> imgUrl;
+
+    @Schema(example = "456 Side Street", description = "The address of the user submitting the report")
+    private String userAddress;
+
+    @Schema(example = "John Doe", description = "The name associated with the report")
+    private String name;
+
+    @Schema(example = "3", description = "Identifier for the space associated with the report")
+    private Short space_id;
+
+    @Schema(example = "4", description = "Identifier for the type of report")
+    private Short report_type_id;
 
 
 

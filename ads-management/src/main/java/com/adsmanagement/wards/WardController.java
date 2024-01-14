@@ -6,6 +6,7 @@ import com.adsmanagement.districts.CreateDistrictDto;
 import com.adsmanagement.districts.District;
 import com.adsmanagement.districts.DistrictRepository;
 import com.adsmanagement.districts.UpdateDistrictDto;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/v1/wards")
+@Tag(name = "Quản lý phường", description = "Dùng để Quản lý phường")
+
 public class WardController {
     private final WardService wardService;
 

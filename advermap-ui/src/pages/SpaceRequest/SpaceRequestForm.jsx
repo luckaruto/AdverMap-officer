@@ -34,6 +34,10 @@ const SpaceRequestForm = (props) => {
   // @ts-ignore
   const { token } = useSelector((state) => state.appState);
 
+    // @ts-ignore
+    const { cities } = useSelector((state) => state.permission.permission);
+    const [wards, setWards] = useState([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const geoCoding = useSelector(selectGeocoding);
@@ -119,6 +123,23 @@ const SpaceRequestForm = (props) => {
     }
   }, [geoCoding]);
 
+  useEffect(() => {
+    let districts = [];
+    let wards = [];
+
+    if (cities && cities.length > 0) {
+      cities.forEach((city) => {
+        districts = [...districts, ...city.districts];
+      });
+
+      districts.forEach((district) => {
+        wards = [...wards, ...district.wards];
+      });
+    }
+
+    setWards(wards);
+  }, [cities]);
+
   return (
     <Modal HandleFalse={handleClose}>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] ">
@@ -156,7 +177,12 @@ const SpaceRequestForm = (props) => {
               </div>
 
               <div className="flex flex-col items-center gap-4">
-                <BasicInput name="wardId" type="number" label="Phường" />
+              <BasicSelect
+                  name="wardId"
+                  label="Phường"
+                  choices={wards}
+                  format={(value) => value.name}
+                />
 
                 <BasicSelect
                   label="Trạng thái"

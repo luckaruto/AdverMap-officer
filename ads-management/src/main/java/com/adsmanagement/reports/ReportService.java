@@ -142,8 +142,6 @@ public class ReportService {
 
         this.emailService.sendReportMail(re);
 
-        this.notificationService.sendNotifyForReport(id);
-
         return re;
     }
 

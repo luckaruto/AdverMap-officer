@@ -9,6 +9,14 @@ export const API={
 	SURFACE:"/api/v1/surfaces",
 	SPACE:"/api/v1/spaces",
 	REPORT:"/api/v1/reports",
+	WARD:{
+		LIST: "/api/v1/wards",
+		ALL: "/api/v1/wards/all",
+	},
+	DISTRICT:{
+		LIST: "/api/v1/districts",
+		ALL: "/api/v1/districts/all",
+	},
 	USER: {
 		LIST:"/api/v1/users",
 	}

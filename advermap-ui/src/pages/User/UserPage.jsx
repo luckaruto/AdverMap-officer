@@ -5,11 +5,11 @@ import { PAGE } from "components/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
 import { useNavigate } from "react-router-dom";
-import SpaceInfo from "./SpaceInfo";
+import SpaceInfo from "./UserInfo";
 import { formatFormat, typeFormat } from "utils/format";
 import Heading1 from "components/Text/Heading1";
 import Button from "@mui/material/Button";
-import SpaceForm from "./SpaceForm";
+import SpaceForm from "./UserForm";
 import ConfirmModal from "components/ConfirmModal/ConfirmModal";
 import { testParams } from "services/apis/constants";
 import {
@@ -19,6 +19,8 @@ import {
 } from "utils/formatToUI";
 import { useLocation } from "react-router-dom";
 import {fetchUser} from "../../redux/userSlice";
+import UserInfo from "./UserInfo";
+import UserForm from "./UserForm";
 
 const columns = [
   { id: "id", label: "ID" },
@@ -64,7 +66,6 @@ const UserPage = () => {
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.users);
 
-  console.log(entities);
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
 
@@ -102,7 +103,6 @@ const UserPage = () => {
   };
 
   useEffect(() => {
-    console.log("call");
     // @ts-ignore
     dispatch(fetchUser({ testParams, token }));
   }, []);
@@ -116,9 +116,6 @@ const UserPage = () => {
   useEffect(() => {
     dispatch(setLoading(loading));
   }, [loading]);
-
-  console.log("get there");
-  console.log(selectedRow);
 
   return (
     <>
@@ -167,12 +164,12 @@ const UserPage = () => {
         {error && (
           <p className="text-center text-red-500 text-lg font-bold">{error}</p>
         )}
-        {selectedRow && <SpaceInfo data={selectedRow} />}
-        {/*<SpaceForm*/}
-        {/*  open={openForm}*/}
-        {/*  handleClose={handleCloseForm}*/}
-        {/*  existData={selectedRow}*/}
-        {/*/>*/}
+        {selectedRow && <UserInfo data={selectedRow} />}
+        <UserForm
+          open={openForm}
+          handleClose={handleCloseForm}
+          existData={selectedRow}
+        />
         <ConfirmModal
           open={openConfirm}
           handleClose={() => setOpenConfirm(false)}

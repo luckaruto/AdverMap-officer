@@ -10,6 +10,8 @@ import { useTransitionStateManager } from '@mui/base/useTransition';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import {useEffect} from "react";
+import {fetchNotifications} from "../../../redux/notificationSlice";
 
 
 export default function NotificationBox() {
@@ -19,7 +21,17 @@ export default function NotificationBox() {
     };
 
     const open = Boolean(anchor);
-    const {notification} = useSelector(state=>state.notification);
+    const { count, countLoaded } = useSelector((state)=>state.notification);
+    console.log(countLoaded);
+    console.log(count);
+
+    useEffect(() => {
+        if (!countLoaded) {
+            console.log("ok")
+
+            dispatch(fetchNotifications({token}));
+        }
+    }, []);
     const {currentPage,token} = useSelector((state) => state.appState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -28,11 +40,11 @@ export default function NotificationBox() {
         <>
             <IconButton
                 size="large"
-                aria-label={"show" + {notification} + "new notifications"}
+                aria-label={"show" + count + "new notifications"}
                 onClick={handleClick}
                 color="inherit"
             >
-                <Badge badgeContent={notification} color="error">
+                <Badge badgeContent={count} color="error">
                     <NotificationsIcon sx={{fontSize: DEFAULT.ICON_SIZE}}/>
                 </Badge>
             </IconButton>

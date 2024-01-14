@@ -1,6 +1,10 @@
 package com.adsmanagement.notifications;
 
 public enum NotificationType {
-    USER,
-    ADMIN,
+    REQUEST_APPROVED,
+    REQUEST_REJECTED,
+    REQUEST_IN_PROGRESS,
+
+    REQUEST_CANCELED,
+
 }

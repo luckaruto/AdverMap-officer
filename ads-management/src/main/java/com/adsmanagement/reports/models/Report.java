@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -97,6 +97,10 @@ public class Report {
     @ManyToOne
     @JoinColumn(name="report_type_id")
     private ReportType reportType;
+
+    public Report(Short id) {
+        this.id  =id;
+    }
 
     public ReportDto toDto(){
         SurfaceDto surfaceDto = null;

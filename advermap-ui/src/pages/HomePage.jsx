@@ -12,14 +12,23 @@ export default function HomePage() {
   );
 
   const { userId } = tokenPayload;
-
   const dispatch = useDispatch();
 
   const getPermission = async () => {
     dispatch(setLoading(true));
-    const { role, cities } = await UserService.getPermission(userId, token);
-    dispatch(setCities(cities));
-    dispatch(setLoading(false));
+
+    try {
+      const { role, cities } = await UserService.getPermission(userId, token);
+      console.log(role);
+      console.log(cities);
+      dispatch(setCities(cities));
+    }catch (e) {
+
+    }finally {
+      dispatch(setLoading(false));
+
+    }
+
   };
 
   useEffect(() => {

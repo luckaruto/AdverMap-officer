@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { default as notificationReducer } from "./notification";
 import appSlice from "./appSlice";
 import spaceSlice from "./spaceSlice";
 import surfaceSlice from "./surfaceSlice";
@@ -10,6 +9,7 @@ import permission from "./permission";
 import spaceRequestSlice from "./spaceRequestSlice";
 import userSlice from "./userSlice";
 import navSlice from "./navSlice";
+import notificationSlice from "./notificationSlice";
 
 
 const persistConfig = {
@@ -19,7 +19,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   appState: appSlice,
-  notification: notificationReducer,
+  notification: notificationSlice,
   spaces: spaceSlice,
   spaceRequest: spaceRequestSlice,
   surfaces: surfaceSlice,

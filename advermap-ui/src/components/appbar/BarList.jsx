@@ -31,14 +31,12 @@ const WARD_ADMIN_LIST = [
     nav.surface_request
 ]
 
-
 const DISTRICT_ADMIN_LIST = [
     nav.space,
     nav.surface,
     nav.report,
     nav.surface_request
 ]
-
 
 const ADMIN_LIST = [
     nav.space,

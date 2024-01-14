@@ -156,11 +156,12 @@ export default function HomePage() {
     if (selectedSpace) {
       console.log(selectedSpace.id);
       const id = selectedSpace.id;
+      let reqParams
       if (id) {
-        params = { spaceIds: id };
-      } else params = { cityIds: 1 };
+        reqParams = { spaceId: id };
+      } else reqParams = { cityIds: 1 };
       // @ts-ignore
-      dispatch(fetchSurfaces({ params, token }));
+      dispatch(fetchSurfaces({ params:reqParams, token }));
     }
   }, [selectedSpace]);
 

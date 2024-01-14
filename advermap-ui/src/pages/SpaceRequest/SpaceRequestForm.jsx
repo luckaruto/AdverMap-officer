@@ -153,7 +153,9 @@ const SpaceRequestForm = (props) => {
                   choices={Object.values(SpaceFormat)}
                   format={formatFormat}
                 />
+              </div>
 
+              <div className="flex flex-col items-center gap-4">
                 <BasicInput name="wardId" type="number" label="Phường" />
 
                 <BasicSelect
@@ -162,9 +164,6 @@ const SpaceRequestForm = (props) => {
                   choices={[true, false]}
                   format={plannedFormat}
                 />
-              </div>
-
-              <div className="flex flex-col items-center gap-4">
                 <ImageInput
                   setImages={setImages}
                   existData={existData?.imgUrl || null}

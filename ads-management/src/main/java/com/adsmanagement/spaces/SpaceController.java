@@ -8,6 +8,11 @@ import com.adsmanagement.spaces.dto.*;
 import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.surfaces.SurfaceRepository;
 import com.adsmanagement.surfaces.dto.SurfaceDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -21,6 +26,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/v1/spaces")
+@Tag(name = "Quản lý địa điểm", description = "Dùng để Quản lý địa điểm")
 public class SpaceController {
     private final SpaceService spaceService;
 
@@ -38,6 +44,10 @@ public class SpaceController {
         this.spaceRequestRepository = spaceRequestRepository;
     }
 
+    @Operation(summary = "Get a list of spaces")
+    @ApiResponse(responseCode = "200", description = "List of spaces",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<SpaceDto>>> list(
             @RequestParam(defaultValue = "0") Short page,
@@ -61,6 +71,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Create a new space")
+    @ApiResponse(responseCode = "200", description = "Space created successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "")
     public ResponseEntity<Response<SpaceDto>> create(
            @RequestBody CreateSpaceDto createSpaceDto
@@ -70,6 +84,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete a space by ID")
+    @ApiResponse(responseCode = "200", description = "Space deleted successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Response<String>> delete(
             @PathVariable("id") Short spaceId
@@ -85,6 +103,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update a space by ID")
+    @ApiResponse(responseCode = "200", description = "Space updated successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}")
     public ResponseEntity<Response<SpaceDto>> update(
             @PathVariable("id") Short spaceId,
@@ -106,6 +128,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Create a new space request")
+    @ApiResponse(responseCode = "200", description = "Space request created successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}/request")
     public ResponseEntity<Response<SpaceRequestDto>> createRequest(
             @PathVariable("id") Short spaceId,
@@ -119,6 +145,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Process a space request by ID")
+    @ApiResponse(responseCode = "200", description = "Space request processed successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/request/{id}/process")
     public ResponseEntity<Response<SpaceRequestDto>> processRequest(
             @PathVariable("id") Short reqId,
@@ -137,6 +167,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Cancel a space request by ID")
+    @ApiResponse(responseCode = "200", description = "Space request canceled successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/request/{id}/cancel")
     public ResponseEntity<Response<SpaceRequestDto>> cancelRequest(
             @PathVariable("id") Short reqId,
@@ -158,6 +192,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get a list of space requests")
+    @ApiResponse(responseCode = "200", description = "List of space requests",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/request")
     public ResponseEntity<Response<Page<SpaceRequestDto>>> listRequest(
             @RequestParam(defaultValue = "0") Short page,
@@ -181,6 +219,10 @@ public class SpaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get details of a space by ID")
+    @ApiResponse(responseCode = "200", description = "Space details",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/{id}")
     public ResponseEntity<Response<SpaceDto>> detail(
             @PathVariable("id") Short id

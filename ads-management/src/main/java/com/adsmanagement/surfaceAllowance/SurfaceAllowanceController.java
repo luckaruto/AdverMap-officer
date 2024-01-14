@@ -9,6 +9,11 @@ import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.surfaceAllowance.dto.CreateSurfaceAllowanceDto;
 import com.adsmanagement.surfaceAllowance.dto.ProcessResponse;
 import com.adsmanagement.surfaceAllowance.dto.SurfaceAllowanceDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,6 +28,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/v1/surface-allowance")
+@Tag(name = "Quản lý cấp phép địa điểm", description = "Dùng để Quản lý cấp phép địa điểm")
 public class SurfaceAllowanceController {
     private final SurfaceAllowanceService surfaceAllowanceService;
     private final SpaceRepository spaceRepository;
@@ -33,6 +39,10 @@ public class SurfaceAllowanceController {
         this.spaceRepository = spaceRepository;
     }
 
+    @Operation(summary = "Get a list of surface allowances")
+    @ApiResponse(responseCode = "200", description = "List of surface allowances",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<SurfaceAllowanceDto>>> list(
             @RequestParam(defaultValue = "0") Short page,
@@ -54,6 +64,10 @@ public class SurfaceAllowanceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get details of a surface allowance by ID")
+    @ApiResponse(responseCode = "200", description = "Surface allowance details",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/{id}")
     public ResponseEntity<Response<SurfaceAllowanceDto>> detail(
             @PathVariable("id") Short id
@@ -69,6 +83,10 @@ public class SurfaceAllowanceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Create a new surface allowance")
+    @ApiResponse(responseCode = "200", description = "Surface allowance created successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "")
     public ResponseEntity<Response<SurfaceAllowanceDto>> createSurfaceAllowance(
             @RequestBody CreateSurfaceAllowanceDto createSurfaceAllowanceDto,
@@ -93,6 +111,10 @@ public class SurfaceAllowanceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Process a surface allowance by ID")
+    @ApiResponse(responseCode = "200", description = "Surface allowance processed successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}/process")
     public ResponseEntity<Response<SurfaceAllowanceDto>> process(
             @PathVariable("id") Short id,
@@ -120,6 +142,10 @@ public class SurfaceAllowanceController {
 
     }
 
+    @Operation(summary = "Cancel a surface allowance by ID")
+    @ApiResponse(responseCode = "200", description = "Surface allowance canceled successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}/cancel")
     public ResponseEntity<Response<SurfaceAllowanceDto>> cancel(
             @PathVariable("id") Short id,

@@ -8,6 +8,11 @@ import com.adsmanagement.reports.dto.CreateReportDto;
 import com.adsmanagement.reports.dto.ProcessReportDto;
 import com.adsmanagement.reports.dto.ReportDto;
 import com.adsmanagement.reports.models.ReportState;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,6 +27,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/v1/notifications")
+@Tag(name = "Quản lý thông báo", description = "Dùng để Quản lý thông báo")
+
 public class NotificationController {
     private final NotificationService notificationService;
 
@@ -30,6 +37,10 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
+    @Operation(summary = "Get paginated list of notifications for the authenticated user")
+    @ApiResponse(responseCode = "200", description = "Paginated list of notifications",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<NotificationDto>>> list(
             @RequestParam(defaultValue = "0") Short page,
@@ -49,6 +60,10 @@ public class NotificationController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get the count of unseen notifications for the authenticated user")
+    @ApiResponse(responseCode = "200", description = "Count of unseen notifications",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/count")
     public ResponseEntity<Response<Long>> countUnSeen( @AuthenticationPrincipal UserInfoUserDetails userDetails)   {
         var user = userDetails.getUser();
@@ -57,6 +72,10 @@ public class NotificationController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Mark a notification as seen for the authenticated user")
+    @ApiResponse(responseCode = "200", description = "Notification marked as seen",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}/seen")
     public ResponseEntity<Response<NotificationDto>> seenNotification(
             @AuthenticationPrincipal UserInfoUserDetails userDetails,
@@ -68,6 +87,10 @@ public class NotificationController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Mark all notifications as seen for the authenticated user")
+    @ApiResponse(responseCode = "200", description = "All notifications marked as seen",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/seen-all")
     public ResponseEntity<Response<String>> seenAllNotification(
             @AuthenticationPrincipal UserInfoUserDetails userDetails,

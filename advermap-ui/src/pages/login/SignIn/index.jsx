@@ -20,6 +20,7 @@ import {
   Stack,
   Link,
   Avatar,
+  Flex,
 } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LoginSchema } from "../../../constants/validation/index.jsx";
@@ -77,8 +78,8 @@ const SignIn = () => {
 
   return (
     <ChakraHook>
-      <Box width="full" maxWidth="xl" marginX="auto" paddingY="188px">
-        <Box maxWidth="416px" marginX={{ base: 8, md: "auto" }}>
+      <Flex height="100vh" maxWidth="xl" marginX="auto" paddingY="188px">
+        <Box width="full" marginX={{ base: 8, md: "auto" }}>
           <VStack marginBottom={12} width="full" alignItems="flex-start">
             <Avatar size="lg" src="https://bit.ly/broken-link" />
             <Heading
@@ -123,7 +124,7 @@ const SignIn = () => {
             </form>
           </FormProvider>
         </Box>
-      </Box>
+      </Flex>
     </ChakraHook>
   );
 };

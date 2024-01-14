@@ -6,6 +6,7 @@ import com.adsmanagement.common.Response;
 import com.adsmanagement.users.UserRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.Header;
@@ -43,7 +44,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response<TokenDto>> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<Response<TokenDto>> authenticateAndGetToken(
+            @RequestBody AuthRequest authRequest
+    ) {
         //return jwtService.generateToken(authRequest.getUsername());
         var user = this.userRepository.findByEmailAndIsDeleted(authRequest.getUsername(), false);
         if (user.isEmpty()){

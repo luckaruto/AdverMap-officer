@@ -5,7 +5,6 @@ export const fetchCities = createAsyncThunk(
   "city/fetchCities",
   async ({}, thunkApi) => {
     try {
-      console.log("fetch cities 2");
       const cities = await CityService.getCities();
       return cities;
     } catch (error) {

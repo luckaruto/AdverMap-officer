@@ -2,6 +2,8 @@ export const API = {
     AUTH: "/api/v1/auth/login",
     NOTIFICATION: {
         COUNT: "/api/v1/notifications/count",
+        LIST: "/api/v1/notifications",
+        SEEN_ALL: "/api/v1/notifications/seen-all",
     },
     FORGOT_PASSWORD: "/api/v1/auth/forgot-password",
     VERIFY_OTP: "/api/v1/auth/verify-otp",

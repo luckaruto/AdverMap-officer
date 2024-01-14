@@ -12,29 +12,35 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {useEffect} from "react";
 import {fetchNotifications} from "../../../redux/notificationSlice";
+import {NotificationService} from "../../../services/notification/notificationService";
 
 
 export default function NotificationBox() {
     const [anchor, setAnchor] = React.useState(null);
+    const {token} = useSelector((state) => state.appState);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleClick = (event) => {
+        // const data =  NotificationService.seenAll(token).then((result)=>{
+        //     console.log(result);
+        //     if (result=='ok'){
+        //         dispatch(fetchNotifications({token}));
+        //     }
+        // });
+
         setAnchor(anchor ? null : event.currentTarget);
     };
 
     const open = Boolean(anchor);
     const { count, countLoaded } = useSelector((state)=>state.notification);
-    console.log(countLoaded);
-    console.log(count);
 
     useEffect(() => {
         if (!countLoaded) {
-            console.log("ok")
-
             dispatch(fetchNotifications({token}));
         }
     }, []);
-    const {currentPage,token} = useSelector((state) => state.appState);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+
 
     return (
         <>

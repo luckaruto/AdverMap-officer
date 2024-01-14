@@ -13,6 +13,8 @@ import navSlice from "./navSlice";
 import surfaceRequestSlice from "./surfaceRequestSlice";
 import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
 import citySlice from "./CitySlice";
+import districtSlice from "./DistrictSlice";
+import WardSlice from "./WardSlice";
 
 const persistConfig = {
   key: "root", // Change this key as needed
@@ -32,6 +34,8 @@ const rootReducer = combineReducers({
   users: userSlice,
   surfaceAllowances: surfaceAllowanceSlice,
   cities: citySlice,
+  districts: districtSlice,
+  wards: WardSlice,
 });
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);

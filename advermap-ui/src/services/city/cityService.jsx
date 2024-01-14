@@ -20,9 +20,8 @@ export class CityService {
 
   static async createCity(data, token) {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await api.post(API.CITY, data, {
-        headers: headers,
+      const response = await api.post(`/api/v1/cities?name=${data.name}`, {}, {
+        headers: auth(),
       });
 
       if (response.status === 200 && response.data.data) {
@@ -37,9 +36,8 @@ export class CityService {
 
   static async editCity(id, data, token) {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await api.put(API.CITY + `/${id}`, data, {
-        headers: headers,
+      const response = await api.post(`/api/v1/cities/${id}?name=${data.name}`, {}, {
+        headers: auth(),
       });
 
       if (response.status === 200 && response.data.data) {
@@ -54,9 +52,8 @@ export class CityService {
 
   static async deleteCity(id, token) {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
       const response = await api.delete(API.CITY + `/${id}`, {
-        headers: headers,
+        headers: auth(),
       });
 
       if (response.status === 200 && response.data.data) {

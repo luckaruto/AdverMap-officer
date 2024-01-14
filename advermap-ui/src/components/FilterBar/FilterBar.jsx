@@ -10,7 +10,7 @@ import { PAGE } from "components/constants";
 export default function FilterBar() {
   const { tokenPayload, token, params } = useSelector(
     // @ts-ignore
-    (state) => state.appState
+    (state) => state.appState || {}
   );
 
   let userId = null;

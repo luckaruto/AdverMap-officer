@@ -7,6 +7,7 @@ import Heading1 from "../../components/Text/Heading1";
 import Button from "@mui/material/Button";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { CityService } from "services/city/CityService";
+// @ts-ignore
 import { fetchCities } from "redux/citySlice";
 
 const columns = [
@@ -25,9 +26,12 @@ const CityPage = () => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
+  // @ts-ignore
+  const { token, entities, error, loading } = useSelector(
     // @ts-ignore
-    // @ts-ignore
-    const { token, entities, error, loading } = useSelector((state) => state.cities || {});
+    (state) => state.cities || {}
+  );
 
   const handleOpenRequestForm = () => {
     setSelectedRow(null);
@@ -62,10 +66,10 @@ const CityPage = () => {
     }
   };
 
-    useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchCities({ }));
-    }, [dispatch, token]);
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(fetchCities({}));
+  }, [dispatch, token]);
 
   return (
     <>

@@ -144,6 +144,8 @@ const SpacePage = () => {
 
   useEffect(() => {
     dispatch(setLoading(loading));
+    // @ts-ignore
+    console.log(window.env.GOOLE_API);
   }, [loading]);
 
   return (

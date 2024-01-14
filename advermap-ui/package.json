@@ -22,6 +22,7 @@
     "axios": "^1.6.2",
     "chakra": "^0.0.3",
     "dot-env": "^0.0.1",
+    "dotenv": "^16.3.1",
     "firebase": "^10.7.1",
     "framer-motion": "^10.17.9",
     "jwt-decode": "^4.0.0",
@@ -60,7 +61,7 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "Google_API"
+      "GOOGLE_API"
     ]
   },
   "browserslist": {
@@ -76,6 +77,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "postcss": "^8.4.31",
     "sass": "^1.69.5",
     "tailwindcss": "^3.3.6"

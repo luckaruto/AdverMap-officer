@@ -77,11 +77,9 @@ const ReportPage = () => {
   // @ts-ignore
   const { entities, error, loading } = useSelector((state) => state.reports);
 
-  const [listReport, setListReport] = useState(entities);
+  const [listReport, setListReport] = useState(null);
 
   const handleClickDetail = (row) => navigate(PAGE.REPORT.path + `/${row.id}`);
-
-  console.log(selectedRow);
 
   const handleOpenResponseForm = () => setOpenResponseForm(true);
   const handleCloseResponseForm = () => setOpenResponseForm(false);
@@ -107,18 +105,15 @@ const ReportPage = () => {
       setListReport(
         entities.filter((entity) => entity.state === ReportState.APPROVED)
       );
-    }
-    if (stateFormat(ReportState.IN_PROGRESS) === type) {
+    } else if (stateFormat(ReportState.IN_PROGRESS) === type) {
       setListReport(
         entities.filter((entity) => entity.state === ReportState.IN_PROGRESS)
       );
-    }
-    if (stateFormat(ReportState.REJECTED) === type) {
+    } else if (stateFormat(ReportState.REJECTED) === type) {
       setListReport(
         entities.filter((entity) => entity.state === ReportState.REJECTED)
       );
-    }
-    if (type === "Tất cả") {
+    } else {
       setListReport(entities);
     }
   };
@@ -126,6 +121,10 @@ const ReportPage = () => {
   useEffect(() => {
     fetchData();
   }, [params, location]);
+
+  useEffect(() => {
+    setListReport(entities);
+  }, [entities]);
 
   useEffect(() => {
     dispatch(setLoading(loading));

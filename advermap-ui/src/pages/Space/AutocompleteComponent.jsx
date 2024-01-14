@@ -33,7 +33,7 @@ export default function AutocompleteComponent({ className }) {
 
   return (
     <LoadScript
-      googleMapsApiKey={"AIzaSyBZISzd5bODvZpfQUEzlUfLWqcREOx6hUY"}
+      googleMapsApiKey={window.env.GOOLE_API}
       libraries={["places"]}
       className={className}
     >

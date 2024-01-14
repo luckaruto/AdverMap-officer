@@ -14,7 +14,6 @@ import surfaceRequestSlice from "./surfaceRequestSlice";
 import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
 import citySlice from "./citySlice";
 
-
 const persistConfig = {
   key: "root", // Change this key as needed
   storage,

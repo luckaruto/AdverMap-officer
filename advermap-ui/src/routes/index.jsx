@@ -20,6 +20,8 @@ import UserPage from "../pages/User/UserPage";
 import CityPage from "pages/City/CityPage";
 import SurfaceRequestPage from "pages/SurfaceRequest/SurfaceRequestPage";
 import SurfaceAllowancePage from "pages/SurfaceAllowance/SurfaceAllowancePage";
+import DistrictPage from "pages/District/DistrictPage";
+import WardPage from "pages/Ward/WardPage";
 
 const privateRoute = [
   { path: PAGE.HOME.path, element: <HomePage /> },
@@ -79,14 +81,14 @@ const privateRoute = [
     path: "cities",
     element: <CityPage />,
   },
-  // {
-  //     path: "districts",
-  //     element: <DistrictPage/>,
-  // },
-  // {
-  //     path: "wards",
-  //     element: <WardPage/>,
-  // }
+  {
+      path: "districts",
+      element: <DistrictPage/>,
+  },
+  {
+      path: "wards",
+      element: <WardPage/>,
+  }
 ];
 
 const route = createBrowserRouter([

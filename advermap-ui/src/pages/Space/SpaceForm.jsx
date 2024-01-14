@@ -142,7 +142,11 @@ const SpaceForm = (props) => {
                   format={typeFormat}
                 />
 
-                <BasicSelect
+                
+              </div>
+
+              <div className="flex flex-col items-center gap-4">
+              <BasicSelect
                   label="Hình thức"
                   name="format"
                   choices={Object.values(SpaceFormat)}
@@ -157,9 +161,6 @@ const SpaceForm = (props) => {
                   choices={[true, false]}
                   format={plannedFormat}
                 />
-              </div>
-
-              <div className="flex flex-col items-center gap-4">
                 <ImageInput
                   setImages={setImages}
                   existData={existData?.imgUrl || null}

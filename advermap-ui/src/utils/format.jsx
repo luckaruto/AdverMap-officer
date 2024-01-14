@@ -9,10 +9,10 @@ import React from "react";
 export const plannedFormat = (value) => {
   switch (value) {
     case true:
-      return "Đã chứng nhận";
+      return "Đã Quy Hoạch";
       break;
     case false:
-      return "Chưa chứng nhận";
+      return "Chưa Quy Hoạch";
       break;
   }
 };

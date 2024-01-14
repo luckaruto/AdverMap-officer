@@ -9,9 +9,10 @@ import SurfaceInfo from "pages/Surface/SurfaceInfo";
 import Heading1 from "components/Text/Heading1";
 import Heading2 from "components/Text/Heading2";
 import { stateFormatUI } from "utils/formatToUI";
+import SpaceInfo from "pages/Space/SpaceInfo";
 
 const ReportDetail = () => {
-    // @ts-ignore
+  // @ts-ignore
   const { token } = useSelector((state) => state.appState);
   const location = useLocation();
   const [error, setError] = useState("");
@@ -98,7 +99,8 @@ const ReportDetail = () => {
             <div className="w-[768px] h-[400px] flex m-auto">
               <CarouselImage data={report.imgUrl} />
             </div>
-            <SurfaceInfo data={report.surface} />
+            {report.surface && <SurfaceInfo data={report.surface} />}
+            {report.space && <SpaceInfo data={report.space} />}
           </>
         ) : (
           <p className="text-center text-red-500 text-lg font-bold">{error}</p>

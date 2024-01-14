@@ -42,7 +42,7 @@ const SurfaceInfo = (props) => {
           <p>No data</p>
         )}
       </div>
-      <SpaceInfo data={data.space} />
+      {/* <SpaceInfo data={data.space} /> */}
     </>
   );
 };

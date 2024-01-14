@@ -162,7 +162,7 @@ export default function MiniDrawer() {
         onClose={handleMenuClose}
       >
         <MenuItem onClick={goToProfile}>Thông tin cá nhân</MenuItem>
-        <MenuItem onClick={handleLogout}>Đăng suất</MenuItem>
+        <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
       </Menu>
      
     

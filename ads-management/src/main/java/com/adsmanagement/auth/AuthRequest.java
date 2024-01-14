@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class AuthRequest {
 
     @Schema(example = "admin@gmail.com", description = "Cán bộ sở: admin@gmail.com ,\n " +

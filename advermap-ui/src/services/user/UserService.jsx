@@ -5,7 +5,6 @@ export class UserService {
   static async getPermission(id, token) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(API.USER);
         const headers = { Authorization: `Bearer ${token}` }; // Fix: Use an object for headers
         const response = await api.get(API.USER+`/${id}/permission`, {
           headers: headers,

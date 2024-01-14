@@ -4,8 +4,13 @@ import com.adsmanagement.config.EmailService;
 import com.adsmanagement.jwt.JwtService;
 import com.adsmanagement.common.Response;
 import com.adsmanagement.users.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.Header;
@@ -42,8 +47,17 @@ public class AuthController {
         this.emailService = emailService;
     }
 
+    @Operation(summary = "Authenticate and get token")
+    @ApiResponse(responseCode = "200", description = "Successful authentication",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = TokenDto.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid user request",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping("/login")
-    public ResponseEntity<Response<TokenDto>> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<Response<TokenDto>> authenticateAndGetToken(
+            @RequestBody AuthRequest authRequest
+    ) {
         //return jwtService.generateToken(authRequest.getUsername());
         var user = this.userRepository.findByEmailAndIsDeleted(authRequest.getUsername(), false);
         if (user.isEmpty()){
@@ -63,6 +77,13 @@ public class AuthController {
 
     }
 
+    @Operation(summary = "Refresh token")
+    @ApiResponse(responseCode = "200", description = "Token refresh successful",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = TokenDto.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid user request or token",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping("/refresh")
     public ResponseEntity<Response<TokenDto>> refreshAndGetToken(@RequestHeader("Refresh-Token") String refreshToken) {
         var username = jwtService.extractUsername(refreshToken);
@@ -83,6 +104,13 @@ public class AuthController {
         }
     }
 
+    @Operation(summary = "Forgot password")
+    @ApiResponse(responseCode = "200", description = "Email sent successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid user request",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping("/forgot-password")
     public ResponseEntity<Response<String>> forgotPassword(
             @RequestBody ForgotPasswordDto dto
@@ -96,6 +124,13 @@ public class AuthController {
         return new ResponseEntity<>(new Response<>("","ok"), HttpStatus.OK);
     }
 
+    @Operation(summary = "Verify OTP and reset password")
+    @ApiResponse(responseCode = "200", description = "Password reset successful",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = TokenDto.class)))
+    @ApiResponse(responseCode = "400", description = "Invalid OTP or user request",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping("/verify-otp")
     public ResponseEntity<Response<TokenDto>> forgotPassword(
             @RequestBody OtpDto dto

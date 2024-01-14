@@ -9,7 +9,13 @@ export const fetchNotifications = createAsyncThunk(
   async ({ token }, thunkApi) => {
     try {
       const res =  await NotificationService.countUnseen(token);
-      return res;
+
+      const data = await NotificationService.getNotification(token);
+
+      return {
+        count: res,
+        notificationData: data
+      };
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -18,6 +24,7 @@ export const fetchNotifications = createAsyncThunk(
 
 const initialState = {
   count: 0,
+  notificationData: [],
   loading: false,
   countLoaded: false,
   error: null,
@@ -29,7 +36,8 @@ const notificationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchNotifications.fulfilled, (state, action) => {
       return {
-        count: action.payload,
+        count: action.payload.count,
+        notificationData: action.payload.notificationData,
         loading: false,
         countLoaded: true,
         error: null,
@@ -38,6 +46,7 @@ const notificationSlice = createSlice({
     builder.addCase(fetchNotifications.pending, (state, action) => {
       return {
         count: 0,
+        notificationData: [],
         loading: true,
         countLoaded: false,
         error: null,
@@ -46,6 +55,7 @@ const notificationSlice = createSlice({
     builder.addCase(fetchNotifications.rejected, (state, action) => {
       return {
         count: 0,
+        notificationData: [],
         loading: false,
         countLoaded: false,
         error: action.payload,

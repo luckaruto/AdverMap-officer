@@ -23,7 +23,6 @@ export default function FilterBar() {
     // If tokenPayload is null or userId is undefined, set userId to null (or perform your desired action)
     userId = null;
   }
-  console.log(userId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

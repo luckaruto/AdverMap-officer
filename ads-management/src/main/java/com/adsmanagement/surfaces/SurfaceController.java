@@ -9,6 +9,11 @@ import com.adsmanagement.spaces.dto.CreateSpaceRequestDto;
 import com.adsmanagement.spaces.dto.SpaceRequestDto;
 import com.adsmanagement.spaces.models.RequestState;
 import com.adsmanagement.surfaces.dto.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,6 +29,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/v1/surfaces")
+@Tag(name = "Quản lý bảng quảng cáo", description = "Dùng để Quản lý bảng quảng cáo")
+
 public class SurfaceController {
     private final SurfaceService surfaceService;
 
@@ -41,6 +48,10 @@ public class SurfaceController {
         this.surfaceRequestRepository = surfaceRequestRepository;
     }
 
+    @Operation(summary = "Get a list of surfaces")
+    @ApiResponse(responseCode = "200", description = "List of surfaces",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "")
     public ResponseEntity<Response<Page<SurfaceDto>>> list(
             @RequestParam(defaultValue = "0") Short page,
@@ -63,6 +74,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Create a new surface")
+    @ApiResponse(responseCode = "200", description = "Surface created successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "")
     public ResponseEntity<Response<SurfaceDto>> create(
            @RequestBody CreateSurfaceDto createSurfaceDto
@@ -72,6 +87,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Create a new surface request for a specific surface")
+    @ApiResponse(responseCode = "200", description = "Surface request created successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}/request")
     public ResponseEntity<Response<SurfaceRequestDto>> createRequest(
             @PathVariable("id") Short surfaceId,
@@ -111,6 +130,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Process a surface request by ID")
+    @ApiResponse(responseCode = "200", description = "Surface request processed successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/request/{id}/process")
     public ResponseEntity<Response<SurfaceRequestDto>> processRequest(
             @PathVariable("id") Short reqId,
@@ -131,6 +154,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Cancel a surface request by ID")
+    @ApiResponse(responseCode = "200", description = "Surface request canceled successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/request/{id}/cancel")
     public ResponseEntity<Response<SurfaceRequestDto>> processRequest(
             @PathVariable("id") Short reqId,
@@ -155,6 +182,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get a list of surface requests")
+    @ApiResponse(responseCode = "200", description = "List of surface requests",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/request")
     public ResponseEntity<Response<Page<SurfaceRequestDto>>> listRequest(
             @RequestParam(defaultValue = "0") Short page,
@@ -179,6 +210,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get details of a surface by ID")
+    @ApiResponse(responseCode = "200", description = "Surface details",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @GetMapping(path = "/{id}")
     public ResponseEntity<Response<SurfaceDto>> detail(
             @PathVariable("id") Short id
@@ -194,6 +229,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update a surface by ID")
+    @ApiResponse(responseCode = "200", description = "Surface updated successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/{id}")
     public ResponseEntity<Response<SurfaceDto>> update(
             @PathVariable("id") Short id,
@@ -212,6 +251,10 @@ public class SurfaceController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete a surface by ID")
+    @ApiResponse(responseCode = "200", description = "Surface deleted successfully",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Response.class)))
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Response<String>> delete(
             @PathVariable("id") Short id

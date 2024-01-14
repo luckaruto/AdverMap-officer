@@ -3,20 +3,26 @@ import { API } from "../apis/constants"
 
 export class NotificationService {
 
-	static countUnseen = async ({headers}) => {
-		try {
-			const response = await api.get(API.NOTIFICATION.COUNT,{
-				headers: headers
-			})
+	static countUnseen = async (token) => {
 
-			return {
-				status: response.status,
-				message: response.data.message,
-				data: response.data.data
-			};
-		} catch (error) {
-			throw error
-		}
+		return new Promise(async (resolve, reject) => {
+			try {
+				const headers = { Authorization: `Bearer ${token}` };
+				const response = await api.get(API.NOTIFICATION.COUNT,{
+					headers: headers
+				})
+				console.log(response);
+				if (response.status === 200 && response.data.data) {
+					resolve(response.data.data);
+				} else {
+					reject(response.data.message);
+				}
+			} catch (error) {
+				reject(error.message);
+			}
+		});
 	}
+
+
 }
 

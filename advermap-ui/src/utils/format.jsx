@@ -2,7 +2,7 @@ import {
   RequestState,
   SpaceFormat,
   SpaceType,
-  SurfaceFormat,
+  SurfaceFormat, UserRole, UserRoleName,
 } from "constants/types";
 import React from "react";
 
@@ -128,4 +128,17 @@ export const formatImgUrl = (value) => {
         : "Không có ảnh"}
     </>
   );
+};
+
+export const UserRoleFormat = (value) => {
+  switch (value) {
+    case UserRole.DISTRICT_ADMIN:
+      return UserRoleName[UserRole.DISTRICT_ADMIN];
+    case UserRole.ADMIN:
+      return UserRoleName[UserRole.ADMIN];
+    case UserRole.WARD_ADMIN:
+      return UserRoleName[UserRole.WARD_ADMIN];
+    default:
+      return UserRoleName[UserRole.ADMIN];
+  }
 };

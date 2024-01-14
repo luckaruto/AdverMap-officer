@@ -33,6 +33,8 @@ export const requiredError={
   address:'Địa chỉ không được để trống',
   password:'Tên đăng nhập không được để trống',
   default:'Trường này không được để trống',
+  email:'Email không hợp lệ',
+  phone:'Số điện thoại không hợp lệ',
 }
 
 export const validatedError={

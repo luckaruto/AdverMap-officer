@@ -34,10 +34,10 @@ import { testParams } from "services/apis/constants";
 
 const defaultProps = {
   center: {
-    lat: 10.79375530641856,
+    lat: 12.79375530641856,
     lng: 106.72228643720966,
   },
-  zoom: 13,
+  zoom: 12,
 };
 
 const customIcon = new L.Icon({
@@ -108,20 +108,13 @@ export default function HomePage() {
 
   useEffect(() => {
     if (origin) {
-      if (origin !== null) {
-        mapRef.current.setView(
-          [defaultProps.lat, defaultProps.lng],
-          defaultProps.zoom,
-          {
-            animate: true,
-            duration: 1,
-          }
-        );
-      } else return;
+      mapRef?.current?.setView([origin.lat, origin.lng], defaultProps.zoom, {
+        animate: true,
+        duration: 1,
+      });
     }
-
     // Fit the map to the geocoding result
-  }, [origin]);
+  }, [origin, mapRef]);
 
   const onClickToMyLocation = () => {
     if (origin !== null) {
@@ -156,12 +149,12 @@ export default function HomePage() {
     if (selectedSpace) {
       console.log(selectedSpace.id);
       const id = selectedSpace.id;
-      let reqParams
+      let reqParams;
       if (id) {
         reqParams = { spaceId: id };
       } else reqParams = { cityIds: 1 };
       // @ts-ignore
-      dispatch(fetchSurfaces({ params:reqParams, token }));
+      dispatch(fetchSurfaces({ params: reqParams, token }));
     }
   }, [selectedSpace]);
 
@@ -205,7 +198,10 @@ export default function HomePage() {
 
           {/* MapContainer */}
           <MapContainer
-            center={defaultProps.center}
+            center={{
+              lat: origin?.lat || defaultProps.center.lat,
+              lng: origin?.lng || defaultProps.center.lng,
+            }}
             zoom={defaultProps.zoom}
             style={{ height: "100vh", width: "100%" }}
             className="relative z-0"

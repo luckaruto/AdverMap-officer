@@ -11,7 +11,7 @@ import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {useEffect} from "react";
-import {fetchNotifications} from "../../../redux/notificationSlice";
+import {fetchNotifications, setCount} from "../../../redux/notificationSlice";
 import {NotificationService} from "../../../services/notification/notificationService";
 
 
@@ -20,6 +20,13 @@ export default function NotificationBox() {
     const {token} = useSelector((state) => state.appState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const seenAll = async () => {
+        const data =  await NotificationService.seenAll(token)
+        if (data=='ok'){
+            dispatch(setCount(0));
+        }
+    }
 
     const handleClick = (event) => {
         // const data =  NotificationService.seenAll(token).then((result)=>{
@@ -30,6 +37,7 @@ export default function NotificationBox() {
         // });
 
         setAnchor(anchor ? null : event.currentTarget);
+        seenAll()
     };
 
     const open = Boolean(anchor);

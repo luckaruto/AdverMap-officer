@@ -32,7 +32,11 @@ const initialState = {
 const notificationSlice = createSlice({
   name: "notification",
   initialState,
-  reducers: {},
+  reducers: {
+    setCount:(state,action)=>{
+      state.count=action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchNotifications.fulfilled, (state, action) => {
       return {
@@ -63,5 +67,5 @@ const notificationSlice = createSlice({
     });
   },
 });
-export const {} = notificationSlice.actions;
+export const {setCount} = notificationSlice.actions;
 export default notificationSlice.reducer;

@@ -93,8 +93,7 @@ public class NotificationController {
                     schema = @Schema(implementation = Response.class)))
     @PostMapping(path = "/seen-all")
     public ResponseEntity<Response<String>> seenAllNotification(
-            @AuthenticationPrincipal UserInfoUserDetails userDetails,
-            @PathVariable("id") Short id
+            @AuthenticationPrincipal UserInfoUserDetails userDetails
     )   {
         var user = userDetails.getUser();
         var data = this.notificationService.seenAll(user.getId());

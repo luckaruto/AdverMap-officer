@@ -43,6 +43,7 @@ const AccountDetailForm = () => {
         name: get(data, 'name'),
         phone: get(data, 'phone'),
         birthday: moment(birthday).format('DD/MM/YYYY'),
+        // @ts-ignore
         role: get(data, 'role'),
       });
 

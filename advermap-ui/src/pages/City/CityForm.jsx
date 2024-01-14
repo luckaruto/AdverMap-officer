@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setSnackbar } from "redux/appSlice";
 import { CityService } from "services/city/CityService";
 // @ts-ignore
-import { fetchCities } from "redux/citySlice";
+import { fetchCities } from "redux/CitySlice";
 
 const CityForm = ({ open, handleClose, existData }) => {
   const [cityName, setCityName] = useState(existData ? existData.name : "");
+  console.log("🚀 ~ CityForm ~ existData:", existData)
 
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.appState);

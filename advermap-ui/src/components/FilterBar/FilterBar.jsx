@@ -8,10 +8,10 @@ import { UserService } from "services/user/UserService";
 export default function FilterBar() {
   const { tokenPayload, token, params } = useSelector(
     // @ts-ignore
-    (state) => state.appState
+    (state) => state.appState || {}
   );
 
-  const { userId } = tokenPayload;
+  const { userId } = tokenPayload || {};
   console.log(userId);
 
   const dispatch = useDispatch();

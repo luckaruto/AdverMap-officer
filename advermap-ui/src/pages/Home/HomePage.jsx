@@ -90,7 +90,7 @@ export default function HomePage() {
 
   const [marker, setMarker] = useState(null);
 
-  const { token, snackbar } = useSelector((state) => state.appState);
+  const { token, snackbar, params } = useSelector((state) => state.appState);
   const { entities, error, loading } = useSelector((state) => state.spaces);
   const {
     entities: entitiesSurface,
@@ -144,14 +144,13 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    // @ts-ignore
+    const reqParams = params.content;
 
-    dispatch(fetchSpaces({ testParams, token }));
+    // @ts-ignore
+    dispatch(fetchSpaces({ params: reqParams, token }));
 
     setShow(false);
-  }, []);
-
-  var params;
+  }, [params]);
 
   useEffect(() => {
     if (selectedSpace) {

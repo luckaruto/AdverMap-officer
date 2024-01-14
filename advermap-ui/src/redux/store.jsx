@@ -12,7 +12,7 @@ import userSlice from "./userSlice";
 import navSlice from "./navSlice";
 import surfaceRequestSlice from "./surfaceRequestSlice";
 import surfaceAllowanceSlice from "./surfaceAllowanceSlice";
-import citySlice from "./CitySlice";
+import citySlice from "./citySlice";
 import districtSlice from "./DistrictSlice";
 import WardSlice from "./WardSlice";
 

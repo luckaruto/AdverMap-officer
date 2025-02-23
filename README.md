@@ -77,7 +77,9 @@ Department officials oversee billboard regulations, approvals, and administrativ
 - CRUD operations** for billboard management. 
 
 
-Database diagrams 
+### Database diagrams 
+
+
 ![mapDB](https://github.com/user-attachments/assets/2b9366b5-a096-4ef9-bfd5-446a13484841)
 
 
